@@ -186,11 +186,29 @@ def start_driver(headless: bool = True) -> webdriver.Chrome:
     chrome_options = Options()
     if headless:
         chrome_options.add_argument("--headless=new")
+    
+    # 🔥 QUADRUPLE FORCE: Aggressive stability settings
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument('--window-size=1920,1080')
+    
+    # Network stability improvements
+    chrome_options.add_argument("--disable-web-security")
+    chrome_options.add_argument("--disable-features=IsolateOrigins,site-per-process")
+    chrome_options.add_argument("--disable-background-networking")
+    chrome_options.add_argument("--dns-prefetch-disable")
+    
+    # Connection pool settings
+    chrome_options.add_argument("--max-connections-per-host=6")
+    
+    # Timeout preferences
+    chrome_options.add_experimental_option('prefs', {
+        'profile.default_content_setting_values.notifications': 2,
+        'profile.default_content_settings.popups': 0,
+    })
+    
     # human-like user-agent (you may rotate)
     chrome_options.add_argument(
         "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -208,14 +226,32 @@ def start_driver(headless: bool = True) -> webdriver.Chrome:
         cached_drivers.sort(reverse=True)
         driver_path = cached_drivers[0]
         print(f"✅ Znaleziono ChromeDriver w cache: {driver_path}")
-        service = Service(driver_path)
+        
+        # 🔥 QUADRUPLE FORCE: Aggressive timeouts for Service
+        service = Service(
+            driver_path,
+            log_path='NUL' if sys.platform == 'win32' else '/dev/null',  # Suppress logs
+        )
+        
+        # Create driver with extended timeouts
         driver = webdriver.Chrome(service=service, options=chrome_options)
+        
+        # 🔥 QUADRUPLE FORCE: Set aggressive page load timeout
+        driver.set_page_load_timeout(60)  # 60 seconds for page load
+        driver.set_script_timeout(30)  # 30 seconds for scripts
+        driver.implicitly_wait(10)  # 10 seconds implicit wait
     else:
         # Fall back to ChromeDriverManager
         print("⚠️ Pobieranie ChromeDriver przez ChromeDriverManager...")
         try:
-            service = Service(ChromeDriverManager().install())
+            service = Service(
+                ChromeDriverManager().install(),
+                log_path='NUL' if sys.platform == 'win32' else '/dev/null',
+            )
             driver = webdriver.Chrome(service=service, options=chrome_options)
+            driver.set_page_load_timeout(60)
+            driver.set_script_timeout(30)
+            driver.implicitly_wait(10)
         except Exception as e:
             print(f"❌ Błąd podczas inicjalizacji ChromeDriver: {e}")
             print("💡 Spróbuj: pip install --upgrade selenium webdriver-manager")
@@ -371,29 +407,62 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         'gemini_recommendation': None,  # HIGH/MEDIUM/LOW/SKIP
     }
 
-    # KLUCZOWE: Najpierw otwórz stronę główną meczu z retry logic
-    max_retries = 3
-    retry_delay = 3.0
+    # 🔥🔥🔥🔥 QUADRUPLE FORCE: Ultra-aggressive retry logic with multiple strategies
+    max_retries = 5  # Increased from 3
+    retry_delay = 2.0  # Start faster
+    last_error = None
     
     for attempt in range(max_retries):
         try:
-            driver.get(url)
-            time.sleep(2.0)
+            # 🔥 Strategy 1: Normal navigation
+            if attempt == 0:
+                driver.get(url)
+                time.sleep(3.0)  # Longer initial wait
+            
+            # 🔥 Strategy 2: Refresh if first failed
+            elif attempt == 1:
+                print(f"   🔄 Próba #2: Refresh...")
+                driver.refresh()
+                time.sleep(3.0)
+            
+            # 🔥 Strategy 3: Navigate to main page first, then match
+            elif attempt == 2:
+                print(f"   🔄 Próba #3: Via main page...")
+                driver.get("https://www.livesport.com/pl/")
+                time.sleep(2.0)
+                driver.get(url)
+                time.sleep(3.0)
+            
+            # 🔥 Strategy 4: Clear cache and try
+            elif attempt == 3:
+                print(f"   🔄 Próba #4: Clear cache...")
+                driver.delete_all_cookies()
+                time.sleep(1.0)
+                driver.get(url)
+                time.sleep(3.0)
+            
+            # 🔥 Strategy 5: Last resort - direct URL
+            else:
+                print(f"   🔄 Próba #5: Direct URL (last resort)...")
+                driver.get(url)
+                time.sleep(5.0)  # Extra long wait
             
             # Teraz spróbuj kliknąć zakładkę H2H
             click_h2h_tab(driver)
-            time.sleep(2.0)  # Czekaj na załadowanie H2H
+            time.sleep(2.5)  # Czekaj na załadowanie H2H
             break  # Success - wyjdź z pętli
             
-        except (WebDriverException, ConnectionResetError, ConnectionError) as e:
+        except (WebDriverException, ConnectionResetError, ConnectionError, TimeoutError) as e:
+            last_error = e
             if attempt < max_retries - 1:
                 print(f"⚠️ Błąd połączenia (próba {attempt + 1}/{max_retries}): {type(e).__name__}")
-                print(f"   Ponawiam za {retry_delay} sekund...")
+                print(f"   Czekam {retry_delay:.1f}s przed następną próbą...")
                 time.sleep(retry_delay)
-                retry_delay *= 1.5  # Exponential backoff
+                retry_delay *= 1.3  # Gentler exponential backoff
                 continue
             else:
-                print(f"❌ Błąd otwierania {url} po {max_retries} próbach: {e}")
+                print(f"❌ Błąd otwierania {url} po {max_retries} próbach")
+                print(f"   Ostatni błąd: {type(last_error).__name__}: {str(last_error)[:100]}")
                 return out
 
     # pobierz tytuł strony jako fallback na nazwy druzyn
@@ -2132,6 +2201,12 @@ Przykłady użycia:
             else:
                 # Sporty drużynowe (football, basketball, etc.)
                 current_sport = detect_sport_from_url(url)
+                
+                # 🔥 QUADRUPLE FORCE: Intelligent delay between matches
+                if i > 0:  # Not first match
+                    delay = 2.0 + (i % 3) * 0.5  # Variable delay: 2.0s, 2.5s, 3.0s pattern
+                    time.sleep(delay)
+                
                 info = process_match(url, driver, away_team_focus=args.away_team_focus, 
                                    use_forebet=args.use_forebet, use_gemini=args.use_gemini,
                                    sport=current_sport)
