@@ -26,9 +26,9 @@ GEMINI_API_KEY = "your-api-key-here"
 
 # Model selection
 # Options:
-# - "gemini-1.5-flash" (RECOMMENDED - fast, free, good quality)
-# - "gemini-1.5-pro" (slower, better quality, same free tier)
-GEMINI_MODEL = "gemini-1.5-flash"
+- "gemini-pro" (RECOMMENDED - fast, free, good quality)
+- "gemini-1.5-pro" (if available in your region)
+GEMINI_MODEL = "gemini-pro"
 
 # Rate limiting (seconds between requests)
 # Default: 1.0 second = 60 requests/minute (within free tier)

@@ -58,8 +58,8 @@ try:
 except ImportError:
     GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', None)
 
-# Model - gemini-1.5-flash jest szybki i darmowy (60 req/min)
-GEMINI_MODEL = "gemini-1.5-flash"
+# Model - Gemini 2.0 Flash (fast + free tier)
+GEMINI_MODEL = "models/gemini-2.0-flash"
 
 # Timeout i retry
 REQUEST_TIMEOUT = 10  # sekundy
