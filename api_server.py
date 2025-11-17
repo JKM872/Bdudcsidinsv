@@ -272,8 +272,7 @@ def get_matches():
 
 def run_scraping_task(date: str, sports: List[str], max_matches: Optional[int] = None):
     """Funkcja do uruchamiania scrapingu w osobnym wątku"""
-    global scraping_status
-    
+    # Modyfikujemy słownik globalny (bez global statement bo nie przypisujemy nowej wartości)
     try:
         scraping_status['is_running'] = True
         scraping_status['start_time'] = datetime.now().isoformat()
@@ -376,8 +375,7 @@ def start_scraping():
         POST /api/scrape
         Body: {"date": "2025-10-05", "sports": ["football"], "max_matches": 100}
     """
-    global scraping_status
-    
+    # Czytamy słownik globalny (bez global statement bo tylko czytamy)
     if scraping_status['is_running']:
         return jsonify({
             'error': 'Scraping już trwa',
@@ -434,8 +432,7 @@ def get_scraping_status():
     Przykład:
         GET /api/scrape/status
     """
-    global scraping_status
-    
+    # Czytamy słownik globalny (bez global statement bo tylko czytamy)
     status_copy = scraping_status.copy()
     
     # Dodaj procent postępu
