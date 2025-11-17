@@ -37,11 +37,18 @@ Plik wynikowy: outputs/livesport_h2h_YYYY-MM-DD.csv (lub z sufixem sportu)
 import argparse
 import time
 import os
+import sys
 import csv
 import re
 import json
 from datetime import datetime
 from typing import List, Dict, Optional
+
+# Fix Unicode encoding issues on Windows
+if sys.platform == 'win32':
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -61,13 +68,28 @@ except ImportError:
     FOREBET_AVAILABLE = False
     print("⚠️ forebet_scraper not available - predictions will be skipped")
 
-# Gemini AI integration
-try:
-    from gemini_analyzer import analyze_match as gemini_analyze_match
-    GEMINI_AVAILABLE = True
-except ImportError:
-    GEMINI_AVAILABLE = False
-    print("⚠️ gemini_analyzer not available - AI predictions will be skipped")
+# Gemini AI integration - LAZY LOADING to avoid blocking startup
+GEMINI_AVAILABLE = None  # Will be checked on first use
+gemini_analyze_match = None
+
+def lazy_load_gemini():
+    """Lazy load Gemini AI only when actually needed"""
+    global GEMINI_AVAILABLE, gemini_analyze_match
+    
+    if GEMINI_AVAILABLE is None:  # First time check
+        try:
+            print("🤖 Ładuję Gemini AI...")
+            from gemini_analyzer import analyze_match as _gemini_analyze_match
+            gemini_analyze_match = _gemini_analyze_match
+            GEMINI_AVAILABLE = True
+            print("✅ Gemini AI gotowe!")
+            return True
+        except Exception as e:
+            GEMINI_AVAILABLE = False
+            print(f"⚠️ Gemini AI niedostępne: {type(e).__name__}")
+            return False
+    
+    return GEMINI_AVAILABLE
 
 
 # ----------------------
@@ -174,8 +196,31 @@ def start_driver(headless: bool = True) -> webdriver.Chrome:
         "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     )
 
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    # Try to find cached ChromeDriver first (manual or auto-downloaded)
+    import glob
+    print("🔍 Sprawdzam ChromeDriver...")
+    
+    cache_pattern = os.path.join(os.path.expanduser("~"), ".wdm", "drivers", "chromedriver", "**", "chromedriver.exe")
+    cached_drivers = glob.glob(cache_pattern, recursive=True)
+    
+    if cached_drivers:
+        # Sort by path to get the newest version (highest number)
+        cached_drivers.sort(reverse=True)
+        driver_path = cached_drivers[0]
+        print(f"✅ Znaleziono ChromeDriver w cache: {driver_path}")
+        service = Service(driver_path)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+    else:
+        # Fall back to ChromeDriverManager
+        print("⚠️ Pobieranie ChromeDriver przez ChromeDriverManager...")
+        try:
+            service = Service(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=chrome_options)
+        except Exception as e:
+            print(f"❌ Błąd podczas inicjalizacji ChromeDriver: {e}")
+            print("💡 Spróbuj: pip install --upgrade selenium webdriver-manager")
+            raise
+    
     return driver
 
 
@@ -326,18 +371,30 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         'gemini_recommendation': None,  # HIGH/MEDIUM/LOW/SKIP
     }
 
-    # KLUCZOWE: Najpierw otwórz stronę główną meczu
-    try:
-        driver.get(url)
-        time.sleep(2.0)
-        
-        # Teraz spróbuj kliknąć zakładkę H2H
-        click_h2h_tab(driver)
-        time.sleep(2.0)  # Czekaj na załadowanie H2H
-        
-    except WebDriverException as e:
-        print(f"Błąd otwierania {url}: {e}")
-        return out
+    # KLUCZOWE: Najpierw otwórz stronę główną meczu z retry logic
+    max_retries = 3
+    retry_delay = 3.0
+    
+    for attempt in range(max_retries):
+        try:
+            driver.get(url)
+            time.sleep(2.0)
+            
+            # Teraz spróbuj kliknąć zakładkę H2H
+            click_h2h_tab(driver)
+            time.sleep(2.0)  # Czekaj na załadowanie H2H
+            break  # Success - wyjdź z pętli
+            
+        except (WebDriverException, ConnectionResetError, ConnectionError) as e:
+            if attempt < max_retries - 1:
+                print(f"⚠️ Błąd połączenia (próba {attempt + 1}/{max_retries}): {type(e).__name__}")
+                print(f"   Ponawiam za {retry_delay} sekund...")
+                time.sleep(retry_delay)
+                retry_delay *= 1.5  # Exponential backoff
+                continue
+            else:
+                print(f"❌ Błąd otwierania {url} po {max_retries} próbach: {e}")
+                return out
 
     # pobierz tytuł strony jako fallback na nazwy druzyn
     try:
@@ -619,7 +676,7 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
     # ============================================
     # GEMINI AI ANALYSIS (Faza 3)
     # ============================================
-    if use_gemini and GEMINI_AVAILABLE and out.get('qualifies'):
+    if use_gemini and out.get('qualifies'):
         try:
             print("      🤖 Gemini AI analysis...")
             
@@ -641,30 +698,33 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
                 if out.get('forebet_exact_score'):
                     forebet_str += f" - {out['forebet_exact_score']}"
             
-            # Wywołaj Gemini AI
-            gemini_result = gemini_analyze_match(
-                home_team=out.get('home_team', 'Unknown'),
-                away_team=out.get('away_team', 'Unknown'),
-                sport=sport,
-                h2h_data=h2h_data,
-                home_form=home_form_str,
-                away_form=away_form_str,
-                forebet_prediction=forebet_str,
-                home_odds=out.get('home_odds'),
-                away_odds=out.get('away_odds'),
-                additional_info=f"Last H2H: {out.get('last_h2h_date', 'N/A')}"
-            )
-            
-            # Zapisz wyniki
-            if not gemini_result.get('error'):
-                out['gemini_prediction'] = gemini_result.get('prediction')
-                out['gemini_confidence'] = gemini_result.get('confidence')
-                out['gemini_reasoning'] = gemini_result.get('reasoning')
-                out['gemini_recommendation'] = gemini_result.get('recommendation')
+            # Wywołaj Gemini AI (lazy load)
+            if lazy_load_gemini():
+                gemini_result = gemini_analyze_match(
+                    home_team=out.get('home_team', 'Unknown'),
+                    away_team=out.get('away_team', 'Unknown'),
+                    sport=sport,
+                    h2h_data=h2h_data,
+                    home_form=home_form_str,
+                    away_form=away_form_str,
+                    forebet_prediction=forebet_str,
+                    home_odds=out.get('home_odds'),
+                    away_odds=out.get('away_odds'),
+                    additional_info=f"Last H2H: {out.get('last_h2h_date', 'N/A')}"
+                )
                 
-                print(f"      ✅ AI: {gemini_result.get('prediction', '')[:60]}... ({gemini_result.get('confidence', 0)}%)")
+                # Zapisz wyniki
+                if not gemini_result.get('error'):
+                    out['gemini_prediction'] = gemini_result.get('prediction')
+                    out['gemini_confidence'] = gemini_result.get('confidence')
+                    out['gemini_reasoning'] = gemini_result.get('reasoning')
+                    out['gemini_recommendation'] = gemini_result.get('recommendation')
+                    
+                    print(f"      ✅ AI: {gemini_result.get('prediction', '')[:60]}... ({gemini_result.get('confidence', 0)}%)")
+                else:
+                    print(f"      ⚠️ Gemini AI: {gemini_result.get('error', 'Unknown error')}")
             else:
-                print(f"      ⚠️ Gemini AI: {gemini_result.get('error', 'Unknown error')}")
+                print(f"      ⚠️ Gemini AI niedostępne - pominięto")
                 
         except Exception as e:
             print(f"      ⚠️ Błąd Gemini AI: {e}")
