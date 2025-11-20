@@ -45,7 +45,8 @@ python livesport_h2h_scraper.py ^
   --date %TODAY% ^
   --sports football basketball volleyball handball rugby hockey ^
   --away-team-focus ^
-  --headless
+  --headless ^
+  --use-gemini
 
 echo.
 echo ========================================

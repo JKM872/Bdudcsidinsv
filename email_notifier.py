@@ -135,17 +135,158 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
                 border-radius: 3px;
                 margin-right: 10px;
             }}
+            .top-picks-section {{
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 10px;
+                padding: 25px;
+                margin: 20px 0;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            }}
+            .top-picks-header {{
+                color: #fff;
+                font-size: 26px;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }}
+            .top-pick-card {{
+                background: white;
+                border-radius: 8px;
+                padding: 20px;
+                margin: 15px 0;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                border-left: 6px solid #ffd700;
+            }}
+            .top-pick-team {{
+                font-size: 20px;
+                font-weight: bold;
+                color: #2196F3;
+                margin-bottom: 10px;
+            }}
+            .top-pick-stats {{
+                display: flex;
+                justify-content: space-around;
+                margin: 15px 0;
+                flex-wrap: wrap;
+            }}
+            .top-pick-stat {{
+                text-align: center;
+                padding: 10px;
+                min-width: 100px;
+            }}
+            .top-pick-stat-value {{
+                font-size: 24px;
+                font-weight: bold;
+                color: #4CAF50;
+            }}
+            .top-pick-stat-label {{
+                font-size: 12px;
+                color: #666;
+                text-transform: uppercase;
+            }}
+            .top-pick-reasoning {{
+                background: #f8f9fa;
+                border-left: 4px solid #667eea;
+                padding: 12px;
+                margin: 10px 0;
+                font-style: italic;
+                color: #333;
+            }}
         </style>
     </head>
     <body>
         <div class="header">
             <h1>🏆 Kwalifikujące się mecze - {date}</h1>
             <p>🎾 Tennis: Advanced scoring (≥50/100) | ⚽ Drużynowe: Gospodarze wygrali ≥60% H2H</p>
-            <p style="font-size: 14px; margin-top: 10px;">⏰ Posortowane chronologicznie</p>
+            <p style="font-size: 14px; margin-top: 10px;">🤖 <strong>Gemini AI Analysis</strong> | ⏰ Posortowane chronologicznie</p>
         </div>
         
         <div class="content">
-            <p>Znaleziono <strong>{len(sorted_matches)}</strong> kwalifikujących się meczów:</p>
+    """
+    
+    # ========================================================================
+    # TOP PICKS SECTION - Mecze z HIGH recommendation i wysokim confidence
+    # ========================================================================
+    top_picks = [m for m in sorted_matches if m.get('gemini_recommendation') == 'HIGH' and m.get('gemini_confidence', 0) >= 85]
+    
+    if top_picks:
+        html += f"""
+        <div class="top-picks-section">
+            <div class="top-picks-header">
+                ⭐ TOP PICKS - Najlepsze Typy AI ({len(top_picks)}) ⭐
+            </div>
+    """
+        
+        for pick in top_picks:
+            home = pick.get('home_team', 'N/A')
+            away = pick.get('away_team', 'N/A')
+            confidence = pick.get('gemini_confidence', 0)
+            prediction = pick.get('gemini_prediction', 'N/A')
+            reasoning = pick.get('gemini_reasoning', '')[:300]  # First 300 chars
+            
+            # Calculate stats
+            focus_team = pick.get('focus_team', 'home')
+            if focus_team == 'away':
+                wins = pick.get('away_wins_in_h2h_last5', 0)
+                h2h_count = pick.get('h2h_count', pick.get('h2h_last5', 0))
+                focused_team = away
+                team_emoji = '🚀'
+            else:
+                wins = pick.get('home_wins_in_h2h_last5', 0)
+                h2h_count = pick.get('h2h_count', pick.get('h2h_last5', 0))
+                focused_team = home
+                team_emoji = '🏠'
+            
+            win_rate = (wins / h2h_count * 100) if h2h_count > 0 else 0
+            
+            # Forebet data
+            forebet_prob = pick.get('forebet_probability', 'N/A')
+            match_time = pick.get('match_time', 'Brak danych')
+            
+            html += f"""
+            <div class="top-pick-card">
+                <div class="top-pick-team">
+                    {team_emoji} {home} <span style="color: #999;">vs</span> {away}
+                </div>
+                <div style="font-size: 14px; color: #FF5722; font-weight: bold; margin: 5px 0;">
+                    🕐 {match_time}
+                </div>
+                
+                <div class="top-pick-stats">
+                    <div class="top-pick-stat">
+                        <div class="top-pick-stat-value">{confidence:.0f}%</div>
+                        <div class="top-pick-stat-label">AI Confidence</div>
+                    </div>
+                    <div class="top-pick-stat">
+                        <div class="top-pick-stat-value">{win_rate:.0f}%</div>
+                        <div class="top-pick-stat-label">H2H Win Rate</div>
+                    </div>
+                    <div class="top-pick-stat">
+                        <div class="top-pick-stat-value">{forebet_prob}</div>
+                        <div class="top-pick-stat-label">Forebet</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 10px 0; padding: 10px; background: #e3f2fd; border-radius: 5px;">
+                    <strong style="color: #1976d2;">🎯 Prognoza:</strong> {prediction}
+                </div>
+                
+                <div class="top-pick-reasoning">
+                    <strong>🤖 Analiza AI:</strong><br>{reasoning}...
+                </div>
+            </div>
+    """
+        
+        html += """
+        </div>
+        """
+    
+    # ========================================================================
+    # REGULAR MATCHES SECTION
+    # ========================================================================
+    html += f"""
+            <p style="margin-top: 30px;">Znaleziono <strong>{len(sorted_matches)}</strong> kwalifikujących się meczów:</p>
     """
     
     for i, match in enumerate(sorted_matches, 1):
@@ -262,6 +403,48 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
                     </div>
                 '''
         
+        # Gemini AI Predictions (jeśli dostępne)
+        gemini_html = ''
+        gemini_recommendation = match.get('gemini_recommendation')
+        gemini_confidence = match.get('gemini_confidence')
+        gemini_reasoning = match.get('gemini_reasoning')
+        
+        if gemini_recommendation and gemini_confidence:
+            # Kolory dla rekomendacji
+            rec_colors = {
+                'HIGH': '#22c55e',    # Zielony
+                'MEDIUM': '#eab308',  # Żółty
+                'LOW': '#f97316',     # Pomarańczowy
+                'SKIP': '#ef4444'     # Czerwony
+            }
+            rec_color = rec_colors.get(gemini_recommendation, '#999')
+            
+            # Kolor confidence
+            if gemini_confidence >= 85:
+                conf_color = '#22c55e'  # Zielony
+            elif gemini_confidence >= 70:
+                conf_color = '#eab308'  # Żółty
+            else:
+                conf_color = '#ef4444'  # Czerwony
+            
+            # Skróć reasoning jeśli jest zbyt długi
+            reasoning_display = gemini_reasoning[:200] + '...' if gemini_reasoning and len(gemini_reasoning) > 200 else gemini_reasoning
+            
+            gemini_html = f'''
+                <div style="background-color: #F0F4FF; padding: 12px; border-radius: 8px; margin-top: 12px; border-left: 4px solid {rec_color};">
+                    <div style="font-weight: bold; margin-bottom: 8px;">
+                        🤖 <span style="color: #667eea;">Gemini AI Analysis</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span style="font-size: 12px; color: #666;">Recommendation:</span>
+                        <span style="background-color: {rec_color}; color: white; padding: 3px 10px; border-radius: 12px; font-weight: bold; font-size: 11px; margin-left: 6px;">{gemini_recommendation}</span>
+                        <span style="margin-left: 12px; font-size: 12px; color: #666;">Confidence:</span>
+                        <span style="background-color: {conf_color}; color: white; padding: 3px 10px; border-radius: 12px; font-weight: bold; font-size: 11px; margin-left: 6px;">{gemini_confidence:.0f}%</span>
+                    </div>
+                    {f'<div style="font-size: 12px; color: #555; font-style: italic; margin-top: 8px; padding: 6px; background-color: white; border-radius: 4px;">💡 {reasoning_display}</div>' if reasoning_display else ''}
+                </div>
+            '''
+        
         # Kursy bukmacherskie (jeśli dostępne)
         odds_html = ''
         home_odds = match.get('home_odds')
@@ -289,6 +472,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
                     {h2h_info}
                     {form_info}
                 </div>
+                {gemini_html}
                 {odds_html}
                 <div class="match-details">
                     🔗 <a href="{match_url}">Zobacz mecz na Livesport</a>

@@ -91,6 +91,10 @@ def lazy_load_gemini():
     
     return GEMINI_AVAILABLE
 
+# Nordic Bet integration (disabled - using Forebet odds instead)
+NORDIC_BET_AVAILABLE = False
+print("ℹ️ Using Forebet for odds data (more reliable)")
+
 
 # ----------------------
 # Helper / scraper code
@@ -365,7 +369,7 @@ def parse_h2h_from_soup(soup: BeautifulSoup, home_team: str) -> List[Dict]:
     return results
 
 
-def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = False, use_forebet: bool = False, use_gemini: bool = False, sport: str = 'football') -> Dict:
+def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = False, use_forebet: bool = False, use_gemini: bool = False, use_sofascore: bool = False, use_nordic_bet: bool = False, sport: str = 'football') -> Dict:
     """Odwiedza stronę meczu, otwiera H2H i zwraca informację we właściwym formacie.
     
     Args:
@@ -797,6 +801,68 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
                 
         except Exception as e:
             print(f"      ⚠️ Błąd Gemini AI: {e}")
+    
+    # ========================================================================
+    # SOFASCORE INTEGRATION - "Who will win?" predictions
+    # ========================================================================
+    if use_sofascore:
+        try:
+            print(f"   🎯 SofaScore: Pobieranie predykcji...")
+            from sofascore_scraper import scrape_sofascore_full
+            
+            sofascore_result = scrape_sofascore_full(
+                driver=driver,
+                home_team=out['home_team'],
+                away_team=out['away_team'],
+                sport=sport
+            )
+            
+            if sofascore_result.get('sofascore_found'):
+                # Dodaj dane SofaScore do wyniku
+                out['sofascore_home_win_prob'] = sofascore_result.get('sofascore_home_win_prob')
+                out['sofascore_draw_prob'] = sofascore_result.get('sofascore_draw_prob')
+                out['sofascore_away_win_prob'] = sofascore_result.get('sofascore_away_win_prob')
+                out['sofascore_total_votes'] = sofascore_result.get('sofascore_total_votes', 0)
+                out['sofascore_home_odds_avg'] = sofascore_result.get('sofascore_home_odds_avg')
+                out['sofascore_away_odds_avg'] = sofascore_result.get('sofascore_away_odds_avg')
+                out['sofascore_url'] = sofascore_result.get('sofascore_url')
+                
+                print(f"      ✅ SofaScore: Home={sofascore_result.get('sofascore_home_win_prob')}%, "
+                      f"Away={sofascore_result.get('sofascore_away_win_prob')}%, "
+                      f"Votes={sofascore_result.get('sofascore_total_votes', 0)}")
+            else:
+                print(f"      ⚠️ SofaScore: Mecz nie znaleziony")
+                
+        except ImportError:
+            print(f"      ⚠️ SofaScore scraper nie zainstalowany")
+        except Exception as e:
+            print(f"      ⚠️ Błąd SofaScore: {e}")
+    
+    # NORDIC BET ODDS
+    if use_nordic_bet and NORDIC_BET_AVAILABLE and out.get('home_team') and out.get('away_team'):
+        try:
+            print(f"   💰 Pobieranie kursów z Nordic Bet...")
+            
+            nordic_result = scrape_nordic_bet(
+                out['home_team'],
+                out['away_team'],
+                sport
+            )
+            
+            if nordic_result.get('nordic_bet_found'):
+                out['nordic_bet_home_odds'] = nordic_result.get('nordic_bet_home_odds')
+                out['nordic_bet_draw_odds'] = nordic_result.get('nordic_bet_draw_odds')
+                out['nordic_bet_away_odds'] = nordic_result.get('nordic_bet_away_odds')
+                out['nordic_bet_found'] = True
+                print(f"      ✅ Nordic Bet: {nordic_result.get('nordic_bet_home_odds')}/{nordic_result.get('nordic_bet_draw_odds')}/{nordic_result.get('nordic_bet_away_odds')}")
+            else:
+                print(f"      ⚠️ Nordic Bet: Kursy nie znalezione")
+                out['nordic_bet_found'] = False
+                
+        except Exception as e:
+            print(f"      ⚠️ Błąd Nordic Bet: {e}")
+    elif use_nordic_bet and not NORDIC_BET_AVAILABLE:
+        print(f"      ⚠️ Nordic Bet: Scraper niedostępny")
 
     return out
 
@@ -2093,7 +2159,23 @@ Przykłady użycia:
                        help='Pobieraj predykcje z Forebet.com (wymaga widocznej przeglądarki)')
     parser.add_argument('--use-gemini', action='store_true',
                        help='Użyj Gemini AI do analizy meczów (wymaga API key w gemini_config.py)')
+    parser.add_argument('--use-sofascore', action='store_true',
+                       help='Pobieraj predykcje "Who will win?" z SofaScore.com')
+    parser.add_argument('--use-supabase', action='store_true',
+                       help='Zapisuj wyniki do bazy danych Supabase')
+    parser.add_argument('--use-nordic-bet', action='store_true',
+                       help='Pobieraj kursy z Nordic Bet')
+    parser.add_argument('--use-all', action='store_true',
+                       help='Użyj wszystkich dostępnych źródeł (Forebet, Gemini, SofaScore, Nordic Bet, Supabase)')
     args = parser.parse_args()
+    
+    # Handle --use-all flag
+    if args.use_all:
+        args.use_forebet = True
+        args.use_gemini = True
+        args.use_sofascore = True
+        args.use_nordic_bet = True
+        args.use_supabase = True
 
     # Walidacja
     if args.mode == 'urls' and not args.input:
@@ -2209,6 +2291,7 @@ Przykłady użycia:
                 
                 info = process_match(url, driver, away_team_focus=args.away_team_focus, 
                                    use_forebet=args.use_forebet, use_gemini=args.use_gemini,
+                                   use_sofascore=args.use_sofascore, use_nordic_bet=args.use_nordic_bet,
                                    sport=current_sport)
                 rows.append(info)
                 
@@ -2304,11 +2387,36 @@ Przykłady użycia:
     
     df.to_csv(outfn, index=False, encoding='utf-8-sig')
 
+    # ========================================================================
+    # SUPABASE INTEGRATION - Save to database
+    # ========================================================================
+    if args.use_supabase and rows:
+        try:
+            print(f'\n💾 Zapisywanie do Supabase...')
+            from supabase_manager import SupabaseManager
+            
+            supabase = SupabaseManager()
+            
+            # Przygotuj dane dla Supabase (dodaj datę i sport)
+            for row in rows:
+                row['match_date'] = args.date
+                row['sport'] = current_sport if 'current_sport' in locals() else 'football'
+            
+            saved_count = supabase.save_bulk_predictions(rows)
+            print(f'   ✅ Zapisano {saved_count}/{len(rows)} predykcji do Supabase')
+            
+        except ImportError:
+            print(f'   ⚠️ Supabase manager nie zainstalowany (brak supabase package)')
+        except Exception as e:
+            print(f'   ❌ Błąd zapisu do Supabase: {e}')
+
     # Podsumowanie
     print(f'\n📊 PODSUMOWANIE:')
     print(f'   Przetworzono meczów: {len(rows)}')
     print(f'   Kwalifikujących się: {qualifying_count} ({qualifying_count/len(rows)*100:.1f}%)' if rows else '   Brak danych')
     print(f'   Zapisano do: {outfn}')
+    if args.use_supabase:
+        print(f'   💾 Supabase: Enabled')
     print('\n✨ Gotowe!')
 
 

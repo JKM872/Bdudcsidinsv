@@ -27,7 +27,7 @@ set TODAY=%datetime:~0,4%-%datetime:~4,2%-%datetime:~6,2%
 echo Scrapuję mecze na dzień: %TODAY%
 echo.
 
-REM Uruchom scraper z WSZYSTKIMI sportami
+REM Uruchom scraper z WSZYSTKIMI sportami + Gemini AI
 python scrape_and_notify.py ^
   --date %TODAY% ^
   --sports football basketball volleyball handball rugby hockey tennis ^
@@ -35,7 +35,8 @@ python scrape_and_notify.py ^
   --from-email jakub.majka.zg@gmail.com ^
   --password "vurb tcai zaaq itjx" ^
   --headless ^
-  --sort time
+  --sort time ^
+  --use-gemini
 
 echo.
 echo ========================================
