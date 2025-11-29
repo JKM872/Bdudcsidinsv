@@ -1,0 +1,523 @@
+name: Daily Sports Scraper
+
+on:
+  schedule:
+    # Uruchomienie o 2:00 UTC (3:00 czasu polskiego zimą, 4:00 latem)
+    # Każdy sport osobno z 5-minutowymi przerwami dla stabilności
+    - cron: '0 2 * * *'   # Football o 2:00
+    - cron: '5 2 * * *'   # Basketball o 2:05
+    - cron: '10 2 * * *'  # Tennis o 2:10
+    - cron: '15 2 * * *'  # Hockey o 2:15
+    - cron: '20 2 * * *'  # Volleyball o 2:20
+    - cron: '25 2 * * *'  # Handball o 2:25
+  
+  workflow_dispatch:
+    inputs:
+      sport:
+        description: 'Sport to scrape (football, basketball, tennis, hockey, volleyball, handball, all)'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - football
+          - basketball
+          - tennis
+          - hockey
+          - volleyball
+          - handball
+          - all
+      date:
+        description: 'Date to scrape (YYYY-MM-DD format, empty for today)'
+        required: false
+        default: ''
+      use_forebet:
+        description: 'Use Forebet predictions'
+        required: false
+        default: true
+        type: boolean
+      use_sofascore:
+        description: 'Use SofaScore fan votes'
+        required: false
+        default: true
+        type: boolean
+      use_odds:
+        description: 'Fetch FlashScore odds'
+        required: false
+        default: true
+        type: boolean
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  determine-sport:
+    runs-on: ubuntu-latest
+    outputs:
+      sport: ${{ steps.set-sport.outputs.sport }}
+      date: ${{ steps.set-date.outputs.date }}
+    steps:
+      - name: Determine which sport to scrape
+        id: set-sport
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "sport=${{ github.event.inputs.sport }}" >> $GITHUB_OUTPUT
+          else
+            # Scheduled run - determine sport by cron minute
+            MINUTE=$(date -u +%M)
+            case $MINUTE in
+              00) echo "sport=football" >> $GITHUB_OUTPUT ;;
+              05) echo "sport=basketball" >> $GITHUB_OUTPUT ;;
+              10) echo "sport=tennis" >> $GITHUB_OUTPUT ;;
+              15) echo "sport=hockey" >> $GITHUB_OUTPUT ;;
+              20) echo "sport=volleyball" >> $GITHUB_OUTPUT ;;
+              25) echo "sport=handball" >> $GITHUB_OUTPUT ;;
+              *) echo "sport=football" >> $GITHUB_OUTPUT ;;
+            esac
+          fi
+      
+      - name: Set date
+        id: set-date
+        run: |
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            echo "date=${{ github.event.inputs.date }}" >> $GITHUB_OUTPUT
+          else
+            echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+          fi
+
+  scrape-football:
+    needs: determine-sport
+    if: needs.determine-sport.outputs.sport == 'football' || needs.determine-sport.outputs.sport == 'all'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      
+      - name: Install ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+      
+      - name: Install Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install xvfbwrapper
+      
+      - name: Run Football Scraper
+        env:
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER || 'gmail' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scrape_and_notify.py \
+            --date ${{ needs.determine-sport.outputs.date }} \
+            --sports football \
+            --to-email "$EMAIL_TO" \
+            --from-email "$EMAIL_FROM" \
+            --password "$EMAIL_PASSWORD" \
+            --provider "$EMAIL_PROVIDER" \
+            --headless \
+            --use-forebet \
+            --use-sofascore \
+            --use-odds
+      
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: football-results-${{ needs.determine-sport.outputs.date }}
+          path: |
+            results/*.json
+            results/*.csv
+            results/*.html
+          if-no-files-found: ignore
+          retention-days: 30
+
+  scrape-basketball:
+    needs: determine-sport
+    if: needs.determine-sport.outputs.sport == 'basketball' || needs.determine-sport.outputs.sport == 'all'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      
+      - name: Install ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+      
+      - name: Install Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install xvfbwrapper
+      
+      - name: Run Basketball Scraper
+        env:
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER || 'gmail' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scrape_and_notify.py \
+            --date ${{ needs.determine-sport.outputs.date }} \
+            --sports basketball \
+            --to-email "$EMAIL_TO" \
+            --from-email "$EMAIL_FROM" \
+            --password "$EMAIL_PASSWORD" \
+            --provider "$EMAIL_PROVIDER" \
+            --headless \
+            --use-forebet \
+            --use-sofascore \
+            --use-odds
+      
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: basketball-results-${{ needs.determine-sport.outputs.date }}
+          path: |
+            results/*.json
+            results/*.csv
+            results/*.html
+          if-no-files-found: ignore
+          retention-days: 30
+
+  scrape-tennis:
+    needs: determine-sport
+    if: needs.determine-sport.outputs.sport == 'tennis' || needs.determine-sport.outputs.sport == 'all'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      
+      - name: Install ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+      
+      - name: Install Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install xvfbwrapper
+      
+      - name: Run Tennis Scraper
+        env:
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER || 'gmail' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scrape_and_notify.py \
+            --date ${{ needs.determine-sport.outputs.date }} \
+            --sports tennis \
+            --to-email "$EMAIL_TO" \
+            --from-email "$EMAIL_FROM" \
+            --password "$EMAIL_PASSWORD" \
+            --provider "$EMAIL_PROVIDER" \
+            --headless \
+            --use-forebet \
+            --use-sofascore \
+            --use-odds
+      
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tennis-results-${{ needs.determine-sport.outputs.date }}
+          path: |
+            results/*.json
+            results/*.csv
+            results/*.html
+          if-no-files-found: ignore
+          retention-days: 30
+
+  scrape-hockey:
+    needs: determine-sport
+    if: needs.determine-sport.outputs.sport == 'hockey' || needs.determine-sport.outputs.sport == 'all'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      
+      - name: Install ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+      
+      - name: Install Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install xvfbwrapper
+      
+      - name: Run Hockey Scraper
+        env:
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER || 'gmail' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scrape_and_notify.py \
+            --date ${{ needs.determine-sport.outputs.date }} \
+            --sports hockey \
+            --to-email "$EMAIL_TO" \
+            --from-email "$EMAIL_FROM" \
+            --password "$EMAIL_PASSWORD" \
+            --provider "$EMAIL_PROVIDER" \
+            --headless \
+            --use-forebet \
+            --use-sofascore \
+            --use-odds
+      
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hockey-results-${{ needs.determine-sport.outputs.date }}
+          path: |
+            results/*.json
+            results/*.csv
+            results/*.html
+          if-no-files-found: ignore
+          retention-days: 30
+
+  scrape-volleyball:
+    needs: determine-sport
+    if: needs.determine-sport.outputs.sport == 'volleyball' || needs.determine-sport.outputs.sport == 'all'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      
+      - name: Install ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+      
+      - name: Install Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install xvfbwrapper
+      
+      - name: Run Volleyball Scraper
+        env:
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER || 'gmail' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scrape_and_notify.py \
+            --date ${{ needs.determine-sport.outputs.date }} \
+            --sports volleyball \
+            --to-email "$EMAIL_TO" \
+            --from-email "$EMAIL_FROM" \
+            --password "$EMAIL_PASSWORD" \
+            --provider "$EMAIL_PROVIDER" \
+            --headless \
+            --use-forebet \
+            --use-sofascore \
+            --use-odds
+      
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: volleyball-results-${{ needs.determine-sport.outputs.date }}
+          path: |
+            results/*.json
+            results/*.csv
+            results/*.html
+          if-no-files-found: ignore
+          retention-days: 30
+
+  scrape-handball:
+    needs: determine-sport
+    if: needs.determine-sport.outputs.sport == 'handball' || needs.determine-sport.outputs.sport == 'all'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      
+      - name: Install ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+      
+      - name: Install Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install xvfbwrapper
+      
+      - name: Run Handball Scraper
+        env:
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER || 'gmail' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scrape_and_notify.py \
+            --date ${{ needs.determine-sport.outputs.date }} \
+            --sports handball \
+            --to-email "$EMAIL_TO" \
+            --from-email "$EMAIL_FROM" \
+            --password "$EMAIL_PASSWORD" \
+            --provider "$EMAIL_PROVIDER" \
+            --headless \
+            --use-forebet \
+            --use-sofascore \
+            --use-odds
+      
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: handball-results-${{ needs.determine-sport.outputs.date }}
+          path: |
+            results/*.json
+            results/*.csv
+            results/*.html
+          if-no-files-found: ignore
+          retention-days: 30
+
+  summary:
+    needs: [scrape-football, scrape-basketball, scrape-tennis, scrape-hockey, scrape-volleyball, scrape-handball]
+    if: always()
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Generate Summary
+        run: |
+          echo "## 🏆 Daily Scraper Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📅 **Date:** $(date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
+          echo "⏰ **Time:** $(date -u +%H:%M) UTC" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sport Results:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Sport | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| ⚽ Football | ${{ needs.scrape-football.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🏀 Basketball | ${{ needs.scrape-basketball.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🎾 Tennis | ${{ needs.scrape-tennis.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🏒 Hockey | ${{ needs.scrape-hockey.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🏐 Volleyball | ${{ needs.scrape-volleyball.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🤾 Handball | ${{ needs.scrape-handball.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
