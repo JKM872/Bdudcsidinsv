@@ -132,8 +132,8 @@ jobs:
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \
             --sports football \
-            --to-email "$EMAIL_TO" \
-            --from-email "$EMAIL_FROM" \
+            --to "$EMAIL_TO" \
+            --from "$EMAIL_FROM" \
             --password "$EMAIL_PASSWORD" \
             --provider "$EMAIL_PROVIDER" \
             --headless \
@@ -201,8 +201,8 @@ jobs:
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \
             --sports basketball \
-            --to-email "$EMAIL_TO" \
-            --from-email "$EMAIL_FROM" \
+            --to "$EMAIL_TO" \
+            --from "$EMAIL_FROM" \
             --password "$EMAIL_PASSWORD" \
             --provider "$EMAIL_PROVIDER" \
             --headless \
@@ -270,8 +270,8 @@ jobs:
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \
             --sports tennis \
-            --to-email "$EMAIL_TO" \
-            --from-email "$EMAIL_FROM" \
+            --to "$EMAIL_TO" \
+            --from "$EMAIL_FROM" \
             --password "$EMAIL_PASSWORD" \
             --provider "$EMAIL_PROVIDER" \
             --headless \
@@ -339,8 +339,8 @@ jobs:
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \
             --sports hockey \
-            --to-email "$EMAIL_TO" \
-            --from-email "$EMAIL_FROM" \
+            --to "$EMAIL_TO" \
+            --from "$EMAIL_FROM" \
             --password "$EMAIL_PASSWORD" \
             --provider "$EMAIL_PROVIDER" \
             --headless \
@@ -408,8 +408,8 @@ jobs:
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \
             --sports volleyball \
-            --to-email "$EMAIL_TO" \
-            --from-email "$EMAIL_FROM" \
+            --to "$EMAIL_TO" \
+            --from "$EMAIL_FROM" \
             --password "$EMAIL_PASSWORD" \
             --provider "$EMAIL_PROVIDER" \
             --headless \
@@ -477,8 +477,8 @@ jobs:
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \
             --sports handball \
-            --to-email "$EMAIL_TO" \
-            --from-email "$EMAIL_FROM" \
+            --to "$EMAIL_TO" \
+            --from "$EMAIL_FROM" \
             --password "$EMAIL_PASSWORD" \
             --provider "$EMAIL_PROVIDER" \
             --headless \
