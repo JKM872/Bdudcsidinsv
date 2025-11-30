@@ -705,8 +705,9 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
     out['home_odds'] = odds['home_odds']
     out['away_odds'] = odds['away_odds']
 
-    # FOREBET PREDICTIONS - jeśli włączone
-    if use_forebet and FOREBET_AVAILABLE and out.get('home_team') and out.get('away_team'):
+    # FOREBET PREDICTIONS - TYLKO jeśli mecz KWALIFIKUJE SIĘ!
+    # 🔥 OPTYMALIZACJA: Skip Forebet dla meczów które i tak nie przejdą
+    if use_forebet and FOREBET_AVAILABLE and out.get('qualifies') and out.get('home_team') and out.get('away_team'):
         try:
             print(f"      🎯 Forebet: Pobieram predykcję...")
             
