@@ -269,9 +269,10 @@ def search_forebet_prediction(
     html_content = None
     soup = None
     
-    # 🔥 CACHE HTML PER SPORT - najważniejsza optymalizacja!
+    # 🔥 CACHE HTML PER SPORT + DATA - najważniejsza optymalizacja!
     sport_lower = sport.lower()
-    sport_cache_key = sport_lower
+    # WAŻNE: Cache per data + sport, bo Forebet pokazuje mecze tylko dla konkretnej daty!
+    sport_cache_key = f"{sport_lower}_{match_date}"
     
     if sport_cache_key in _forebet_html_cache:
         cached_html, cached_soup, cache_time = _forebet_html_cache[sport_cache_key]
@@ -291,11 +292,12 @@ def search_forebet_prediction(
         if IS_CI_CD and CLOUDFLARE_BYPASS_AVAILABLE:
             print(f"      🔥 CI/CD: Używam FlareSolverr (skip Puppeteer - nie działa)")
             
-            # 🔥 WAŻNE: Używamy /by-league bo pokazuje WSZYSTKIE mecze na jednej stronie!
-            # Normalny URL pokazuje tylko ~50 i wymaga "Load More"
+            # 🔥 WAŻNE: Używamy URL z datą meczu!
+            # Forebet wymaga konkretnej daty w URL żeby pokazać mecze z tej daty
+            # Format: ?date=YYYY-MM-DD na końcu URL
             sport_urls = {
-                'football': 'https://www.forebet.com/en/football-tips-and-predictions-for-today/predictions-1x2/by-league',
-                'soccer': 'https://www.forebet.com/en/football-tips-and-predictions-for-today/predictions-1x2/by-league',
+                'football': 'https://www.forebet.com/en/football-tips-and-predictions-for-today/predictions-1x2',
+                'soccer': 'https://www.forebet.com/en/football-tips-and-predictions-for-today/predictions-1x2',
                 'basketball': 'https://www.forebet.com/en/basketball/predictions-today',
                 'volleyball': 'https://www.forebet.com/en/volleyball/predictions-today',
                 'handball': 'https://www.forebet.com/en/handball/predictions-today',
@@ -304,8 +306,21 @@ def search_forebet_prediction(
                 'tennis': 'https://www.forebet.com/en/tennis/predictions-today',
             }
             
-            url = sport_urls.get(sport_lower, sport_urls['football'])
-            print(f"      🌐 Forebet ({sport}): {url} [FULL LIST /by-league]")
+            base_url = sport_urls.get(sport_lower, sport_urls['football'])
+            
+            # Dodaj datę do URL - Forebet filtruje mecze po dacie!
+            # Dla "dzisiaj" nie trzeba dodawać, ale dla innych dat tak
+            from datetime import datetime, timedelta
+            today = datetime.now().strftime('%Y-%m-%d')
+            
+            if match_date and match_date != today:
+                url = f"{base_url}?date={match_date}"
+                print(f"      📅 Forebet dla daty: {match_date} (nie dzisiaj)")
+            else:
+                url = base_url
+                print(f"      📅 Forebet dla dzisiaj: {today}")
+            
+            print(f"      🌐 Forebet ({sport}): {url}")
             
             try:
                 html_content = fetch_forebet_with_bypass(url, debug=True)
@@ -577,6 +592,18 @@ def search_forebet_prediction(
         # DEBUG: Wypisz pierwsze 5 meczów z Forebet żeby zobaczyć format
         debug_matches = []
         
+        # DEBUG: Zapisz surowy HTML pierwszych 2 wierszy do pliku
+        if match_rows:
+            try:
+                with open('forebet_debug_rows.html', 'w', encoding='utf-8') as f:
+                    for i, r in enumerate(match_rows[:2]):
+                        f.write(f"<!-- ROW {i+1} -->\n")
+                        f.write(str(r))
+                        f.write("\n\n")
+                print(f"      💾 Zapisano debug HTML do forebet_debug_rows.html")
+            except Exception as e:
+                print(f"      ⚠️ Nie udało się zapisać debug HTML: {e}")
+        
         # Szukaj naszego meczu
         for row in match_rows:
             try:
@@ -622,19 +649,43 @@ def search_forebet_prediction(
                                 away_elem = FakeElement(parts[1].replace('-', ' ').title())
                                 break
                 
+                # Wariant 5: Szukaj klasy 'tnm' (team name) - nowa struktura Forebet
                 if not home_elem or not away_elem:
-                    # DEBUG: Sprawdź co jest w wierszu
+                    tnm_elems = row.find_all(class_='tnm')
+                    if len(tnm_elems) >= 2:
+                        home_elem = tnm_elems[0]
+                        away_elem = tnm_elems[1]
+                
+                # Wariant 6: Szukaj klasy 'ht' i 'at' (home team / away team)
+                if not home_elem or not away_elem:
+                    home_elem = row.find(class_='ht')
+                    away_elem = row.find(class_='at')
+                
+                # Wariant 7: Szukaj dowolnych elementów z tekstem w strukturze div.contentmiddle lub tr
+                if not home_elem or not away_elem:
+                    all_links = row.find_all('a')
+                    team_links = [l for l in all_links if l.get_text(strip=True) and len(l.get_text(strip=True)) > 2]
+                    if len(team_links) >= 2:
+                        home_elem = team_links[0]
+                        away_elem = team_links[1]
+                
+                if not home_elem or not away_elem:
+                    # DEBUG: Sprawdź co jest w wierszu - BARDZIEJ SZCZEGÓŁOWO
                     if len(debug_matches) < 3:
                         row_text = row.get_text(strip=True)[:100] if row else "None"
                         debug_matches.append(f"[EMPTY] {row_text}")
+                        # Wypisz pełny HTML wiersza do debugowania
+                        if row:
+                            print(f"      🔬 DEBUG ROW HTML: {str(row)[:300]}")
                     continue
                 
                 forebet_home = home_elem.get_text(strip=True)
                 forebet_away = away_elem.get_text(strip=True)
                 
-                # DEBUG: Zbierz pierwsze mecze do logowania
-                if len(debug_matches) < 5:
+                # DEBUG: Zbierz WSZYSTKIE mecze do logowania (nie tylko 5)
+                if len(debug_matches) < 10:
                     debug_matches.append(f"{forebet_home} vs {forebet_away}")
+                    print(f"      🏟️ Forebet mecz znaleziony: {forebet_home} vs {forebet_away}")
                 
                 # Sprawdź similarity
                 home_score = similarity_score(home_team, forebet_home)
