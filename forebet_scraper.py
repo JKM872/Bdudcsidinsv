@@ -560,6 +560,9 @@ def search_forebet_prediction(
         
         print(f"      🔍 Znaleziono {len(match_rows)} meczów na Forebet")
         
+        # DEBUG: Wypisz pierwsze 5 meczów z Forebet żeby zobaczyć format
+        debug_matches = []
+        
         # Szukaj naszego meczu
         for row in match_rows:
             try:
@@ -610,6 +613,10 @@ def search_forebet_prediction(
                 
                 forebet_home = home_elem.get_text(strip=True)
                 forebet_away = away_elem.get_text(strip=True)
+                
+                # DEBUG: Zbierz pierwsze mecze do logowania
+                if len(debug_matches) < 5:
+                    debug_matches.append(f"{forebet_home} vs {forebet_away}")
                 
                 # Sprawdź similarity
                 home_score = similarity_score(home_team, forebet_home)
@@ -693,6 +700,10 @@ def search_forebet_prediction(
                 continue
         
         if not result['success']:
+            # DEBUG: Wypisz pierwsze mecze znalezione na stronie
+            if debug_matches:
+                print(f"      📋 Próbki meczów na Forebet: {debug_matches[:5]}")
+                print(f"      🔎 Szukany mecz: {home_team} vs {away_team}")
             result['error'] = f'Nie znaleziono meczu {home_team} vs {away_team} na Forebet (similarity < {min_similarity})'
     
     except TimeoutException:
