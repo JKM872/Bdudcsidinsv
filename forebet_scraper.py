@@ -267,8 +267,16 @@ def search_forebet_prediction(
         print(f"      🚀 CI/CD: Próbuję Puppeteer Stealth (najlepsza metoda)...")
         html_content = fetch_forebet_with_puppeteer(sport)
         
-        if html_content and ('rcnt' in html_content or 'tr_0' in html_content):
-            print(f"      ✅ Puppeteer Stealth SUCCESS!")
+        if html_content:
+            # Weryfikacja czy to prawdziwa strona Forebet
+            is_cloudflare = 'loading-verifying' in html_content or 'lds-ring' in html_content
+            is_forebet = 'class="rcnt"' in html_content or 'class="tr_0"' in html_content
+            
+            if is_forebet and not is_cloudflare:
+                print(f"      ✅ Puppeteer Stealth SUCCESS! ({len(html_content)} znaków)")
+            else:
+                print(f"      ⚠️ Puppeteer zwrócił stronę challenge, nie Forebet...")
+                html_content = None
         else:
             print(f"      ⚠️ Puppeteer nie zadziałał, próbuję innych metod...")
             html_content = None
@@ -295,10 +303,35 @@ def search_forebet_prediction(
             html_content = fetch_forebet_with_bypass(url, debug=True)
             
             if html_content:
-                print(f"      🔥 Cloudflare Bypass SUCCESS! ({len(html_content)} znaków)")
-                soup = BeautifulSoup(html_content, 'html.parser')
+                # 🔥 WERYFIKACJA: Sprawdź czy to prawdziwa strona Forebet!
+                is_cloudflare = (
+                    'loading-verifying' in html_content or
+                    'lds-ring' in html_content or
+                    'checking your browser' in html_content.lower() or
+                    'verifying you are human' in html_content.lower()
+                )
                 
-                # Przejdź do parsowania meczów (poniżej)
+                is_forebet = (
+                    'class="rcnt"' in html_content or
+                    'class="forepr"' in html_content or
+                    'class="tr_0"' in html_content or
+                    'class="tr_1"' in html_content
+                )
+                
+                if is_cloudflare and not is_forebet:
+                    print(f"      ⚠️ Cloudflare Bypass zwrócił stronę challenge, nie Forebet!")
+                    print(f"      ⚠️ Ignoruję i próbuję innej metody...")
+                    html_content = None
+                elif is_forebet:
+                    print(f"      🔥 Cloudflare Bypass SUCCESS! ({len(html_content)} znaków)")
+                    print(f"      ✅ Potwierdzona strona Forebet!")
+                    soup = BeautifulSoup(html_content, 'html.parser')
+                else:
+                    print(f"      ⚠️ Bypass zwrócił nieznany HTML ({len(html_content)} znaków)")
+                    # Zapisz do debug
+                    with open('forebet_bypass_debug.html', 'w', encoding='utf-8') as f:
+                        f.write(html_content)
+                    html_content = None
             else:
                 print(f"      ⚠️ Cloudflare Bypass nie zadziałał, próbuję standardową metodę...")
                 html_content = None
