@@ -1,0 +1,23 @@
+{
+  "name": "forebet-scraper",
+  "version": "1.0.0",
+  "description": "Forebet scraper with Puppeteer Stealth for Cloudflare bypass",
+  "main": "forebet_puppeteer.js",
+  "scripts": {
+    "scrape": "node forebet_puppeteer.js",
+    "scrape:football": "node forebet_puppeteer.js football forebet_football.html",
+    "scrape:basketball": "node forebet_puppeteer.js basketball forebet_basketball.html",
+    "scrape:tennis": "node forebet_puppeteer.js tennis forebet_tennis.html",
+    "scrape:hockey": "node forebet_puppeteer.js hockey forebet_hockey.html",
+    "scrape:volleyball": "node forebet_puppeteer.js volleyball forebet_volleyball.html",
+    "scrape:handball": "node forebet_puppeteer.js handball forebet_handball.html"
+  },
+  "dependencies": {
+    "puppeteer": "^21.6.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

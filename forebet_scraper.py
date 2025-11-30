@@ -8,7 +8,10 @@ Pobiera predykcje meczów z Forebet.com:
 - BTTS (Both Teams To Score) - czy obie drużyny strzelą
 
 🔥 ULTRA POWER CLOUDFLARE BYPASS 🔥
-Używa wielu metod aby ominąć Cloudflare w CI/CD
+Używa wielu metod aby ominąć Cloudflare w CI/CD:
+1. Puppeteer Extra z Stealth (Node.js) - NAJLEPSZA
+2. FlareSolverr (Docker)
+3. curl_cffi, cloudscraper, drissionpage, itd.
 
 Autor: AI Assistant
 Data: 2025-11-17
@@ -17,6 +20,7 @@ Data: 2025-11-17
 import time
 import random
 import os
+import subprocess
 from typing import Dict, Optional, Tuple
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -58,6 +62,69 @@ if IS_CI_CD:
 # Cache dla wyników (żeby nie scrape'ować dwa razy tego samego)
 _forebet_cache = {}
 
+# 🔥 PUPPETEER STEALTH - najlepsza metoda dla CI/CD
+def fetch_forebet_with_puppeteer(sport: str) -> Optional[str]:
+    """
+    Pobierz Forebet używając Puppeteer Extra z Stealth (Node.js).
+    To jest najskuteczniejsza metoda dla GitHub Actions!
+    """
+    output_file = f'forebet_{sport.lower()}_puppeteer.html'
+    
+    try:
+        print(f"      🚀 Puppeteer Stealth: Uruchamiam dla {sport}...")
+        
+        # Sprawdź czy Node.js i npm są dostępne
+        result = subprocess.run(['node', '--version'], capture_output=True, text=True, timeout=10)
+        if result.returncode != 0:
+            print("      ⚠️ Node.js nie jest dostępny")
+            return None
+        
+        # Sprawdź czy dependencies są zainstalowane
+        if not os.path.exists('node_modules/puppeteer-extra'):
+            print("      📦 Instaluję puppeteer-extra...")
+            subprocess.run(['npm', 'install'], capture_output=True, timeout=120)
+        
+        # Uruchom Puppeteer scraper
+        result = subprocess.run(
+            ['node', 'forebet_puppeteer.js', sport.lower(), output_file],
+            capture_output=True,
+            text=True,
+            timeout=180  # 3 minuty timeout
+        )
+        
+        # Pokaż output
+        if result.stdout:
+            for line in result.stdout.strip().split('\n'):
+                print(f"      {line}")
+        if result.stderr:
+            for line in result.stderr.strip().split('\n')[:5]:
+                print(f"      ⚠️ {line}")
+        
+        # Sprawdź czy plik został utworzony
+        if os.path.exists(output_file):
+            with open(output_file, 'r', encoding='utf-8') as f:
+                html = f.read()
+            
+            # Weryfikacja
+            if 'rcnt' in html or 'tr_0' in html or 'forepr' in html:
+                print(f"      ✅ Puppeteer SUCCESS! ({len(html)} znaków)")
+                return html
+            else:
+                print(f"      ⚠️ Puppeteer: HTML nie zawiera meczów Forebet")
+                return html  # Zwróć mimo wszystko do analizy
+        else:
+            print(f"      ❌ Puppeteer: Plik {output_file} nie został utworzony")
+            return None
+            
+    except subprocess.TimeoutExpired:
+        print("      ⚠️ Puppeteer: Timeout (3 minuty)")
+        return None
+    except FileNotFoundError:
+        print("      ⚠️ Puppeteer: Node.js nie znaleziony")
+        return None
+    except Exception as e:
+        print(f"      ❌ Puppeteer error: {e}")
+        return None
 
 def normalize_team_name(name: str) -> str:
     """
@@ -195,8 +262,19 @@ def search_forebet_prediction(
     own_driver = False
     html_content = None
     
+    # 🔥 CI/CD: Najpierw spróbuj Puppeteer Stealth (Node.js) - NAJSKUTECZNIEJSZE!
+    if IS_CI_CD:
+        print(f"      🚀 CI/CD: Próbuję Puppeteer Stealth (najlepsza metoda)...")
+        html_content = fetch_forebet_with_puppeteer(sport)
+        
+        if html_content and ('rcnt' in html_content or 'tr_0' in html_content):
+            print(f"      ✅ Puppeteer Stealth SUCCESS!")
+        else:
+            print(f"      ⚠️ Puppeteer nie zadziałał, próbuję innych metod...")
+            html_content = None
+    
     # 🔥 ULTRA POWER: Używaj Cloudflare Bypass (włącznie z FlareSolverr w CI/CD!)
-    if CLOUDFLARE_BYPASS_AVAILABLE:
+    if html_content is None and CLOUDFLARE_BYPASS_AVAILABLE:
         print(f"      🔥 Używam Ultra Power Cloudflare Bypass!")
         
         sport_urls = {

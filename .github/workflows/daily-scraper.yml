@@ -125,6 +125,19 @@ jobs:
           Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
       
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Puppeteer Stealth
+        run: |
+          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
+          # Biblioteki dla Puppeteer
+          sudo apt-get install -y libatk-bridge2.0-0 libatk1.0-0 libcups2 libdrm2 \
+            libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 \
+            libpango-1.0-0 libpangocairo-1.0-0 libnss3 libxss1 || true
+      
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -219,6 +232,18 @@ jobs:
           Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
       
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Puppeteer Stealth
+        run: |
+          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
+          sudo apt-get install -y libatk-bridge2.0-0 libatk1.0-0 libcups2 libdrm2 \
+            libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 \
+            libpango-1.0-0 libpangocairo-1.0-0 libnss3 libxss1 || true
+      
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -311,6 +336,18 @@ jobs:
           sudo apt-get install -y xvfb
           Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Puppeteer Stealth
+        run: |
+          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
+          sudo apt-get install -y libatk-bridge2.0-0 libatk1.0-0 libcups2 libdrm2 \
+            libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 \
+            libpango-1.0-0 libpangocairo-1.0-0 libnss3 libxss1 || true
       
       - name: Install dependencies
         run: |
@@ -405,6 +442,18 @@ jobs:
           Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
       
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Puppeteer Stealth
+        run: |
+          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
+          sudo apt-get install -y libatk-bridge2.0-0 libatk1.0-0 libcups2 libdrm2 \
+            libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 \
+            libpango-1.0-0 libpangocairo-1.0-0 libnss3 libxss1 || true
+      
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -498,6 +547,18 @@ jobs:
           Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
       
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Puppeteer Stealth
+        run: |
+          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
+          sudo apt-get install -y libatk-bridge2.0-0 libatk1.0-0 libcups2 libdrm2 \
+            libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 \
+            libpango-1.0-0 libpangocairo-1.0-0 libnss3 libxss1 || true
+      
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -590,6 +651,18 @@ jobs:
           sudo apt-get install -y xvfb
           Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Puppeteer Stealth
+        run: |
+          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
+          sudo apt-get install -y libatk-bridge2.0-0 libatk1.0-0 libcups2 libdrm2 \
+            libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 \
+            libpango-1.0-0 libpangocairo-1.0-0 libnss3 libxss1 || true
       
       - name: Install dependencies
         run: |
