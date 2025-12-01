@@ -711,15 +711,24 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         try:
             print(f"      🎯 Forebet: Pobieram predykcję...")
             
-            # Wyciągnij datę meczu z match_time (format: DD.MM.YY HH:MM)
-            match_date_str = '2025-11-17'  # Domyślna data
+            # Wyciągnij datę meczu z match_time (format: DD.MM.YY HH:MM lub DD.MM.YYYY HH:MM)
+            from datetime import datetime as dt_forebet
+            match_date_str = dt_forebet.now().strftime('%Y-%m-%d')  # Domyślna data = dzisiaj
             if out.get('match_time'):
                 try:
                     import re
-                    date_match = re.search(r'(\d{2})\.(\d{2})\.(\d{2})', out['match_time'])
+                    # Obsługa zarówno DD.MM.YY jak i DD.MM.YYYY
+                    date_match = re.search(r'(\d{2})\.(\d{2})\.(\d{2,4})', out['match_time'])
                     if date_match:
                         day, month, year = date_match.groups()
-                        match_date_str = f'20{year}-{month}-{day}'
+                        # Jeśli rok ma 4 cyfry, użyj go bezpośrednio
+                        if len(year) == 4:
+                            match_date_str = f'{year}-{month}-{day}'
+                        else:
+                            # Rok 2-cyfrowy: 00-50 -> 2000s, 51-99 -> 1900s
+                            year_int = int(year)
+                            full_year = 2000 + year_int if year_int <= 50 else 1900 + year_int
+                            match_date_str = f'{full_year}-{month}-{day}'
                 except:
                     pass
             

@@ -539,28 +539,49 @@ def search_forebet_prediction(
                 print(f"      ⚠️ Wykryto Cloudflare challenge - czekam dłużej...")
                 time.sleep(8)  # Dodatkowe 8s na challenge
             
-            # Symulacja ludzkiego przewijania (kilka razy)
-            print(f"      🖱️ Symulacja scrollowania...")
-            for _ in range(3):
-                scroll_amount = random.randint(200, 500)
-                driver.execute_script(f"window.scrollBy(0, {scroll_amount});")
-                time.sleep(random.uniform(0.3, 0.8))
+            # 🔥 PEŁNE SCROLLOWANIE - ładuje WSZYSTKIE mecze (w tym wieczorne europejskie)
+            print(f"      🖱️ Scrollowanie całej strony aby załadować wszystkie mecze...")
             
-            # Przewiń na środek strony
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
-            time.sleep(1)
+            # Pobierz początkową liczbę meczów
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            initial_matches = len(soup.find_all('div', class_='rcnt'))
+            print(f"      📊 Początkowa liczba meczów: {initial_matches}")
             
-            # Sprawdź czy są mecze (czekaj max 10s)
-            print(f"      ⏳ Czekam na załadowanie meczów...")
-            start_wait = time.time()
-            while time.time() - start_wait < 10:
+            # Scrolluj całą stronę od góry do dołu, czekając na lazy loading
+            last_height = driver.execute_script("return document.body.scrollHeight")
+            scroll_attempts = 0
+            max_scroll_attempts = 15  # Max 15 prób scrollowania
+            
+            while scroll_attempts < max_scroll_attempts:
+                # Przewiń na dół strony
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(random.uniform(1.5, 2.5))  # Czekaj na lazy loading
+                
+                # Sprawdź czy strona się powiększyła
+                new_height = driver.execute_script("return document.body.scrollHeight")
                 soup = BeautifulSoup(driver.page_source, 'html.parser')
-                if soup.find_all('div', class_='tr') or soup.find_all('tr') or soup.find('table'):
-                    print(f"      ✅ Mecze załadowane!")
-                    break
-                time.sleep(1)
-            else:
-                print(f"      ⚠️ Timeout czekania na mecze")
+                current_matches = len(soup.find_all('div', class_='rcnt'))
+                
+                print(f"      📊 Scroll {scroll_attempts + 1}: {current_matches} meczów (height: {new_height})")
+                
+                if new_height == last_height:
+                    # Jeszcze jedna próba - czasem potrzeba więcej czasu
+                    time.sleep(1)
+                    new_height = driver.execute_script("return document.body.scrollHeight")
+                    if new_height == last_height:
+                        print(f"      ✅ Wszystkie mecze załadowane!")
+                        break
+                
+                last_height = new_height
+                scroll_attempts += 1
+            
+            # Przewiń z powrotem na górę i policz finalne mecze
+            driver.execute_script("window.scrollTo(0, 0);")
+            time.sleep(0.5)
+            
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            final_matches = len(soup.find_all('div', class_='rcnt'))
+            print(f"      📊 Finalna liczba meczów: {final_matches} (dodano {final_matches - initial_matches})")
             
             # Pobierz finalny HTML
             soup = BeautifulSoup(driver.page_source, 'html.parser')

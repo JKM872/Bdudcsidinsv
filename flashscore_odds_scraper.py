@@ -135,11 +135,9 @@ class FlashScoreOddsScraper:
                     print(f"   ✅ FlashScore: Znaleziono mecz!")
                     return full_url
             
-            # Jeśli nie znaleziono konkretnego meczu, zwróć pierwszy dostępny
-            # (dla testowania)
-            if matches:
-                return f'https://www.flashscore.com{matches[0]}'
-            
+            # NIE zwracaj losowego meczu - to powodowało identyczne kursy dla wszystkich!
+            # Zamiast tego zwróć None i pozwól fallbackowi na LiveScore
+            print(f"   ⚠️ FlashScore: Nie znaleziono meczu {home_team} vs {away_team}")
             return None
             
         except Exception as e:

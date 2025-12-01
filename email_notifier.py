@@ -223,7 +223,12 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
             away = pick.get('away_team', 'N/A')
             confidence = pick.get('gemini_confidence', 0)
             prediction = pick.get('gemini_prediction', 'N/A')
-            reasoning = pick.get('gemini_reasoning', '')[:300]  # First 300 chars
+            # Bezpieczne pobieranie reasoning (może być NaN/float z pandas)
+            raw_reasoning = pick.get('gemini_reasoning', '')
+            if raw_reasoning is None or (isinstance(raw_reasoning, float) and str(raw_reasoning) == 'nan'):
+                reasoning = ''
+            else:
+                reasoning = str(raw_reasoning)[:300]  # First 300 chars
             
             # Calculate stats
             focus_team = pick.get('focus_team', 'home')
@@ -240,8 +245,14 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
             
             win_rate = (wins / h2h_count * 100) if h2h_count > 0 else 0
             
-            # Forebet data
-            forebet_prob = pick.get('forebet_probability', 'N/A')
+            # Forebet data - obsługa braku danych
+            raw_forebet_prob = pick.get('forebet_probability')
+            if raw_forebet_prob is None or (isinstance(raw_forebet_prob, float) and str(raw_forebet_prob) == 'nan'):
+                forebet_prob = 'Brak'
+                forebet_style = 'color: #999; font-size: 12px;'
+            else:
+                forebet_prob = f"{raw_forebet_prob}%" if isinstance(raw_forebet_prob, (int, float)) else str(raw_forebet_prob)
+                forebet_style = ''
             match_time = pick.get('match_time', 'Brak danych')
             
             html += f"""
@@ -263,7 +274,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
                         <div class="top-pick-stat-label">H2H Win Rate</div>
                     </div>
                     <div class="top-pick-stat">
-                        <div class="top-pick-stat-value">{forebet_prob}</div>
+                        <div class="top-pick-stat-value" style="{forebet_style}">{forebet_prob}</div>
                         <div class="top-pick-stat-label">Forebet</div>
                     </div>
                 </div>
@@ -427,8 +438,12 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
             else:
                 conf_color = '#ef4444'  # Czerwony
             
-            # Skróć reasoning jeśli jest zbyt długi
-            reasoning_display = gemini_reasoning[:200] + '...' if gemini_reasoning and len(gemini_reasoning) > 200 else gemini_reasoning
+            # Skróć reasoning jeśli jest zbyt długi (bezpieczna obsługa NaN/float)
+            if gemini_reasoning is None or (isinstance(gemini_reasoning, float) and str(gemini_reasoning) == 'nan'):
+                reasoning_display = ''
+            else:
+                reasoning_str = str(gemini_reasoning)
+                reasoning_display = reasoning_str[:200] + '...' if len(reasoning_str) > 200 else reasoning_str
             
             gemini_html = f'''
                 <div style="background-color: #F0F4FF; padding: 12px; border-radius: 8px; margin-top: 12px; border-left: 4px solid {rec_color};">

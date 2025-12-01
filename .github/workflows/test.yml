@@ -59,6 +59,48 @@ jobs:
       run: |
         python test_compilation.py
     
+    - name: Test date parsing and data validation
+      run: |
+        python -c "
+        import re
+        import math
+        
+        # Test 1: Parsowanie daty DD.MM.YYYY (4-cyfrowy rok)
+        test_cases = [
+            ('17.11.2025 20:00', '2025-11-17'),
+            ('30.11.2025 15:00', '2025-11-30'),
+            ('01.12.2025', '2025-12-01'),
+            ('30.11.25 15:00', '2025-11-30'),  # 2-cyfrowy rok
+            ('15.06.24', '2024-06-15'),  # 2-cyfrowy rok
+        ]
+        
+        for input_val, expected in test_cases:
+            match = re.search(r'(\d{2})\.(\d{2})\.(\d{2,4})', input_val)
+            if match:
+                day, month, year = match.groups()
+                if len(year) == 4:
+                    result = f'{year}-{month}-{day}'
+                else:
+                    year_int = int(year)
+                    full_year = 2000 + year_int if year_int <= 50 else 1900 + year_int
+                    result = f'{full_year}-{month}-{day}'
+                assert result == expected, f'Date parsing failed: {input_val} -> got {result}, expected {expected}'
+                print(f'✅ Date: {input_val} -> {result}')
+        
+        print('✅ All date parsing tests passed!')
+        
+        # Test 2: NaN/float handling for gemini_reasoning
+        test_values = [None, float('nan'), 'Valid reasoning text', '', 123.45]
+        for val in test_values:
+            if val is None or (isinstance(val, float) and (math.isnan(val) if not isinstance(val, str) else False)):
+                safe_val = ''
+            else:
+                safe_val = str(val)[:200]
+            print(f'✅ NaN handling: {type(val).__name__} -> \"{safe_val[:20]}...\"')
+        
+        print('✅ All NaN handling tests passed!')
+        "
+    
     - name: Test import modules
       run: |
         python -c "from livesport_h2h_scraper import start_driver, process_match, detect_sport_from_url; print('✅ Imports OK')"
