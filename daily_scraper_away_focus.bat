@@ -30,13 +30,15 @@ echo Scrapuję mecze na dzień: %TODAY%
 echo Tryb: GOŚCIE (AWAY TEAMS) z >=60%% H2H
 echo.
 
-REM Uruchom scraper z WSZYSTKIMI sportami i flagą --away-team-focus
+REM Uruchom scraper z WSZYSTKIMI sportami i flagą --away-team-focus + AI/Forebet
 python livesport_h2h_scraper.py ^
   --mode auto ^
   --date %TODAY% ^
   --sports football basketball volleyball handball rugby hockey ^
   --away-team-focus ^
-  --headless
+  --headless ^
+  --use-gemini ^
+  --use-forebet
 
 echo.
 echo ========================================

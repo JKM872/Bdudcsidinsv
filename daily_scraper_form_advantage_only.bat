@@ -64,7 +64,10 @@ python scrape_and_notify.py ^
     --password "%PASSWORD%" ^
     --provider gmail ^
     --headless ^
-    --only-form-advantage
+    --only-form-advantage ^
+    --use-forebet ^
+    --use-odds ^
+    --use-gemini
 
 echo.
 echo ========================================================================

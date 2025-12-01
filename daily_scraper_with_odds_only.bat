@@ -63,7 +63,10 @@ python scrape_and_notify.py ^
     --password "%PASSWORD%" ^
     --provider gmail ^
     --headless ^
-    --skip-no-odds
+    --skip-no-odds ^
+    --use-forebet ^
+    --use-odds ^
+    --use-gemini
 
 echo.
 echo ========================================================================

@@ -533,6 +533,58 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
                 </div>
             '''
         
+        # Forebet Predictions (jeśli dostępne)
+        forebet_html = ''
+        forebet_prediction = match.get('forebet_prediction')
+        forebet_probability = match.get('forebet_probability')
+        forebet_exact_score = match.get('forebet_exact_score')
+        forebet_over_under = match.get('forebet_over_under')
+        forebet_btts = match.get('forebet_btts')
+        
+        # Sprawdź czy forebet_probability nie jest NaN
+        has_forebet = False
+        if forebet_probability is not None:
+            if isinstance(forebet_probability, float):
+                import math
+                if not math.isnan(forebet_probability):
+                    has_forebet = True
+            else:
+                has_forebet = True
+        
+        if has_forebet:
+            # Kolor dla prawdopodobieństwa
+            if forebet_probability >= 70:
+                prob_color = '#22c55e'  # Zielony
+            elif forebet_probability >= 50:
+                prob_color = '#eab308'  # Żółty
+            else:
+                prob_color = '#ef4444'  # Czerwony
+            
+            # Formatuj predykcję
+            pred_display = forebet_prediction if forebet_prediction else 'N/A'
+            exact_score_html = f'<span style="margin-left: 10px; font-size: 12px; color: #666;">📊 Wynik: <strong>{forebet_exact_score}</strong></span>' if forebet_exact_score else ''
+            over_under_html = f'<span style="margin-left: 10px; font-size: 12px; color: #666;">⚽ {forebet_over_under}</span>' if forebet_over_under else ''
+            btts_html = f'<span style="margin-left: 10px; font-size: 12px; color: #666;">🎯 BTTS: {forebet_btts}</span>' if forebet_btts else ''
+            
+            forebet_html = f'''
+                <div style="background-color: #FFF8E1; padding: 12px; border-radius: 8px; margin-top: 12px; border-left: 4px solid #FF9800;">
+                    <div style="font-weight: bold; margin-bottom: 8px;">
+                        🎯 <span style="color: #E65100;">Forebet Prediction</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span style="font-size: 12px; color: #666;">Predykcja:</span>
+                        <span style="background-color: #FF9800; color: white; padding: 3px 10px; border-radius: 12px; font-weight: bold; font-size: 14px; margin-left: 6px;">{pred_display}</span>
+                        <span style="margin-left: 12px; font-size: 12px; color: #666;">Prawdopodobieństwo:</span>
+                        <span style="background-color: {prob_color}; color: white; padding: 3px 10px; border-radius: 12px; font-weight: bold; font-size: 14px; margin-left: 6px;">{forebet_probability:.0f}%</span>
+                    </div>
+                    <div style="margin-top: 6px;">
+                        {exact_score_html}
+                        {over_under_html}
+                        {btts_html}
+                    </div>
+                </div>
+            '''
+        
         html += f"""
             <div class="match">
                 <div style="margin-bottom: 10px;">
@@ -548,6 +600,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
                     {h2h_info}
                     {form_info}
                 </div>
+                {forebet_html}
                 {gemini_html}
                 {odds_html}
                 {sofascore_html}

@@ -372,9 +372,43 @@ class HTMLReportGenerator:
             away_team = row.get('away_team', 'Unknown')
             win_rate = row.get('win_rate', 0) * 100
             
-            # Optional fields
+            # Forebet fields
             forebet_prob = row.get('forebet_probability', None)
-            forebet_html = f'<div class="detail-item"><div class="detail-label">Forebet</div><div class="detail-value">{forebet_prob:.1f}%</div></div>' if pd.notna(forebet_prob) else ''
+            forebet_pred = row.get('forebet_prediction', None)
+            forebet_exact = row.get('forebet_exact_score', None)
+            forebet_ou = row.get('forebet_over_under', None)
+            forebet_btts = row.get('forebet_btts', None)
+            
+            # Build Forebet HTML with all available data
+            forebet_html = ''
+            if pd.notna(forebet_prob):
+                # Color based on probability
+                if forebet_prob >= 70:
+                    prob_color = '#22c55e'
+                elif forebet_prob >= 50:
+                    prob_color = '#eab308'
+                else:
+                    prob_color = '#ef4444'
+                
+                forebet_details = []
+                if pd.notna(forebet_pred):
+                    forebet_details.append(f'Pred: <strong>{forebet_pred}</strong>')
+                if pd.notna(forebet_exact):
+                    forebet_details.append(f'Score: {forebet_exact}')
+                if pd.notna(forebet_ou):
+                    forebet_details.append(f'{forebet_ou}')
+                if pd.notna(forebet_btts):
+                    forebet_details.append(f'BTTS: {forebet_btts}')
+                
+                details_str = ' | '.join(forebet_details) if forebet_details else ''
+                
+                forebet_html = f'''
+                    <div class="detail-item" style="background: #FFF8E1; padding: 8px; border-radius: 6px; border-left: 3px solid #FF9800;">
+                        <div class="detail-label" style="color: #E65100;">🎯 Forebet</div>
+                        <div class="detail-value" style="color: {prob_color}; font-size: 1.3em;">{forebet_prob:.0f}%</div>
+                        <div style="font-size: 0.8em; color: #666; margin-top: 4px;">{details_str}</div>
+                    </div>
+                '''
             
             reasoning = row.get('gemini_reasoning', '')
             reasoning_html = f'<div class="reasoning-box">💡 {reasoning[:200]}...</div>' if reasoning else ''

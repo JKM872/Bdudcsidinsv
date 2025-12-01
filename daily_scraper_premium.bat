@@ -70,7 +70,10 @@ python scrape_and_notify.py ^
     --provider gmail ^
     --headless ^
     --only-form-advantage ^
-    --skip-no-odds
+    --skip-no-odds ^
+    --use-forebet ^
+    --use-odds ^
+    --use-gemini
 
 echo.
 echo ========================================================================

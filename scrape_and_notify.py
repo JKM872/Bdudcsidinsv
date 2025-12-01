@@ -46,7 +46,8 @@ def scrape_and_send_email(
     away_team_focus: bool = False,
     use_forebet: bool = False,
     use_sofascore: bool = False,
-    use_odds: bool = False
+    use_odds: bool = False,
+    use_gemini: bool = False
 ):
     """
     Scrapuje mecze i automatycznie wysyła email z wynikami
@@ -89,6 +90,10 @@ def scrape_and_send_email(
         print(f"💰 TRYB: Pomijam mecze BEZ KURSÓW bukmacherskich")
     if use_odds:
         print(f"💰 TRYB: Pobieranie kursów z FlashScore")
+    if use_forebet:
+        print(f"🎯 TRYB: Pobieranie predykcji z Forebet")
+    if use_gemini:
+        print(f"🤖 TRYB: Analiza Gemini AI")
     if max_matches:
         print(f"⚠️  TRYB TESTOWY: Limit {max_matches} meczów")
     print("="*70)
@@ -169,7 +174,8 @@ def scrape_and_send_email(
                         # Sporty drużynowe
                         current_sport = detect_sport_from_url(url)
                         info = process_match(url, driver, away_team_focus=away_team_focus,
-                                           use_forebet=use_forebet, sport=current_sport)
+                                           use_forebet=use_forebet, use_gemini=use_gemini, 
+                                           use_sofascore=use_sofascore, sport=current_sport)
                         rows.append(info)
                         
                         if info['qualifies']:
@@ -490,6 +496,8 @@ WAŻNE dla Gmail:
                        help='🗳️ Pobieraj Fan Vote z SofaScore.com (wymaga widocznej przeglądarki)')
     parser.add_argument('--use-odds', action='store_true',
                        help='💰 Pobieraj kursy z FlashScore.com')
+    parser.add_argument('--use-gemini', action='store_true',
+                       help='🤖 Analizuj mecze z Gemini AI')
     parser.add_argument('--app-url', default=None,
                        help='URL aplikacji UI do wysyłania danych (np. http://localhost:3000)')
     parser.add_argument('--app-api-key', default=None,
@@ -514,7 +522,8 @@ WAŻNE dla Gmail:
         away_team_focus=args.away_team_focus,
         use_forebet=args.use_forebet,
         use_sofascore=args.use_sofascore,
-        use_odds=args.use_odds
+        use_odds=args.use_odds,
+        use_gemini=args.use_gemini
     )
     
     print("\n✨ ZAKOŃCZONO!")
