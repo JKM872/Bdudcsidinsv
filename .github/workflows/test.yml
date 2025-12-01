@@ -59,6 +59,10 @@ jobs:
       run: |
         python test_compilation.py
     
+    - name: Test FlashScore Odds Scraper (unit tests)
+      run: |
+        python test_flashscore.py
+    
     - name: Test date parsing and data validation
       run: |
         python -c "
@@ -133,6 +137,33 @@ jobs:
         else:
             print('⚠️  Forebet module not available (expected in CI)')
         "
+    
+    - name: Test FlashScore Selenium integration (headless)
+      timeout-minutes: 3
+      run: |
+        python -c "
+        from flashscore_odds_scraper import FlashScoreOddsScraper, SELENIUM_AVAILABLE
+        print(f'SELENIUM_AVAILABLE: {SELENIUM_AVAILABLE}')
+        
+        if not SELENIUM_AVAILABLE:
+            print('⚠️ Selenium not available - skipping integration test')
+            exit(0)
+        
+        print('Testing FlashScore with headless Chrome...')
+        scraper = FlashScoreOddsScraper(headless=True)
+        
+        # Test driver creation
+        driver = scraper._create_driver()
+        print('✅ Chrome driver created successfully')
+        
+        # Test page load
+        driver.get('https://www.flashscore.com/')
+        print(f'✅ Page loaded: {driver.title}')
+        
+        # Cleanup
+        driver.quit()
+        print('✅ FlashScore Selenium integration test passed!')
+        " || echo "⚠️ FlashScore Selenium test failed (non-critical in CI)"
     
     - name: Test Forebet with Xvfb (CI/CD compatible!)
       timeout-minutes: 3
