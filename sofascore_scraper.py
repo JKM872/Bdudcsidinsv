@@ -1,18 +1,30 @@
 """
-SofaScore Scraper v2.0
+SofaScore Scraper v3.0
 ----------------------
-Pobiera dane z SofaScore.com przy użyciu Selenium:
+Pobiera dane z SofaScore.com:
 - "Who will win?" probabilities (community voting)
 - "Will both teams score?" (BTTS) 
-- H2H data
 
-Używa bezpośredniego URL meczu zamiast API.
+NOWE W v3.0:
+- Obsługa consent popup
+- Cache wyników (30 min)
+- API fallback zamiast HTML scraping
+- Dedykowany driver z optymalnymi timeoutami
+- Lepsza obsługa błędów
 """
 
 import time
 import re
+import hashlib
+from datetime import datetime, timedelta
 from typing import Dict, Optional
 from difflib import SequenceMatcher
+
+try:
+    import requests
+    REQUESTS_AVAILABLE = True
+except ImportError:
+    REQUESTS_AVAILABLE = False
 
 try:
     from selenium import webdriver
@@ -21,6 +33,7 @@ try:
     from selenium.webdriver.support import expected_conditions as EC
     from selenium.common.exceptions import TimeoutException, NoSuchElementException
     from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
     SELENIUM_AVAILABLE = True
 except ImportError:
     SELENIUM_AVAILABLE = False
@@ -40,6 +53,49 @@ SOFASCORE_SPORT_SLUGS = {
     'ice-hockey': 'ice-hockey',
     'tennis': 'tennis',
 }
+
+# Headers dla requests API
+API_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept': 'application/json',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Referer': 'https://www.sofascore.com/',
+}
+
+# ============================================================================
+# CACHE SYSTEM
+# ============================================================================
+
+_sofascore_cache: Dict[str, Dict] = {}
+_cache_expiry: Dict[str, datetime] = {}
+CACHE_DURATION_MINUTES = 30
+
+
+def _get_cache_key(home_team: str, away_team: str, sport: str) -> str:
+    """Generuje klucz cache na podstawie meczu"""
+    key_str = f"{home_team.lower()}|{away_team.lower()}|{sport}".encode()
+    return hashlib.md5(key_str).hexdigest()
+
+
+def _get_cached_result(home_team: str, away_team: str, sport: str) -> Optional[Dict]:
+    """Pobiera wynik z cache jeśli istnieje i nie wygasł"""
+    key = _get_cache_key(home_team, away_team, sport)
+    if key in _sofascore_cache:
+        if key in _cache_expiry and datetime.now() < _cache_expiry[key]:
+            print(f"   📦 SofaScore: Używam cache")
+            return _sofascore_cache[key]
+        else:
+            del _sofascore_cache[key]
+            if key in _cache_expiry:
+                del _cache_expiry[key]
+    return None
+
+
+def _set_cached_result(home_team: str, away_team: str, sport: str, result: Dict):
+    """Zapisuje wynik do cache"""
+    key = _get_cache_key(home_team, away_team, sport)
+    _sofascore_cache[key] = result
+    _cache_expiry[key] = datetime.now() + timedelta(minutes=CACHE_DURATION_MINUTES)
 
 
 def normalize_team_name(name: str) -> str:
@@ -65,6 +121,106 @@ def similarity_score(name1: str, name2: str) -> float:
 def teams_match(team1: str, team2: str, threshold: float = 0.6) -> bool:
     """Sprawdza czy dwie nazwy drużyn są podobne"""
     return similarity_score(team1, team2) >= threshold
+
+
+def accept_consent_popup(driver: 'webdriver.Chrome') -> bool:
+    """
+    Akceptuje cookie consent popup na SofaScore.
+    Zwraca True jeśli popup został zaakceptowany lub nie istnieje.
+    """
+    try:
+        consent_selectors = [
+            "button[data-testid='cookie-accept']",
+            "button.fc-cta-consent",
+            "button[title='Consent']",
+            "//button[contains(text(), 'Consent')]",
+            "//button[contains(text(), 'Accept')]",
+            "//button[contains(text(), 'Agree')]",
+        ]
+        for selector in consent_selectors:
+            try:
+                if selector.startswith('//'):
+                    btn = driver.find_element(By.XPATH, selector)
+                else:
+                    btn = driver.find_element(By.CSS_SELECTOR, selector)
+                if btn and btn.is_displayed():
+                    btn.click()
+                    time.sleep(0.5)
+                    print(f"   ✅ SofaScore: Consent popup zaakceptowany")
+                    return True
+            except:
+                continue
+        return True
+    except Exception as e:
+        return True
+
+
+def get_votes_via_api(event_id: int) -> Optional[Dict]:
+    """
+    Pobiera głosy Fan Vote przez SofaScore API.
+    Szybsze i bardziej niezawodne niż HTML scraping.
+    """
+    if not REQUESTS_AVAILABLE:
+        return None
+    try:
+        url = f"https://api.sofascore.com/api/v1/event/{event_id}/votes"
+        response = requests.get(url, headers=API_HEADERS, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            vote = data.get('vote', {})
+            return {
+                'sofascore_home_win_prob': vote.get('vote1'),
+                'sofascore_draw_prob': vote.get('voteX'),
+                'sofascore_away_win_prob': vote.get('vote2'),
+                'sofascore_total_votes': sum([
+                    vote.get('vote1Count', 0),
+                    vote.get('voteXCount', 0),
+                    vote.get('vote2Count', 0)
+                ]),
+            }
+        return None
+    except Exception:
+        return None
+
+
+def search_event_via_api(home_team: str, away_team: str, sport: str = 'football', date_str: str = None) -> Optional[int]:
+    """Szuka event ID przez SofaScore API."""
+    if not REQUESTS_AVAILABLE:
+        return None
+    try:
+        if date_str:
+            search_date = date_str
+        else:
+            search_date = datetime.now().strftime('%Y-%m-%d')
+        sport_slug = SOFASCORE_SPORT_SLUGS.get(sport, 'football')
+        url = f"https://api.sofascore.com/api/v1/sport/{sport_slug}/scheduled-events/{search_date}"
+        response = requests.get(url, headers=API_HEADERS, timeout=5)
+        if response.status_code != 200:
+            return None
+        data = response.json()
+        events = data.get('events', [])
+        home_norm = normalize_team_name(home_team)
+        away_norm = normalize_team_name(away_team)
+        for event in events:
+            event_home = event.get('homeTeam', {}).get('name', '')
+            event_away = event.get('awayTeam', {}).get('name', '')
+            home_match = similarity_score(home_team, event_home) > 0.6 or \
+                         any(p in normalize_team_name(event_home) for p in home_norm.split() if len(p) > 3)
+            away_match = similarity_score(away_team, event_away) > 0.6 or \
+                         any(p in normalize_team_name(event_away) for p in away_norm.split() if len(p) > 3)
+            if home_match and away_match:
+                return event.get('id')
+        return None
+    except Exception:
+        return None
+
+
+def extract_event_id_from_url(url: str) -> Optional[int]:
+    """Wyciąga event ID z URL SofaScore"""
+    match = re.search(r'#id:(\d+)', url)
+    if match:
+        return int(match.group(1))
+    return None
 
 
 def extract_votes_from_page(driver: webdriver.Chrome, sport: str = 'football') -> Dict:
@@ -154,7 +310,7 @@ def find_match_on_main_page(
         print(f"   🔍 SofaScore: Szukam meczu na stronie głównej...")
         
         # Ustaw krótki timeout dla szybszego działania
-        driver.set_page_load_timeout(15)
+        driver.set_page_load_timeout(8)
         
         # Użyj page_load_strategy do szybszego ładowania
         try:
@@ -162,7 +318,10 @@ def find_match_on_main_page(
         except TimeoutException:
             pass  # Kontynuuj nawet przy timeout (strona częściowo załadowana)
         
-        time.sleep(3)
+        # Akceptuj consent popup
+        accept_consent_popup(driver)
+        
+        time.sleep(1.5)
         
         home_norm = normalize_team_name(home_team)
         away_norm = normalize_team_name(away_team)
@@ -248,26 +407,71 @@ def search_and_get_votes(
     }
     
     try:
-        # Metoda 1: Szukaj na stronie głównej sportu
+        # =============================================
+        # METODA 1: API (szybsza, bardziej niezawodna)
+        # =============================================
+        print(f"   🔍 SofaScore: Próbuję API...")
+        event_id = search_event_via_api(home_team, away_team, sport, date_str)
+        
+        if event_id:
+            api_result = get_votes_via_api(event_id)
+            if api_result and api_result.get('sofascore_home_win_prob') is not None:
+                result.update(api_result)
+                result['sofascore_url'] = f"https://www.sofascore.com/{sport_slug}/match/{event_id}"
+                result['sofascore_found'] = True
+                draw_str = f"🤝{result['sofascore_draw_prob']}% | " if result['sofascore_draw_prob'] else ""
+                print(f"   ✅ Fan Vote (API): 🏠{result['sofascore_home_win_prob']}% | "
+                      f"{draw_str}✈️{result['sofascore_away_win_prob']}% "
+                      f"({result['sofascore_total_votes']:,} głosów)")
+                return result
+        
+        # =============================================
+        # METODA 2: HTML Scraping (fallback)
+        # =============================================
+        print(f"   🔍 SofaScore: API nie zadziałało, próbuję HTML...")
         match_url = find_match_on_main_page(driver, home_team, away_team, sport)
         
         if not match_url:
             print(f"   ⚠️ SofaScore: Nie znaleziono meczu {home_team} vs {away_team}")
             return result
         
-        # Załaduj stronę meczu
-        print(f"   📊 SofaScore: Pobieram dane Fan Vote...")
+        # Spróbuj API z event ID z URL
+        event_id = extract_event_id_from_url(match_url)
+        if event_id:
+            api_result = get_votes_via_api(event_id)
+            if api_result and api_result.get('sofascore_home_win_prob') is not None:
+                result.update(api_result)
+                result['sofascore_url'] = match_url
+                result['sofascore_found'] = True
+                draw_str = f"🤝{result['sofascore_draw_prob']}% | " if result['sofascore_draw_prob'] else ""
+                print(f"   ✅ Fan Vote (API via URL): 🏠{result['sofascore_home_win_prob']}% | "
+                      f"{draw_str}✈️{result['sofascore_away_win_prob']}% "
+                      f"({result['sofascore_total_votes']:,} głosów)")
+                return result
+        
+        # Załaduj stronę meczu (ostatnia deska ratunku)
+        print(f"   📊 SofaScore: Pobieram dane z HTML...")
         try:
-            driver.set_page_load_timeout(15)
+            driver.set_page_load_timeout(12)
             driver.get(match_url)
         except TimeoutException:
             pass  # Kontynuuj nawet przy timeout
+        
+        # Dłuższe oczekiwanie na załadowanie JavaScript
         time.sleep(4)
         
-        # Scroll żeby załadować całą stronę
-        for _ in range(4):
-            driver.execute_script('window.scrollBy(0, 300);')
-            time.sleep(0.5)
+        # Scroll żeby załadować sekcję głosowania (jest w dolnej części)
+        for _ in range(6):
+            driver.execute_script('window.scrollBy(0, 500);')
+            time.sleep(0.3)
+        
+        # Wróć na górę i poczekaj
+        driver.execute_script('window.scrollTo(0, 0);')
+        time.sleep(1)
+        
+        # Scroll ponownie - głosy mogą być w różnych miejscach
+        driver.execute_script('window.scrollTo(0, document.body.scrollHeight / 2);')
+        time.sleep(1)
         
         # Pobierz HTML
         page_source = driver.page_source
@@ -280,22 +484,60 @@ def search_and_get_votes(
         result['sofascore_url'] = match_url
         result['sofascore_found'] = True
         
-        # Szukaj procentów z pattern >XX%<
-        percentages = re.findall(r'>(\d+)%<', page_source)
+        # Szukaj sekcji głosowania - różne warianty
+        who_will_win_found = False
+        section_start = -1
         
-        if 'Who will win' in page_source and len(percentages) >= 2:
-            if has_draw and len(percentages) >= 3:
-                result['sofascore_home_win_prob'] = int(percentages[0])
-                result['sofascore_draw_prob'] = int(percentages[1])
-                result['sofascore_away_win_prob'] = int(percentages[2])
-            else:
-                result['sofascore_home_win_prob'] = int(percentages[0])
-                result['sofascore_away_win_prob'] = int(percentages[1])
+        for pattern in ['Who will win', 'who will win', 'Fan vote', 'fan vote']:
+            idx = page_source.lower().find(pattern.lower())
+            if idx > 0:
+                section_start = idx
+                who_will_win_found = True
+                break
+        
+        if who_will_win_found:
+            # Wyciągnij sekcję wokół znalezionego tekstu
+            section = page_source[max(0, section_start-500):section_start+5000]
             
-            # BTTS jeśli dostępne
-            if len(percentages) >= 5:
-                result['sofascore_btts_yes'] = int(percentages[3])
-                result['sofascore_btts_no'] = int(percentages[4])
+            # Szukaj procentów - różne wzorce
+            # Pattern 1: >XX%<
+            percentages = re.findall(r'>(\d{1,3})%<', section)
+            
+            # Pattern 2: jeśli nie znaleziono, szukaj w innych formatach
+            if len(percentages) < 2:
+                percentages = re.findall(r'(\d{1,3})%', section)
+            
+            if len(percentages) >= 2:
+                if has_draw and len(percentages) >= 3:
+                    result['sofascore_home_win_prob'] = int(percentages[0])
+                    result['sofascore_draw_prob'] = int(percentages[1])
+                    result['sofascore_away_win_prob'] = int(percentages[2])
+                else:
+                    result['sofascore_home_win_prob'] = int(percentages[0])
+                    result['sofascore_away_win_prob'] = int(percentages[1])
+                
+                # BTTS - szukaj po sekcji głosowania
+                btts_idx = section.lower().find('both teams score')
+                if btts_idx < 0:
+                    btts_idx = section.lower().find('btts')
+                if btts_idx > 0 and len(percentages) >= 5:
+                    result['sofascore_btts_yes'] = int(percentages[3])
+                    result['sofascore_btts_no'] = int(percentages[4])
+        else:
+            # Fallback - szukaj wszystkich procentów na stronie
+            all_percentages = re.findall(r'>(\d{1,3})%<', page_source)
+            
+            # Filtruj sensowne wartości (suma ~100%)
+            for i in range(len(all_percentages) - 2):
+                try:
+                    p1, p2, p3 = int(all_percentages[i]), int(all_percentages[i+1]), int(all_percentages[i+2])
+                    if 95 <= p1 + p2 + p3 <= 105:  # Suma bliska 100%
+                        result['sofascore_home_win_prob'] = p1
+                        result['sofascore_draw_prob'] = p2
+                        result['sofascore_away_win_prob'] = p3
+                        break
+                except:
+                    continue
         
         # Szukaj total votes
         votes_match = re.search(r'Total votes[:\s]*(\d+\.?\d*)\s*([kKmM])?', page_source)
@@ -404,19 +646,22 @@ def scrape_sofascore_full(
     home_team: str = None,
     away_team: str = None,
     sport: str = 'football',
-    date_str: str = None
+    date_str: str = None,
+    use_cache: bool = True
 ) -> Dict:
     """
     Pełne scrapowanie SofaScore:
-    1. Szukaj meczu
-    2. Pobierz "Who will win?" predictions
+    1. Sprawdź cache
+    2. Próbuj API
+    3. Fallback do HTML scraping
     
     Args:
-        driver: Selenium WebDriver (opcjonalny - jeśli None, tworzy nowy)
+        driver: Selenium WebDriver (opcjonalny - jeśli None, tworzy dedykowany)
         home_team: Nazwa gospodarzy
         away_team: Nazwa gości
         sport: Sport
         date_str: Data meczu (YYYY-MM-DD)
+        use_cache: Czy używać cache (domyślnie True)
     
     Returns:
         Dict ze wszystkimi danymi SofaScore
@@ -432,14 +677,51 @@ def scrape_sofascore_full(
         'sofascore_found': False,
     }
     
+    if not home_team or not away_team:
+        print("   ⚠️ SofaScore: Brak nazw drużyn")
+        return result
+    
+    # Sprawdź cache
+    if use_cache:
+        cached = _get_cached_result(home_team, away_team, sport)
+        if cached:
+            return cached
+    
+    # =============================================
+    # METODA SZYBKA: Tylko API (bez Selenium)
+    # =============================================
+    if REQUESTS_AVAILABLE:
+        print(f"   🚀 SofaScore: Szybka ścieżka przez API...")
+        event_id = search_event_via_api(home_team, away_team, sport, date_str)
+        
+        if event_id:
+            api_result = get_votes_via_api(event_id)
+            if api_result and api_result.get('sofascore_home_win_prob') is not None:
+                result.update(api_result)
+                sport_slug = SOFASCORE_SPORT_SLUGS.get(sport, 'football')
+                result['sofascore_url'] = f"https://www.sofascore.com/{sport_slug}/match/{event_id}"
+                result['sofascore_found'] = True
+                draw_str = f"🤝{result['sofascore_draw_prob']}% | " if result['sofascore_draw_prob'] else ""
+                print(f"   ✅ Fan Vote: 🏠{result['sofascore_home_win_prob']}% | "
+                      f"{draw_str}✈️{result['sofascore_away_win_prob']}% "
+                      f"({result['sofascore_total_votes']:,} głosów)")
+                if use_cache:
+                    _set_cached_result(home_team, away_team, sport, result)
+                return result
+    
+    # =============================================
+    # METODA WOLNA: Selenium (fallback)
+    # =============================================
     if not SELENIUM_AVAILABLE:
-        print("❌ Selenium not available")
+        print("   ❌ SofaScore: Selenium niedostępne, API nie znalazło meczu")
         return result
     
     own_driver = False
     if driver is None:
         own_driver = True
+        print(f"   🌐 SofaScore: Tworzę dedykowany driver...")
         chrome_options = Options()
+        chrome_options.add_argument('--headless=new')
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
@@ -447,24 +729,29 @@ def scrape_sofascore_full(
         chrome_options.add_argument('--disable-extensions')
         chrome_options.add_argument('--disable-infobars')
         chrome_options.add_argument('--disable-notifications')
-        chrome_options.add_argument('--blink-settings=imagesEnabled=false')  # Szybsze ładowanie
+        chrome_options.add_argument('--blink-settings=imagesEnabled=false')
         chrome_options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')
-        chrome_options.page_load_strategy = 'eager'  # Nie czekaj na pełne załadowanie
+        chrome_options.page_load_strategy = 'eager'
         driver = webdriver.Chrome(options=chrome_options)
-        driver.set_page_load_timeout(15)
-        driver.set_script_timeout(10)
+        driver.set_page_load_timeout(10)
+        driver.set_script_timeout(5)
     
     try:
         result = search_and_get_votes(driver, home_team, away_team, sport, date_str)
+        if use_cache and result.get('sofascore_found'):
+            _set_cached_result(home_team, away_team, sport, result)
         return result
         
     except Exception as e:
-        print(f"❌ SofaScore scraping error: {e}")
+        print(f"   ❌ SofaScore scraping error: {e}")
         return result
         
     finally:
         if own_driver:
-            driver.quit()
+            try:
+                driver.quit()
+            except:
+                pass
 
 
 # ============================================================================
@@ -474,48 +761,53 @@ def scrape_sofascore_full(
 if __name__ == "__main__":
     import argparse
     
-    parser = argparse.ArgumentParser(description='Test SofaScore scraper')
+    parser = argparse.ArgumentParser(description='Test SofaScore scraper v3.0')
     parser.add_argument('--home', required=True, help='Home team name')
     parser.add_argument('--away', required=True, help='Away team name')
     parser.add_argument('--sport', default='football', help='Sport')
     parser.add_argument('--headless', action='store_true', help='Run headless')
+    parser.add_argument('--no-cache', action='store_true', help='Disable cache')
+    parser.add_argument('--api-only', action='store_true', help='Only use API, no Selenium')
     
     args = parser.parse_args()
     
     print(f"\n{'='*60}")
-    print(f"TESTING SOFASCORE SCRAPER v2.0")
+    print(f"TESTING SOFASCORE SCRAPER v3.0")
     print(f"{'='*60}\n")
     
-    # Setup Chrome
-    chrome_options = Options()
-    if args.headless:
-        chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_argument('--window-size=1920,1080')
-    chrome_options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')
+    print(f"🏠 Home: {args.home}")
+    print(f"✈️ Away: {args.away}")
+    print(f"⚽ Sport: {args.sport}")
+    print(f"📦 Cache: {'disabled' if args.no_cache else 'enabled'}")
+    print()
     
-    driver = webdriver.Chrome(options=chrome_options)
-    
-    try:
+    if args.api_only:
+        print("🚀 API-only mode")
+        event_id = search_event_via_api(args.home, args.away, args.sport)
+        if event_id:
+            print(f"✅ Found event ID: {event_id}")
+            result = get_votes_via_api(event_id)
+            if result:
+                print(f"✅ API Result: {result}")
+            else:
+                print("❌ No API result")
+        else:
+            print("❌ Event not found via API")
+    else:
         result = scrape_sofascore_full(
             home_team=args.home,
             away_team=args.away,
             sport=args.sport,
-            driver=driver
+            use_cache=not args.no_cache
         )
         
         print(f"\n{'='*60}")
         print(f"RESULTS:")
         print(f"{'='*60}")
         for key, value in result.items():
-            print(f"{key}: {value}")
+            print(f"  {key}: {value}")
         
         print(f"\n{'='*60}")
         print(f"FORMATTED OUTPUT:")
         print(f"{'='*60}")
         print(format_votes_for_display(result))
-        
-    finally:
-        driver.quit()
