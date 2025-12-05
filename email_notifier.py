@@ -3,11 +3,43 @@ Moduł do wysyłania powiadomień email o kwalifikujących się meczach
 """
 
 import smtplib
+import math
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from typing import List, Dict
+from typing import List, Dict, Any
 import pandas as pd
 from datetime import datetime
+
+
+def is_nan_or_none(val: Any) -> bool:
+    """Check if value is None or NaN (float)."""
+    if val is None:
+        return True
+    if isinstance(val, float) and math.isnan(val):
+        return True
+    if isinstance(val, str) and val.lower() == 'nan':
+        return True
+    return False
+
+
+def safe_value(val: Any, default: Any = '') -> Any:
+    """
+    Convert NaN/None to default value.
+    Used to prevent 'nan' text from appearing in email.
+    """
+    if is_nan_or_none(val):
+        return default
+    return val
+
+
+def safe_float(val: Any, default: float = 0.0) -> float:
+    """Convert value to float, returning default if NaN/None."""
+    if is_nan_or_none(val):
+        return default
+    try:
+        return float(val)
+    except (ValueError, TypeError):
+        return default
 
 # Konfiguracja SMTP
 SMTP_CONFIG = {
@@ -420,7 +452,12 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
         gemini_confidence = match.get('gemini_confidence')
         gemini_reasoning = match.get('gemini_reasoning')
         
-        if gemini_recommendation and gemini_confidence:
+        # FIXED: Check for NaN values, not just None/empty
+        has_gemini = (not is_nan_or_none(gemini_recommendation) and 
+                      not is_nan_or_none(gemini_confidence))
+        
+        if has_gemini:
+            gemini_confidence = safe_float(gemini_confidence, 0)
             # Kolory dla rekomendacji
             rec_colors = {
                 'HIGH': '#22c55e',    # Zielony
@@ -465,9 +502,15 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
         home_odds = match.get('home_odds')
         draw_odds = match.get('draw_odds')
         away_odds = match.get('away_odds')
-        odds_source = match.get('odds_source', 'flashscore')
+        odds_source = safe_value(match.get('odds_source'), 'flashscore')
         
-        if home_odds and away_odds:
+        # FIXED: Check for NaN values, not just None/empty
+        has_odds = (not is_nan_or_none(home_odds) and not is_nan_or_none(away_odds))
+        
+        if has_odds:
+            home_odds = safe_float(home_odds, 0)
+            away_odds = safe_float(away_odds, 0)
+            draw_odds = safe_float(draw_odds, 0) if not is_nan_or_none(draw_odds) else None
             # Znajdź najniższy kurs (faworyt)
             odds_list = [home_odds, draw_odds, away_odds] if draw_odds else [home_odds, away_odds]
             min_odds = min(o for o in odds_list if o is not None)
@@ -504,14 +547,24 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
         sofascore_btts_yes = match.get('sofascore_btts_yes')
         sofascore_btts_no = match.get('sofascore_btts_no')
         
-        if sofascore_home is not None:
+        # FIXED: Check for NaN values, not just None
+        has_sofascore = (not is_nan_or_none(sofascore_home) and 
+                         not is_nan_or_none(sofascore_away))
+        
+        if has_sofascore:
+            # Convert to safe values
+            sofascore_home = safe_float(sofascore_home, 0)
+            sofascore_away = safe_float(sofascore_away, 0)
+            sofascore_draw = safe_float(sofascore_draw, 0) if not is_nan_or_none(sofascore_draw) else None
+            sofascore_votes = safe_float(sofascore_votes, 0)
+            
             # Format liczby głosów
             if sofascore_votes >= 1000000:
                 votes_str = f"{sofascore_votes/1000000:.1f}M"
             elif sofascore_votes >= 1000:
                 votes_str = f"{sofascore_votes/1000:.1f}k"
             else:
-                votes_str = str(sofascore_votes)
+                votes_str = str(int(sofascore_votes))
             
             # Koloruj dominującą opcję
             max_pct = max(sofascore_home, sofascore_draw or 0, sofascore_away)
@@ -525,11 +578,11 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
                         🗳️ SofaScore Fan Vote <span style="font-size: 11px; color: #666; font-weight: normal;">({votes_str} głosów)</span>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <span style="padding: 4px 12px; border-radius: 15px; {home_style}">🏠 {sofascore_home}%</span>
-                        {f'<span style="padding: 4px 12px; border-radius: 15px; {draw_style}">🤝 {sofascore_draw}%</span>' if sofascore_draw else ''}
-                        <span style="padding: 4px 12px; border-radius: 15px; {away_style}">✈️ {sofascore_away}%</span>
+                        <span style="padding: 4px 12px; border-radius: 15px; {home_style}">🏠 {sofascore_home:.0f}%</span>
+                        {f'<span style="padding: 4px 12px; border-radius: 15px; {draw_style}">🤝 {sofascore_draw:.0f}%</span>' if sofascore_draw else ''}
+                        <span style="padding: 4px 12px; border-radius: 15px; {away_style}">✈️ {sofascore_away:.0f}%</span>
                     </div>
-                    {f'<div style="margin-top: 6px; font-size: 12px; color: #555;">🎯 BTTS: Yes {sofascore_btts_yes}% | No {sofascore_btts_no}%</div>' if sofascore_btts_yes else ''}
+                    {f'<div style="margin-top: 6px; font-size: 12px; color: #555;">🎯 BTTS: Yes {sofascore_btts_yes}% | No {sofascore_btts_no}%</div>' if not is_nan_or_none(sofascore_btts_yes) else ''}
                 </div>
             '''
         
