@@ -1773,21 +1773,38 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
         'away_odds': None,             # Kurs bukmacherski na zawodnika B
     }
 
-    # TENIS używa innego URLa H2H niż inne sporty!
-    # Dla tenisa: /h2h/wszystkie-nawierzchnie/ (nie /h2h/ogolem/)
-    h2h_url = url.replace('/szczegoly/', '/h2h/wszystkie-nawierzchnie/')
-    if 'szczegoly' not in url and 'h2h' not in url:
-        # Jeśli URL nie ma szczegoly ani h2h, dodaj /h2h/wszystkie-nawierzchnie/
-        if url.endswith('/'):
-            h2h_url = url + 'h2h/wszystkie-nawierzchnie/'
-        else:
-            h2h_url = url + '/h2h/wszystkie-nawierzchnie/'
-    
+    # TENIS: Nawigacja dwuetapowa - najpierw strona meczu, potem find H2H link
+    # Tennis URLs mają parametry ?mid=... które łamią proste dodawanie ścieżki
     try:
-        driver.get(h2h_url)
-        time.sleep(3.0)  # Tennis wymaga więcej czasu na załadowanie
+        # KROK 1: Przejdź do strony meczu
+        driver.get(url)
+        time.sleep(2.5)
+        
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        
+        # KROK 2: Znajdź link do H2H na stronie
+        h2h_link = None
+        for link in soup.find_all('a', href=True):
+            href = link.get('href', '')
+            if '/h2h/' in href.lower():
+                h2h_link = href
+                break
+        
+        if h2h_link:
+            # Zbuduj pełny URL do H2H
+            h2h_url = 'https://www.livesport.com' + h2h_link if h2h_link.startswith('/') else h2h_link
+            driver.get(h2h_url)
+            time.sleep(3.0)  # Tennis H2H wymaga więcej czasu na załadowanie
+        else:
+            # Fallback: użyj starej metody jeśli nie znaleziono linku
+            h2h_url = url.replace('/szczegoly/', '/h2h/wszystkie-nawierzchnie/')
+            if 'szczegoly' not in url and 'h2h' not in url:
+                h2h_url = url.rstrip('/') + '/h2h/wszystkie-nawierzchnie/'
+            driver.get(h2h_url)
+            time.sleep(3.0)
+            
     except WebDriverException as e:
-        print(f"Błąd otwierania {h2h_url}: {e}")
+        print(f"   ⚠️ Błąd nawigacji dla tenisa: {e}")
         return out
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
