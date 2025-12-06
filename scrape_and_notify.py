@@ -175,7 +175,8 @@ def scrape_and_send_email(
                         current_sport = detect_sport_from_url(url)
                         info = process_match(url, driver, away_team_focus=away_team_focus,
                                            use_forebet=use_forebet, use_gemini=use_gemini, 
-                                           use_sofascore=use_sofascore, sport=current_sport)
+                                           use_sofascore=use_sofascore, use_flashscore=use_odds,
+                                           sport=current_sport)
                         rows.append(info)
                         
                         if info['qualifies']:

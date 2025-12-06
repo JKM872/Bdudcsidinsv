@@ -33,21 +33,6 @@ except ImportError:
     REQUESTS_AVAILABLE = False
 
 try:
-    import cloudscraper
-    CLOUDSCRAPER_AVAILABLE = True
-except ImportError:
-    CLOUDSCRAPER_AVAILABLE = False
-
-# FlareSolverr integration for aggressive Cloudflare bypass
-try:
-    from cloudflare_bypass import CloudflareBypass, FLARESOLVERR_URL
-    import os
-    FLARESOLVERR_AVAILABLE = True
-except ImportError:
-    FLARESOLVERR_AVAILABLE = False
-    FLARESOLVERR_URL = os.environ.get('FLARESOLVERR_URL', 'http://localhost:8191/v1') if 'os' in dir() else 'http://localhost:8191/v1'
-
-try:
     from selenium import webdriver
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support.ui import WebDriverWait
@@ -84,29 +69,13 @@ SOFASCORE_SPORT_SLUGS = {
     'tennis': 'tennis',
 }
 
-# Headers dla requests API - ENHANCED to bypass 403
+# Headers dla requests API
 API_HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-    'Accept': '*/*',
-    'Accept-Language': 'en-US,en;q=0.9,pl;q=0.8',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Origin': 'https://www.sofascore.com',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept': 'application/json',
+    'Accept-Language': 'en-US,en;q=0.9',
     'Referer': 'https://www.sofascore.com/',
-    'Sec-Ch-Ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
-    'Sec-Ch-Ua-Mobile': '?0',
-    'Sec-Ch-Ua-Platform': '"Windows"',
-    'Sec-Fetch-Dest': 'empty',
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Site': 'same-site',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Cache-Control': 'no-cache',
-    'Pragma': 'no-cache',
 }
-
-# Session singleton for cookie persistence
-_sofascore_session: Optional[requests.Session] = None
-_session_expires: Optional[datetime] = None
-SESSION_TTL_MINUTES = 20
 
 # ============================================================================
 # CACHE SYSTEM
@@ -200,254 +169,65 @@ def accept_consent_popup(driver: 'webdriver.Chrome') -> bool:
     except Exception as e:
         return True
 
-def _try_flaresolverr_api(api_url: str, timeout: int = 60) -> Optional[Dict]:
-    """
-    Use FlareSolverr Docker service to bypass Cloudflare on SofaScore API.
-    Returns JSON response if successful, None otherwise.
-    """
-    if not FLARESOLVERR_AVAILABLE:
-        return None
-    
-    try:
-        print(f"   🐳 SofaScore: Próbuję FlareSolverr API bypass...")
-        
-        payload = {
-            "cmd": "request.get",
-            "url": api_url,
-            "maxTimeout": timeout * 1000,  # Convert to ms
-        }
-        
-        response = requests.post(
-            FLARESOLVERR_URL,
-            headers={"Content-Type": "application/json"},
-            json=payload,
-            timeout=timeout + 30
-        )
-        
-        if response.status_code == 200:
-            data = response.json()
-            
-            if data.get("status") == "ok":
-                solution = data.get("solution", {})
-                html_response = solution.get("response", "")
-                
-                # Try to parse as JSON (API response)
-                if html_response:
-                    try:
-                        # The API response should be JSON
-                        import json
-                        api_data = json.loads(html_response)
-                        print(f"   ✅ SofaScore: FlareSolverr API SUCCESS!")
-                        return api_data
-                    except json.JSONDecodeError:
-                        # Maybe it's wrapped in HTML?
-                        # Try to extract JSON from response
-                        json_match = re.search(r'\{.*\}', html_response, re.DOTALL)
-                        if json_match:
-                            try:
-                                api_data = json.loads(json_match.group())
-                                print(f"   ✅ SofaScore: FlareSolverr extracted JSON!")
-                                return api_data
-                            except:
-                                pass
-                        print(f"   ⚠️ SofaScore: FlareSolverr response not JSON")
-        
-        return None
-        
-    except requests.exceptions.ConnectionError:
-        print(f"   ⚠️ SofaScore: FlareSolverr niedostępny (Docker nie działa?)")
-        return None
-    except Exception as e:
-        print(f"   ⚠️ SofaScore: FlareSolverr error: {str(e)[:50]}")
-        return None
 
-
-def _get_sofascore_session() -> requests.Session:
-    """
-    Get or create a session that can bypass Cloudflare.
-    Priority: FlareSolverr > cloudscraper > requests.Session
-    """
-    global _sofascore_session, _session_expires
-    
-    # Return existing session if still valid
-    if _sofascore_session and _session_expires and datetime.now() < _session_expires:
-        return _sofascore_session
-    
-    # Try cloudscraper (works for some Cloudflare setups)
-    if CLOUDSCRAPER_AVAILABLE:
-        try:
-            print("   🛡️ SofaScore: Używam cloudscraper (Cloudflare bypass)...")
-            scraper = cloudscraper.create_scraper(
-                browser={
-                    'browser': 'chrome',
-                    'platform': 'windows',
-                    'desktop': True
-                }
-            )
-            scraper.headers.update({
-                'User-Agent': API_HEADERS['User-Agent'],
-                'Accept': '*/*',
-                'Accept-Language': 'en-US,en;q=0.9',
-                'Origin': 'https://www.sofascore.com',
-                'Referer': 'https://www.sofascore.com/',
-            })
-            
-            response = scraper.get('https://www.sofascore.com/', timeout=15)
-            
-            if response.status_code == 200:
-                cookies = scraper.cookies.get_dict()
-                print(f"   ✅ SofaScore: Cloudscraper OK! ({len(cookies)} cookies)")
-                _sofascore_session = scraper
-                _session_expires = datetime.now() + timedelta(minutes=SESSION_TTL_MINUTES)
-                return scraper
-            else:
-                print(f"   ⚠️ SofaScore: Cloudscraper returned {response.status_code}")
-                
-        except Exception as e:
-            print(f"   ⚠️ SofaScore: Cloudscraper error: {e}")
-    
-    # Fallback to regular session
-    print("   🔧 SofaScore: Fallback do requests.Session...")
-    session = requests.Session()
-    session.headers.update(API_HEADERS)
-    
-    _sofascore_session = session
-    _session_expires = datetime.now() + timedelta(minutes=5)
-    return session
-
-
-def get_votes_via_api(event_id: int, use_session: bool = True) -> Optional[Dict]:
+def get_votes_via_api(event_id: int) -> Optional[Dict]:
     """
     Pobiera głosy Fan Vote przez SofaScore API.
     Szybsze i bardziej niezawodne niż HTML scraping.
-    
-    Uses session with cookies to bypass 403 Forbidden.
     """
     if not REQUESTS_AVAILABLE:
         return None
-    
-    url = f"https://api.sofascore.com/api/v1/event/{event_id}/votes"
-    
-    # Try with session first (has cookies)
-    for attempt in range(2):
-        try:
-            if use_session and attempt == 0:
-                session = _get_sofascore_session()
-                response = session.get(url, timeout=8)
-            else:
-                # Fallback to direct request with enhanced headers
-                response = requests.get(url, headers=API_HEADERS, timeout=8)
-            
-            if response.status_code == 200:
-                data = response.json()
-                vote = data.get('vote', {})
-                if vote:
-                    return {
-                        'sofascore_home_win_prob': vote.get('vote1'),
-                        'sofascore_draw_prob': vote.get('voteX'),
-                        'sofascore_away_win_prob': vote.get('vote2'),
-                        'sofascore_total_votes': sum([
-                            vote.get('vote1Count', 0),
-                            vote.get('voteXCount', 0),
-                            vote.get('vote2Count', 0)
-                        ]),
-                    }
-            elif response.status_code == 403:
-                if attempt == 0:
-                    print(f"   ⚠️ SofaScore API: 403 Forbidden, próbuję bez sesji...")
-                    # Reset session for next attempt
-                    global _sofascore_session, _session_expires
-                    _sofascore_session = None
-                    _session_expires = None
-                    continue
-                else:
-                    print(f"   ❌ SofaScore API: 403 Forbidden (obie metody zawiodły)")
-            
-            return None
-            
-        except Exception as e:
-            if attempt == 0:
-                continue
-            return None
-    
-    return None
+    try:
+        url = f"https://api.sofascore.com/api/v1/event/{event_id}/votes"
+        response = requests.get(url, headers=API_HEADERS, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            vote = data.get('vote', {})
+            return {
+                'sofascore_home_win_prob': vote.get('vote1'),
+                'sofascore_draw_prob': vote.get('voteX'),
+                'sofascore_away_win_prob': vote.get('vote2'),
+                'sofascore_total_votes': sum([
+                    vote.get('vote1Count', 0),
+                    vote.get('voteXCount', 0),
+                    vote.get('vote2Count', 0)
+                ]),
+            }
+        return None
+    except Exception:
+        return None
 
 
-def search_event_via_api(home_team: str, away_team: str, sport: str = 'football', date_str: str = None, use_session: bool = True) -> Optional[int]:
-    """
-    Szuka event ID przez SofaScore API.
-    Priority: FlareSolverr > cloudscraper session > direct request
-    """
+def search_event_via_api(home_team: str, away_team: str, sport: str = 'football', date_str: str = None) -> Optional[int]:
+    """Szuka event ID przez SofaScore API."""
     if not REQUESTS_AVAILABLE:
         return None
-    
-    if date_str:
-        search_date = date_str
-    else:
-        search_date = datetime.now().strftime('%Y-%m-%d')
-    
-    sport_slug = SOFASCORE_SPORT_SLUGS.get(sport, 'football')
-    url = f"https://api.sofascore.com/api/v1/sport/{sport_slug}/scheduled-events/{search_date}"
-    
-    # Helper function to find event in data
-    def find_event_in_data(data):
+    try:
+        if date_str:
+            search_date = date_str
+        else:
+            search_date = datetime.now().strftime('%Y-%m-%d')
+        sport_slug = SOFASCORE_SPORT_SLUGS.get(sport, 'football')
+        url = f"https://api.sofascore.com/api/v1/sport/{sport_slug}/scheduled-events/{search_date}"
+        response = requests.get(url, headers=API_HEADERS, timeout=5)
+        if response.status_code != 200:
+            return None
+        data = response.json()
         events = data.get('events', [])
-        if not events:
-            return None
-        
         home_norm = normalize_team_name(home_team)
         away_norm = normalize_team_name(away_team)
-        
         for event in events:
             event_home = event.get('homeTeam', {}).get('name', '')
             event_away = event.get('awayTeam', {}).get('name', '')
-            
             home_match = similarity_score(home_team, event_home) > 0.6 or \
                          any(p in normalize_team_name(event_home) for p in home_norm.split() if len(p) > 3)
             away_match = similarity_score(away_team, event_away) > 0.6 or \
                          any(p in normalize_team_name(event_away) for p in away_norm.split() if len(p) > 3)
-            
             if home_match and away_match:
                 return event.get('id')
         return None
-    
-    # 🔥 METHOD 1: FlareSolverr (best for Cloudflare bypass)
-    if FLARESOLVERR_AVAILABLE:
-        flare_data = _try_flaresolverr_api(url)
-        if flare_data:
-            event_id = find_event_in_data(flare_data)
-            if event_id:
-                return event_id
-    
-    # METHOD 2: Session-based with cloudscraper/cookies
-    for attempt in range(2):
-        try:
-            if use_session and attempt == 0:
-                session = _get_sofascore_session()
-                response = session.get(url, timeout=10)
-            else:
-                response = requests.get(url, headers=API_HEADERS, timeout=10)
-            
-            if response.status_code == 200:
-                data = response.json()
-                return find_event_in_data(data)
-                
-            elif response.status_code == 403:
-                if attempt == 0:
-                    print(f"   ⚠️ SofaScore Events API: 403, próbuję ponownie...")
-                    global _sofascore_session, _session_expires
-                    _sofascore_session = None
-                    _session_expires = None
-                    continue
-            
-            return None
-            
-        except Exception as e:
-            if attempt == 0:
-                continue
-            return None
-    
-    return None
+    except Exception:
+        return None
 
 
 def extract_event_id_from_url(url: str) -> Optional[int]:
@@ -597,7 +377,57 @@ def find_match_on_main_page(
                 print(f"   ✅ SofaScore: Znaleziono mecz!")
                 return full_url
         
-        # Metoda 2: Fallback - użyj Selenium elements jeśli regex nie zadziałał
+        # Metoda 2: ULEPSZONE - szukaj tekstu drużyn na stronie (nie tylko w URL)
+        try:
+            # Użyj BeautifulSoup do parsowania HTML
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(page_source, 'html.parser')
+            
+            # Szukaj linków do meczów
+            all_links = soup.find_all('a', href=True)
+            best_match = None
+            best_score = 0.0
+            
+            for link in all_links:
+                href = link.get('href', '')
+                if '#id:' not in href or f'/{sport_slug}/' not in href:
+                    continue
+                
+                # Pobierz tekst linku (nazwy drużyn)
+                link_text = link.get_text(strip=True)
+                
+                # Oblicz similarity score dla tekstu
+                home_score = similarity_score(home_team, link_text)
+                away_score = similarity_score(away_team, link_text)
+                
+                # Sprawdź też czy główne słowa są w tekście
+                home_parts = [p for p in home_norm.split() if len(p) > 2]
+                away_parts = [p for p in away_norm.split() if len(p) > 2]
+                link_text_lower = link_text.lower()
+                
+                home_in_text = any(part in link_text_lower for part in home_parts)
+                away_in_text = any(part in link_text_lower for part in away_parts)
+                
+                # Daj bonus za znalezienie słów
+                combined_score = (home_score + away_score) / 2
+                if home_in_text and away_in_text:
+                    combined_score += 0.3
+                elif home_in_text or away_in_text:
+                    combined_score += 0.15
+                
+                if combined_score > best_score and combined_score >= 0.4:
+                    best_score = combined_score
+                    best_match = href
+            
+            if best_match:
+                full_url = f'https://www.sofascore.com{best_match}' if best_match.startswith('/') else best_match
+                print(f"   ✅ SofaScore: Znaleziono mecz (text match, score={best_score:.2f})!")
+                return full_url
+                
+        except Exception as e:
+            print(f"   ⚠️ SofaScore: Text search failed: {e}")
+        
+        # Metoda 3: Fallback - użyj Selenium elements (stara metoda)
         try:
             links = driver.find_elements(By.TAG_NAME, 'a')
             
@@ -607,13 +437,16 @@ def find_match_on_main_page(
                     if not href or '#id:' not in href or f'/{sport_slug}/' not in href:
                         continue
                     
+                    # Pobierz tekst elementu (nazwy drużyn)
+                    link_text = link.text.lower() if link.text else ""
                     href_lower = href.lower()
                     
-                    home_parts = [p for p in home_norm.split() if len(p) > 3]
-                    away_parts = [p for p in away_norm.split() if len(p) > 3]
+                    home_parts = [p for p in home_norm.split() if len(p) > 2]
+                    away_parts = [p for p in away_norm.split() if len(p) > 2]
                     
-                    home_found = any(part in href_lower for part in home_parts)
-                    away_found = any(part in href_lower for part in away_parts)
+                    # Sprawdź tekst lub href
+                    home_found = any(part in href_lower or part in link_text for part in home_parts) if home_parts else False
+                    away_found = any(part in href_lower or part in link_text for part in away_parts) if away_parts else False
                     
                     if home_found and away_found:
                         print(f"   ✅ SofaScore: Znaleziono mecz (fallback)!")
@@ -627,6 +460,7 @@ def find_match_on_main_page(
         except Exception as e:
             print(f"   ⚠️ SofaScore: Fallback search failed: {e}")
         
+        print(f"   ⚠️ SofaScore: Nie znaleziono meczu {home_team} vs {away_team}")
         return None
         
     except Exception as e:

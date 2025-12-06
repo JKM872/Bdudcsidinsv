@@ -91,9 +91,17 @@ def lazy_load_gemini():
     
     return GEMINI_AVAILABLE
 
-# Nordic Bet integration (disabled - using Forebet odds instead)
+# Nordic Bet integration (disabled - using FlashScore instead)
 NORDIC_BET_AVAILABLE = False
-print("ℹ️ Using Forebet for odds data (more reliable)")
+
+# FlashScore odds integration
+try:
+    from flashscore_odds_scraper import FlashScoreOddsScraper, format_odds_for_display
+    FLASHSCORE_AVAILABLE = True
+    print("✅ FlashScore odds scraper loaded")
+except ImportError:
+    FLASHSCORE_AVAILABLE = False
+    print("⚠️ flashscore_odds_scraper not available - odds will use Forebet fallback")
 
 
 # ----------------------
@@ -369,7 +377,7 @@ def parse_h2h_from_soup(soup: BeautifulSoup, home_team: str) -> List[Dict]:
     return results
 
 
-def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = False, use_forebet: bool = False, use_gemini: bool = False, use_sofascore: bool = False, use_nordic_bet: bool = False, sport: str = 'football') -> Dict:
+def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = False, use_forebet: bool = False, use_gemini: bool = False, use_sofascore: bool = False, use_flashscore: bool = False, sport: str = 'football') -> Dict:
     """Odwiedza stronę meczu, otwiera H2H i zwraca informację we właściwym formacie.
     
     Args:
@@ -848,31 +856,44 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         except Exception as e:
             print(f"      ⚠️ Błąd SofaScore: {e}")
     
-    # NORDIC BET ODDS
-    if use_nordic_bet and NORDIC_BET_AVAILABLE and out.get('home_team') and out.get('away_team'):
+    # FLASHSCORE ODDS
+    if use_flashscore and FLASHSCORE_AVAILABLE and out.get('qualifies') and out.get('home_team') and out.get('away_team'):
         try:
-            print(f"   💰 Pobieranie kursów z Nordic Bet...")
+            print(f"   💰 FlashScore: Pobieranie kursów...")
             
-            nordic_result = scrape_nordic_bet(
-                out['home_team'],
-                out['away_team'],
-                sport
+            flashscore_scraper = FlashScoreOddsScraper(headless=True)
+            flashscore_result = flashscore_scraper.get_odds(
+                home_team=out['home_team'],
+                away_team=out['away_team'],
+                sport=sport,
+                driver=driver  # Reużywamy istniejącego drivera
             )
             
-            if nordic_result.get('nordic_bet_found'):
-                out['nordic_bet_home_odds'] = nordic_result.get('nordic_bet_home_odds')
-                out['nordic_bet_draw_odds'] = nordic_result.get('nordic_bet_draw_odds')
-                out['nordic_bet_away_odds'] = nordic_result.get('nordic_bet_away_odds')
-                out['nordic_bet_found'] = True
-                print(f"      ✅ Nordic Bet: {nordic_result.get('nordic_bet_home_odds')}/{nordic_result.get('nordic_bet_draw_odds')}/{nordic_result.get('nordic_bet_away_odds')}")
+            if flashscore_result.get('found'):
+                out['flashscore_home_odds'] = flashscore_result.get('home_odds')
+                out['flashscore_draw_odds'] = flashscore_result.get('draw_odds')
+                out['flashscore_away_odds'] = flashscore_result.get('away_odds')
+                out['flashscore_over_25'] = flashscore_result.get('over_25_odds')
+                out['flashscore_under_25'] = flashscore_result.get('under_25_odds')
+                out['flashscore_bookmaker'] = flashscore_result.get('bookmaker', 'FlashScore')
+                out['flashscore_found'] = True
+                
+                # Fallback: jeśli nie mamy home_odds/away_odds z Livesport, użyj FlashScore
+                if not out.get('home_odds') and flashscore_result.get('home_odds'):
+                    out['home_odds'] = flashscore_result.get('home_odds')
+                if not out.get('away_odds') and flashscore_result.get('away_odds'):
+                    out['away_odds'] = flashscore_result.get('away_odds')
+                
+                print(f"      ✅ FlashScore: {flashscore_result.get('home_odds')}/{flashscore_result.get('draw_odds')}/{flashscore_result.get('away_odds')}")
             else:
-                print(f"      ⚠️ Nordic Bet: Kursy nie znalezione")
-                out['nordic_bet_found'] = False
+                print(f"      ⚠️ FlashScore: Kursy nie znalezione")
+                out['flashscore_found'] = False
                 
         except Exception as e:
-            print(f"      ⚠️ Błąd Nordic Bet: {e}")
-    elif use_nordic_bet and not NORDIC_BET_AVAILABLE:
-        print(f"      ⚠️ Nordic Bet: Scraper niedostępny")
+            print(f"      ⚠️ Błąd FlashScore: {e}")
+            out['flashscore_found'] = False
+    elif use_flashscore and not FLASHSCORE_AVAILABLE:
+        print(f"      ⚠️ FlashScore: Scraper niedostępny")
 
     return out
 
