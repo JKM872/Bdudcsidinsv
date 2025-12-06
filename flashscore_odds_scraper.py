@@ -147,9 +147,12 @@ class FlashScoreOddsScraper:
     def _extract_odds_from_match(self, match_url: str, sport: str = 'football') -> Dict:
         """
         Wyciąga kursy ze strony meczu FlashScore.
-        Używa URL z #/odds-comparison dla pełnej listy kursów.
+        PRIORYTET: Pinnacle > bet365 > Betway > dowolny bukmacher
         """
         has_draw = sport not in ['tennis', 'volleyball', 'basketball']
+        
+        # Preferowani bukmacherzy w kolejności priorytetu
+        PREFERRED_BOOKMAKERS = ['pinnacle', 'bet365', 'betway', 'unibet', 'william hill', '1xbet']
         
         result = {
             'home_odds': None,
@@ -159,13 +162,13 @@ class FlashScoreOddsScraper:
             'under_25_odds': None,
             'btts_yes_odds': None,
             'btts_no_odds': None,
-            'bookmaker': 'flashscore_avg',
+            'bookmaker': None,
             'odds_found': False,
         }
         
         try:
             # Otwórz stronę z kursami
-            odds_url = match_url.rstrip('/') + '/#/odds-comparison'
+            odds_url = match_url.rstrip('/') + '/#/odds-comparison/1x2-odds/full-time'
             
             try:
                 self.driver.get(odds_url)
@@ -174,29 +177,69 @@ class FlashScoreOddsScraper:
             
             time.sleep(4)
             
-            page_source = self.driver.page_source
+            page_source = self.driver.page_source.lower()
             
-            # Szukaj kursów w formacie X.XX
-            odds_pattern = r'>(\d+\.\d{2})<'
-            potential_odds = re.findall(odds_pattern, page_source)
+            # Struktura: każdy wiersz bukmachera ma nazwę i kursy
+            # Szukamy wierszy z kursami
             
-            # Filtruj - kursy są zwykle między 1.01 a 50.00
-            valid_odds = [float(o) for o in potential_odds if 1.01 <= float(o) <= 50.0]
+            bookmaker_odds = {}  # {'pinnacle': [1.85, 3.40, 2.10], ...}
             
-            if len(valid_odds) >= 2:
+            # Metoda 1: Szukaj konkretnych bukmacherów
+            for bookie in PREFERRED_BOOKMAKERS:
+                if bookie in page_source:
+                    # Znajdź pozycję bukmachera i wyciągnij kursy z tej okolicy
+                    bookie_idx = page_source.find(bookie)
+                    if bookie_idx > 0:
+                        # Wyciągnij fragment HTML wokół bukmachera (500 znaków)
+                        snippet = page_source[bookie_idx:bookie_idx + 500]
+                        
+                        # Szukaj kursów w formacie X.XX
+                        odds_pattern = r'(\d+\.\d{2})'
+                        odds_found = re.findall(odds_pattern, snippet)
+                        
+                        # Filtruj prawidłowe kursy
+                        valid_odds = [float(o) for o in odds_found if 1.01 <= float(o) <= 50.0]
+                        
+                        if len(valid_odds) >= 2:
+                            bookmaker_odds[bookie] = valid_odds[:3]  # Max 3 kursy (1X2)
+            
+            # Wybierz najlepszego bukmachera według priorytetu
+            selected_bookie = None
+            selected_odds = None
+            
+            for bookie in PREFERRED_BOOKMAKERS:
+                if bookie in bookmaker_odds:
+                    selected_bookie = bookie
+                    selected_odds = bookmaker_odds[bookie]
+                    break
+            
+            # Fallback: jeśli żaden preferowany nie znaleziony, weź pierwsze dostępne kursy
+            if not selected_odds:
+                # Szukaj wszystkich kursów na stronie
+                all_odds_pattern = r'>(\d+\.\d{2})<'
+                all_odds = re.findall(all_odds_pattern, self.driver.page_source)
+                valid_odds = [float(o) for o in all_odds if 1.01 <= float(o) <= 50.0]
+                
+                if len(valid_odds) >= 2:
+                    selected_odds = valid_odds[:3]
+                    selected_bookie = 'flashscore_avg'
+            
+            # Zapisz wyniki
+            if selected_odds and len(selected_odds) >= 2:
                 result['odds_found'] = True
+                result['bookmaker'] = selected_bookie.title() if selected_bookie else 'Unknown'
                 
-                if has_draw and len(valid_odds) >= 3:
-                    result['home_odds'] = valid_odds[0]
-                    result['draw_odds'] = valid_odds[1]
-                    result['away_odds'] = valid_odds[2]
+                if has_draw and len(selected_odds) >= 3:
+                    result['home_odds'] = selected_odds[0]
+                    result['draw_odds'] = selected_odds[1]
+                    result['away_odds'] = selected_odds[2]
                 else:
-                    result['home_odds'] = valid_odds[0]
-                    result['away_odds'] = valid_odds[1]
+                    result['home_odds'] = selected_odds[0]
+                    result['away_odds'] = selected_odds[1]
                 
-                print(f"   ✅ Kursy 1X2: {result['home_odds']}/{result['draw_odds']}/{result['away_odds']}")
+                print(f"   ✅ Kursy od {result['bookmaker']}: {result['home_odds']}/{result['draw_odds']}/{result['away_odds']}")
             else:
-                print(f"   ⚠️ Nie znaleziono kursów (found {len(valid_odds)} values)")
+                print(f"   ⚠️ Nie znaleziono kursów")
             
             return result
             
