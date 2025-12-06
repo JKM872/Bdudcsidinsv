@@ -411,18 +411,37 @@ def search_forebet_prediction(
                         'class="tr_1"' in html_content
                     )
                     
+                    # 🔥 WERYFIKACJA SPORTU: Sprawdź czy HTML zawiera żądany sport!
+                    # FlareSolverr może zwracać cached stronę z innego sportu
+                    sport_check_keywords = {
+                        'basketball': ['basketball', 'nba', 'euroleague', 'fiba'],
+                        'volleyball': ['volleyball', 'volley'],
+                        'handball': ['handball'],
+                        'hockey': ['hockey', 'nhl', 'khl'],
+                        'tennis': ['tennis', 'atp', 'wta'],
+                        'football': ['football', 'soccer', 'liga', 'premier league', 'serie a'],
+                        'soccer': ['football', 'soccer', 'liga', 'premier league', 'serie a'],
+                    }
+                    keywords = sport_check_keywords.get(sport_lower, ['predictions'])
+                    html_lower = html_content.lower()
+                    sport_matches = any(kw in html_lower for kw in keywords)
+                    
                     if is_cloudflare and not is_forebet:
                         print(f"      ⚠️ Cloudflare Bypass zwrócił stronę challenge!")
                         html_content = None
-                    elif is_forebet:
+                    elif is_forebet and sport_matches:
                         print(f"      🔥 Cloudflare Bypass SUCCESS! ({len(html_content)} znaków)")
-                        print(f"      ✅ Potwierdzona strona Forebet!")
+                        print(f"      ✅ Potwierdzona strona Forebet dla {sport}!")
                         soup = BeautifulSoup(html_content, 'html.parser')
                         # 🔥 Zapisz do cache!
                         _forebet_html_cache[sport_cache_key] = (html_content, soup, time.time())
                         print(f"      💾 HTML zapisany do cache dla {sport}")
+                    elif is_forebet and not sport_matches:
+                        print(f"      ⚠️ Forebet HTML nie zawiera sportu {sport}! (FlareSolverr cache?)")
+                        print(f"      🔄 Próbuję ponownie bez cache...")
+                        # NIE cachuj - może być stale HTML z innego sportu
+                        html_content = None
                     else:
-                        print(f"      ⚠️ Bypass zwrócił nieznany HTML")
                         html_content = None
                 else:
                     print(f"      ⚠️ Cloudflare Bypass nie zadziałał")
