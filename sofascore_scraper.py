@@ -864,14 +864,26 @@ def scrape_sofascore_full(
         # Uruchom scraping z własnym timeoutem przez threading
         scrape_result = [result]  # Użyj listy żeby móc modyfikować w wątku
         scrape_exception = [None]
+        driver_killed = [False]  # Flag to suppress errors after driver.quit()
         
         def do_scrape():
             try:
+                if driver_killed[0]:
+                    return  # Driver was killed by timeout, stop immediately
                 scrape_result[0] = search_and_get_votes(
                     sofascore_driver, home_team, away_team, sport, date_str
                 )
+            except (ConnectionRefusedError, ConnectionResetError) as e:
+                # Suppress connection errors - driver was probably killed by timeout
+                if not driver_killed[0]:
+                    scrape_exception[0] = e
             except Exception as e:
-                scrape_exception[0] = e
+                # Suppress all exceptions if driver was killed
+                if not driver_killed[0]:
+                    error_msg = str(e).lower()
+                    # Suppress typical driver-killed errors
+                    if 'connection refused' not in error_msg and 'max retries' not in error_msg:
+                        scrape_exception[0] = e
         
         scrape_thread = threading.Thread(target=do_scrape)
         scrape_thread.start()
@@ -879,7 +891,8 @@ def scrape_sofascore_full(
         
         if scrape_thread.is_alive():
             print(f"   ⚠️ SofaScore: Timeout po {SOFASCORE_GLOBAL_TIMEOUT}s - przerywam")
-            # Wątek się nie skończył - driver.quit() przerwać operację
+            # Mark driver as killed BEFORE quitting to suppress errors in thread
+            driver_killed[0] = True
             try:
                 sofascore_driver.quit()
             except:
