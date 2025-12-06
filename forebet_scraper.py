@@ -143,10 +143,30 @@ def normalize_team_name(name: str) -> str:
     # Lowercase i trim
     normalized = name.lower().strip()
     
+    # 🔥 POLSKIE ZNAKI → ASCII (KRYTYCZNE dla polskich drużyn!)
+    polish_chars = {
+        'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
+        'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z',
+        'Ą': 'A', 'Ć': 'C', 'Ę': 'E', 'Ł': 'L', 'Ń': 'N',
+        'Ó': 'O', 'Ś': 'S', 'Ź': 'Z', 'Ż': 'Z',
+        # Inne popularne znaki diakrytyczne
+        'ä': 'a', 'ö': 'o', 'ü': 'u', 'ß': 'ss',  # Niemieckie
+        'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',   # Francuskie
+        'á': 'a', 'à': 'a', 'â': 'a', 'ã': 'a',
+        'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
+        'ú': 'u', 'ù': 'u', 'û': 'u',
+        'ñ': 'n', 'ç': 'c', 'š': 's', 'č': 'c', 'ž': 'z',  # Hiszpańskie/Czeskie
+        'ř': 'r', 'ď': 'd', 'ť': 't', 'ň': 'n',  # Czeskie
+        'ő': 'o', 'ű': 'u',  # Węgierskie
+    }
+    for char, replacement in polish_chars.items():
+        normalized = normalized.replace(char, replacement)
+    
     # 🔥 Usuń prefixy (NOWE!)
     prefixes_to_remove = ['fc ', 'afc ', 'cf ', 'club ', 'sporting ', 'real ', 
                           'sc ', 'sv ', 'vfb ', 'tsv ', 'fk ', 'nk ', 'sk ',
-                          'ac ', 'as ', 'ss ', 'us ', 'cd ', 'ud ', 'rcd ']
+                          'ac ', 'as ', 'ss ', 'us ', 'cd ', 'ud ', 'rcd ',
+                          'ks ', 'mks ', 'gks ', 'rks ', 'wks ', 'ks ']  # Polskie kluby
     for prefix in prefixes_to_remove:
         if normalized.startswith(prefix):
             normalized = normalized[len(prefix):]
@@ -155,7 +175,8 @@ def normalize_team_name(name: str) -> str:
     suffixes_to_remove = [' fc', ' afc', ' cf', ' united', ' city', ' town', 
                           ' wanderers', ' rovers', ' athletic', ' sports',
                           ' k', ' w', ' kobiety', ' kobiet', ' sc', ' sv',
-                          ' fk', ' nk', ' sk', ' kv', ' bk']
+                          ' fk', ' nk', ' sk', ' kv', ' bk',
+                          ' sa', ' ssa']  # Polskie/Włoskie sufixy
     for suffix in suffixes_to_remove:
         if normalized.endswith(suffix):
             normalized = normalized[:-len(suffix)].strip()
@@ -170,6 +191,9 @@ def normalize_team_name(name: str) -> str:
         'dynamo': 'dinamo',  # Wariant transliteracji
         'cska': 'cska',  # Zostaw bez zmian
         'spartak': 'spartak',
+        # Polskie
+        'ziel ': 'zielona ', 'ziel.': 'zielona',
+        'gora': 'gora',
     }
     for abbr, full in abbreviations.items():
         normalized = normalized.replace(abbr, full)

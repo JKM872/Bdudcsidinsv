@@ -118,6 +118,19 @@ def normalize_team_name(name: str) -> str:
     if not name:
         return ""
     name = name.lower().strip()
+    
+    # 🔥 POLSKIE/EUROPEJSKIE ZNAKI → ASCII
+    char_map = {
+        'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
+        'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z',
+        'ä': 'a', 'ö': 'o', 'ü': 'u', 'ß': 'ss',
+        'é': 'e', 'è': 'e', 'ê': 'e', 'á': 'a', 'à': 'a',
+        'í': 'i', 'ú': 'u', 'ñ': 'n', 'ç': 'c',
+        'š': 's', 'č': 'c', 'ž': 'z', 'ř': 'r',
+    }
+    for char, replacement in char_map.items():
+        name = name.replace(char, replacement)
+    
     name = re.sub(r'\s+(u21|u19|u18|b|ii|iii|iv)\s*$', '', name, flags=re.IGNORECASE)
     name = re.sub(r'[^a-z0-9\s]', '', name)
     name = re.sub(r'\s+', ' ', name).strip()
