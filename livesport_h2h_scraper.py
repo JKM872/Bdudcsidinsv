@@ -253,21 +253,33 @@ def start_driver(headless: bool = True) -> webdriver.Chrome:
         driver.set_script_timeout(30)  # 30 seconds for scripts
         driver.implicitly_wait(10)  # 10 seconds implicit wait
     else:
-        # Fall back to ChromeDriverManager
-        print("⚠️ Pobieranie ChromeDriver przez ChromeDriverManager...")
-        try:
+        # 🔥 CI/CD ENVIRONMENT: Use system chromedriver DIRECTLY
+        if os.getenv('CI') or os.getenv('GITHUB_ACTIONS'):
+            print("🔥 CI/CD detected - using system chromedriver (skipping ChromeDriverManager)")
             service = Service(
-                ChromeDriverManager().install(),
-                log_path='NUL' if sys.platform == 'win32' else '/dev/null',
+                '/usr/bin/chromedriver',  # System chromedriver path
+                log_path='/dev/null',
             )
             driver = webdriver.Chrome(service=service, options=chrome_options)
             driver.set_page_load_timeout(60)
             driver.set_script_timeout(30)
             driver.implicitly_wait(10)
-        except Exception as e:
-            print(f"❌ Błąd podczas inicjalizacji ChromeDriver: {e}")
-            print("💡 Spróbuj: pip install --upgrade selenium webdriver-manager")
-            raise
+        else:
+            # Fall back to ChromeDriverManager (local development)
+            print("⚠️ Pobieranie ChromeDriver przez ChromeDriverManager...")
+            try:
+                service = Service(
+                    ChromeDriverManager().install(),
+                    log_path='NUL' if sys.platform == 'win32' else '/dev/null',
+                )
+                driver = webdriver.Chrome(service=service, options=chrome_options)
+                driver.set_page_load_timeout(60)
+                driver.set_script_timeout(30)
+                driver.implicitly_wait(10)
+            except Exception as e:
+                print(f"❌ Błąd podczas inicjalizacji ChromeDriver: {e}")
+                print("💡 Spróbuj: pip install --upgrade selenium webdriver-manager")
+                raise
     
     return driver
 
