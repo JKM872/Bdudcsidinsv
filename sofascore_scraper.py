@@ -761,7 +761,22 @@ def search_and_get_votes(
         who_will_win_found = False
         section_start = -1
         
-        for pattern in ['Who will win', 'who will win', 'Fan vote', 'fan vote']:
+        # 🔥 Multi-language patterns for "Who will win" detection
+        vote_patterns = [
+            'who will win', 'Who will win',  # English
+            'kto wygra', 'Kto wygra',        # Polish
+            'wer gewinnt',                    # German
+            'quién ganará',                   # Spanish
+            'qui va gagner',                  # French
+            'chi vincerà',                    # Italian
+            'quem vai ganhar',                # Portuguese
+            'kdo vyhraje',                    # Czech
+            'ki nyer',                        # Hungarian
+            'fan vote', 'Fan Vote',           # Generic
+            'głosuj', 'głosy', 'votes',      # Vote keywords
+        ]
+        
+        for pattern in vote_patterns:
             idx = page_source.lower().find(pattern.lower())
             if idx > 0:
                 section_start = idx

@@ -71,12 +71,37 @@ async function getFanVotes(matchUrl) {
         const votes = await page.evaluate(() => {
             const result = { home: null, draw: null, away: null, votes: null, preMatch: false };
 
-            // Find "Who will win" section
-            const pageText = document.body.innerText;
-            const hasWhoWillWin = /who will win/i.test(pageText);
+            // Find "Who will win" section - MULTI-LANGUAGE SUPPORT
+            const pageText = document.body.innerText.toLowerCase();
+
+            // 🔥 Multiple languages for "Who will win" detection
+            const whoWillWinPatterns = [
+                'who will win',           // English
+                'kto wygra',              // Polish
+                'wer gewinnt',            // German
+                'quién ganará',           // Spanish
+                'qui va gagner',          // French
+                'chi vincerà',            // Italian
+                'quem vai ganhar',        // Portuguese
+                'kdo vyhraje',            // Czech
+                'ki nyer',                // Hungarian
+                'cine va câștiga',        // Romanian
+                'hvem vinder',            // Danish
+                'vem vinner',             // Swedish
+                'hvem vinner',            // Norwegian
+                // Fallback patterns
+                'fan vote',
+                'vote',
+                'głosuj',
+                'głosy',
+                'votes'
+            ];
+
+            const hasWhoWillWin = whoWillWinPatterns.some(pattern => pageText.includes(pattern));
 
             if (!hasWhoWillWin) {
-                return result;
+                // 🔥 Still try to find percentages even without "who will win" text
+                // SofaScore might display votes differently
             }
 
             // Method 1: Find vote count (e.g. "1234 votes" or "1,234 głosów")
