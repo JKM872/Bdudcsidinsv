@@ -942,6 +942,7 @@ def search_forebet_prediction(
         
         # DEBUG: Wypisz pierwsze 5 meczów z Forebet żeby zobaczyć format
         debug_matches = []
+        best_similarity = 0.0  # Track najlepszy wynik similarity
         
         # DEBUG: Zapisz surowy HTML pierwszych 2 wierszy do pliku
         if match_rows:
@@ -1055,14 +1056,21 @@ def search_forebet_prediction(
                 min_score = min(home_score, away_score)
                 max_score = max(home_score, away_score)
                 
-                # Warunek 1: Obie drużyny >= min_similarity (0.6) - ZWIĘKSZONE z 0.5
-                condition1 = home_score >= min_similarity and away_score >= min_similarity
-                # Warunek 2: Średnia >= 0.65 i minimum >= 0.55 - ZWIĘKSZONE
-                condition2 = combined_score >= 0.65 and min_score >= 0.55
-                # Warunek 3: Jedna drużyna bardzo pewna (>=0.9) i druga >= 0.5 - ZWIĘKSZONE
-                condition3 = max_score >= 0.90 and min_score >= 0.50
+                # Track najlepszy wynik dla Gemini decyzji
+                if combined_score > best_similarity:
+                    best_similarity = combined_score
                 
-                if condition1 or condition2 or condition3:
+                # 🔄 POPRAWIONE WARUNKI - bardziej elastyczne dopasowanie
+                # Warunek 1: Obie drużyny >= 0.55 (poluzowane z 0.6)
+                condition1 = home_score >= 0.55 and away_score >= 0.55
+                # Warunek 2: Średnia >= 0.55 i minimum >= 0.45 (poluzowane)
+                condition2 = combined_score >= 0.55 and min_score >= 0.45
+                # Warunek 3: Jedna drużyna bardzo pewna (>=0.85) i druga >= 0.40
+                condition3 = max_score >= 0.85 and min_score >= 0.40
+                # Warunek 4: Obie drużyny mają > 0.5 (nowy, łagodniejszy)
+                condition4 = home_score > 0.5 and away_score > 0.5
+                
+                if condition1 or condition2 or condition3 or condition4:
                     print(f"      ✅ Znaleziono mecz na Forebet: {forebet_home} vs {forebet_away}")
                     print(f"         Similarity: Home={home_score:.2f}, Away={away_score:.2f}")
                     
@@ -1140,9 +1148,18 @@ def search_forebet_prediction(
                 continue
         
         if not result['success']:
-            # 🤖 GEMINI FALLBACK: Spróbuj znaleźć mecz za pomocą AI
-            if debug_matches and len(debug_matches) > 0:
-                print(f"      🤖 Forebet: Próbuję Gemini AI matching ({len(debug_matches)} meczów)...")
+            # 🤖 GEMINI AS TRUE LAST RESORT: Użyj tylko gdy algorytm nic nie znalazł
+            # Gemini używamy TYLKO gdy najlepszy similarity score < 0.35
+            # (znaczy że nawet bliskie dopasowania nie istnieją)
+            
+            use_gemini = (
+                best_similarity < 0.35 and  # Brak nawet częściowych dopasowań
+                debug_matches and 
+                len([m for m in debug_matches if 'vs' in m]) >= 3  # Min 3 mecze
+            )
+            
+            if use_gemini:
+                print(f"      🤖 Forebet: Najlepszy score={best_similarity:.2f} < 0.35 - używam Gemini AI ({len(debug_matches)} meczów)...")
                 gemini_match = find_forebet_match_with_gemini(home_team, away_team, debug_matches)
                 
                 if gemini_match:

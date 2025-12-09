@@ -558,15 +558,19 @@ def find_match_on_main_page(
         except Exception as e:
             print(f"   ⚠️ SofaScore: Fallback search failed: {e}")
         
-        # Metoda 3: GEMINI AI FALLBACK
-        # Zbierz wszystkie URL-e meczów i poproś Gemini o dopasowanie
+        # Metoda 3: GEMINI AI - TYLKO JAKO OSTATECZNOŚĆ
+        # Używamy Gemini tylko gdy wszystkie inne metody zawiodły
+        # i mamy przynajmniej kilka URL-i do sprawdzenia
         try:
             all_match_urls = [f"https://www.sofascore.com{url}" for url in matches]
-            if all_match_urls:
-                print(f"   🤖 SofaScore: Próbuję Gemini AI matching ({len(all_match_urls)} URLs)...")
+            # Gemini tylko gdy: >= 5 URLs i nie znaleziono żadnego dopasowania
+            if len(all_match_urls) >= 5:
+                print(f"   🤖 SofaScore: Ostateczność - Gemini AI ({len(all_match_urls)} URLs)...")
                 gemini_result = find_best_match_with_gemini(home_team, away_team, all_match_urls, sport)
                 if gemini_result:
                     return gemini_result
+            else:
+                print(f"   ⚠️ SofaScore: Za mało URL-i ({len(all_match_urls)}) - pomijam Gemini")
         except Exception as e:
             print(f"   ⚠️ Gemini fallback error: {e}")
         
