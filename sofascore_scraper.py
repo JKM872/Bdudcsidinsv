@@ -51,7 +51,7 @@ except ImportError:
     SELENIUM_AVAILABLE = False
     
 # Globalny timeout dla całej operacji SofaScore (sekundy)
-SOFASCORE_GLOBAL_TIMEOUT = 45  # Zwiększone z 20 na 45 żeby Puppeteer fallback miał czas
+SOFASCORE_GLOBAL_TIMEOUT = 30  # Optimized from 45s
 
 # Sporty BEZ REMISÓW (tylko Home/Away win)
 SPORTS_WITHOUT_DRAW = ['volleyball', 'tennis', 'basketball', 'handball', 'hockey', 'ice-hockey']
@@ -296,7 +296,7 @@ def get_votes_via_puppeteer(match_url: str) -> Optional[Dict]:
             ['node', puppeteer_script, match_url],
             capture_output=True,
             text=True,
-            timeout=30,  # Zmniejszone z 90 na 30 żeby zmieścić się w globalnym timeout
+            timeout=20,  # Optimized from 30s
             cwd=script_dir
         )
         
@@ -480,7 +480,7 @@ def find_match_on_main_page(
         # Akceptuj consent popup
         accept_consent_popup(driver)
         
-        time.sleep(1.5)
+        time.sleep(1)  # Optimized from 1.5s
         
         home_norm = normalize_team_name(home_team)
         away_norm = normalize_team_name(away_team)
@@ -647,7 +647,7 @@ def search_and_get_votes(
             pass
         
         # Dłuższe oczekiwanie na załadowanie JavaScript
-        time.sleep(4)
+        time.sleep(2)  # Optimized from 4s
         
         # Scroll żeby załadować sekcję głosowania (jest w dolnej części)
         try:
@@ -657,11 +657,11 @@ def search_and_get_votes(
             
             # Wróć na górę i poczekaj
             driver.execute_script('window.scrollTo(0, 0);')
-            time.sleep(1)
+            time.sleep(0.5)  # Optimized from 1s
             
             # Scroll ponownie - głosy mogą być w różnych miejscach
             driver.execute_script('window.scrollTo(0, document.body.scrollHeight / 2);')
-            time.sleep(1)
+            time.sleep(0.5)  # Optimized from 1s
         except (WebDriverException, ReadTimeoutError, MaxRetryError):
             pass  # Ignoruj błędy scrollowania
         except Exception:
@@ -716,7 +716,7 @@ def search_and_get_votes(
                             driver.execute_script("arguments[0].click();", tab)
                         
                         print(f"   🔘 SofaScore: Kliknięto tab Fan Vote")
-                        time.sleep(2)  # Dłuższe oczekiwanie na załadowanie głosów
+                        time.sleep(1.5)  # Optimized from 2s
                         vote_clicked = True
                         break
                 except:
