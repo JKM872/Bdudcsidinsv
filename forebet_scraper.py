@@ -396,7 +396,7 @@ def search_forebet_prediction(
     away_team: str,
     match_date: str,
     driver: webdriver.Chrome = None,
-    min_similarity: float = 0.5,  # 🔥 Zmniejszone z 0.7 dla lepszego matchingu
+    min_similarity: float = 0.6,  # 🔥 Zwiększone z 0.5 dla dokładniejszego matchingu
     timeout: int = 10,
     headless: bool = False,
     sport: str = 'football',
@@ -965,19 +965,19 @@ def search_forebet_prediction(
                 if home_score >= 0.35 or away_score >= 0.35:
                     print(f"      🔍 Potencjalny match: {forebet_home} vs {forebet_away} | Home={home_score:.2f} Away={away_score:.2f}")
                 
-                # 🔥 NOWA LOGIKA: Elastyczne dopasowanie
-                # Stare: if home_score >= 0.7 and away_score >= 0.7
-                # Nowe: średnia >= 0.55 ORAZ minimum >= 0.4 (lub jedna drużyna >= 0.8)
+                # 🔥 POPRAWIONA LOGIKA: Surowsze dopasowanie (wrzesień 2024)
+                # Poprzednio zbyt niskie thresholdy powodowały fałszywe dopasowania
+                # np. "Monaco U19" pasowało do "Tottenham U19" przez wspólne "U19"
                 combined_score = (home_score + away_score) / 2
                 min_score = min(home_score, away_score)
                 max_score = max(home_score, away_score)
                 
-                # Warunek 1: Obie drużyny >= min_similarity (oryginalne zachowanie)
+                # Warunek 1: Obie drużyny >= min_similarity (0.6) - ZWIĘKSZONE z 0.5
                 condition1 = home_score >= min_similarity and away_score >= min_similarity
-                # Warunek 2: Średnia >= 0.55 i minimum >= 0.4 (elastyczne)
-                condition2 = combined_score >= 0.55 and min_score >= 0.4
-                # Warunek 3: Jedna drużyna bardzo pewna (>=0.85) i druga akceptowalna (>=0.35)
-                condition3 = max_score >= 0.85 and min_score >= 0.35
+                # Warunek 2: Średnia >= 0.65 i minimum >= 0.55 - ZWIĘKSZONE
+                condition2 = combined_score >= 0.65 and min_score >= 0.55
+                # Warunek 3: Jedna drużyna bardzo pewna (>=0.9) i druga >= 0.5 - ZWIĘKSZONE
+                condition3 = max_score >= 0.90 and min_score >= 0.50
                 
                 if condition1 or condition2 or condition3:
                     print(f"      ✅ Znaleziono mecz na Forebet: {forebet_home} vs {forebet_away}")
