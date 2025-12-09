@@ -338,16 +338,29 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
         else:
             wins = match.get('home_wins_in_h2h_last5', 0)
         
-        # SofaScore
-        ss_home = match.get('sofascore_home_win_prob') or match.get('sofascore_home')
-        ss_draw = match.get('sofascore_draw_prob') or match.get('sofascore_draw')
-        ss_away = match.get('sofascore_away_win_prob') or match.get('sofascore_away')
-        ss_votes = match.get('sofascore_total_votes') or match.get('sofascore_votes', 0)
+        # Helper: sanitize NaN values (pandas float NaN → None)
+        import math
+        def safe_float(val):
+            if val is None:
+                return None
+            try:
+                f = float(val)
+                if math.isnan(f):
+                    return None
+                return f
+            except (ValueError, TypeError):
+                return None
         
-        # Odds
-        home_odds = match.get('home_odds')
-        draw_odds = match.get('draw_odds')
-        away_odds = match.get('away_odds')
+        # SofaScore (sanitized)
+        ss_home = safe_float(match.get('sofascore_home_win_prob') or match.get('sofascore_home'))
+        ss_draw = safe_float(match.get('sofascore_draw_prob') or match.get('sofascore_draw'))
+        ss_away = safe_float(match.get('sofascore_away_win_prob') or match.get('sofascore_away'))
+        ss_votes = safe_float(match.get('sofascore_total_votes') or match.get('sofascore_votes', 0)) or 0
+        
+        # Odds (sanitized)
+        home_odds = safe_float(match.get('home_odds'))
+        draw_odds = safe_float(match.get('draw_odds'))
+        away_odds = safe_float(match.get('away_odds'))
         
         # Forebet
         fb_pred = match.get('forebet_prediction')
@@ -414,20 +427,20 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
                     <!-- SOFASCORE FAN VOTES -->
                     {f'''
                     <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 8px;">
-                        <div style="font-size: 11px; color: #666; margin-bottom: 8px;">🗳️ SofaScore Fan Vote {f'({ss_votes} głosów)' if ss_votes else ''}</div>
+                        <div style="font-size: 11px; color: #666; margin-bottom: 8px;">🗳️ SofaScore Fan Vote {f'({int(ss_votes)} głosów)' if ss_votes and ss_votes > 0 else ''}</div>
                         <div style="display: flex; justify-content: space-around;">
                             <div style="text-align: center;">
-                                <div style="font-size: 18px; font-weight: bold; color: {'#4CAF50' if ss_home and ss_home >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">{ss_home}%</div>
+                                <div style="font-size: 18px; font-weight: bold; color: {'#4CAF50' if ss_home and ss_home >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">{int(ss_home)}%</div>
                                 <div style="font-size: 10px; color: #888;">🏠</div>
                             </div>
-                            {f'<div style="text-align: center;"><div style="font-size: 18px; font-weight: bold; color: {chr(39)}#FFC107{chr(39) if ss_draw and ss_draw >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else chr(39)}#333{chr(39)};">{ss_draw}%</div><div style="font-size: 10px; color: #888;">🤝</div></div>' if ss_draw else ''}
+                            {f'<div style="text-align: center;"><div style="font-size: 18px; font-weight: bold; color: #333;">{int(ss_draw)}%</div><div style="font-size: 10px; color: #888;">🤝</div></div>' if ss_draw else ''}
                             <div style="text-align: center;">
-                                <div style="font-size: 18px; font-weight: bold; color: {'#F44336' if ss_away and ss_away >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">{ss_away}%</div>
+                                <div style="font-size: 18px; font-weight: bold; color: {'#F44336' if ss_away and ss_away >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">{int(ss_away) if ss_away else '-'}%</div>
                                 <div style="font-size: 10px; color: #888;">✈️</div>
                             </div>
                         </div>
                     </div>
-                    ''' if ss_home else ''}
+                    ''' if ss_home and ss_away else ''}
                     
                     <!-- KURSY -->
                     {f'''
