@@ -51,7 +51,7 @@ except ImportError:
     SELENIUM_AVAILABLE = False
     
 # Globalny timeout dla całej operacji SofaScore (sekundy)
-SOFASCORE_GLOBAL_TIMEOUT = 20
+SOFASCORE_GLOBAL_TIMEOUT = 45  # Zwiększone z 20 na 45 żeby Puppeteer fallback miał czas
 
 # Sporty BEZ REMISÓW (tylko Home/Away win)
 SPORTS_WITHOUT_DRAW = ['volleyball', 'tennis', 'basketball', 'handball', 'hockey', 'ice-hockey']
@@ -225,7 +225,7 @@ def get_votes_via_puppeteer(match_url: str) -> Optional[Dict]:
             ['node', puppeteer_script, match_url],
             capture_output=True,
             text=True,
-            timeout=90,  # 90s timeout
+            timeout=30,  # Zmniejszone z 90 na 30 żeby zmieścić się w globalnym timeout
             cwd=script_dir
         )
         

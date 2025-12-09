@@ -119,7 +119,7 @@ async function getFanVotes(matchUrl) {
                 const voteButtons = [];
 
                 for (const el of allElements) {
-                    const text = el.innerText.trim();
+                    const text = (el.innerText || '').trim();
                     if ((text === '1' || text === 'X' || text === '2') && el.clientWidth > 30) {
                         // Check if parent has percentage
                         const parent = el.closest('div');
