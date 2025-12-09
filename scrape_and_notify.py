@@ -283,7 +283,7 @@ def scrape_and_send_email(
             print(f"\n💰 KROK 2.5/4: Pobieranie kursów z FlashScore...")
             print("="*70)
             
-            odds_scraper = FlashScoreOddsScraper(headless=False)
+            odds_scraper = FlashScoreOddsScraper(headless=True)  # CI/CD requires headless
             odds_fetched = 0
             
             for row in rows:
