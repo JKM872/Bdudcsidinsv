@@ -790,7 +790,15 @@ def scrape_sofascore_full(
         chrome_options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')
         chrome_options.page_load_strategy = 'eager'
         
-        sofascore_driver = webdriver.Chrome(options=chrome_options)
+        # 🔥 CI/CD ENVIRONMENT: Use system chromedriver
+        import os
+        if os.getenv('CI') or os.getenv('GITHUB_ACTIONS'):
+            from selenium.webdriver.chrome.service import Service
+            service = Service('/usr/bin/chromedriver')
+            sofascore_driver = webdriver.Chrome(service=service, options=chrome_options)
+        else:
+            sofascore_driver = webdriver.Chrome(options=chrome_options)
+        
         sofascore_driver.set_page_load_timeout(10)
         sofascore_driver.set_script_timeout(5)
         
