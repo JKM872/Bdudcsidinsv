@@ -100,7 +100,15 @@ class FlashScoreOddsScraper:
         # Wyłącz logi
         chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
         
-        driver = webdriver.Chrome(options=chrome_options)
+        # 🔥 CI/CD ENVIRONMENT: Use system chromedriver
+        import os
+        if os.getenv('CI') or os.getenv('GITHUB_ACTIONS'):
+            from selenium.webdriver.chrome.service import Service
+            service = Service('/usr/bin/chromedriver')
+            driver = webdriver.Chrome(service=service, options=chrome_options)
+        else:
+            driver = webdriver.Chrome(options=chrome_options)
+        
         driver.set_page_load_timeout(30)
         driver.set_script_timeout(15)
         
