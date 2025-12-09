@@ -198,6 +198,72 @@ def get_votes_via_api(event_id: int) -> Optional[Dict]:
         return None
 
 
+def get_votes_via_puppeteer(match_url: str) -> Optional[Dict]:
+    """
+    Pobiera głosy Fan Vote przez Puppeteer (Node.js).
+    Używane jako fallback gdy API i HTML scraping zawiodą.
+    
+    Wymaga: node, puppeteer, puppeteer-extra-plugin-stealth
+    """
+    import subprocess
+    import json
+    import os
+    
+    try:
+        # Znajdź ścieżkę do sofascore_puppeteer.js
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        puppeteer_script = os.path.join(script_dir, 'sofascore_puppeteer.js')
+        
+        if not os.path.exists(puppeteer_script):
+            print(f"   ⚠️ Puppeteer: Skrypt nie znaleziony")
+            return None
+        
+        print(f"   🎭 Puppeteer: Próbuję pobrać dane...")
+        
+        # Uruchom Node.js z Puppeteer
+        result = subprocess.run(
+            ['node', puppeteer_script, match_url],
+            capture_output=True,
+            text=True,
+            timeout=90,  # 90s timeout
+            cwd=script_dir
+        )
+        
+        if result.returncode != 0:
+            print(f"   ⚠️ Puppeteer: Błąd exit code {result.returncode}")
+            return None
+        
+        # Parsuj JSON output
+        try:
+            data = json.loads(result.stdout.strip())
+        except json.JSONDecodeError:
+            print(f"   ⚠️ Puppeteer: Błąd JSON")
+            return None
+        
+        if data.get('success'):
+            return {
+                'sofascore_home_win_prob': data.get('home_win_pct'),
+                'sofascore_draw_prob': data.get('draw_pct'),
+                'sofascore_away_win_prob': data.get('away_win_pct'),
+                'sofascore_total_votes': data.get('total_votes', 0),
+            }
+        else:
+            error = data.get('error', 'Unknown')
+            if 'pre-match' not in error.lower():
+                print(f"   ⚠️ Puppeteer: {error}")
+            return None
+            
+    except subprocess.TimeoutExpired:
+        print(f"   ⚠️ Puppeteer: Timeout (90s)")
+        return None
+    except FileNotFoundError:
+        print(f"   ⚠️ Puppeteer: Node.js nie znaleziony")
+        return None
+    except Exception as e:
+        print(f"   ⚠️ Puppeteer: Błąd: {e}")
+        return None
+
+
 def search_event_via_api(home_team: str, away_team: str, sport: str = 'football', date_str: str = None) -> Optional[int]:
     """Szuka event ID przez SofaScore API."""
     if not REQUESTS_AVAILABLE:
@@ -653,7 +719,21 @@ def search_and_get_votes(
             if result['sofascore_btts_yes']:
                 print(f"   ✅ BTTS: Yes {result['sofascore_btts_yes']}% | No {result['sofascore_btts_no']}%")
         else:
-            print(f"   ⚠️ SofaScore: Brak danych Fan Vote")
+            # 🎭 PUPPETEER FALLBACK: Próbuj Node.js Puppeteer gdy HTML scraping zawiódł
+            if match_url:
+                print(f"   🎭 SofaScore: Próbuję Puppeteer jako fallback...")
+                puppeteer_result = get_votes_via_puppeteer(match_url)
+                if puppeteer_result:
+                    result.update(puppeteer_result)
+                    result['sofascore_found'] = True
+                    draw_str = f"🤝{result['sofascore_draw_prob']}% | " if result.get('sofascore_draw_prob') else ""
+                    print(f"   ✅ Fan Vote (Puppeteer): 🏠{result['sofascore_home_win_prob']}% | "
+                          f"{draw_str}✈️{result['sofascore_away_win_prob']}% "
+                          f"({result.get('sofascore_total_votes', 0):,} głosów)")
+                else:
+                    print(f"   ⚠️ SofaScore: Brak danych Fan Vote (wszystkie metody zawiodły)")
+            else:
+                print(f"   ⚠️ SofaScore: Brak danych Fan Vote")
         
         return result
         
