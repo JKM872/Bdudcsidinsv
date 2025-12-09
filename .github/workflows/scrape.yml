@@ -106,6 +106,7 @@ jobs:
       - name: Run scraper - ${{ matrix.sport }}
         env:
           FLARESOLVERR_URL: "http://localhost:8191/v1"
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           echo "🏃 Scraping ${{ matrix.sport }}..."
           TODAY=$(date +%Y-%m-%d)
