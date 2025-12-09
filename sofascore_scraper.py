@@ -119,6 +119,8 @@ def normalize_team_name(name: str) -> str:
         return ""
     name = name.lower().strip()
     name = re.sub(r'\s+(u21|u19|u18|b|ii|iii|iv)\s*$', '', name, flags=re.IGNORECASE)
+    # Zamień / i - na spacje PRZED usunięciem specjalnych znaków
+    name = name.replace('/', ' ').replace('-', ' ')
     name = re.sub(r'[^a-z0-9\s]', '', name)
     name = re.sub(r'\s+', ' ', name).strip()
     return name
