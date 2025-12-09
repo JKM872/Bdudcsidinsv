@@ -46,7 +46,7 @@ print("-" * 50)
 test_cases_normalize = [
     ("Real Madrid", "real madrid"),
     ("FC Barcelona", "fc barcelona"),
-    ("Bayern München", "bayern mnchen"),  # Usuwa znaki specjalne
+    ("Bayern München", "bayern munchen"),  # ü → u
     ("Manchester United U21", "manchester united"),  # Usuwa U21
     ("Liverpool B", "liverpool"),  # Usuwa B
     ("  Chelsea  FC  ", "chelsea fc"),  # Trim i normalizuj spacje
