@@ -140,6 +140,75 @@ def teams_match(team1: str, team2: str, threshold: float = 0.6) -> bool:
     return similarity_score(team1, team2) >= threshold
 
 
+def find_best_match_with_gemini(home_team: str, away_team: str, url_list: list, sport: str = 'football') -> Optional[str]:
+    """
+    Używa Gemini AI do inteligentnego dopasowania nazw drużyn do URL-i z SofaScore.
+    Fallback gdy standardowe metody regex/similarity nie działają.
+    
+    Args:
+        home_team: Nazwa gospodarzy (z Livesport)
+        away_team: Nazwa gości (z Livesport)
+        url_list: Lista URL-i meczów z SofaScore
+        sport: Sport
+    
+    Returns:
+        Najlepiej dopasowany URL lub None
+    """
+    if not url_list:
+        return None
+    
+    # Ogranicz do 20 URL-i (limit Gemini context)
+    url_list = url_list[:20]
+    
+    try:
+        import os
+        try:
+            import google.generativeai as genai
+        except ImportError:
+            return None
+        
+        # API Key
+        try:
+            from gemini_config import GEMINI_API_KEY
+        except ImportError:
+            GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', None)
+        
+        if not GEMINI_API_KEY:
+            return None
+        
+        genai.configure(api_key=GEMINI_API_KEY)
+        model = genai.GenerativeModel("models/gemini-2.0-flash")
+        
+        # Przygotuj listę URL-i z numerami
+        url_options = "\n".join([f"{i+1}. {url}" for i, url in enumerate(url_list)])
+        
+        prompt = f"""Znajdź który URL pasuje do meczu: {home_team} vs {away_team} (sport: {sport})
+
+URLs:
+{url_options}
+
+Odpowiedz TYLKO numerem (1-{len(url_list)}) najlepiej pasującego URL, lub 0 jeśli żaden nie pasuje.
+Bierz pod uwagę różne warianty nazw drużyn (skróty, pełne nazwy, nazwy miast).
+Twoja odpowiedź musi zawierać TYLKO jedną liczbę."""
+
+        response = model.generate_content(prompt)
+        
+        # Parsuj odpowiedź
+        try:
+            match_idx = int(response.text.strip()) - 1
+            if 0 <= match_idx < len(url_list):
+                print(f"   🤖 Gemini: Znalazłem dopasowanie!")
+                return url_list[match_idx]
+        except (ValueError, IndexError):
+            pass
+        
+        return None
+        
+    except Exception as e:
+        print(f"   ⚠️ Gemini matching error: {e}")
+        return None
+
+
 def accept_consent_popup(driver: 'webdriver.Chrome') -> bool:
     """
     Akceptuje cookie consent popup na SofaScore.
@@ -475,6 +544,19 @@ def find_match_on_main_page(
         except Exception as e:
             print(f"   ⚠️ SofaScore: Fallback search failed: {e}")
         
+        # Metoda 3: GEMINI AI FALLBACK
+        # Zbierz wszystkie URL-e meczów i poproś Gemini o dopasowanie
+        try:
+            all_match_urls = [f"https://www.sofascore.com{url}" for url in matches]
+            if all_match_urls:
+                print(f"   🤖 SofaScore: Próbuję Gemini AI matching ({len(all_match_urls)} URLs)...")
+                gemini_result = find_best_match_with_gemini(home_team, away_team, all_match_urls, sport)
+                if gemini_result:
+                    return gemini_result
+        except Exception as e:
+            print(f"   ⚠️ Gemini fallback error: {e}")
+        
+        print(f"   ⚠️ SofaScore: Nie znaleziono meczu {home_team} vs {away_team}")
         return None
         
     except Exception as e:
