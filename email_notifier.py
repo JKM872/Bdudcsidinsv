@@ -400,36 +400,68 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
                     </td>
                 </tr>
                 
-                <!-- FORMA DRUŻYN -->
+                <!-- H2H - w stylu ze screenshotu -->
                 <tr>
-                    <td style="background: #f8f9fa; padding: 12px; width: 50%; border-right: 1px solid #eee;">
-                        <div style="font-size: 10px; color: #666; margin-bottom: 4px;">📊 {home} (ogólna)</div>
-                        <div style="font-size: 16px;">{form_to_icons(home_form_overall)}</div>
-                        {f'<div style="font-size: 10px; color: #888; margin-top: 4px;">🏠 U siebie: {form_to_icons(home_form_home)}</div>' if home_form_home else ''}
-                    </td>
-                    <td style="background: #f8f9fa; padding: 12px; width: 50%;">
-                        <div style="font-size: 10px; color: #666; margin-bottom: 4px;">📊 {away} (ogólna)</div>
-                        <div style="font-size: 16px;">{form_to_icons(away_form_overall)}</div>
-                        {f'<div style="font-size: 10px; color: #888; margin-top: 4px;">✈️ Na wyjeździe: {form_to_icons(away_form_away)}</div>' if away_form_away else ''}
+                    <td colspan="2" style="background: #f8f9fa; padding: 12px; border-bottom: 1px solid #eee;">
+                        <div style="font-size: 12px; color: #333;">
+                            🔄 <strong>H2H:</strong> 
+                            {f'<span style="color: #4CAF50; font-weight: bold;">{home if focus_team != "away" else away} wygrał {wins}/{h2h_count} ({win_rate*100:.0f}%)</span> 🏠' if h2h_count > 0 else '—'}
+                            {f' | 📅 Ost. mecz: <strong>{last_meeting_date}</strong>' if last_meeting_date else ''}
+                        </div>
                     </td>
                 </tr>
                 
-                <!-- H2H -->
+                <!-- ANALIZA FORMY - header -->
                 <tr>
-                    <td style="background: white; padding: 12px; border-right: 1px solid #eee; text-align: center;">
-                        <div style="font-size: 10px; color: #666;">🔄 H2H</div>
-                        <div style="font-size: 20px; font-weight: bold; color: {'#4CAF50' if win_rate >= 0.6 else '#FF9800'};">
-                            {f'{wins}/{h2h_count}' if h2h_count > 0 else '—'}
-                        </div>
-                        <div style="font-size: 12px; color: #888;">{f'{win_rate*100:.0f}%' if h2h_count > 0 else ''}</div>
-                    </td>
-                    <td style="background: white; padding: 12px; text-align: center;">
-                        <div style="font-size: 10px; color: #666;">📅 Ostatni mecz</div>
-                        <div style="font-size: 14px; font-weight: bold; color: #333;">
-                            {last_meeting_date if last_meeting_date else '—'}
+                    <td colspan="2" style="background: #e8f5e9; padding: 10px 12px; border-bottom: 1px solid #c8e6c9;">
+                        <div style="font-size: 11px; color: #2e7d32; font-weight: bold;">
+                            📊 Analiza Formy (ostatnie 5 meczów):
                         </div>
                     </td>
                 </tr>
+                
+                <!-- FORMA DRUŻYN - GOSPODARZE -->
+                <tr>
+                    <td colspan="2" style="background: white; padding: 10px 12px; border-bottom: 1px solid #eee;">
+                        <div style="margin-bottom: 8px;">
+                            <strong style="color: #333;">{home}:</strong>
+                        </div>
+                        <table width="100%" style="font-size: 11px;">
+                            <tr>
+                                <td style="color: #666; width: 80px;">🌍 Ogółem:</td>
+                                <td style="font-size: 14px;">{form_to_icons(home_form_overall)}</td>
+                            </tr>
+                            {f'<tr><td style="color: #666;">🏠 U siebie:</td><td style="font-size: 14px;">{form_to_icons(home_form_home)}</td></tr>' if home_form_home else ''}
+                        </table>
+                    </td>
+                </tr>
+                
+                <!-- FORMA DRUŻYN - GOŚCIE -->
+                <tr>
+                    <td colspan="2" style="background: white; padding: 10px 12px; border-bottom: 1px solid #eee;">
+                        <div style="margin-bottom: 8px;">
+                            <strong style="color: #333;">{away}:</strong>
+                        </div>
+                        <table width="100%" style="font-size: 11px;">
+                            <tr>
+                                <td style="color: #666; width: 80px;">🌍 Ogółem:</td>
+                                <td style="font-size: 14px;">{form_to_icons(away_form_overall)}</td>
+                            </tr>
+                            {f'<tr><td style="color: #666;">✈️ Na wyjeździe:</td><td style="font-size: 14px;">{form_to_icons(away_form_away)}</td></tr>' if away_form_away else ''}
+                        </table>
+                    </td>
+                </tr>
+                
+                <!-- PRZEWAGA W FORMIE -->
+                {f'''
+                <tr>
+                    <td colspan="2" style="background: #fff3e0; padding: 10px 12px; border-bottom: 1px solid #ffe0b2;">
+                        <div style="font-size: 12px; color: #e65100; font-weight: bold; text-align: center;">
+                            🔥 {home if focus_team != "away" else away} ma przewagę w formie!
+                        </div>
+                    </td>
+                </tr>
+                ''' if form_advantage else ''}
                 
                 <!-- SOFASCORE (tylko gdy dane są dostępne) -->
                 {f'''
