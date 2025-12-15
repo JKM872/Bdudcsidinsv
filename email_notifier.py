@@ -318,32 +318,11 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
         # ========== KOMPAKTOWA KARTA MECZU Z IKONAMI ==========
         # Zbierz wszystkie dane w jednym miejscu
         
-        # 🔥 Helper: Parse form list from CSV string (CSV saves lists as strings)
-        def parse_form_list(val):
-            if not val:
-                return []
-            if isinstance(val, list):
-                return val
-            if isinstance(val, str):
-                # CSV format: "['W', 'L', 'D']" → ['W', 'L', 'D']
-                val = val.strip()
-                if val.startswith('[') and val.endswith(']'):
-                    # Remove brackets and quotes, split by comma
-                    inner = val[1:-1]
-                    if not inner:
-                        return []
-                    # Parse: 'W', 'L', 'D' → ['W', 'L', 'D']
-                    items = [s.strip().strip("'\"") for s in inner.split(',')]
-                    return [i for i in items if i in ('W', 'L', 'D')]
-                # Simple format: "WLDWD" → ['W', 'L', 'D', 'W', 'D']
-                return [c for c in val if c in ('W', 'L', 'D')]
-            return []
-        
-        # FORMA - parse from CSV strings
-        home_form_overall = parse_form_list(match.get('home_form_overall', match.get('home_form', [])))
-        home_form_home = parse_form_list(match.get('home_form_home', []))
-        away_form_overall = parse_form_list(match.get('away_form_overall', match.get('away_form', [])))
-        away_form_away = parse_form_list(match.get('away_form_away', []))
+        # FORMA
+        home_form_overall = match.get('home_form_overall', match.get('home_form', []))
+        home_form_home = match.get('home_form_home', [])
+        away_form_overall = match.get('away_form_overall', match.get('away_form', []))
+        away_form_away = match.get('away_form_away', [])
         form_advantage = match.get('form_advantage', False)
         last_meeting_date = match.get('last_meeting_date', '')
         
@@ -359,201 +338,139 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time') -> 
         else:
             wins = match.get('home_wins_in_h2h_last5', 0)
         
-        # Helper: sanitize NaN values (pandas float NaN → None)
-        import math
-        def safe_float(val):
-            if val is None:
-                return None
-            try:
-                f = float(val)
-                if math.isnan(f):
-                    return None
-                return f
-            except (ValueError, TypeError):
-                return None
+        # SofaScore
+        ss_home = match.get('sofascore_home_win_prob') or match.get('sofascore_home')
+        ss_draw = match.get('sofascore_draw_prob') or match.get('sofascore_draw')
+        ss_away = match.get('sofascore_away_win_prob') or match.get('sofascore_away')
+        ss_votes = match.get('sofascore_total_votes') or match.get('sofascore_votes', 0)
         
-        # SofaScore (sanitized)
-        ss_home = safe_float(match.get('sofascore_home_win_prob') or match.get('sofascore_home'))
-        ss_draw = safe_float(match.get('sofascore_draw_prob') or match.get('sofascore_draw'))
-        ss_away = safe_float(match.get('sofascore_away_win_prob') or match.get('sofascore_away'))
-        ss_votes = safe_float(match.get('sofascore_total_votes') or match.get('sofascore_votes', 0)) or 0
-        
-        # Odds (sanitized)
-        home_odds = safe_float(match.get('home_odds'))
-        draw_odds = safe_float(match.get('draw_odds'))
-        away_odds = safe_float(match.get('away_odds'))
+        # Odds
+        home_odds = match.get('home_odds')
+        draw_odds = match.get('draw_odds')
+        away_odds = match.get('away_odds')
         
         # Forebet
         fb_pred = match.get('forebet_prediction')
         fb_prob = match.get('forebet_probability')
         fb_exact = match.get('forebet_exact_score')
-        fb_prob_clean = safe_float(fb_prob)
         
         # Kolory podświetlenia
         advantage_icon = '🔥' if form_advantage else ''
         
-        # ========== TABLE-BASED LAYOUT (works in Gmail/Outlook) ==========
         html += f"""
-            <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin: 15px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <!-- HEADER: Czas i numer -->
-                <tr>
-                    <td colspan="2" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 12px 20px;">
-                        <table width="100%">
-                            <tr>
-                                <td style="color: white;">
-                                    <span style="background: #FF5722; padding: 4px 10px; border-radius: 12px; font-weight: bold; font-size: 12px;">🕐 {time_badge if time_badge else 'TBD'}</span>
-                                </td>
-                                <td align="right" style="color: rgba(255,255,255,0.7); font-size: 11px;">
-                                    #{i}
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; margin: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2); overflow: hidden;">
+                <!-- HEADER -->
+                <div style="padding: 15px 20px; background: rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+                    <div style="color: white; font-size: 12px;">
+                        <span style="background: #FF5722; padding: 5px 12px; border-radius: 15px; font-weight: bold;">🕐 {time_badge.replace('<span class="time-badge">', '').replace('</span>', '') if time_badge else 'TBD'}</span>
+                    </div>
+                    <div style="color: white; font-size: 11px; opacity: 0.8;">
+                        #{i}
+                    </div>
+                </div>
                 
                 <!-- DRUŻYNY -->
-                <tr>
-                    <td colspan="2" style="background: white; padding: 20px; text-align: center;">
-                        <div style="font-size: 20px; font-weight: bold; color: #333;">
-                            🏠 {home} <span style="color: #999; font-size: 14px;">vs</span> {away} ✈️
+                <div style="background: white; padding: 20px; text-align: center;">
+                    <div style="font-size: 22px; font-weight: bold; color: #333;">
+                        🏠 {home} <span style="color: #999; font-size: 16px;">vs</span> {away} ✈️
+                    </div>
+                    {f'<div style="margin-top: 5px;"><span style="background: #FFD700; color: #333; padding: 3px 8px; border-radius: 10px; font-size: 11px; font-weight: bold;">🔥 Przewaga gospodarzy!</span></div>' if form_advantage else ''}
+                </div>
+                
+                <!-- DANE MECZU - GRID -->
+                <div style="background: #f8f9fa; padding: 15px 20px;">
+                    
+                    <!-- FORMA DRUŻYN -->
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding: 10px; background: white; border-radius: 8px;">
+                        <div style="flex: 1; text-align: center; border-right: 1px solid #eee;">
+                            <div style="font-size: 11px; color: #666; margin-bottom: 5px;">📊 {home} (ogólna)</div>
+                            <div style="font-size: 16px;">{form_to_icons(home_form_overall)}</div>
+                            {f'<div style="font-size: 10px; color: #888; margin-top: 3px;">🏠 U siebie: {form_to_icons(home_form_home)}</div>' if home_form_home else ''}
                         </div>
-                        {f'<div style="margin-top: 8px;"><span style="background: #FFD700; color: #333; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: bold;">🔥 Przewaga gospodarzy!</span></div>' if form_advantage else ''}
-                    </td>
-                </tr>
-                
-                <!-- H2H - w stylu ze screenshotu -->
-                <tr>
-                    <td colspan="2" style="background: #f8f9fa; padding: 12px; border-bottom: 1px solid #eee;">
-                        <div style="font-size: 12px; color: #333;">
-                            🔄 <strong>H2H:</strong> 
-                            {f'<span style="color: #4CAF50; font-weight: bold;">{home if focus_team != "away" else away} wygrał {wins}/{h2h_count} ({win_rate*100:.0f}%)</span> 🏠' if h2h_count > 0 else '—'}
-                            {f' | 📅 Ost. mecz: <strong>{last_meeting_date}</strong>' if last_meeting_date else ''}
+                        <div style="flex: 1; text-align: center;">
+                            <div style="font-size: 11px; color: #666; margin-bottom: 5px;">📊 {away} (ogólna)</div>
+                            <div style="font-size: 16px;">{form_to_icons(away_form_overall)}</div>
+                            {f'<div style="font-size: 10px; color: #888; margin-top: 3px;">✈️ Na wyjeździe: {form_to_icons(away_form_away)}</div>' if away_form_away else ''}
                         </div>
-                    </td>
-                </tr>
-                
-                <!-- ANALIZA FORMY - header -->
-                <tr>
-                    <td colspan="2" style="background: #e8f5e9; padding: 10px 12px; border-bottom: 1px solid #c8e6c9;">
-                        <div style="font-size: 11px; color: #2e7d32; font-weight: bold;">
-                            📊 Analiza Formy (ostatnie 5 meczów):
+                    </div>
+                    
+                    <!-- H2H + OSTATNI MECZ -->
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding: 10px; background: white; border-radius: 8px;">
+                        <div style="flex: 1; text-align: center; border-right: 1px solid #eee;">
+                            <div style="font-size: 11px; color: #666;">🔄 H2H</div>
+                            <div style="font-size: 18px; font-weight: bold; color: {'#4CAF50' if win_rate >= 0.6 else '#FF9800'};">
+                                {f'{wins}/{h2h_count}' if h2h_count > 0 else '—'}
+                            </div>
+                            <div style="font-size: 12px; color: #888;">{f'{win_rate*100:.0f}%' if h2h_count > 0 else ''}</div>
                         </div>
-                    </td>
-                </tr>
-                
-                <!-- FORMA DRUŻYN - GOSPODARZE -->
-                <tr>
-                    <td colspan="2" style="background: white; padding: 10px 12px; border-bottom: 1px solid #eee;">
-                        <div style="margin-bottom: 8px;">
-                            <strong style="color: #333;">{home}:</strong>
+                        <div style="flex: 1; text-align: center;">
+                            <div style="font-size: 11px; color: #666;">📅 Ostatni mecz</div>
+                            <div style="font-size: 14px; font-weight: bold; color: #333;">
+                                {last_meeting_date if last_meeting_date else '—'}
+                            </div>
                         </div>
-                        <table width="100%" style="font-size: 11px;">
-                            <tr>
-                                <td style="color: #666; width: 80px;">🌍 Ogółem:</td>
-                                <td style="font-size: 14px;">{form_to_icons(home_form_overall)}</td>
-                            </tr>
-                            {f'<tr><td style="color: #666;">🏠 U siebie:</td><td style="font-size: 14px;">{form_to_icons(home_form_home)}</td></tr>' if home_form_home else ''}
-                        </table>
-                    </td>
-                </tr>
-                
-                <!-- FORMA DRUŻYN - GOŚCIE -->
-                <tr>
-                    <td colspan="2" style="background: white; padding: 10px 12px; border-bottom: 1px solid #eee;">
-                        <div style="margin-bottom: 8px;">
-                            <strong style="color: #333;">{away}:</strong>
+                    </div>
+                    
+                    <!-- SOFASCORE FAN VOTES -->
+                    {f'''
+                    <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 8px;">
+                        <div style="font-size: 11px; color: #666; margin-bottom: 8px;">🗳️ SofaScore Fan Vote {f'({ss_votes} głosów)' if ss_votes else ''}</div>
+                        <div style="display: flex; justify-content: space-around;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 18px; font-weight: bold; color: {'#4CAF50' if ss_home and ss_home >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">{ss_home}%</div>
+                                <div style="font-size: 10px; color: #888;">🏠</div>
+                            </div>
+                            {f'<div style="text-align: center;"><div style="font-size: 18px; font-weight: bold; color: {chr(39)}#FFC107{chr(39) if ss_draw and ss_draw >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else chr(39)}#333{chr(39)};">{ss_draw}%</div><div style="font-size: 10px; color: #888;">🤝</div></div>' if ss_draw else ''}
+                            <div style="text-align: center;">
+                                <div style="font-size: 18px; font-weight: bold; color: {'#F44336' if ss_away and ss_away >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">{ss_away}%</div>
+                                <div style="font-size: 10px; color: #888;">✈️</div>
+                            </div>
                         </div>
-                        <table width="100%" style="font-size: 11px;">
-                            <tr>
-                                <td style="color: #666; width: 80px;">🌍 Ogółem:</td>
-                                <td style="font-size: 14px;">{form_to_icons(away_form_overall)}</td>
-                            </tr>
-                            {f'<tr><td style="color: #666;">✈️ Na wyjeździe:</td><td style="font-size: 14px;">{form_to_icons(away_form_away)}</td></tr>' if away_form_away else ''}
-                        </table>
-                    </td>
-                </tr>
-                
-                <!-- PRZEWAGA W FORMIE -->
-                {f'''
-                <tr>
-                    <td colspan="2" style="background: #fff3e0; padding: 10px 12px; border-bottom: 1px solid #ffe0b2;">
-                        <div style="font-size: 12px; color: #e65100; font-weight: bold; text-align: center;">
-                            🔥 {home if focus_team != "away" else away} ma przewagę w formie!
+                    </div>
+                    ''' if ss_home else ''}
+                    
+                    <!-- KURSY -->
+                    {f'''
+                    <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 8px;">
+                        <div style="font-size: 11px; color: #666; margin-bottom: 8px;">💰 Kursy bukmacherskie</div>
+                        <div style="display: flex; justify-content: space-around;">
+                            <div style="text-align: center; padding: 5px 15px; background: {'#4CAF50' if home_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#f5f5f5'}; border-radius: 8px;">
+                                <div style="font-size: 16px; font-weight: bold; color: {'white' if home_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#333'};">{home_odds:.2f}</div>
+                                <div style="font-size: 10px; color: {'white' if home_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#888'};">1</div>
+                            </div>
+                            {f'<div style="text-align: center; padding: 5px 15px; background: {chr(39)}#4CAF50{chr(39) if draw_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else chr(39)}#f5f5f5{chr(39)}; border-radius: 8px;"><div style="font-size: 16px; font-weight: bold; color: {chr(39)}white{chr(39) if draw_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else chr(39)}#333{chr(39)};">{draw_odds:.2f}</div><div style="font-size: 10px;">X</div></div>' if draw_odds else ''}
+                            <div style="text-align: center; padding: 5px 15px; background: {'#4CAF50' if away_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#f5f5f5'}; border-radius: 8px;">
+                                <div style="font-size: 16px; font-weight: bold; color: {'white' if away_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#333'};">{away_odds:.2f}</div>
+                                <div style="font-size: 10px; color: {'white' if away_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#888'};">2</div>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-                ''' if form_advantage else ''}
-                
-                <!-- SOFASCORE (tylko gdy dane są dostępne) -->
-                {f'''
-                <tr>
-                    <td colspan="2" style="background: #f0f4f8; padding: 12px;">
-                        <div style="font-size: 10px; color: #666; margin-bottom: 6px;">🗳️ SofaScore Fan Vote {f'({int(ss_votes)} głosów)' if ss_votes > 0 else ''}</div>
-                        <table width="100%">
-                            <tr>
-                                <td align="center" style="font-size: 16px; font-weight: bold; color: {'#4CAF50' if ss_home and ss_home >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">🏠 {int(ss_home)}%</td>
-                                {'<td align="center" style="font-size: 16px; font-weight: bold; color: #666;">🤝 ' + str(int(ss_draw)) + '%</td>' if ss_draw else ''}
-                                <td align="center" style="font-size: 16px; font-weight: bold; color: {'#F44336' if ss_away and ss_away >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">✈️ {int(ss_away)}%</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                ''' if ss_home and ss_away else ''}
-                
-                <!-- KURSY (pokazuj gdy jest jakiekolwiek dane) -->
-                {f'''
-                <tr>
-                    <td colspan="2" style="background: white; padding: 12px;">
-                        <div style="font-size: 10px; color: #666; margin-bottom: 6px;">💰 Kursy bukmacherskie</div>
-                        <table width="100%">
-                            <tr>
-                                <td align="center" style="padding: 5px;">
-                                    <div style="background: {'#4CAF50' if home_odds and away_odds and home_odds < away_odds else '#f5f5f5'}; padding: 8px 12px; border-radius: 6px;">
-                                        <div style="font-size: 16px; font-weight: bold; color: {'white' if home_odds and away_odds and home_odds < away_odds else '#333'};">{f"{home_odds:.2f}" if home_odds else "N/A"}</div>
-                                        <div style="font-size: 10px; color: {'white' if home_odds and away_odds and home_odds < away_odds else '#888'};">1</div>
-                                    </div>
-                                </td>
-                                {f'<td align="center" style="padding: 5px;"><div style="background: #f5f5f5; padding: 8px 12px; border-radius: 6px;"><div style="font-size: 16px; font-weight: bold; color: #333;">' + f'{draw_odds:.2f}' + '</div><div style="font-size: 10px; color: #888;">X</div></div></td>' if draw_odds else ''}
-                                <td align="center" style="padding: 5px;">
-                                    <div style="background: {'#4CAF50' if home_odds and away_odds and away_odds < home_odds else '#f5f5f5'}; padding: 8px 12px; border-radius: 6px;">
-                                        <div style="font-size: 16px; font-weight: bold; color: {'white' if home_odds and away_odds and away_odds < home_odds else '#333'};">{f"{away_odds:.2f}" if away_odds else "N/A"}</div>
-                                        <div style="font-size: 10px; color: {'white' if home_odds and away_odds and away_odds < home_odds else '#888'};">2</div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                ''' if home_odds or away_odds or draw_odds else ''}
-                
-                <!-- FOREBET (pokazuj gdy jest jakiekolwiek dane) -->
-                {f'''
-                <tr>
-                    <td colspan="2" style="background: linear-gradient(135deg, #FF9800, #FF5722); padding: 12px;">
-                        <table width="100%">
-                            <tr>
-                                <td style="color: white;">
-                                    <div style="font-size: 10px; opacity: 0.8;">🎯 Forebet</div>
-                                    <div style="font-size: 18px; font-weight: bold;">{fb_pred if fb_pred else 'N/A'}</div>
-                                </td>
-                                <td align="right" style="color: white;">
-                                    <div style="font-size: 10px; opacity: 0.8;">Prawdopodobieństwo</div>
-                                    <div style="font-size: 22px; font-weight: bold;">{f"{fb_prob_clean:.0f}%" if fb_prob_clean else 'N/A'}</div>
-                                </td>
-                                {f'<td align="right" style="color: white;"><div style="background: rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 6px;"><div style="font-size: 10px; opacity: 0.8;">Wynik</div><div style="font-size: 14px; font-weight: bold;">' + str(fb_exact) + '</div></div></td>' if fb_exact else ''}
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                ''' if fb_pred or fb_prob_clean or fb_exact else ''}
+                    </div>
+                    ''' if home_odds and away_odds else ''}
+                    
+                    <!-- FOREBET PREDICTION -->
+                    {f'''
+                    <div style="padding: 10px; background: linear-gradient(135deg, #FF9800, #FF5722); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 11px; color: rgba(255,255,255,0.8);">🎯 Forebet</div>
+                                <div style="font-size: 20px; font-weight: bold; color: white;">{fb_pred}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 11px; color: rgba(255,255,255,0.8);">Prawdopodobieństwo</div>
+                                <div style="font-size: 24px; font-weight: bold; color: white;">{fb_prob:.0f}%</div>
+                            </div>
+                            {f'<div style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 5px;"><div style="font-size: 10px; color: rgba(255,255,255,0.8);">Wynik</div><div style="font-size: 14px; font-weight: bold; color: white;">{fb_exact}</div></div>' if fb_exact else ''}
+                        </div>
+                    </div>
+                    ''' if fb_pred and fb_prob and str(fb_prob) != 'nan' else ''}
+                    
+                </div>
                 
                 <!-- FOOTER -->
-                <tr>
-                    <td colspan="2" style="background: #764ba2; padding: 10px; text-align: center;">
-                        <a href="{match_url}" style="color: white; text-decoration: none; font-size: 12px;">🔗 Zobacz szczegóły meczu →</a>
-                    </td>
-                </tr>
-            </table>
+                <div style="background: rgba(0,0,0,0.1); padding: 10px 20px; text-align: center;">
+                    <a href="{match_url}" style="color: white; text-decoration: none; font-size: 12px;">🔗 Zobacz szczegóły meczu →</a>
+                </div>
+            </div>
         """
     
     html += """

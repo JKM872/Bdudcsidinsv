@@ -301,9 +301,12 @@ def normalize_team_name(name: str) -> str:
     # Usuń sufixy
     suffixes_to_remove = [' fc', ' afc', ' cf', ' united', ' city', ' town', 
                           ' wanderers', ' rovers', ' athletic', ' sports',
-                          ' k', ' w', ' kobiety', ' kobiet', ' sc', ' sv',
-                          ' fk', ' nk', ' sk', ' kv', ' bk',
-                          ' sa', ' ssa']  # Polskie/Włoskie sufixy
+                          ' k', ' w', ' kobiety', ' kobiet', ' women', ' womens',
+                          ' m', ' men', ' mezczyzni',
+                          ' sc', ' sv', ' fk', ' nk', ' sk', ' kv', ' bk',
+                          ' sa', ' ssa', ' srl', ' spa',
+                          ' b', ' ii', ' iii', ' u21', ' u19', ' u18', ' u17',
+                          ' reserves', ' youth', ' juniors']  # Europejskie sufixy
     for suffix in suffixes_to_remove:
         if normalized.endswith(suffix):
             normalized = normalized[:-len(suffix)].strip()
@@ -365,8 +368,21 @@ def similarity_score(name1: str, name2: str) -> float:
         if norm1 in norm2 or norm2 in norm1:
             containment = 0.85  # Wysoki score dla zawierania
     
-    # Zwróć najwyższy wynik z trzech metod
-    return max(seq_score, jaccard, containment)
+    # 🔥 Metoda 4: First-word matching (dla nazw miast vs pełnych nazw klubów)
+    # np. "Hamburg" vs "Hamburg Towers", "Jerusalem" vs "Hapoel Jerusalem"
+    first_word_score = 0.0
+    words1 = norm1.split()
+    words2 = norm2.split()
+    if words1 and words2:
+        # Sprawdź czy pierwsze słowo jednej nazwy jest w drugiej
+        if words1[0] in words2 or words2[0] in words1:
+            first_word_score = 0.75
+        # Sprawdź też ostatnie słowo (np. "Jerusalem" w "Hapoel Jerusalem")
+        if words1[-1] in words2 or words2[-1] in words1:
+            first_word_score = max(first_word_score, 0.75)
+    
+    # Zwróć najwyższy wynik z czterech metod
+    return max(seq_score, jaccard, containment, first_word_score)
 
 
 def find_best_match(target_team: str, available_teams: list) -> Tuple[Optional[str], float]:
@@ -943,6 +959,10 @@ def search_forebet_prediction(
         # DEBUG: Wypisz pierwsze 5 meczów z Forebet żeby zobaczyć format
         debug_matches = []
         best_similarity = 0.0  # Track najlepszy wynik similarity
+        
+        # 🔥 DEBUG: Wypisz CZEGO szukamy
+        print(f"      🔎 Szukam meczu: '{home_team}' vs '{away_team}'")
+        print(f"      🔎 Znormalizowane: '{normalize_team_name(home_team)}' vs '{normalize_team_name(away_team)}'")
         
         # DEBUG: Zapisz surowy HTML pierwszych 2 wierszy do pliku
         if match_rows:

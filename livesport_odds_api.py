@@ -97,9 +97,14 @@ class LivesportOddsAPI:
         - &mid=KQAaF7d2
         - #id/KQAaF7d2
         - /mecz/.../KQAaF7d2/
+        - /mecz/.../KQAaF7d2/h2h/ogolem/
+        - /match/.../KQAaF7d2/
         """
         if not url:
             return None
+        
+        # Oczyszczenie URL
+        url = url.strip()
             
         # Metoda 1: Parametr ?mid= lub &mid=
         match = re.search(r'[?&]mid=([a-zA-Z0-9]+)', url)
@@ -111,14 +116,26 @@ class LivesportOddsAPI:
         if match:
             return match.group(1)
         
-        # Metoda 3: Format URL /mecz/.../EventID/
+        # Metoda 3: Format URL /mecz/.../EventID/ lub /mecz/.../EventID/h2h/...
         # https://www.livesport.com/pl/mecz/pilka-nozna/...team1-team2/KQAaF7d2/
+        # https://www.livesport.com/pl/mecz/pilka-nozna/...team1-team2/KQAaF7d2/h2h/ogolem/
+        
+        # Lista słów które NIE są Event ID
+        excluded_words = [
+            'szczegoly', 'h2h', 'statystyki', 'kursy', 'mecz', 'match', 
+            'ogolem', 'overall', 'wyniki', 'results', 'live', 'lineup', 
+            'sklad', 'odds', 'video', 'news', 'draw', 'pilka-nozna', 
+            'koszykowka', 'siatkowka', 'pilka-reczna', 'hokej', 'tenis',
+            'football', 'basketball', 'volleyball', 'handball', 'hockey', 'tennis',
+            'rugby', 'pl', 'en', 'de', 'es', 'fr', 'it'
+        ]
+        
         parts = url.rstrip('/').split('/')
         for part in reversed(parts):
-            # Event ID ma typowo 8 znaków alfanumerycznych
+            # Event ID ma typowo 6-10 znaków alfanumerycznych
             if re.match(r'^[a-zA-Z0-9]{6,10}$', part):
-                # Nie może być fragmentem URL (np. "szczegoly", "h2h")
-                if part.lower() not in ['szczegoly', 'h2h', 'statystyki', 'kursy', 'mecz', 'match']:
+                # Nie może być fragmentem URL
+                if part.lower() not in excluded_words:
                     return part
         
         return None

@@ -51,7 +51,7 @@ except ImportError:
     SELENIUM_AVAILABLE = False
     
 # Globalny timeout dla całej operacji SofaScore (sekundy)
-SOFASCORE_GLOBAL_TIMEOUT = 30  # Optimized from 45s
+SOFASCORE_GLOBAL_TIMEOUT = 20
 
 # Sporty BEZ REMISÓW (tylko Home/Away win)
 SPORTS_WITHOUT_DRAW = ['volleyball', 'tennis', 'basketball', 'handball', 'hockey', 'ice-hockey']
@@ -119,8 +119,6 @@ def normalize_team_name(name: str) -> str:
         return ""
     name = name.lower().strip()
     name = re.sub(r'\s+(u21|u19|u18|b|ii|iii|iv)\s*$', '', name, flags=re.IGNORECASE)
-    # Zamień / i - na spacje PRZED usunięciem specjalnych znaków
-    name = name.replace('/', ' ').replace('-', ' ')
     name = re.sub(r'[^a-z0-9\s]', '', name)
     name = re.sub(r'\s+', ' ', name).strip()
     return name
@@ -138,89 +136,6 @@ def similarity_score(name1: str, name2: str) -> float:
 def teams_match(team1: str, team2: str, threshold: float = 0.6) -> bool:
     """Sprawdza czy dwie nazwy drużyn są podobne"""
     return similarity_score(team1, team2) >= threshold
-
-
-def find_best_match_with_gemini(home_team: str, away_team: str, url_list: list, sport: str = 'football') -> Optional[str]:
-    """
-    Używa Gemini AI do inteligentnego dopasowania nazw drużyn do URL-i z SofaScore.
-    Fallback gdy standardowe metody regex/similarity nie działają.
-    
-    Args:
-        home_team: Nazwa gospodarzy (z Livesport)
-        away_team: Nazwa gości (z Livesport)
-        url_list: Lista URL-i meczów z SofaScore
-        sport: Sport
-    
-    Returns:
-        Najlepiej dopasowany URL lub None
-    """
-    if not url_list:
-        return None
-    
-    # Ogranicz do 20 URL-i (limit Gemini context)
-    url_list = url_list[:20]
-    
-    try:
-        import os
-        try:
-            import google.generativeai as genai
-        except ImportError:
-            return None
-        
-        # API Key
-        try:
-            from gemini_config import GEMINI_API_KEY
-        except ImportError:
-            GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', None)
-        
-        if not GEMINI_API_KEY:
-            return None
-        
-        genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel("gemini-2.0-flash")
-        
-        # Ograniczenie do 15 URL-i dla oszczędności tokenów
-        url_subset = url_list[:15]
-        url_options = "\n".join([f"{i+1}. {url}" for i, url in enumerate(url_subset)])
-        
-        prompt = f"""Znajdź który URL pasuje do meczu: {home_team} vs {away_team} (sport: {sport})
-
-URLs:
-{url_options}
-
-Odpowiedz TYLKO numerem (1-{len(url_subset)}) najlepiej pasującego URL, lub 0 jeśli żaden nie pasuje.
-Bierz pod uwagę różne warianty nazw drużyn (skróty, pełne nazwy, nazwy miast).
-Twoja odpowiedź musi zawierać TYLKO jedną liczbę."""
-
-        # Retry logic for rate limiting
-        import time as time_module
-        max_retries = 2
-        for attempt in range(max_retries):
-            try:
-                response = model.generate_content(prompt)
-                break
-            except Exception as e:
-                if '429' in str(e) and attempt < max_retries - 1:
-                    wait_time = 30 * (attempt + 1)
-                    print(f"   ⏳ Gemini rate limit - czekam {wait_time}s...")
-                    time_module.sleep(wait_time)
-                    continue
-                raise
-        
-        # Parsuj odpowiedź
-        try:
-            match_idx = int(response.text.strip()) - 1
-            if 0 <= match_idx < len(url_subset):
-                print(f"   🤖 Gemini: Znalazłem dopasowanie!")
-                return url_subset[match_idx]
-        except (ValueError, IndexError):
-            pass
-        
-        return None
-        
-    except Exception as e:
-        print(f"   ⚠️ Gemini matching error: {e}")
-        return None
 
 
 def accept_consent_popup(driver: 'webdriver.Chrome') -> bool:
@@ -280,72 +195,6 @@ def get_votes_via_api(event_id: int) -> Optional[Dict]:
             }
         return None
     except Exception:
-        return None
-
-
-def get_votes_via_puppeteer(match_url: str) -> Optional[Dict]:
-    """
-    Pobiera głosy Fan Vote przez Puppeteer (Node.js).
-    Używane jako fallback gdy API i HTML scraping zawiodą.
-    
-    Wymaga: node, puppeteer, puppeteer-extra-plugin-stealth
-    """
-    import subprocess
-    import json
-    import os
-    
-    try:
-        # Znajdź ścieżkę do sofascore_puppeteer.js
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        puppeteer_script = os.path.join(script_dir, 'sofascore_puppeteer.js')
-        
-        if not os.path.exists(puppeteer_script):
-            print(f"   ⚠️ Puppeteer: Skrypt nie znaleziony")
-            return None
-        
-        print(f"   🎭 Puppeteer: Próbuję pobrać dane...")
-        
-        # Uruchom Node.js z Puppeteer
-        result = subprocess.run(
-            ['node', puppeteer_script, match_url],
-            capture_output=True,
-            text=True,
-            timeout=20,  # Optimized from 30s
-            cwd=script_dir
-        )
-        
-        if result.returncode != 0:
-            print(f"   ⚠️ Puppeteer: Błąd exit code {result.returncode}")
-            return None
-        
-        # Parsuj JSON output
-        try:
-            data = json.loads(result.stdout.strip())
-        except json.JSONDecodeError:
-            print(f"   ⚠️ Puppeteer: Błąd JSON")
-            return None
-        
-        if data.get('success'):
-            return {
-                'sofascore_home_win_prob': data.get('home_win_pct'),
-                'sofascore_draw_prob': data.get('draw_pct'),
-                'sofascore_away_win_prob': data.get('away_win_pct'),
-                'sofascore_total_votes': data.get('total_votes', 0),
-            }
-        else:
-            error = data.get('error', 'Unknown')
-            if 'pre-match' not in error.lower():
-                print(f"   ⚠️ Puppeteer: {error}")
-            return None
-            
-    except subprocess.TimeoutExpired:
-        print(f"   ⚠️ Puppeteer: Timeout (90s)")
-        return None
-    except FileNotFoundError:
-        print(f"   ⚠️ Puppeteer: Node.js nie znaleziony")
-        return None
-    except Exception as e:
-        print(f"   ⚠️ Puppeteer: Błąd: {e}")
         return None
 
 
@@ -494,7 +343,7 @@ def find_match_on_main_page(
         # Akceptuj consent popup
         accept_consent_popup(driver)
         
-        time.sleep(1)  # Optimized from 1.5s
+        time.sleep(1.5)
         
         home_norm = normalize_team_name(home_team)
         away_norm = normalize_team_name(away_team)
@@ -558,23 +407,6 @@ def find_match_on_main_page(
         except Exception as e:
             print(f"   ⚠️ SofaScore: Fallback search failed: {e}")
         
-        # Metoda 3: GEMINI AI - TYLKO JAKO OSTATECZNOŚĆ
-        # Używamy Gemini tylko gdy wszystkie inne metody zawiodły
-        # i mamy przynajmniej kilka URL-i do sprawdzenia
-        try:
-            all_match_urls = [f"https://www.sofascore.com{url}" for url in matches]
-            # Gemini tylko gdy: >= 5 URLs i nie znaleziono żadnego dopasowania
-            if len(all_match_urls) >= 5:
-                print(f"   🤖 SofaScore: Ostateczność - Gemini AI ({len(all_match_urls)} URLs)...")
-                gemini_result = find_best_match_with_gemini(home_team, away_team, all_match_urls, sport)
-                if gemini_result:
-                    return gemini_result
-            else:
-                print(f"   ⚠️ SofaScore: Za mało URL-i ({len(all_match_urls)}) - pomijam Gemini")
-        except Exception as e:
-            print(f"   ⚠️ Gemini fallback error: {e}")
-        
-        print(f"   ⚠️ SofaScore: Nie znaleziono meczu {home_team} vs {away_team}")
         return None
         
     except Exception as e:
@@ -665,7 +497,7 @@ def search_and_get_votes(
             pass
         
         # Dłuższe oczekiwanie na załadowanie JavaScript
-        time.sleep(2)  # Optimized from 4s
+        time.sleep(4)
         
         # Scroll żeby załadować sekcję głosowania (jest w dolnej części)
         try:
@@ -675,84 +507,15 @@ def search_and_get_votes(
             
             # Wróć na górę i poczekaj
             driver.execute_script('window.scrollTo(0, 0);')
-            time.sleep(0.5)  # Optimized from 1s
+            time.sleep(1)
             
             # Scroll ponownie - głosy mogą być w różnych miejscach
             driver.execute_script('window.scrollTo(0, document.body.scrollHeight / 2);')
-            time.sleep(0.5)  # Optimized from 1s
+            time.sleep(1)
         except (WebDriverException, ReadTimeoutError, MaxRetryError):
             pass  # Ignoruj błędy scrollowania
         except Exception:
             pass
-        
-        # 🔥 IMPORTANT: Kliknij w tab "Fans" / "Fan Vote" / "Vote" żeby załadować głosy
-        # SofaScore wymaga kliknięcia w ten tab aby pokazać procenty!
-        vote_clicked = False
-        try:
-            vote_tab_selectors = [
-                # SofaScore Desktop - Fans tab
-                "//button[contains(text(), 'Fans')]",
-                "//a[contains(text(), 'Fans')]",
-                "//div[contains(text(), 'Fans')]",
-                "[data-testid='fans-tab']",
-                
-                # Vote / Who will win
-                "//button[contains(text(), 'Vote')]",
-                "//button[contains(text(), 'vote')]",
-                "//div[contains(text(), 'Who will win')]",
-                "//span[contains(text(), 'Who will win')]",
-                "//p[contains(text(), 'Who will win')]",
-                
-                # Głosowanie (polski?)
-                "//button[contains(text(), 'Głosuj')]",
-                "//div[contains(text(), 'Kto wygra')]",
-                
-                # CSS selectors
-                "[class*='VoteFan']",
-                "[class*='fanVote']",
-                "[class*='FanVote']",
-                "[class*='vote-section']",
-                "[data-testid='vote-tab']",
-                "[class*='vote']",
-                
-                # Ostatnia deska ratunku - szukaj 1 X 2 buttonów
-                "//button[text()='1']",
-            ]
-            
-            for selector in vote_tab_selectors:
-                try:
-                    if selector.startswith('//'):
-                        tab = driver.find_element(By.XPATH, selector)
-                    else:
-                        tab = driver.find_element(By.CSS_SELECTOR, selector)
-                    
-                    if tab and tab.is_displayed():
-                        try:
-                            tab.click()
-                        except:
-                            # Fallback: JavaScript click
-                            driver.execute_script("arguments[0].click();", tab)
-                        
-                        print(f"   🔘 SofaScore: Kliknięto tab Fan Vote")
-                        # 🔥 WIĘCEJ CZASU: SofaScore potrzebuje AJAX load na dane głosów
-                        time.sleep(3)  # Zwiększone z 1.5s
-                        
-                        # 🔥 SCROLL do vote area żeby trigger lazy load
-                        try:
-                            driver.execute_script("window.scrollBy(0, 300);")
-                            time.sleep(0.5)
-                        except:
-                            pass
-                        
-                        vote_clicked = True
-                        break
-                except:
-                    continue
-            
-            if not vote_clicked:
-                print(f"   ⚠️ SofaScore: Nie znaleziono taba Fan Vote - próbuję dalej")
-        except Exception:
-            pass  # Kontynuuj bez klikania
         
         # Pobierz HTML
         try:
@@ -779,22 +542,7 @@ def search_and_get_votes(
         who_will_win_found = False
         section_start = -1
         
-        # 🔥 Multi-language patterns for "Who will win" detection
-        vote_patterns = [
-            'who will win', 'Who will win',  # English
-            'kto wygra', 'Kto wygra',        # Polish
-            'wer gewinnt',                    # German
-            'quién ganará',                   # Spanish
-            'qui va gagner',                  # French
-            'chi vincerà',                    # Italian
-            'quem vai ganhar',                # Portuguese
-            'kdo vyhraje',                    # Czech
-            'ki nyer',                        # Hungarian
-            'fan vote', 'Fan Vote',           # Generic
-            'głosuj', 'głosy', 'votes',      # Vote keywords
-        ]
-        
-        for pattern in vote_patterns:
+        for pattern in ['Who will win', 'who will win', 'Fan vote', 'fan vote']:
             idx = page_source.lower().find(pattern.lower())
             if idx > 0:
                 section_start = idx
@@ -859,17 +607,6 @@ def search_and_get_votes(
             except:
                 pass
         
-        
-        # 🔥 WALIDACJA: Odrzuć fałszywe wyniki (100%/100% z 0 głosami = brak danych)
-        if (result['sofascore_home_win_prob'] == 100 and 
-            result['sofascore_away_win_prob'] == 100 and 
-            result['sofascore_total_votes'] == 0):
-            print(f"   ⚠️ SofaScore: Fałszywe głosy (100%/100% z 0 głosów) - resetuję")
-            result['sofascore_home_win_prob'] = None
-            result['sofascore_draw_prob'] = None
-            result['sofascore_away_win_prob'] = None
-            result['sofascore_found'] = False
-        
         if result['sofascore_home_win_prob'] is not None:
             draw_str = f"🤝{result['sofascore_draw_prob']}% | " if result['sofascore_draw_prob'] else ""
             print(f"   ✅ Fan Vote: 🏠{result['sofascore_home_win_prob']}% | "
@@ -878,21 +615,7 @@ def search_and_get_votes(
             if result['sofascore_btts_yes']:
                 print(f"   ✅ BTTS: Yes {result['sofascore_btts_yes']}% | No {result['sofascore_btts_no']}%")
         else:
-            # 🎭 PUPPETEER FALLBACK: Próbuj Node.js Puppeteer gdy HTML scraping zawiódł
-            if match_url:
-                print(f"   🎭 SofaScore: Próbuję Puppeteer jako fallback...")
-                puppeteer_result = get_votes_via_puppeteer(match_url)
-                if puppeteer_result:
-                    result.update(puppeteer_result)
-                    result['sofascore_found'] = True
-                    draw_str = f"🤝{result['sofascore_draw_prob']}% | " if result.get('sofascore_draw_prob') else ""
-                    print(f"   ✅ Fan Vote (Puppeteer): 🏠{result['sofascore_home_win_prob']}% | "
-                          f"{draw_str}✈️{result['sofascore_away_win_prob']}% "
-                          f"({result.get('sofascore_total_votes', 0):,} głosów)")
-                else:
-                    print(f"   ⚠️ SofaScore: Brak danych Fan Vote (wszystkie metody zawiodły)")
-            else:
-                print(f"   ⚠️ SofaScore: Brak danych Fan Vote")
+            print(f"   ⚠️ SofaScore: Brak danych Fan Vote")
         
         return result
         
@@ -1067,15 +790,7 @@ def scrape_sofascore_full(
         chrome_options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')
         chrome_options.page_load_strategy = 'eager'
         
-        # 🔥 CI/CD ENVIRONMENT: Use system chromedriver
-        import os
-        if os.getenv('CI') or os.getenv('GITHUB_ACTIONS'):
-            from selenium.webdriver.chrome.service import Service
-            service = Service('/usr/bin/chromedriver')
-            sofascore_driver = webdriver.Chrome(service=service, options=chrome_options)
-        else:
-            sofascore_driver = webdriver.Chrome(options=chrome_options)
-        
+        sofascore_driver = webdriver.Chrome(options=chrome_options)
         sofascore_driver.set_page_load_timeout(10)
         sofascore_driver.set_script_timeout(5)
         
