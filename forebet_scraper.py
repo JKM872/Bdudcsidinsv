@@ -1257,17 +1257,19 @@ def search_forebet_prediction(
         
         if not result['success']:
             # 🤖 GEMINI/GROQ FALLBACK: Użyj gdy algorytm nie znalazł meczu
-            # Gemini używamy gdy najlepszy similarity score < 0.50
+            # Gemini używamy gdy najlepszy similarity score < 0.55
             # (znaczy że nie znaleźliśmy pewnego dopasowania)
+            # Zwiększono z 0.50 na 0.55 aby zmniejszyć liczbę wywołań AI i uniknąć rate limitów
             
+            AI_SIMILARITY_THRESHOLD = 0.55
             use_gemini = (
-                best_similarity < 0.50 and  # Brak pewnych dopasowań - poluzowane z 0.35
+                best_similarity < AI_SIMILARITY_THRESHOLD and  # Brak pewnych dopasowań
                 debug_matches and 
-                len([m for m in debug_matches if 'vs' in m]) >= 2  # Min 2 mecze (poluzowane z 3)
+                len([m for m in debug_matches if 'vs' in m]) >= 2  # Min 2 mecze
             )
             
             if use_gemini:
-                print(f"      🤖 Forebet: Najlepszy score={best_similarity:.2f} < 0.35 - używam Gemini AI ({len(debug_matches)} meczów)...")
+                print(f"      🤖 Forebet: Najlepszy score={best_similarity:.2f} < {AI_SIMILARITY_THRESHOLD} - używam Gemini AI ({len(debug_matches)} meczów)...")
                 gemini_match = find_forebet_match_with_gemini(home_team, away_team, debug_matches)
                 
                 if gemini_match:

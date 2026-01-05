@@ -1186,6 +1186,47 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
     elif use_flashscore and not FLASHSCORE_AVAILABLE:
         print(f"      ⚠️ FlashScore: Scraper niedostępny")
 
+    # ========================================================================
+    # PODSUMOWANIE INTEGRACJI DANYCH
+    # ========================================================================
+    if out.get('home_team') and out.get('away_team'):
+        sources = []
+        missing = []
+        
+        # H2H
+        if out.get('h2h_last5') and len(out.get('h2h_last5', [])) > 0:
+            sources.append(f"H2H({len(out['h2h_last5'])})")
+        else:
+            missing.append("H2H")
+        
+        # Forebet
+        if out.get('forebet_prediction'):
+            sources.append(f"Forebet({out.get('forebet_prediction')})")
+        else:
+            missing.append("Forebet")
+        
+        # SofaScore
+        if out.get('sofascore_home_win_prob'):
+            sources.append(f"SofaScore({out.get('sofascore_home_win_prob')}%)")
+        else:
+            missing.append("SofaScore")
+        
+        # Kursy
+        if out.get('home_odds') or out.get('flashscore_home_odds'):
+            odds_val = out.get('home_odds') or out.get('flashscore_home_odds')
+            sources.append(f"Odds({odds_val})")
+        else:
+            missing.append("Odds")
+        
+        # Gemini
+        if out.get('gemini_prediction'):
+            sources.append(f"Gemini({out.get('gemini_confidence')}%)")
+        
+        # Log podsumowania
+        sources_str = ' | '.join(sources) if sources else 'BRAK'
+        missing_str = ', '.join(missing) if missing else 'BRAK'
+        print(f"   📊 Integracja: [{sources_str}] | Brak: [{missing_str}]")
+
     return out
 
 

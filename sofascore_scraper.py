@@ -17,7 +17,7 @@ NOWE W v3.2:
 
 NOWE W v3.1:
 - ZAWSZE dedykowany driver (nie używa zewnętrznego z 120s timeout)
-- Globalny timeout 20s dla całej operacji
+- Globalny timeout 35s dla całej operacji (zwiększono z 20s dla stabilności CI/CD)
 - Lepsze wyłapywanie wszystkich wyjątków Selenium
 - Nie blokuje głównego scrapera
 
