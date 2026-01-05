@@ -141,19 +141,28 @@ class FlashScoreOddsScraper:
             # FlashScore używa div z id="g_1_XXXXXXXXX" dla każdego meczu
             # Szukamy elementów z danymi meczów
             
-            # 🔥 UPDATED: FlashScore changed their class names - use newer patterns
-            # Modern FlashScore uses classes like: event__match, sportName, etc.
+            # 🔥 UPDATED 2025: FlashScore nowe selektory CSS
+            # Strona używa dynamicznych klas i data atrybutów
             match_selectors = [
-                # New patterns (2024+)
-                '.event__match',
-                '.event__participant',
+                # New patterns (2025+)
+                '[class*="event__match"]',
+                '[class*="event__participant"]',
                 '[class*="participant__participantName"]',
+                '[class*="participant--home"]',
+                '[class*="participant--away"]',
+                # Data attributes
+                '[data-testid*="match"]',
+                '[data-testid*="event"]',
                 # Row-based
                 '[class*="event__"]',
                 '.sportName',
-                # ID-based
+                # ID-based (legacy)
                 '[id^="g_1_"]',
                 '[id^="g_2_"]',
+                # Alternatywne selektory
+                '.event',
+                '.match',
+                'a[href*="/match/"]',
             ]
             
             for selector in match_selectors:
@@ -292,21 +301,38 @@ class FlashScoreOddsScraper:
             
             bookmaker_odds = {}  # {'pinnacle': [1.85, 3.40, 2.10], ...}
             
-            # Metoda 1: Szukaj konkretnych bukmacherów
+            # Metoda 1: Szukaj konkretnych bukmacherów (ulepszona 2025)
             for bookie in PREFERRED_BOOKMAKERS:
                 if bookie in page_source:
                     # Znajdź pozycję bukmachera i wyciągnij kursy z tej okolicy
                     bookie_idx = page_source.find(bookie)
                     if bookie_idx > 0:
-                        # Wyciągnij fragment HTML wokół bukmachera (500 znaków)
-                        snippet = page_source[bookie_idx:bookie_idx + 500]
+                        # Wyciągnij fragment HTML wokół bukmachera (800 znaków - więcej kontekstu)
+                        snippet = page_source[bookie_idx:bookie_idx + 800]
                         
-                        # Szukaj kursów w formacie X.XX
-                        odds_pattern = r'(\d+\.\d{2})'
-                        odds_found = re.findall(odds_pattern, snippet)
+                        # Szukaj kursów w różnych formatach
+                        # Format 1: X.XX
+                        odds_pattern1 = r'>(\d+\.\d{2})<'
+                        # Format 2: X.X
+                        odds_pattern2 = r'>(\d+\.\d{1})<'
+                        # Format 3: bez tagów
+                        odds_pattern3 = r'(\d+\.\d{2})'
                         
-                        # Filtruj prawidłowe kursy
-                        valid_odds = [float(o) for o in odds_found if 1.01 <= float(o) <= 50.0]
+                        odds_found = []
+                        for pattern in [odds_pattern1, odds_pattern2, odds_pattern3]:
+                            odds_found.extend(re.findall(pattern, snippet))
+                            if len(odds_found) >= 3:
+                                break
+                        
+                        # Filtruj prawidłowe kursy (1.01 - 100.0)
+                        valid_odds = []
+                        for o in odds_found:
+                            try:
+                                val = float(o)
+                                if 1.01 <= val <= 100.0:
+                                    valid_odds.append(val)
+                            except ValueError:
+                                continue
                         
                         if len(valid_odds) >= 2:
                             bookmaker_odds[bookie] = valid_odds[:3]  # Max 3 kursy (1X2)

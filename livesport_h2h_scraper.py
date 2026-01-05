@@ -41,6 +41,8 @@ import sys
 import csv
 import re
 import json
+import logging
+import random
 from datetime import datetime
 from typing import List, Dict, Optional
 
@@ -57,8 +59,28 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, TimeoutException, WebDriverException
+from selenium.common.exceptions import (
+    NoSuchElementException, 
+    TimeoutException, 
+    WebDriverException,
+    StaleElementReferenceException
+)
 from webdriver_manager.chrome import ChromeDriverManager
+
+# ============================================================================
+# LOGGING SETUP
+# ============================================================================
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+logger = logging.getLogger(__name__)
+
+# Reduce verbosity of selenium and urllib3 loggers
+logging.getLogger('selenium').setLevel(logging.WARNING)
+logging.getLogger('urllib3').setLevel(logging.WARNING)
+logging.getLogger('webdriver_manager').setLevel(logging.WARNING)
 
 # Forebet integration
 try:
@@ -102,6 +124,155 @@ try:
 except ImportError:
     FLASHSCORE_AVAILABLE = False
     print("⚠️ flashscore_odds_scraper not available - odds will use Forebet fallback")
+
+
+# ============================================================================
+# ROBUST ERROR HANDLING HELPERS
+# ============================================================================
+
+def check_driver_health(driver: webdriver.Chrome) -> bool:
+    """
+    Sprawdza czy driver jest w działającym stanie.
+    
+    Returns:
+        True jeśli driver działa poprawnie, False w przeciwnym razie
+    """
+    if driver is None:
+        return False
+    try:
+        # Próba dostępu do current_url sprawdzi czy driver jest responsywny
+        _ = driver.current_url
+        return True
+    except (WebDriverException, AttributeError, Exception) as e:
+        logger.debug(f"Driver health check failed: {type(e).__name__}")
+        return False
+
+
+def safe_find_element(driver: webdriver.Chrome, by: By, value: str, max_retries: int = 3):
+    """
+    Bezpieczne znalezienie elementu z retry logic dla StaleElementReferenceException.
+    
+    Args:
+        driver: WebDriver instance
+        by: Metoda lokalizacji (By.XPATH, By.CSS_SELECTOR, etc.)
+        value: Wartość selektora
+        max_retries: Maksymalna liczba prób
+        
+    Returns:
+        Element lub None jeśli nie znaleziono
+    """
+    for attempt in range(max_retries):
+        try:
+            element = driver.find_element(by, value)
+            return element
+        except StaleElementReferenceException:
+            if attempt < max_retries - 1:
+                time.sleep(0.5)
+                logger.debug(f"StaleElementReferenceException, retry {attempt + 1}/{max_retries}")
+                continue
+            logger.warning(f"StaleElementReferenceException after {max_retries} retries for: {value}")
+            return None
+        except NoSuchElementException:
+            return None
+        except Exception as e:
+            logger.debug(f"safe_find_element error: {type(e).__name__}: {e}")
+            return None
+    return None
+
+
+def safe_find_elements(driver: webdriver.Chrome, by: By, value: str, max_retries: int = 3) -> list:
+    """
+    Bezpieczne znalezienie wielu elementów z retry logic.
+    
+    Returns:
+        Lista elementów (może być pusta)
+    """
+    for attempt in range(max_retries):
+        try:
+            elements = driver.find_elements(by, value)
+            return elements
+        except StaleElementReferenceException:
+            if attempt < max_retries - 1:
+                time.sleep(0.5)
+                continue
+            return []
+        except Exception as e:
+            logger.debug(f"safe_find_elements error: {type(e).__name__}")
+            return []
+    return []
+
+
+def safe_get_text(element, default: str = '') -> str:
+    """
+    Bezpieczne pobranie tekstu z elementu.
+    
+    Returns:
+        Tekst elementu lub wartość domyślna
+    """
+    if element is None:
+        return default
+    try:
+        return element.get_text(strip=True) if hasattr(element, 'get_text') else element.text.strip()
+    except (AttributeError, StaleElementReferenceException) as e:
+        logger.debug(f"safe_get_text error: {type(e).__name__}")
+        return default
+
+
+def save_partial_results(rows: List[Dict], args, suffix: str = '_PARTIAL') -> str:
+    """
+    Zapisuje częściowe wyniki w razie błędu.
+    
+    Args:
+        rows: Lista wierszy danych
+        args: Argumenty programu
+        suffix: Sufiks do nazwy pliku
+        
+    Returns:
+        Ścieżka do zapisanego pliku
+    """
+    if not rows:
+        logger.warning("Brak danych do zapisania")
+        return None
+    
+    try:
+        os.makedirs('outputs', exist_ok=True)
+        
+        # Nazwa pliku z sufiksem
+        output_suffix = f'_{args.output_suffix}' if hasattr(args, 'output_suffix') and args.output_suffix else ''
+        if hasattr(args, 'sports') and args.sports and len(args.sports) == 1:
+            output_suffix = f'_{args.sports[0]}{output_suffix}'
+        if hasattr(args, 'away_team_focus') and args.away_team_focus:
+            output_suffix = f'{output_suffix}_AWAY_FOCUS'
+        
+        date_str = args.date if hasattr(args, 'date') else datetime.now().strftime('%Y-%m-%d')
+        outfn = os.path.join('outputs', f'livesport_h2h_{date_str}{output_suffix}{suffix}.csv')
+        
+        df = pd.DataFrame(rows)
+        df.to_csv(outfn, index=False, encoding='utf-8-sig')
+        
+        logger.info(f"Zapisano częściowe wyniki ({len(rows)} wierszy) do: {outfn}")
+        return outfn
+        
+    except Exception as e:
+        logger.error(f"Błąd zapisu częściowych wyników: {e}")
+        return None
+
+
+def exponential_backoff_with_jitter(attempt: int, base_delay: float = 2.0, max_delay: float = 30.0) -> float:
+    """
+    Oblicza opóźnienie z exponential backoff i jitter.
+    
+    Args:
+        attempt: Numer próby (0-indexed)
+        base_delay: Bazowe opóźnienie w sekundach
+        max_delay: Maksymalne opóźnienie
+        
+    Returns:
+        Opóźnienie w sekundach
+    """
+    delay = min(base_delay * (2 ** attempt), max_delay)
+    jitter = random.uniform(0, delay * 0.3)  # Do 30% jitter
+    return delay + jitter
 
 
 # ----------------------
@@ -293,8 +464,12 @@ def click_h2h_tab(driver: webdriver.Chrome) -> None:
             el.click()
             time.sleep(0.8)
             return
-        except Exception:
-            pass
+        except (NoSuchElementException, StaleElementReferenceException):
+            # Element nie istnieje lub stał się nieaktualny - próbuj następny wariant
+            continue
+        except WebDriverException as e:
+            logger.debug(f"WebDriverException przy klikaniu H2H tab '{text}': {e}")
+            continue
 
     # fallback: look for element with data-tab or href containing 'h2h'
     try:
@@ -302,8 +477,10 @@ def click_h2h_tab(driver: webdriver.Chrome) -> None:
         el.click()
         time.sleep(0.8)
         return
-    except Exception:
-        pass
+    except (NoSuchElementException, StaleElementReferenceException):
+        logger.debug("Nie znaleziono zakładki H2H - zawartość może być już widoczna")
+    except WebDriverException as e:
+        logger.debug(f"WebDriverException przy fallback H2H: {e}")
 
     # if nothing works, do nothing and hope content is already present
 
@@ -313,17 +490,29 @@ def parse_h2h_from_soup(soup: BeautifulSoup, home_team: str) -> List[Dict]:
     Zwracany format: [{'date':..., 'home':..., 'away':..., 'score': 'x - y', 'winner': 'home'/'away'/'draw'}]
     """
     results = []
+    
+    # Walidacja wejścia
+    if soup is None:
+        logger.warning("parse_h2h_from_soup: soup jest None - nie można parsować H2H")
+        return results
 
     # NOWA STRUKTURA LIVESPORT (2025)
     # Szukaj sekcji "Pojedynki bezpośrednie"
-    h2h_sections = soup.find_all('div', class_='h2h__section')
+    try:
+        h2h_sections = soup.find_all('div', class_='h2h__section')
+    except AttributeError as e:
+        logger.warning(f"parse_h2h_from_soup: Błąd przy wyszukiwaniu sekcji H2H: {e}")
+        return results
     
     pojedynki_section = None
     for section in h2h_sections:
-        text = section.get_text(" ", strip=True)
-        if 'pojedynki' in text.lower() or 'bezpośrednie' in text.lower():
-            pojedynki_section = section
-            break
+        try:
+            text = section.get_text(" ", strip=True)
+            if 'pojedynki' in text.lower() or 'bezpośrednie' in text.lower():
+                pojedynki_section = section
+                break
+        except AttributeError:
+            continue
     
     if not pojedynki_section:
         # Fallback: weź pierwszą sekcję h2h__section
@@ -331,24 +520,29 @@ def parse_h2h_from_soup(soup: BeautifulSoup, home_team: str) -> List[Dict]:
             pojedynki_section = h2h_sections[0]
     
     if not pojedynki_section:
+        logger.debug(f"parse_h2h_from_soup: Nie znaleziono sekcji H2H dla {home_team}")
         return results
     
     # Znajdź wiersze z meczami: a.h2h__row
-    match_rows = pojedynki_section.select('a.h2h__row')
+    try:
+        match_rows = pojedynki_section.select('a.h2h__row')
+    except Exception as e:
+        logger.warning(f"parse_h2h_from_soup: Błąd przy wyszukiwaniu wierszy H2H: {e}")
+        return results
     
     for row in match_rows[:5]:  # Maksymalnie 5 ostatnich
         try:
             # Data
             date_el = row.select_one('span.h2h__date')
-            date = date_el.get_text(strip=True) if date_el else ''
+            date = safe_get_text(date_el, '')
             
             # Gospodarz
             home_el = row.select_one('span.h2h__homeParticipant span.h2h__participantInner')
-            home = home_el.get_text(strip=True) if home_el else ''
+            home = safe_get_text(home_el, '')
             
             # Gość
             away_el = row.select_one('span.h2h__awayParticipant span.h2h__participantInner')
-            away = away_el.get_text(strip=True) if away_el else ''
+            away = safe_get_text(away_el, '')
             
             # Wynik
             score = ''
@@ -356,8 +550,8 @@ def parse_h2h_from_soup(soup: BeautifulSoup, home_team: str) -> List[Dict]:
             result_spans = row.select('span.h2h__result span')
             
             if len(result_spans) >= 2:
-                goals_home = result_spans[0].get_text(strip=True)
-                goals_away = result_spans[1].get_text(strip=True)
+                goals_home = safe_get_text(result_spans[0], '0')
+                goals_away = safe_get_text(result_spans[1], '0')
                 score = f"{goals_home}-{goals_away}"
                 
                 # Determine winner
@@ -370,7 +564,8 @@ def parse_h2h_from_soup(soup: BeautifulSoup, home_team: str) -> List[Dict]:
                         winner = 'away'
                     else:
                         winner = 'draw'
-                except:
+                except (ValueError, TypeError) as e:
+                    logger.debug(f"parse_h2h_from_soup: Nie można sparsować wyniku '{goals_home}-{goals_away}': {e}")
                     winner = 'unknown'
 
             if home and away and score:
@@ -383,7 +578,11 @@ def parse_h2h_from_soup(soup: BeautifulSoup, home_team: str) -> List[Dict]:
                     'raw': f"{date} {home} {score} {away}"
                 })
         
+        except (AttributeError, TypeError) as e:
+            logger.debug(f"parse_h2h_from_soup: Błąd przy parsowaniu wiersza H2H: {e}")
+            continue
         except Exception as e:
+            logger.warning(f"parse_h2h_from_soup: Nieoczekiwany błąd: {type(e).__name__}: {e}")
             continue
 
     return results
@@ -433,8 +632,12 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
 
     # 🔥🔥🔥🔥 QUADRUPLE FORCE: Ultra-aggressive retry logic with multiple strategies
     max_retries = 5  # Increased from 3
-    retry_delay = 2.0  # Start faster
     last_error = None
+    
+    # Sprawdź stan drivera przed rozpoczęciem
+    if not check_driver_health(driver):
+        logger.error(f"Driver nie działa przed przetworzeniem {url}")
+        return out
     
     for attempt in range(max_retries):
         try:
@@ -460,7 +663,10 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
             # 🔥 Strategy 4: Clear cache and try
             elif attempt == 3:
                 print(f"   🔄 Próba #4: Clear cache...")
-                driver.delete_all_cookies()
+                try:
+                    driver.delete_all_cookies()
+                except WebDriverException:
+                    pass  # Ignoruj błędy przy czyszczeniu cookies
                 time.sleep(1.0)
                 driver.get(url)
                 time.sleep(3.0)
@@ -476,37 +682,65 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
             time.sleep(2.5)  # Czekaj na załadowanie H2H
             break  # Success - wyjdź z pętli
             
-        except (WebDriverException, ConnectionResetError, ConnectionError, TimeoutError) as e:
+        except (WebDriverException, ConnectionResetError, ConnectionError, TimeoutError, TimeoutException) as e:
             last_error = e
+            logger.debug(f"Błąd połączenia dla {url}: {type(e).__name__}: {str(e)[:100]}")
+            
             if attempt < max_retries - 1:
+                # Użyj exponential backoff z jitter
+                delay = exponential_backoff_with_jitter(attempt)
                 print(f"⚠️ Błąd połączenia (próba {attempt + 1}/{max_retries}): {type(e).__name__}")
-                print(f"   Czekam {retry_delay:.1f}s przed następną próbą...")
-                time.sleep(retry_delay)
-                retry_delay *= 1.3  # Gentler exponential backoff
+                print(f"   Czekam {delay:.1f}s przed następną próbą...")
+                time.sleep(delay)
+                
+                # Sprawdź czy driver nadal działa
+                if not check_driver_health(driver):
+                    logger.warning("Driver przestał działać po błędzie - przerywam próby")
+                    return out
                 continue
             else:
                 print(f"❌ Błąd otwierania {url} po {max_retries} próbach")
                 print(f"   Ostatni błąd: {type(last_error).__name__}: {str(last_error)[:100]}")
+                logger.error(f"Nie udało się otworzyć {url} po {max_retries} próbach: {last_error}")
+                return out
+        except StaleElementReferenceException as e:
+            # Element stał się nieaktualny - spróbuj ponownie
+            logger.debug(f"StaleElementReferenceException dla {url}, retry {attempt + 1}")
+            if attempt < max_retries - 1:
+                time.sleep(1.0)
+                continue
+            else:
+                logger.warning(f"StaleElementReferenceException po {max_retries} próbach dla {url}")
                 return out
 
     # pobierz tytuł strony jako fallback na nazwy druzyn
     try:
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        page_source = driver.page_source
+        if not page_source:
+            logger.warning(f"process_match: Pusta strona dla {url}")
+            return out
+        soup = BeautifulSoup(page_source, 'html.parser')
         # spróbuj wyciągnąć nazwy drużyn z nagłówka
         title = soup.title.string if soup.title else ''
         if title:
             # tytuł często ma formę "Home - Away" lub "Home vs Away"
-            import re
             m = re.split(r"\s[-–—|]\s|\svs\s|\sv\s", title)
             if len(m) >= 2:
                 out['home_team'] = m[0].strip()
                 out['away_team'] = m[1].strip()
-    except Exception:
-        pass
+    except (WebDriverException, AttributeError) as e:
+        logger.debug(f"process_match: Błąd pobierania tytułu strony dla {url}: {e}")
+    except Exception as e:
+        logger.warning(f"process_match: Nieoczekiwany błąd przy parsowaniu tytułu: {type(e).__name__}")
 
     # NIE MUSIMY KLIKAĆ H2H - już jesteśmy na stronie /h2h/ogolem/
 
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    # Ponownie pobierz soup gdyby poprzednia próba się nie powiodła
+    try:
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+    except WebDriverException as e:
+        logger.error(f"process_match: Nie można pobrać page_source dla {url}: {e}")
+        return out
 
     # try to extract team names from the page header - NOWE SELEKTORY
     try:
@@ -515,9 +749,9 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         if not home_el:
             home_el = soup.select_one("a.participant__participantName")
         if home_el:
-            out['home_team'] = home_el.get_text(strip=True)
-    except Exception:
-        pass
+            out['home_team'] = safe_get_text(home_el, out['home_team'])
+    except (AttributeError, TypeError) as e:
+        logger.debug(f"process_match: Błąd przy pobieraniu nazwy gospodarzy: {e}")
 
     try:
         away_el = soup.select_one("div.smv__participantRow.smv__awayParticipant a.participant__participantName")
@@ -527,9 +761,9 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
             if len(all_teams) >= 2:
                 away_el = all_teams[1]
         if away_el:
-            out['away_team'] = away_el.get_text(strip=True)
-    except Exception:
-        pass
+            out['away_team'] = safe_get_text(away_el, out['away_team'])
+    except (AttributeError, TypeError) as e:
+        logger.debug(f"process_match: Błąd przy pobieraniu nazwy gości: {e}")
     
     # Wydobądź datę i godzinę meczu
     try:
@@ -537,30 +771,31 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         # Próba 1: Element z czasem startu
         time_el = soup.select_one("div.duelParticipant__startTime")
         if time_el:
-            out['match_time'] = time_el.get_text(strip=True)
+            out['match_time'] = safe_get_text(time_el, '')
         
         # Próba 2: Z tytułu strony (często zawiera datę)
         if not out['match_time'] and soup.title:
-            title = soup.title.string
-            # Szukaj wzorca daty i czasu w tytule
-            import re
-            # Format: DD.MM.YYYY HH:MM lub podobne
-            date_match = re.search(r'(\d{1,2}\.\d{1,2}\.\d{2,4})\s*(\d{1,2}:\d{2})?', title)
-            if date_match:
-                date_str = date_match.group(1)
-                time_str = date_match.group(2) if date_match.group(2) else ''
-                out['match_time'] = f"{date_str} {time_str}".strip()
+            title = soup.title.string if soup.title else ''
+            if title:
+                # Szukaj wzorca daty i czasu w tytule
+                # Format: DD.MM.YYYY HH:MM lub podobne
+                date_match = re.search(r'(\d{1,2}\.\d{1,2}\.\d{2,4})\s*(\d{1,2}:\d{2})?', title)
+                if date_match:
+                    date_str = date_match.group(1)
+                    time_str = date_match.group(2) if date_match.group(2) else ''
+                    out['match_time'] = f"{date_str} {time_str}".strip()
         
         # Próba 3: Z URL (może zawierać datę)
         if not out['match_time']:
             # Czasem data jest w parametrach URL
             if 'date=' in url:
-                import re
                 date_param = re.search(r'date=([^&]+)', url)
                 if date_param:
                     out['match_time'] = date_param.group(1)
-    except Exception:
-        pass
+    except (AttributeError, TypeError) as e:
+        logger.debug(f"process_match: Błąd przy wydobywaniu czasu meczu: {e}")
+    except Exception as e:
+        logger.warning(f"process_match: Nieoczekiwany błąd przy parsowaniu czasu: {type(e).__name__}")
 
     # parse H2H
     h2h = parse_h2h_from_soup(soup, out['home_team'] or '')
@@ -714,8 +949,8 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
                 away_form = extract_team_form(soup, driver, 'away', out.get('away_team'))
                 out['home_form'] = home_form
                 out['away_form'] = away_form
-            except:
-                pass
+            except (AttributeError, TypeError, WebDriverException) as e:
+                logger.debug(f"Błąd przy pobieraniu formy fallback: {e}")
     else:
         # Nie kwalifikuje się podstawowo - nie sprawdzaj formy
         out['qualifies'] = False
@@ -792,8 +1027,8 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
                             year_int = int(year)
                             full_year = 2000 + year_int if year_int <= 50 else 1900 + year_int
                             match_date_str = f'{full_year}-{month}-{day}'
-                except:
-                    pass
+                except (ValueError, AttributeError, TypeError) as e:
+                    logger.debug(f"Błąd przy parsowaniu daty dla Forebet: {e}")
             
             forebet_result = search_forebet_prediction(
                 home_team=out['home_team'],
@@ -1087,8 +1322,8 @@ def _extract_form_from_h2h_page(url: str, driver: webdriver.Chrome, context: str
         try:
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(1.0)
-        except:
-            pass
+        except (WebDriverException, TimeoutException) as e:
+            logger.debug(f"Scroll dla lazy-loading nie powiódł się: {e}")
         
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         
@@ -1159,7 +1394,8 @@ def _extract_form_from_h2h_page(url: str, driver: webdriver.Chrome, context: str
                                     temp_form.append('L')
                                 else:
                                     temp_form.append('D')
-                    except:
+                    except (ValueError, AttributeError, TypeError) as e:
+                        logger.debug(f"Błąd przy parsowaniu wyniku formy: {e}")
                         continue
                 
                 if idx == 0:
@@ -1190,7 +1426,8 @@ def _extract_form_from_h2h_page(url: str, driver: webdriver.Chrome, context: str
                             else:
                                 home_form.append('D')
                                 away_form.append('D')
-                        except:
+                        except (ValueError, AttributeError, TypeError) as e:
+                            logger.debug(f"Błąd przy parsowaniu wyniku formy (fallback): {e}")
                             continue
                             
     except Exception as e:
@@ -1576,24 +1813,26 @@ def extract_betting_odds(soup: BeautifulSoup) -> Dict[str, Optional[float]]:
             if elem.get('data-home-odds'):
                 try:
                     odds_data['home_odds'] = float(elem.get('data-home-odds'))
-                except:
-                    pass
+                except (ValueError, TypeError) as e:
+                    logger.debug(f"Nie można sparsować home_odds: {e}")
             if elem.get('data-away-odds'):
                 try:
                     odds_data['away_odds'] = float(elem.get('data-away-odds'))
-                except:
-                    pass
+                except (ValueError, TypeError) as e:
+                    logger.debug(f"Nie można sparsować away_odds: {e}")
         
         # Metoda 3: Szukaj w JSON-LD lub skryptach
         scripts = soup.find_all('script', type='application/ld+json')
         for script in scripts:
             try:
-                data = json.loads(script.string)
-                if 'offers' in data or 'odds' in str(data).lower():
-                    # Próbuj wydobyć kursy z JSON
-                    pass
-            except:
-                pass
+                script_content = script.string if script.string else ''
+                if script_content:
+                    data = json.loads(script_content)
+                    if 'offers' in data or 'odds' in str(data).lower():
+                        # Próbuj wydobyć kursy z JSON
+                        pass
+            except (json.JSONDecodeError, TypeError, AttributeError) as e:
+                logger.debug(f"Nie można sparsować JSON-LD dla kursów: {e}")
         
         # Jeśli znaleźliśmy dokładnie 2 kursy (home i away)
         if len(odds_values) >= 2 and odds_data['home_odds'] is None:
@@ -2296,8 +2535,8 @@ def get_match_links_advanced(driver: webdriver.Chrome, date: str, sports: List[s
                 calendar_btn = driver.find_element(By.XPATH, "//button[contains(@class, 'calendar') or contains(@aria-label, 'calendar')]")
                 calendar_btn.click()
                 time.sleep(1.0)
-            except:
-                pass
+            except (NoSuchElementException, StaleElementReferenceException, WebDriverException) as e:
+                logger.debug(f"Kalendarz nie znaleziony lub niedostępny: {e}")
             
             # Zbierz linki
             soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -2539,21 +2778,59 @@ Przykłady użycia:
                     else:
                         print(f'   ⚠️  Brak H2H')
                 
+        except (WebDriverException, ConnectionResetError, ConnectionError) as e:
+            logger.warning(f'Błąd połączenia przy meczu {url}: {type(e).__name__}: {str(e)[:100]}')
+            print(f'   ⚠️  Błąd połączenia: {type(e).__name__}')
         except Exception as e:
+            logger.error(f'Nieoczekiwany błąd przy meczu {url}: {type(e).__name__}: {e}')
             print(f'   ⚠️  Błąd: {e}')
         
         # AUTO-RESTART przeglądarki co N meczów (zapobiega crashom)
         if i % RESTART_INTERVAL == 0 and i < len(urls):
             print(f'\n🔄 AUTO-RESTART: Restartowanie przeglądarki po {i} meczach...')
             print(f'   ✅ Przetworzone dane ({len(rows)} meczów) są bezpieczne w pamięci!')
-            try:
-                driver.quit()
-                time.sleep(2)
-                driver = start_driver(headless=args.headless)
-                print(f'   ✅ Przeglądarka zrestartowana! Kontynuuję od meczu {i+1}...\n')
-            except Exception as e:
-                print(f'   ⚠️  Błąd restartu: {e}')
-                driver = start_driver(headless=args.headless)
+            
+            restart_success = False
+            max_restart_attempts = 3
+            
+            for restart_attempt in range(max_restart_attempts):
+                try:
+                    # Zamknij stary driver
+                    try:
+                        driver.quit()
+                    except Exception:
+                        pass  # Ignoruj błędy przy zamykaniu
+                    
+                    time.sleep(2)
+                    
+                    # Utwórz nowy driver
+                    driver = start_driver(headless=args.headless)
+                    
+                    # Sprawdź czy nowy driver działa
+                    if check_driver_health(driver):
+                        print(f'   ✅ Przeglądarka zrestartowana! Kontynuuję od meczu {i+1}...\n')
+                        restart_success = True
+                        break
+                    else:
+                        logger.warning(f"Driver health check failed po restarcie (próba {restart_attempt + 1})")
+                        
+                except Exception as e:
+                    logger.warning(f'Błąd restartu (próba {restart_attempt + 1}/{max_restart_attempts}): {e}')
+                    time.sleep(2)
+            
+            if not restart_success:
+                logger.error("Nie udało się zrestartować przeglądarki po maksymalnej liczbie prób")
+                print(f'   ❌ Krytyczny błąd restartu - zapisuję częściowe wyniki...')
+                save_partial_results(rows, args)
+                # Ostatnia próba uruchomienia drivera
+                try:
+                    driver = start_driver(headless=args.headless)
+                    if not check_driver_health(driver):
+                        raise RuntimeError("Driver nie działa po ostatecznej próbie")
+                except Exception as e:
+                    logger.critical(f"Nie można kontynuować scrapowania: {e}")
+                    print(f'   ❌ Zapisano {len(rows)} meczów, kończę działanie.')
+                    break
         
         # Rate limiting - adaptacyjny
         elif i < len(urls):

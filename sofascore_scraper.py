@@ -1,9 +1,14 @@
 """
-SofaScore Scraper v3.1
+SofaScore Scraper v3.2
 ----------------------
 Pobiera dane z SofaScore.com:
 - "Who will win?" probabilities (community voting)
 - "Will both teams score?" (BTTS) 
+
+NOWE W v3.3:
+- Ulepszona obsługa wyjątków z logowaniem
+- Driver health checks
+- Exponential backoff z jitter
 
 NOWE W v3.2:
 - RETRY LOGIC z exponential backoff (3 próby)
@@ -27,9 +32,14 @@ import time
 import re
 import hashlib
 import threading
+import logging
+import random
 from datetime import datetime, timedelta
 from typing import Dict, Optional
 from difflib import SequenceMatcher
+
+# Logging setup
+logger = logging.getLogger(__name__)
 
 try:
     import requests
@@ -174,11 +184,37 @@ def _retry_request(request_func, *args, **kwargs):
 
 
 def normalize_team_name(name: str) -> str:
-    """Normalizuje nazwę drużyny do porównania"""
+    """Normalizuje nazwę drużyny do porównania - rozszerzona wersja"""
     if not name:
         return ""
     name = name.lower().strip()
-    name = re.sub(r'\s+(u21|u19|u18|b|ii|iii|iv)\s*$', '', name, flags=re.IGNORECASE)
+    
+    # 🔥 POLSKIE/EUROPEJSKIE ZNAKI → ASCII
+    char_map = {
+        'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
+        'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z',
+        'ä': 'a', 'ö': 'o', 'ü': 'u', 'ß': 'ss',
+        'é': 'e', 'è': 'e', 'ê': 'e', 'á': 'a', 'à': 'a', 'â': 'a',
+        'í': 'i', 'ì': 'i', 'î': 'i', 'ú': 'u', 'ù': 'u', 'û': 'u',
+        'ñ': 'n', 'ç': 'c', 'š': 's', 'č': 'c', 'ž': 'z', 'ř': 'r',
+        'ď': 'd', 'ť': 't', 'ň': 'n', 'ő': 'o', 'ű': 'u',
+    }
+    for char, replacement in char_map.items():
+        name = name.replace(char, replacement)
+    
+    # Usuń prefiksy klubów
+    prefixes = ['fc ', 'afc ', 'cf ', 'sc ', 'sv ', 'fk ', 'nk ', 'sk ', 'bk ',
+                'ac ', 'as ', 'ss ', 'us ', 'cd ', 'ud ', 'rcd ', 'ks ', 'mks ',
+                'hapoel ', 'maccabi ', 'beitar ', 'dinamo ', 'dynamo ', 'spartak ',
+                'cska ', 'lokomotiv ', 'rapid ', 'inter ', 'real ', 'sporting ']
+    for prefix in prefixes:
+        if name.startswith(prefix):
+            name = name[len(prefix):]
+    
+    # Usuń sufiksy
+    name = re.sub(r'\s+(u21|u19|u18|u17|u16|u23|b|ii|iii|iv|women|kobiety|ladies)\s*$', '', name, flags=re.IGNORECASE)
+    name = re.sub(r'\s+(fc|sc|fk|united|city|town)\s*$', '', name, flags=re.IGNORECASE)
+    
     name = re.sub(r'[^a-z0-9\s]', '', name)
     name = re.sub(r'\s+', ' ', name).strip()
     return name
@@ -193,8 +229,8 @@ def similarity_score(name1: str, name2: str) -> float:
     return SequenceMatcher(None, norm1, norm2).ratio()
 
 
-def teams_match(team1: str, team2: str, threshold: float = 0.6) -> bool:
-    """Sprawdza czy dwie nazwy drużyn są podobne"""
+def teams_match(team1: str, team2: str, threshold: float = 0.45) -> bool:
+    """Sprawdza czy dwie nazwy drużyn są podobne - poluzowany threshold z 0.6"""
     return similarity_score(team1, team2) >= threshold
 
 
@@ -223,10 +259,12 @@ def accept_consent_popup(driver: 'webdriver.Chrome') -> bool:
                     time.sleep(0.5)
                     print(f"   ✅ SofaScore: Consent popup zaakceptowany")
                     return True
-            except:
+            except (NoSuchElementException, StaleElementReferenceException, WebDriverException) as e:
+                logger.debug(f"Consent popup selector nie znaleziony: {e}")
                 continue
         return True
-    except Exception as e:
+    except (WebDriverException, TimeoutException) as e:
+        logger.debug(f"Błąd consent popup: {e}")
         return True
 
 
@@ -260,6 +298,86 @@ def get_votes_via_api(event_id: int) -> Optional[Dict]:
         return None
 
 
+def get_odds_via_api(event_id: int) -> Optional[Dict]:
+    """
+    🔥 NOWE: Pobiera kursy bukmacherskie przez SofaScore API.
+    Fallback gdy FlashScore nie zadziała.
+    
+    Returns:
+        Dict z kursami lub None
+    """
+    if not REQUESTS_AVAILABLE:
+        return None
+    try:
+        url = f"https://api.sofascore.com/api/v1/event/{event_id}/odds/1/all"
+        response = _retry_request(requests.get, url, headers=API_HEADERS, timeout=5)
+        if response and response.status_code == 200:
+            data = response.json()
+            markets = data.get('markets', [])
+            
+            result = {
+                'home_odds': None,
+                'draw_odds': None,
+                'away_odds': None,
+                'bookmaker': None,
+                'odds_found': False,
+            }
+            
+            # Szukaj rynku 1X2 (Full Time Result)
+            for market in markets:
+                if market.get('marketName') in ['Full Time', '1X2', 'Match Winner', 'Full Time Result']:
+                    choices = market.get('choices', [])
+                    
+                    for choice in choices:
+                        name = choice.get('name', '').lower()
+                        # Weź najlepsze kursy (pierwszy bukmacher z listy)
+                        fractional = choice.get('fractionalValue', '')
+                        decimal_odds = None
+                        
+                        # Konwertuj ułamek na dziesiętny
+                        if '/' in str(fractional):
+                            parts = str(fractional).split('/')
+                            if len(parts) == 2:
+                                try:
+                                    decimal_odds = float(parts[0]) / float(parts[1]) + 1
+                                except (ValueError, ZeroDivisionError):
+                                    pass
+                        elif fractional:
+                            try:
+                                decimal_odds = float(fractional)
+                            except ValueError:
+                                pass
+                        
+                        # Alternatywnie użyj sourceOdds
+                        if not decimal_odds:
+                            source_odds = choice.get('sourceOdds', [])
+                            if source_odds:
+                                try:
+                                    decimal_odds = float(source_odds[0].get('odds', 0))
+                                except (ValueError, IndexError, TypeError):
+                                    pass
+                        
+                        if decimal_odds and decimal_odds > 1.0:
+                            if '1' in name or 'home' in name:
+                                result['home_odds'] = round(decimal_odds, 2)
+                            elif 'x' in name or 'draw' in name:
+                                result['draw_odds'] = round(decimal_odds, 2)
+                            elif '2' in name or 'away' in name:
+                                result['away_odds'] = round(decimal_odds, 2)
+                    
+                    if result['home_odds'] and result['away_odds']:
+                        result['odds_found'] = True
+                        result['bookmaker'] = 'SofaScore'
+                        print(f"   💰 SofaScore Odds: 1={result['home_odds']:.2f} | X={result.get('draw_odds', '-')} | 2={result['away_odds']:.2f}")
+                        return result
+            
+            return None
+        return None
+    except Exception as e:
+        logger.debug(f"SofaScore odds API error: {e}")
+        return None
+
+
 
 def search_event_via_api(home_team: str, away_team: str, sport: str = 'football', date_str: str = None) -> Optional[int]:
     """
@@ -286,11 +404,32 @@ def search_event_via_api(home_team: str, away_team: str, sport: str = 'football'
         for event in events:
             event_home = event.get('homeTeam', {}).get('name', '')
             event_away = event.get('awayTeam', {}).get('name', '')
-            home_match = similarity_score(home_team, event_home) > 0.6 or \
-                         any(p in normalize_team_name(event_home) for p in home_norm.split() if len(p) > 3)
-            away_match = similarity_score(away_team, event_away) > 0.6 or \
-                         any(p in normalize_team_name(event_away) for p in away_norm.split() if len(p) > 3)
-            if home_match and away_match:
+            event_home_norm = normalize_team_name(event_home)
+            event_away_norm = normalize_team_name(event_away)
+            
+            # Poluzowane warunki dopasowania (z 0.6 na 0.45)
+            home_sim = similarity_score(home_team, event_home)
+            away_sim = similarity_score(away_team, event_away)
+            
+            # Warunek 1: Similarity score >= 0.45
+            home_match_sim = home_sim > 0.45
+            away_match_sim = away_sim > 0.45
+            
+            # Warunek 2: Część nazwy drużyny zawarta w nazwie z SofaScore (dla krótkich słów >= 3 znaki)
+            home_match_partial = any(p in event_home_norm for p in home_norm.split() if len(p) > 2)
+            away_match_partial = any(p in event_away_norm for p in away_norm.split() if len(p) > 2)
+            
+            # Warunek 3: Nazwa z SofaScore zawiera część szukanej nazwy
+            home_match_reverse = any(p in home_norm for p in event_home_norm.split() if len(p) > 2)
+            away_match_reverse = any(p in away_norm for p in event_away_norm.split() if len(p) > 2)
+            
+            home_match = home_match_sim or home_match_partial or home_match_reverse
+            away_match = away_match_sim or away_match_partial or away_match_reverse
+            
+            # Dodatkowy warunek: suma similarity >= 1.0 (nawet jeśli jedna drużyna słabsza)
+            combined_match = (home_sim + away_sim) >= 1.0
+            
+            if (home_match and away_match) or combined_match:
                 return event.get('id')
         return None
     except Exception:
@@ -360,8 +499,11 @@ def extract_votes_from_page(driver: webdriver.Chrome, sport: str = 'football') -
             multiplier = votes_match.group(2)
             try:
                 votes = float(votes_str.replace(',', '.'))
-            except:
-                votes = float(votes_str.replace('.', ''))
+            except ValueError:
+                try:
+                    votes = float(votes_str.replace('.', ''))
+                except ValueError:
+                    votes = 0
             if multiplier and multiplier.lower() == 'k':
                 votes *= 1000
             elif multiplier and multiplier.lower() == 'm':
@@ -397,16 +539,15 @@ def find_match_on_main_page(
         # Ustaw krótki timeout dla szybszego działania
         try:
             driver.set_page_load_timeout(8)
-        except Exception:
-            pass  # Ignoruj błędy przy ustawianiu timeout
+        except WebDriverException as e:
+            logger.debug(f"Nie można ustawić page_load_timeout: {e}")
         
         # Użyj page_load_strategy do szybszego ładowania
         try:
             driver.get(url)
-        except (TimeoutException, WebDriverException, ReadTimeoutError, MaxRetryError):
-            pass  # Kontynuuj nawet przy timeout (strona częściowo załadowana)
-        except Exception:
-            pass  # Wszystkie inne błędy też ignoruj
+        except (TimeoutException, WebDriverException, ReadTimeoutError, MaxRetryError) as e:
+            logger.debug(f"Timeout/błąd przy ładowaniu strony (kontynuuję): {e}")
+            # Kontynuuj nawet przy timeout (strona częściowo załadowana)
         
         # Akceptuj consent popup
         accept_consent_popup(driver)
@@ -554,15 +695,14 @@ def search_and_get_votes(
         print(f"   📊 SofaScore: Pobieram dane z HTML...")
         try:
             driver.set_page_load_timeout(12)
-        except Exception:
-            pass
+        except WebDriverException as e:
+            logger.debug(f"Nie można ustawić page_load_timeout dla match_url: {e}")
         
         try:
             driver.get(match_url)
-        except (TimeoutException, WebDriverException, ReadTimeoutError, MaxRetryError):
-            pass  # Kontynuuj nawet przy timeout
-        except Exception:
-            pass
+        except (TimeoutException, WebDriverException, ReadTimeoutError, MaxRetryError) as e:
+            logger.debug(f"Timeout przy ładowaniu match_url (kontynuuję): {e}")
+            # Kontynuuj nawet przy timeout - strona może być częściowo załadowana
         
         # Dłuższe oczekiwanie na załadowanie JavaScript
         time.sleep(4)
@@ -580,10 +720,9 @@ def search_and_get_votes(
             # Scroll ponownie - głosy mogą być w różnych miejscach
             driver.execute_script('window.scrollTo(0, document.body.scrollHeight / 2);')
             time.sleep(1)
-        except (WebDriverException, ReadTimeoutError, MaxRetryError):
-            pass  # Ignoruj błędy scrollowania
-        except Exception:
-            pass
+        except (WebDriverException, ReadTimeoutError, MaxRetryError, TimeoutException) as e:
+            logger.debug(f"Błąd przy scrollowaniu SofaScore: {e}")
+            # Kontynuuj mimo błędu scrollowania
         
         # Pobierz HTML
         try:
@@ -658,7 +797,8 @@ def search_and_get_votes(
                         result['sofascore_draw_prob'] = p2
                         result['sofascore_away_win_prob'] = p3
                         break
-                except:
+                except (ValueError, IndexError) as e:
+                    logger.debug(f"Błąd przy parsowaniu procentów: {e}")
                     continue
         
         # Szukaj total votes
@@ -672,8 +812,8 @@ def search_and_get_votes(
                 elif multiplier and multiplier.lower() == 'm':
                     votes *= 1000000
                 result['sofascore_total_votes'] = int(votes)
-            except:
-                pass
+            except (ValueError, AttributeError, TypeError) as e:
+                logger.debug(f"Błąd przy parsowaniu liczby głosów: {e}")
         
         if result['sofascore_home_win_prob'] is not None:
             draw_str = f"🤝{result['sofascore_draw_prob']}% | " if result['sofascore_draw_prob'] else ""
@@ -880,15 +1020,17 @@ def scrape_sofascore_full(
         
         if scrape_thread.is_alive():
             print(f"   ⚠️ SofaScore: Timeout po {SOFASCORE_GLOBAL_TIMEOUT}s - przerywam")
+            logger.warning(f"SofaScore: Globalny timeout {SOFASCORE_GLOBAL_TIMEOUT}s przekroczony")
             # Wątek się nie skończył - driver.quit() przerwać operację
             try:
                 sofascore_driver.quit()
-            except:
-                pass
+            except (WebDriverException, OSError) as e:
+                logger.debug(f"Błąd przy zamykaniu drivera po timeout: {e}")
             sofascore_driver = None
             return result
         
         if scrape_exception[0]:
+            logger.warning(f"SofaScore scrape exception: {scrape_exception[0]}")
             print(f"   ⚠️ SofaScore: Błąd: {scrape_exception[0]}")
             return result
         
@@ -898,6 +1040,7 @@ def scrape_sofascore_full(
         return result
         
     except Exception as e:
+        logger.error(f"SofaScore scraping error: {type(e).__name__}: {e}")
         print(f"   ❌ SofaScore scraping error: {e}")
         return result
         
@@ -905,8 +1048,8 @@ def scrape_sofascore_full(
         if sofascore_driver:
             try:
                 sofascore_driver.quit()
-            except:
-                pass
+            except (WebDriverException, OSError) as e:
+                logger.debug(f"Błąd przy zamykaniu drivera SofaScore: {e}")
 
 
 # ============================================================================

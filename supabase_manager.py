@@ -26,7 +26,7 @@ class SupabaseManager:
     def __init__(self):
         """Inicjalizuje połączenie z Supabase"""
         self.client: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-        print(f"✅ Connected to Supabase: {SUPABASE_URL}")
+        print(f"[OK] Connected to Supabase: {SUPABASE_URL}")
     
     
     def save_prediction(self, match_data: Dict) -> bool:
@@ -121,11 +121,11 @@ class SupabaseManager:
             # Insert do Supabase
             response = self.client.table('predictions').insert(prediction_record).execute()
             
-            print(f"✅ Saved to Supabase: {match_data.get('home_team')} vs {match_data.get('away_team')}")
+            print(f"[OK] Saved to Supabase: {match_data.get('home_team')} vs {match_data.get('away_team')}")
             return True
             
         except Exception as e:
-            print(f"❌ Error saving to Supabase: {e}")
+            print(f"[ERROR] Error saving to Supabase: {e}")
             return False
     
     
@@ -145,7 +145,7 @@ class SupabaseManager:
             if self.save_prediction(match):
                 success_count += 1
         
-        print(f"📊 Saved {success_count}/{len(matches_data)} predictions to Supabase")
+        print(f"[STATS] Saved {success_count}/{len(matches_data)} predictions to Supabase")
         return success_count
     
     
@@ -178,11 +178,11 @@ class SupabaseManager:
             
             response = self.client.table('predictions').update(update_data).eq('id', match_id).execute()
             
-            print(f"✅ Updated result for match ID {match_id}: {actual_result} ({home_score}-{away_score})")
+            print(f"[OK] Updated result for match ID {match_id}: {actual_result} ({home_score}-{away_score})")
             return True
             
         except Exception as e:
-            print(f"❌ Error updating result: {e}")
+            print(f"[ERROR] Error updating result: {e}")
             return False
     
     
@@ -294,7 +294,7 @@ class SupabaseManager:
             }
             
         except Exception as e:
-            print(f"❌ Error calculating accuracy: {e}")
+            print(f"[ERROR] Error calculating accuracy: {e}")
             return {
                 'total_predictions': 0,
                 'correct_predictions': 0,
@@ -317,6 +317,245 @@ class SupabaseManager:
             results[source] = self.get_source_accuracy(source, days)
         
         return results
+    
+    
+    # ========================================================================
+    # USER BETS METHODS
+    # ========================================================================
+    
+    def save_user_bet(self, bet_data: Dict) -> Optional[int]:
+        """
+        Zapisuje zakład użytkownika do tabeli 'user_bets'
+        
+        Args:
+            bet_data: Dict zawierający:
+                - prediction_id: int (opcjonalne - referencja do predykcji)
+                - match_date: str (YYYY-MM-DD)
+                - match_time: str (HH:MM)
+                - home_team: str
+                - away_team: str
+                - sport: str
+                - league: str (opcjonalne)
+                - bet_selection: str ('1', 'X', '2')
+                - odds_at_bet: float
+                - stake: float (domyślnie 10.00)
+                - notes: str (opcjonalne)
+        
+        Returns:
+            ID nowego zakładu lub None jeśli błąd
+        """
+        try:
+            bet_record = {
+                'prediction_id': bet_data.get('prediction_id'),
+                'match_date': bet_data.get('match_date'),
+                'match_time': bet_data.get('match_time'),
+                'home_team': bet_data.get('home_team'),
+                'away_team': bet_data.get('away_team'),
+                'sport': bet_data.get('sport', 'football'),
+                'league': bet_data.get('league'),
+                'bet_selection': bet_data.get('bet_selection'),
+                'odds_at_bet': bet_data.get('odds_at_bet'),
+                'stake': bet_data.get('stake', 10.00),
+                'status': 'pending',
+                'notes': bet_data.get('notes'),
+                'created_at': datetime.now().isoformat(),
+            }
+            
+            response = self.client.table('user_bets').insert(bet_record).execute()
+            
+            if response.data:
+                bet_id = response.data[0]['id']
+                print(f"[OK] Saved bet: {bet_data.get('home_team')} vs {bet_data.get('away_team')} - {bet_data.get('bet_selection')} @ {bet_data.get('odds_at_bet')}")
+                return bet_id
+            return None
+            
+        except Exception as e:
+            print(f"[ERROR] Error saving bet: {e}")
+            return None
+    
+    
+    def get_user_bets(
+        self,
+        status: Optional[str] = None,
+        days: Optional[int] = None,
+        limit: int = 100
+    ) -> List[Dict]:
+        """
+        Pobiera zakłady użytkownika
+        
+        Args:
+            status: Filtruj po statusie ('pending', 'won', 'lost', 'void')
+            days: Ile dni wstecz (None = wszystkie)
+            limit: Maksymalna liczba rekordów
+        
+        Returns:
+            Lista zakładów
+        """
+        try:
+            query = self.client.table('user_bets').select('*')
+            
+            if status:
+                query = query.eq('status', status)
+            
+            if days:
+                from datetime import timedelta
+                cutoff_date = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
+                query = query.gte('match_date', cutoff_date)
+            
+            query = query.order('created_at', desc=True).limit(limit)
+            
+            response = query.execute()
+            return response.data or []
+            
+        except Exception as e:
+            print(f"[ERROR] Error fetching bets: {e}")
+            return []
+    
+    
+    def update_bet_result(
+        self,
+        bet_id: int,
+        actual_result: str,
+        home_score: int,
+        away_score: int
+    ) -> bool:
+        """
+        Aktualizuje wynik zakładu po zakończeniu meczu
+        
+        Args:
+            bet_id: ID zakładu
+            actual_result: '1' (home win), 'X' (draw), '2' (away win)
+            home_score: Bramki gospodarzy
+            away_score: Bramki gości
+        
+        Returns:
+            True jeśli sukces
+        """
+        try:
+            # Pobierz zakład aby obliczyć profit
+            response = self.client.table('user_bets').select('*').eq('id', bet_id).execute()
+            
+            if not response.data:
+                print(f"[ERROR] Bet ID {bet_id} not found")
+                return False
+            
+            bet = response.data[0]
+            bet_selection = bet['bet_selection']
+            odds = float(bet['odds_at_bet'])
+            stake = float(bet['stake'])
+            
+            # Oblicz wynik
+            if bet_selection == actual_result:
+                status = 'won'
+                profit = stake * (odds - 1)  # Zysk = stawka * (kurs - 1)
+            else:
+                status = 'lost'
+                profit = -stake  # Strata = -stawka
+            
+            update_data = {
+                'status': status,
+                'actual_result': actual_result,
+                'home_score': home_score,
+                'away_score': away_score,
+                'profit': round(profit, 2),
+                'settled_at': datetime.now().isoformat(),
+            }
+            
+            self.client.table('user_bets').update(update_data).eq('id', bet_id).execute()
+            
+            print(f"[OK] Updated bet ID {bet_id}: {status} (profit: {profit:+.2f})")
+            return True
+            
+        except Exception as e:
+            print(f"[ERROR] Error updating bet result: {e}")
+            return False
+    
+    
+    def get_user_betting_stats(self) -> Dict:
+        """
+        Pobiera statystyki zakładów użytkownika
+        
+        Returns:
+            Dict z metrykami:
+            - total_bets: int
+            - pending_bets: int
+            - won_bets: int
+            - lost_bets: int
+            - total_staked: float
+            - total_profit: float
+            - win_rate: float (%)
+            - roi: float (%)
+        """
+        try:
+            response = self.client.table('user_bets').select('*').execute()
+            bets = response.data or []
+            
+            if not bets:
+                return {
+                    'total_bets': 0,
+                    'pending_bets': 0,
+                    'won_bets': 0,
+                    'lost_bets': 0,
+                    'total_staked': 0.0,
+                    'total_profit': 0.0,
+                    'win_rate': 0.0,
+                    'roi': 0.0
+                }
+            
+            total = len(bets)
+            pending = sum(1 for b in bets if b['status'] == 'pending')
+            won = sum(1 for b in bets if b['status'] == 'won')
+            lost = sum(1 for b in bets if b['status'] == 'lost')
+            
+            settled_bets = [b for b in bets if b['status'] in ('won', 'lost')]
+            total_staked = sum(float(b['stake'] or 0) for b in settled_bets)
+            total_profit = sum(float(b['profit'] or 0) for b in settled_bets)
+            
+            win_rate = (won / len(settled_bets) * 100) if settled_bets else 0
+            roi = (total_profit / total_staked * 100) if total_staked > 0 else 0
+            
+            return {
+                'total_bets': total,
+                'pending_bets': pending,
+                'won_bets': won,
+                'lost_bets': lost,
+                'total_staked': round(total_staked, 2),
+                'total_profit': round(total_profit, 2),
+                'win_rate': round(win_rate, 2),
+                'roi': round(roi, 2)
+            }
+            
+        except Exception as e:
+            print(f"[ERROR] Error fetching betting stats: {e}")
+            return {
+                'total_bets': 0,
+                'pending_bets': 0,
+                'won_bets': 0,
+                'lost_bets': 0,
+                'total_staked': 0.0,
+                'total_profit': 0.0,
+                'win_rate': 0.0,
+                'roi': 0.0
+            }
+    
+    
+    def delete_bet(self, bet_id: int) -> bool:
+        """
+        Usuwa zakład użytkownika
+        
+        Args:
+            bet_id: ID zakładu
+        
+        Returns:
+            True jeśli sukces
+        """
+        try:
+            self.client.table('user_bets').delete().eq('id', bet_id).execute()
+            print(f"[OK] Deleted bet ID {bet_id}")
+            return True
+        except Exception as e:
+            print(f"[ERROR] Error deleting bet: {e}")
+            return False
 
 
 # ============================================================================
@@ -429,7 +668,7 @@ if __name__ == "__main__":
     }
     
     success = manager.save_prediction(test_match)
-    print(f"\n{'✅' if success else '❌'} Test save: {success}")
+    print(f"\n{'[OK]' if success else '[FAIL]'} Test save: {success}")
     
     # Test accuracy (może być puste jeśli brak danych)
     print("\n" + "="*60)

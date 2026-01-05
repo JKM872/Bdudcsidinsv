@@ -289,24 +289,37 @@ def normalize_team_name(name: str) -> str:
     for char, replacement in polish_chars.items():
         normalized = normalized.replace(char, replacement)
     
-    # 🔥 Usuń prefixy (NOWE!)
+    # 🔥 Usuń prefixy (ROZSZERZONE!)
     prefixes_to_remove = ['fc ', 'afc ', 'cf ', 'club ', 'sporting ', 'real ', 
                           'sc ', 'sv ', 'vfb ', 'tsv ', 'fk ', 'nk ', 'sk ',
                           'ac ', 'as ', 'ss ', 'us ', 'cd ', 'ud ', 'rcd ',
-                          'ks ', 'mks ', 'gks ', 'rks ', 'wks ', 'ks ']  # Polskie kluby
+                          'ks ', 'mks ', 'gks ', 'rks ', 'wks ', 'ks ',  # Polskie kluby
+                          'bk ', 'if ', 'aik ', 'ik ', 'bsc ', 'vfl ', 'tsg ',  # Skandynawskie/Niemieckie
+                          'ca ', 'ce ', 'rc ', 'sd ', 'rb ', 'red bull ',  # Hiszpańskie/Austriackie
+                          'hapoel ', 'maccabi ', 'beitar ',  # Izraelskie
+                          'dinamo ', 'dynamo ', 'lokomotiv ', 'spartak ', 'cska ',  # Rosyjskie/Wschodnioeuropejskie
+                          'rapid ', 'austria ', 'admira ',  # Austriackie
+                          'ajax ', 'psv ', 'az ', 'nec ', 'ado ',  # Holenderskie
+                          'olympique ', 'stade ', 'as ', 'ogc ', 'fc ',  # Francuskie
+                          'inter ', 'juventus ', 'roma ', 'lazio ', 'napoli ']  # Włoskie
     for prefix in prefixes_to_remove:
         if normalized.startswith(prefix):
             normalized = normalized[len(prefix):]
     
-    # Usuń sufixy
+    # Usuń sufixy (ROZSZERZONE!)
     suffixes_to_remove = [' fc', ' afc', ' cf', ' united', ' city', ' town', 
                           ' wanderers', ' rovers', ' athletic', ' sports',
-                          ' k', ' w', ' kobiety', ' kobiet', ' women', ' womens',
+                          ' k', ' w', ' kobiety', ' kobiet', ' women', ' womens', ' ladies',
                           ' m', ' men', ' mezczyzni',
                           ' sc', ' sv', ' fk', ' nk', ' sk', ' kv', ' bk',
-                          ' sa', ' ssa', ' srl', ' spa',
-                          ' b', ' ii', ' iii', ' u21', ' u19', ' u18', ' u17',
-                          ' reserves', ' youth', ' juniors']  # Europejskie sufixy
+                          ' sa', ' ssa', ' srl', ' spa', ' ssd',
+                          ' b', ' ii', ' iii', ' u21', ' u19', ' u18', ' u17', ' u16', ' u23',
+                          ' reserves', ' youth', ' juniors', ' academy', ' b team',
+                          ' 1912', ' 1893', ' 1896', ' 1899', ' 1900', ' 1903', ' 1904', ' 1905',  # Rok założenia
+                          ' calcio', ' futbol', ' football',  # Włoskie/Hiszpańskie
+                          ' moscow', ' minsk', ' kyiv', ' kiev',  # Miasta w nazwach
+                          ' hotspur', ' albion', ' county', ' argyle', ' borough',  # Angielskie
+                          ' 04', ' 05', ' 06', ' 07', ' 08', ' 09', ' 1860', ' 1899']  # Niemieckie
     for suffix in suffixes_to_remove:
         if normalized.endswith(suffix):
             normalized = normalized[:-len(suffix)].strip()
@@ -415,9 +428,20 @@ def _call_groq_api(prompt: str) -> Optional[str]:
     import os
     import requests
     
-    api_key = os.environ.get('GROQ_API_KEY')
+    # Try config file first, then environment variable
+    api_key = None
+    try:
+        from groq_config import GROQ_API_KEY, GROQ_ENABLED
+        if GROQ_ENABLED:
+            api_key = GROQ_API_KEY
+    except ImportError:
+        pass
+    
     if not api_key:
-        print(f"      ⚠️ Groq: Brak GROQ_API_KEY w środowisku")
+        api_key = os.environ.get('GROQ_API_KEY')
+    
+    if not api_key:
+        print(f"      [!] Groq: Brak GROQ_API_KEY (ustaw w groq_config.py lub zmiennej srodowiskowej)")
         return None
     
     try:
@@ -439,7 +463,7 @@ def _call_groq_api(prompt: str) -> Optional[str]:
         if response.status_code == 200:
             data = response.json()
             answer = data['choices'][0]['message']['content'].strip()
-            print(f"      🚀 Groq odpowiedź: '{answer[:60]}...' " if len(answer) > 60 else f"      🚀 Groq odpowiedź: '{answer}'")
+            print(f"      [GROQ] Odpowiedz: '{answer[:60]}...' " if len(answer) > 60 else f"      [GROQ] Odpowiedz: '{answer}'")
             return answer
         else:
             print(f"      ⚠️ Groq API error: {response.status_code} - {response.text[:100]}")
@@ -557,7 +581,7 @@ def search_forebet_prediction(
     away_team: str,
     match_date: str,
     driver: webdriver.Chrome = None,
-    min_similarity: float = 0.6,  # 🔥 Zwiększone z 0.5 dla dokładniejszego matchingu
+    min_similarity: float = 0.45,  # 🔥 Zmniejszone z 0.6 dla lepszego znajdywania meczów
     timeout: int = 10,
     headless: bool = False,
     sport: str = 'football',
@@ -1142,17 +1166,19 @@ def search_forebet_prediction(
                 if combined_score > best_similarity:
                     best_similarity = combined_score
                 
-                # 🔄 POPRAWIONE WARUNKI - bardziej elastyczne dopasowanie
-                # Warunek 1: Obie drużyny >= 0.55 (poluzowane z 0.6)
-                condition1 = home_score >= 0.55 and away_score >= 0.55
-                # Warunek 2: Średnia >= 0.55 i minimum >= 0.45 (poluzowane)
-                condition2 = combined_score >= 0.55 and min_score >= 0.45
-                # Warunek 3: Jedna drużyna bardzo pewna (>=0.85) i druga >= 0.40
-                condition3 = max_score >= 0.85 and min_score >= 0.40
-                # Warunek 4: Obie drużyny mają > 0.5 (nowy, łagodniejszy)
-                condition4 = home_score > 0.5 and away_score > 0.5
+                # 🔄 POPRAWIONE WARUNKI - jeszcze bardziej elastyczne dopasowanie
+                # Warunek 1: Obie drużyny >= 0.45 (poluzowane z 0.55)
+                condition1 = home_score >= 0.45 and away_score >= 0.45
+                # Warunek 2: Średnia >= 0.50 i minimum >= 0.35 (poluzowane)
+                condition2 = combined_score >= 0.50 and min_score >= 0.35
+                # Warunek 3: Jedna drużyna bardzo pewna (>=0.80) i druga >= 0.30
+                condition3 = max_score >= 0.80 and min_score >= 0.30
+                # Warunek 4: Obie drużyny mają > 0.40 (poluzowane)
+                condition4 = home_score > 0.40 and away_score > 0.40
+                # Warunek 5: Kombinowana suma >= 0.9 (NOWY - łapie częściowe dopasowania)
+                condition5 = (home_score + away_score) >= 0.90
                 
-                if condition1 or condition2 or condition3 or condition4:
+                if condition1 or condition2 or condition3 or condition4 or condition5:
                     print(f"      ✅ Znaleziono mecz na Forebet: {forebet_home} vs {forebet_away}")
                     print(f"         Similarity: Home={home_score:.2f}, Away={away_score:.2f}")
                     
@@ -1230,14 +1256,14 @@ def search_forebet_prediction(
                 continue
         
         if not result['success']:
-            # 🤖 GEMINI AS TRUE LAST RESORT: Użyj tylko gdy algorytm nic nie znalazł
-            # Gemini używamy TYLKO gdy najlepszy similarity score < 0.35
-            # (znaczy że nawet bliskie dopasowania nie istnieją)
+            # 🤖 GEMINI/GROQ FALLBACK: Użyj gdy algorytm nie znalazł meczu
+            # Gemini używamy gdy najlepszy similarity score < 0.50
+            # (znaczy że nie znaleźliśmy pewnego dopasowania)
             
             use_gemini = (
-                best_similarity < 0.35 and  # Brak nawet częściowych dopasowań
+                best_similarity < 0.50 and  # Brak pewnych dopasowań - poluzowane z 0.35
                 debug_matches and 
-                len([m for m in debug_matches if 'vs' in m]) >= 3  # Min 3 mecze
+                len([m for m in debug_matches if 'vs' in m]) >= 2  # Min 2 mecze (poluzowane z 3)
             )
             
             if use_gemini:
@@ -1320,7 +1346,8 @@ def search_forebet_prediction(
         if own_driver and driver:
             try:
                 driver.quit()
-            except:
+            except Exception as e:
+                # Ignoruj błędy przy zamykaniu drivera - może już być zamknięty
                 pass
         
         # Zamknij Xvfb jeśli był użyty
@@ -1328,7 +1355,8 @@ def search_forebet_prediction(
             try:
                 xvfb_display.stop()
                 print(f"      🖥️ Xvfb virtual display stopped")
-            except:
+            except Exception as e:
+                # Ignoruj błędy przy zamykaniu Xvfb
                 pass
     
     # Zapisz do cache

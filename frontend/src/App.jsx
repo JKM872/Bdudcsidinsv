@@ -1,13 +1,8 @@
 import { useState, useEffect, useCallback, useMemo, useRef, memo } from 'react'
 import './index.css'
 import {
-  // Sport icons
-  Circle,
-  Disc,
-  Trophy,
-  Target,
-  Zap,
   // UI icons
+  Target,
   Calendar as CalendarIcon,
   Clock,
   ChevronDown,
@@ -56,13 +51,24 @@ import {
   Menu
 } from 'lucide-react'
 
+// Realistic Sport Icons (React Icons)
+import { 
+  MdSportsSoccer, 
+  MdSportsBasketball, 
+  MdSportsVolleyball, 
+  MdSportsHandball, 
+  MdSportsHockey, 
+  MdSportsTennis,
+  MdDashboard
+} from 'react-icons/md'
+
 // Import new components
 import Calendar from './components/Calendar'
 import AccuracyChart from './components/AccuracyChart'
-import LiveScores from './components/LiveScores'
 import NotificationPrompt from './components/NotificationPrompt'
 import StatsDashboard from './components/StatsDashboard'
 import QuickBetCalculator from './components/QuickBetCalculator'
+import Logo from './components/Logo'
 
 
 
@@ -71,17 +77,18 @@ const API_BASE = 'http://localhost:5000'
 
 // Get sport icon component
 const SportIcons = {
-  all: Activity,
-  football: Circle,
-  basketball: Disc,
-  volleyball: Circle,
-  handball: Target,
-  hockey: Zap,
-  tennis: Circle
+  all: MdDashboard,
+  football: MdSportsSoccer,
+  basketball: MdSportsBasketball,
+  volleyball: MdSportsVolleyball,
+  handball: MdSportsHandball,
+  hockey: MdSportsHockey,
+  tennis: MdSportsTennis
 }
 
 function getSportIcon(sportId) {
-  return SportIcons[sportId] || Circle
+  const id = sportId?.toLowerCase() || 'all'
+  return SportIcons[id] || MdDashboard
 }
 
 // Favorites Hook with localStorage
@@ -150,7 +157,13 @@ async function fetchMatches(date, sport) {
     const params = new URLSearchParams({ date, sport })
     const response = await fetch(`${API_BASE}/api/matches?${params}`)
     if (!response.ok) throw new Error('Network error')
-    return await response.json()
+    const data = await response.json()
+    // Jeśli brak meczów, użyj przykładowych danych
+    if (!data.matches || data.matches.length === 0) {
+      const sampleResponse = await fetch(`${API_BASE}/api/sample`)
+      if (sampleResponse.ok) return await sampleResponse.json()
+    }
+    return data
   } catch (error) {
     console.error('Failed to fetch matches:', error)
     const response = await fetch(`${API_BASE}/api/sample`)
@@ -166,13 +179,13 @@ async function fetchSports(date) {
     return await response.json()
   } catch {
     return [
-      { id: 'all', name: 'All Sports', icon: 'Activity', count: 0 },
-      { id: 'football', name: 'Football', icon: 'Circle', count: 0 },
-      { id: 'basketball', name: 'Basketball', icon: 'Disc', count: 0 },
-      { id: 'volleyball', name: 'Volleyball', icon: 'Circle', count: 0 },
-      { id: 'handball', name: 'Handball', icon: 'Target', count: 0 },
-      { id: 'hockey', name: 'Hockey', icon: 'Zap', count: 0 },
-      { id: 'tennis', name: 'Tennis', icon: 'Circle', count: 0 }
+      { id: 'all', name: 'All Sports', icon: 'MdDashboard', count: 0 },
+      { id: 'football', name: 'Football', icon: 'MdSportsSoccer', count: 0 },
+      { id: 'basketball', name: 'Basketball', icon: 'MdSportsBasketball', count: 0 },
+      { id: 'volleyball', name: 'Volleyball', icon: 'MdSportsVolleyball', count: 0 },
+      { id: 'handball', name: 'Handball', icon: 'MdSportsHandball', count: 0 },
+      { id: 'hockey', name: 'Hockey', icon: 'MdSportsHockey', count: 0 },
+      { id: 'tennis', name: 'Tennis', icon: 'MdSportsTennis', count: 0 }
     ]
   }
 }
@@ -242,9 +255,8 @@ function Header({ date, onDateChange, searchQuery, onSearch, onRefresh, isLoadin
       </button>
 
       <div className="header-logo">
-        <Target className="logo-icon" size={28} />
+        <Logo className="logo-icon" size={32} />
         <span>BigOne</span>
-        <span className="badge badge-green">LIVE</span>
       </div>
 
       <div className="header-search">
@@ -429,7 +441,7 @@ function OddBox({ label, value, isBest }) {
   )
 }
 
-const MatchCard = memo(function MatchCard({ match, compareMode, isSelected, onToggleSelect, isFavorite, onToggleFavorite }) {
+const MatchCard = memo(function MatchCard({ match, compareMode, isSelected, onToggleSelect, isFavorite, onToggleFavorite, onPlaceBet }) {
   const [expanded, setExpanded] = useState(false)
   const hasDraw = match.sport === 'football'
 
@@ -638,15 +650,57 @@ const MatchCard = memo(function MatchCard({ match, compareMode, isSelected, onTo
             </div>
           )}
 
-          {/* Match Link */}
-          {match.matchUrl && (
-            <div className="match-actions">
-              <a href={match.matchUrl} target="_blank" rel="noopener noreferrer" className="action-btn">
+          {/* Match Actions */}
+          <div className="match-actions">
+            {match.matchUrl && (
+              <a href={match.matchUrl} target="_blank" rel="noopener noreferrer" className="action-btn secondary">
                 <ExternalLink size={14} />
                 View Details
               </a>
+            )}
+            
+            {/* Bet Buttons */}
+            <div className="bet-buttons">
+              <button
+                className="bet-btn home"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onPlaceBet?.(match, '1', match.odds?.home)
+                }}
+                disabled={!match.odds?.home}
+                title={`Postaw na ${match.homeTeam}`}
+              >
+                <span className="bet-label">1</span>
+                <span className="bet-odds">{match.odds?.home?.toFixed(2) || '—'}</span>
+              </button>
+              {hasDraw && (
+                <button
+                  className="bet-btn draw"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onPlaceBet?.(match, 'X', match.odds?.draw)
+                  }}
+                  disabled={!match.odds?.draw}
+                  title="Postaw na remis"
+                >
+                  <span className="bet-label">X</span>
+                  <span className="bet-odds">{match.odds?.draw?.toFixed(2) || '—'}</span>
+                </button>
+              )}
+              <button
+                className="bet-btn away"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onPlaceBet?.(match, '2', match.odds?.away)
+                }}
+                disabled={!match.odds?.away}
+                title={`Postaw na ${match.awayTeam}`}
+              >
+                <span className="bet-label">2</span>
+                <span className="bet-odds">{match.odds?.away?.toFixed(2) || '—'}</span>
+              </button>
             </div>
-          )}
+          </div>
         </div>
       )}
     </div>
@@ -704,7 +758,7 @@ function ComparePanel({ selectedMatches, onRemove, onClear }) {
   )
 }
 
-function LeagueGroup({ league, matches, country, compareMode, selectedMatches, onToggleSelect, isFavorite, onToggleFavorite }) {
+function LeagueGroup({ league, matches, country, compareMode, selectedMatches, onToggleSelect, isFavorite, onToggleFavorite, onPlaceBet }) {
   const [collapsed, setCollapsed] = useState(false)
 
   return (
@@ -725,6 +779,7 @@ function LeagueGroup({ league, matches, country, compareMode, selectedMatches, o
           onToggleSelect={onToggleSelect}
           isFavorite={isFavorite(match.id)}
           onToggleFavorite={onToggleFavorite}
+          onPlaceBet={onPlaceBet}
         />
       ))}
     </div>
@@ -800,7 +855,7 @@ function App() {
   const [selectedMatches, setSelectedMatches] = useState([])
 
   // Tab navigation state
-  const [activeTab, setActiveTab] = useState('matches') // 'matches' | 'calendar' | 'accuracy' | 'live' | 'favorites'
+  const [activeTab, setActiveTab] = useState('matches') // 'matches' | 'calendar' | 'accuracy' | 'stats' | 'favorites'
   const [showNotificationPrompt, setShowNotificationPrompt] = useState(false)
 
   // Favorites
@@ -815,6 +870,89 @@ function App() {
   // Bet calculator state
   const [showBetCalculator, setShowBetCalculator] = useState(false)
   const [betCalculatorOdds, setBetCalculatorOdds] = useState(null)
+
+  // Bet modal state
+  const [betModalOpen, setBetModalOpen] = useState(false)
+  const [betModalData, setBetModalData] = useState(null)
+  const [betStake, setBetStake] = useState(10)
+  const [betSubmitting, setBetSubmitting] = useState(false)
+
+  // Handle placing a bet
+  const handlePlaceBet = useCallback((match, selection, odds) => {
+    if (!odds) return
+    setBetModalData({
+      match,
+      selection,
+      odds
+    })
+    setBetStake(10) // Reset stake
+    setBetModalOpen(true)
+  }, [])
+
+  // Submit bet to API
+  const submitBet = async () => {
+    if (!betModalData) return
+    
+    setBetSubmitting(true)
+    try {
+      const response = await fetch(`${API_BASE}/api/bets`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          home_team: betModalData.match.homeTeam,
+          away_team: betModalData.match.awayTeam,
+          match_date: betModalData.match.date || date,
+          match_time: betModalData.match.time,
+          sport: betModalData.match.sport || 'football',
+          league: betModalData.match.league,
+          bet_selection: betModalData.selection,
+          odds_at_bet: betModalData.odds,
+          stake: betStake
+        })
+      })
+      
+      if (response.ok) {
+        setBetModalOpen(false)
+        setBetModalData(null)
+        // Optionally show success notification
+        alert(`Zakład zapisany: ${betModalData.match.homeTeam} vs ${betModalData.match.awayTeam} - ${betModalData.selection} @ ${betModalData.odds.toFixed(2)}`)
+      } else {
+        const errorData = await response.json()
+        alert(`Błąd: ${errorData.error || 'Nie udało się zapisać zakładu'}`)
+      }
+    } catch (err) {
+      console.error('Error placing bet:', err)
+      alert('Błąd połączenia z serwerem')
+    } finally {
+      setBetSubmitting(false)
+    }
+  }
+
+  // Load data - MUSI być przed useEffect który go używa!
+  const loadData = useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const [matchData, sportsData] = await Promise.all([
+        fetchMatches(date, activeSport),
+        fetchSports(date)
+      ])
+
+      if (matchData) {
+        setMatches(matchData.matches || [])
+        setStats(matchData.stats || { total: 0, qualifying: 0, formAdvantage: 0 })
+      }
+
+      if (sportsData) {
+        setSports(sportsData)
+      }
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [date, activeSport])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -850,32 +988,6 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [searchQuery, compareMode, loadData])
 
-  // Load data
-  const loadData = useCallback(async () => {
-    setIsLoading(true)
-    setError(null)
-
-    try {
-      const [matchData, sportsData] = await Promise.all([
-        fetchMatches(date, activeSport),
-        fetchSports(date)
-      ])
-
-      if (matchData) {
-        setMatches(matchData.matches || [])
-        setStats(matchData.stats || { total: 0, qualifying: 0, formAdvantage: 0 })
-      }
-
-      if (sportsData) {
-        setSports(sportsData)
-      }
-    } catch (err) {
-      setError(err.message)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [date, activeSport])
-
   useEffect(() => {
     loadData()
   }, [loadData])
@@ -897,7 +1009,8 @@ function App() {
       case 'h2h':
         return (b.h2h?.winRate || 0) - (a.h2h?.winRate || 0)
       case 'odds':
-        return (a.odds?.home || 99) - (b.odds?.home || 99)
+        // Sortuj od największego kursu do najmniejszego (najlepsze kursy pierwsze)
+        return (b.odds?.home || 0) - (a.odds?.home || 0)
       case 'time':
       default:
         return (a.time || '').localeCompare(b.time || '')
@@ -1003,13 +1116,6 @@ function App() {
               <span>Trafność</span>
             </button>
             <button
-              className={`tab-btn ${activeTab === 'live' ? 'active' : ''}`}
-              onClick={() => setActiveTab('live')}
-            >
-              <Activity size={16} />
-              <span>Live</span>
-            </button>
-            <button
               className={`tab-btn ${activeTab === 'stats' ? 'active' : ''}`}
               onClick={() => setActiveTab('stats')}
             >
@@ -1061,6 +1167,7 @@ function App() {
                     onToggleSelect={handleToggleSelect}
                     isFavorite={isFavorite}
                     onToggleFavorite={toggleFavorite}
+                    onPlaceBet={handlePlaceBet}
                   />
                 ))
               )}
@@ -1077,10 +1184,6 @@ function App() {
 
           {activeTab === 'accuracy' && (
             <AccuracyChart apiBase={API_BASE} />
-          )}
-
-          {activeTab === 'live' && (
-            <LiveScores apiBase={API_BASE} />
           )}
 
           {activeTab === 'stats' && (
@@ -1110,6 +1213,7 @@ function App() {
                       onToggleSelect={() => { }}
                       isFavorite={true}
                       onToggleFavorite={toggleFavorite}
+                      onPlaceBet={handlePlaceBet}
                     />
                   ))}
                 </div>
@@ -1130,6 +1234,94 @@ function App() {
         onClose={() => setShowBetCalculator(false)}
         initialOdds={betCalculatorOdds}
       />
+
+      {/* Bet Placement Modal */}
+      {betModalOpen && betModalData && (
+        <div className="modal-overlay" onClick={() => setBetModalOpen(false)}>
+          <div className="bet-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="bet-modal-header">
+              <h3>Postaw zakład</h3>
+              <button className="close-btn" onClick={() => setBetModalOpen(false)}>
+                <X size={20} />
+              </button>
+            </div>
+            <div className="bet-modal-content">
+              <div className="bet-match-info">
+                <span className="bet-teams">{betModalData.match.homeTeam} vs {betModalData.match.awayTeam}</span>
+                <span className="bet-league">{betModalData.match.league || 'Unknown League'}</span>
+                <span className="bet-time">{betModalData.match.date} • {betModalData.match.time}</span>
+              </div>
+              
+              <div className="bet-selection-info">
+                <div className="bet-selection-label">
+                  Twój wybór: <span className={`selection-badge ${betModalData.selection === '1' ? 'home' : betModalData.selection === 'X' ? 'draw' : 'away'}`}>
+                    {betModalData.selection === '1' ? `${betModalData.match.homeTeam} (1)` : 
+                     betModalData.selection === 'X' ? 'Remis (X)' : 
+                     `${betModalData.match.awayTeam} (2)`}
+                  </span>
+                </div>
+                <div className="bet-odds-display">
+                  Kurs: <strong>{betModalData.odds.toFixed(2)}</strong>
+                </div>
+              </div>
+
+              <div className="bet-stake-section">
+                <label htmlFor="stake">Stawka (PLN)</label>
+                <div className="stake-input-wrapper">
+                  <input
+                    type="number"
+                    id="stake"
+                    min="1"
+                    step="1"
+                    value={betStake}
+                    onChange={(e) => setBetStake(Math.max(1, parseFloat(e.target.value) || 0))}
+                  />
+                  <div className="stake-presets">
+                    {[10, 25, 50, 100].map(amount => (
+                      <button
+                        key={amount}
+                        className={`stake-preset ${betStake === amount ? 'active' : ''}`}
+                        onClick={() => setBetStake(amount)}
+                      >
+                        {amount}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="bet-potential-win">
+                <span>Potencjalna wygrana:</span>
+                <strong className="win-amount">{(betStake * betModalData.odds).toFixed(2)} PLN</strong>
+                <span className="profit">(+{(betStake * (betModalData.odds - 1)).toFixed(2)} PLN profit)</span>
+              </div>
+
+              <div className="bet-modal-actions">
+                <button className="btn-secondary" onClick={() => setBetModalOpen(false)}>
+                  Anuluj
+                </button>
+                <button 
+                  className="btn-primary" 
+                  onClick={submitBet}
+                  disabled={betSubmitting || betStake <= 0}
+                >
+                  {betSubmitting ? (
+                    <>
+                      <Loader2 size={16} className="spin" />
+                      Zapisuję...
+                    </>
+                  ) : (
+                    <>
+                      <Check size={16} />
+                      Postaw zakład
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

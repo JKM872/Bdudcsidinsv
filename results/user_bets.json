@@ -1,0 +1,18 @@
+[
+  {
+    "prediction_id": null,
+    "match_date": "2026-01-05",
+    "match_time": "19:00",
+    "home_team": "Arsenal",
+    "away_team": "Chelsea",
+    "sport": "football",
+    "league": "Premier League",
+    "bet_selection": "1",
+    "odds_at_bet": 1.85,
+    "stake": 10.0,
+    "notes": null,
+    "id": 1767640985077,
+    "status": "pending",
+    "created_at": "2026-01-05T20:23:05.077339"
+  }
+]

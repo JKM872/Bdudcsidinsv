@@ -21,6 +21,16 @@ from datetime import datetime, timedelta
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+# Import Supabase manager for user bets
+try:
+    from supabase_manager import SupabaseManager
+    supabase = SupabaseManager()
+    SUPABASE_AVAILABLE = True
+except Exception as e:
+    print(f"[WARNING] Supabase not available: {e}")
+    supabase = None
+    SUPABASE_AVAILABLE = False
+
 app = Flask(__name__)
 CORS(app)  # Enable CORS for React frontend
 
@@ -29,12 +39,12 @@ RESULTS_DIR = os.path.join(os.path.dirname(__file__), 'results')
 
 # Sport mappings
 SPORT_INFO = {
-    'football': {'name': 'Football', 'icon': 'Circle'},
-    'basketball': {'name': 'Basketball', 'icon': 'Disc'},
-    'volleyball': {'name': 'Volleyball', 'icon': 'Circle'},
-    'handball': {'name': 'Handball', 'icon': 'Target'},
-    'hockey': {'name': 'Hockey', 'icon': 'Zap'},
-    'tennis': {'name': 'Tennis', 'icon': 'Circle'}
+    'football': {'name': 'Football', 'icon': 'MdSportsSoccer'},
+    'basketball': {'name': 'Basketball', 'icon': 'MdSportsBasketball'},
+    'volleyball': {'name': 'Volleyball', 'icon': 'MdSportsVolleyball'},
+    'handball': {'name': 'Handball', 'icon': 'MdSportsHandball'},
+    'hockey': {'name': 'Hockey', 'icon': 'MdSportsHockey'},
+    'tennis': {'name': 'Tennis', 'icon': 'MdSportsTennis'}
 }
 
 
@@ -59,7 +69,8 @@ def find_result_files(date_str=None, sport=None):
 def load_matches_from_file(filepath):
     """Load and parse matches from a JSON file."""
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
+        # Use utf-8-sig to handle files with BOM (Byte Order Mark)
+        with open(filepath, 'r', encoding='utf-8-sig') as f:
             data = json.load(f)
             
         # Handle different data structures
@@ -268,8 +279,169 @@ def health_check():
         'status': 'ok',
         'timestamp': datetime.now().isoformat(),
         'resultsDir': RESULTS_DIR,
-        'resultsExist': os.path.exists(RESULTS_DIR)
+        'resultsExist': os.path.exists(RESULTS_DIR),
+        'supabaseAvailable': SUPABASE_AVAILABLE
     })
+
+
+# =============================================================================
+# USER BETS ENDPOINTS
+# =============================================================================
+
+@app.route('/api/bets', methods=['GET'])
+def get_bets():
+    """Get user bets with optional filters."""
+    if not SUPABASE_AVAILABLE:
+        return jsonify({'error': 'Supabase not available'}), 503
+    
+    status = request.args.get('status')  # pending, won, lost, void
+    days = request.args.get('days', type=int)
+    limit = request.args.get('limit', 100, type=int)
+    
+    bets = supabase.get_user_bets(status=status, days=days, limit=limit)
+    
+    return jsonify({
+        'bets': bets,
+        'count': len(bets),
+        'filters': {
+            'status': status,
+            'days': days,
+            'limit': limit
+        }
+    })
+
+
+@app.route('/api/bets', methods=['POST'])
+def create_bet():
+    """Create a new user bet."""
+    data = request.get_json()
+    
+    # Validate required fields
+    required = ['home_team', 'away_team', 'match_date', 'bet_selection', 'odds_at_bet']
+    missing = [f for f in required if not data.get(f)]
+    if missing:
+        return jsonify({'error': f'Missing required fields: {missing}'}), 400
+    
+    # Validate bet_selection
+    if data['bet_selection'] not in ('1', 'X', '2'):
+        return jsonify({'error': 'bet_selection must be 1, X, or 2'}), 400
+    
+    # Save bet
+    bet_data = {
+        'prediction_id': data.get('prediction_id'),
+        'match_date': data['match_date'],
+        'match_time': data.get('match_time'),
+        'home_team': data['home_team'],
+        'away_team': data['away_team'],
+        'sport': data.get('sport', 'football'),
+        'league': data.get('league'),
+        'bet_selection': data['bet_selection'],
+        'odds_at_bet': float(data['odds_at_bet']),
+        'stake': float(data.get('stake', 10.00)),
+        'notes': data.get('notes'),
+    }
+    
+    bet_id = None
+    
+    # Try Supabase first
+    if SUPABASE_AVAILABLE:
+        try:
+            bet_id = supabase.save_user_bet(bet_data)
+        except Exception as e:
+            print(f"[WARNING] Supabase error, falling back to local: {e}")
+    
+    # Fallback to local JSON storage
+    if not bet_id:
+        import time
+        bets_file = os.path.join(RESULTS_DIR, 'user_bets.json')
+        try:
+            if os.path.exists(bets_file):
+                with open(bets_file, 'r', encoding='utf-8-sig') as f:
+                    bets = json.load(f)
+            else:
+                bets = []
+            
+            # Generate local bet ID
+            bet_id = int(time.time() * 1000)
+            bet_data['id'] = bet_id
+            bet_data['status'] = 'pending'
+            bet_data['created_at'] = datetime.now().isoformat()
+            bets.append(bet_data)
+            
+            with open(bets_file, 'w', encoding='utf-8') as f:
+                json.dump(bets, f, ensure_ascii=False, indent=2)
+            
+            print(f"[OK] Saved bet locally: {bet_data['home_team']} vs {bet_data['away_team']} - {bet_data['bet_selection']} @ {bet_data['odds_at_bet']}")
+        except Exception as e:
+            print(f"[ERROR] Failed to save bet locally: {e}")
+            return jsonify({'error': f'Failed to create bet: {str(e)}'}), 500
+    
+    if bet_id:
+        return jsonify({
+            'success': True,
+            'bet_id': bet_id,
+            'message': f'Bet created for {data["home_team"]} vs {data["away_team"]}'
+        }), 201
+    else:
+        return jsonify({'error': 'Failed to create bet'}), 500
+
+
+@app.route('/api/bets/<int:bet_id>', methods=['PUT'])
+def update_bet(bet_id):
+    """Update bet result (settle bet)."""
+    if not SUPABASE_AVAILABLE:
+        return jsonify({'error': 'Supabase not available'}), 503
+    
+    data = request.get_json()
+    
+    # Validate required fields for settling
+    required = ['actual_result', 'home_score', 'away_score']
+    missing = [f for f in required if data.get(f) is None]
+    if missing:
+        return jsonify({'error': f'Missing required fields: {missing}'}), 400
+    
+    success = supabase.update_bet_result(
+        bet_id=bet_id,
+        actual_result=data['actual_result'],
+        home_score=int(data['home_score']),
+        away_score=int(data['away_score'])
+    )
+    
+    if success:
+        return jsonify({
+            'success': True,
+            'message': f'Bet {bet_id} settled'
+        })
+    else:
+        return jsonify({'error': 'Failed to update bet'}), 500
+
+
+@app.route('/api/bets/<int:bet_id>', methods=['DELETE'])
+def delete_bet(bet_id):
+    """Delete a user bet."""
+    if not SUPABASE_AVAILABLE:
+        return jsonify({'error': 'Supabase not available'}), 503
+    
+    success = supabase.delete_bet(bet_id)
+    
+    if success:
+        return jsonify({
+            'success': True,
+            'message': f'Bet {bet_id} deleted'
+        })
+    else:
+        return jsonify({'error': 'Failed to delete bet'}), 500
+
+
+@app.route('/api/bets/stats', methods=['GET'])
+def get_betting_stats():
+    """Get user betting statistics."""
+    if not SUPABASE_AVAILABLE:
+        return jsonify({'error': 'Supabase not available'}), 503
+    
+    stats = supabase.get_user_betting_stats()
+    
+    return jsonify(stats)
 
 
 # Serve sample data for development

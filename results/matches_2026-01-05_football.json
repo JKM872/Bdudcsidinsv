@@ -1,0 +1,165 @@
+{
+  "date": "2026-01-05",
+  "sport": "football",
+  "generatedAt": "2026-01-05T21:23:47.887997",
+  "stats": {
+    "total": 3,
+    "qualifying": 2,
+    "formAdvantage": 2
+  },
+  "matches": [
+    {
+      "id": -5578542988191179020,
+      "homeTeam": "Egipt",
+      "awayTeam": "Benin",
+      "time": "",
+      "date": "2026-01-05",
+      "league": "",
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.35,
+        "draw": 4.1,
+        "away": 9.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8393826895317375445,
+      "homeTeam": "Nigeria",
+      "awayTeam": "Mozambik",
+      "time": "",
+      "date": "2026-01-05",
+      "league": "",
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.25,
+        "draw": 5.0,
+        "away": 10.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 59.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "No"
+      },
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3675996890861697165,
+      "homeTeam": "JS Kabylie",
+      "awayTeam": "Rouisset",
+      "time": "",
+      "date": "2026-01-05",
+      "league": "",
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.38,
+        "draw": 3.6,
+        "away": 8.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    }
+  ]
+}
