@@ -5,11 +5,272 @@ NOWE: Sekcje pre-posortowanych kursów (home/draw/away) - od najwyższych do naj
 """
 
 import smtplib
+import math
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any, Union
 import pandas as pd
 from datetime import datetime
+
+
+# ============================================================================
+# GLOBAL HELPER FUNCTIONS - Obsługa NaN, None i różnych formatów danych
+# ============================================================================
+
+def is_nan_or_none(val: Any) -> bool:
+    """
+    Sprawdza czy wartość jest NaN, None lub pustym stringiem.
+    Obsługuje różne formaty pandas/numpy NaN.
+    """
+    if val is None:
+        return True
+    if isinstance(val, str):
+        return val.strip() == '' or val.lower() == 'nan' or val.lower() == 'none'
+    if isinstance(val, float):
+        try:
+            return math.isnan(val)
+        except (TypeError, ValueError):
+            return False
+    return False
+
+
+def safe_value(val: Any, default: Any = '') -> Any:
+    """
+    Zwraca wartość lub default jeśli wartość jest NaN/None.
+    """
+    if is_nan_or_none(val):
+        return default
+    return val
+
+
+def safe_float(val: Any, default: float = 0.0) -> float:
+    """
+    Bezpiecznie konwertuje wartość na float.
+    Obsługuje NaN, None, stringi, etc.
+    """
+    if is_nan_or_none(val):
+        return default
+    try:
+        result = float(val)
+        if math.isnan(result):
+            return default
+        return result
+    except (ValueError, TypeError):
+        return default
+
+
+def parse_form_list(form_data: Any) -> list:
+    """
+    Parsuje dane formy z różnych formatów (string, lista, etc.) do listy.
+    Obsługuje formaty: ['W', 'L', 'D'], "['W', 'L', 'D']", "W-L-D", "WLD", etc.
+    """
+    if is_nan_or_none(form_data):
+        return []
+    
+    # Już jest listą
+    if isinstance(form_data, list):
+        return [str(x).strip().upper() for x in form_data if x]
+    
+    # String - parsuj
+    if isinstance(form_data, str):
+        form_str = form_data.strip()
+        if not form_str:
+            return []
+        
+        # Format: "['W', 'L', 'D']" - stringified list
+        if form_str.startswith('[') and form_str.endswith(']'):
+            try:
+                import ast
+                parsed = ast.literal_eval(form_str)
+                if isinstance(parsed, list):
+                    return [str(x).strip().upper() for x in parsed if x]
+            except (ValueError, SyntaxError):
+                pass
+        
+        # Format: "W-L-D" lub "W,L,D"
+        for sep in ['-', ',', ' ', ';']:
+            if sep in form_str:
+                return [x.strip().upper() for x in form_str.split(sep) if x.strip()]
+        
+        # Format: "WLDWD" - pojedyncze znaki
+        if all(c.upper() in 'WLD' for c in form_str if c.strip()):
+            return [c.upper() for c in form_str if c.upper() in 'WLD']
+    
+    return []
+
+
+def format_odds_value(val: Any) -> str:
+    """
+    Formatuje wartość kursu do wyświetlenia.
+    """
+    if is_nan_or_none(val):
+        return '—'
+    try:
+        f = float(val)
+        if math.isnan(f) or f <= 0:
+            return '—'
+        return f'{f:.2f}'
+    except (ValueError, TypeError):
+        return '—'
+
+
+def has_valid_odds(match: Dict) -> bool:
+    """
+    Sprawdza czy mecz ma przynajmniej jeden ważny kurs.
+    """
+    home = safe_float(match.get('home_odds'))
+    away = safe_float(match.get('away_odds'))
+    return home > 0 or away > 0
+
+
+def _clean_odds_for_render(val) -> Optional[float]:
+    """
+    Czyści wartość kursu przed renderowaniem - zamienia string 'nan' na None.
+    Obsługuje: None, string 'nan', float NaN, pandas NaN, numpy NaN.
+    """
+    if val is None:
+        return None
+    
+    # Sprawdź pandas/numpy NaN
+    try:
+        if pd.isna(val):
+            return None
+    except (TypeError, ValueError):
+        pass
+    
+    if isinstance(val, str):
+        if val.lower() == 'nan' or val.lower() == 'none' or val.strip() == '':
+            return None
+        try:
+            return float(val)
+        except ValueError:
+            return None
+    if isinstance(val, float):
+        if math.isnan(val):
+            return None
+        return val
+    try:
+        return float(val)
+    except (ValueError, TypeError):
+        return None
+
+
+def _render_odds_section(home_odds: Optional[float], draw_odds: Optional[float], away_odds: Optional[float]) -> str:
+    """
+    Renderuje sekcję kursów w HTML.
+    """
+    # 🔧 Czyść wartości przed renderowaniem - zamień string 'nan' na None
+    home_odds = _clean_odds_for_render(home_odds)
+    draw_odds = _clean_odds_for_render(draw_odds)
+    away_odds = _clean_odds_for_render(away_odds)
+    
+    # Zbierz wszystkie ważne kursy
+    valid_odds = []
+    if home_odds is not None and home_odds > 0:
+        valid_odds.append(home_odds)
+    if draw_odds is not None and draw_odds > 0:
+        valid_odds.append(draw_odds)
+    if away_odds is not None and away_odds > 0:
+        valid_odds.append(away_odds)
+    
+    if not valid_odds:
+        return ''
+    
+    min_odds = min(valid_odds)
+    
+    # Formatuj wartości
+    home_str = f'{home_odds:.2f}' if home_odds and home_odds > 0 else '—'
+    draw_str = f'{draw_odds:.2f}' if draw_odds and draw_odds > 0 else None
+    away_str = f'{away_odds:.2f}' if away_odds and away_odds > 0 else '—'
+    
+    # Sprawdź które jest minimalne (faworytem)
+    home_is_min = home_odds is not None and home_odds > 0 and home_odds == min_odds
+    draw_is_min = draw_odds is not None and draw_odds > 0 and draw_odds == min_odds
+    away_is_min = away_odds is not None and away_odds > 0 and away_odds == min_odds
+    
+    html = '''
+    <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 8px;">
+        <div style="font-size: 11px; color: #666; margin-bottom: 8px;">💰 Kursy bukmacherskie</div>
+        <div style="display: flex; justify-content: space-around;">
+    '''
+    
+    # Home odds
+    home_bg = '#4CAF50' if home_is_min else '#f5f5f5'
+    home_color = 'white' if home_is_min else '#333'
+    html += f'''
+            <div style="text-align: center; padding: 5px 15px; background: {home_bg}; border-radius: 8px;">
+                <div style="font-size: 16px; font-weight: bold; color: {home_color};">{home_str}</div>
+                <div style="font-size: 10px; color: {home_color if home_is_min else '#888'};">1</div>
+            </div>
+    '''
+    
+    # Draw odds (tylko jeśli istnieje)
+    if draw_str:
+        draw_bg = '#4CAF50' if draw_is_min else '#f5f5f5'
+        draw_color = 'white' if draw_is_min else '#333'
+        html += f'''
+            <div style="text-align: center; padding: 5px 15px; background: {draw_bg}; border-radius: 8px;">
+                <div style="font-size: 16px; font-weight: bold; color: {draw_color};">{draw_str}</div>
+                <div style="font-size: 10px; color: {draw_color if draw_is_min else '#888'};">X</div>
+            </div>
+        '''
+    
+    # Away odds
+    away_bg = '#4CAF50' if away_is_min else '#f5f5f5'
+    away_color = 'white' if away_is_min else '#333'
+    html += f'''
+            <div style="text-align: center; padding: 5px 15px; background: {away_bg}; border-radius: 8px;">
+                <div style="font-size: 16px; font-weight: bold; color: {away_color};">{away_str}</div>
+                <div style="font-size: 10px; color: {away_color if away_is_min else '#888'};">2</div>
+            </div>
+        </div>
+    </div>
+    '''
+    
+    return html
+
+
+def _render_forebet_section(fb_pred: Optional[str], fb_prob: Optional[float], fb_exact: Optional[str]) -> str:
+    """
+    Renderuje sekcję predykcji Forebet w HTML.
+    """
+    # 🔧 Czyść wartości - zamień string 'nan' na None
+    if isinstance(fb_pred, str) and fb_pred.lower() == 'nan':
+        fb_pred = None
+    if isinstance(fb_exact, str) and fb_exact.lower() == 'nan':
+        fb_exact = None
+    fb_prob = _clean_odds_for_render(fb_prob)  # Reuse helper function
+    
+    if not fb_pred or fb_prob is None or fb_prob <= 0:
+        return ''
+    
+    html = f'''
+    <div style="padding: 10px; background: linear-gradient(135deg, #FF9800, #FF5722); border-radius: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <div style="font-size: 11px; color: rgba(255,255,255,0.8);">🎯 Forebet</div>
+                <div style="font-size: 20px; font-weight: bold; color: white;">{fb_pred}</div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 11px; color: rgba(255,255,255,0.8);">Prawdopodobieństwo</div>
+                <div style="font-size: 24px; font-weight: bold; color: white;">{fb_prob:.0f}%</div>
+            </div>
+    '''
+    
+    if fb_exact:
+        html += f'''
+            <div style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 5px;">
+                <div style="font-size: 10px; color: rgba(255,255,255,0.8);">Wynik</div>
+                <div style="font-size: 14px; font-weight: bold; color: white;">{fb_exact}</div>
+            </div>
+        '''
+    
+    html += '''
+        </div>
+    </div>
+    '''
+    
+    return html
 
 
 # ============================================================================
@@ -27,23 +288,11 @@ def create_sorted_odds_sections(matches: List[Dict], limit: int = 15) -> str:
     Returns:
         HTML string z trzema sekcjami: Home Odds, Draw Odds, Away Odds
     """
-    # Filtruj mecze z kursami
-    matches_with_odds = [m for m in matches if m.get('home_odds') or m.get('away_odds')]
+    # Filtruj mecze z kursami - używaj globalnej funkcji has_valid_odds
+    matches_with_odds = [m for m in matches if has_valid_odds(m)]
     
     if not matches_with_odds:
         return ""
-    
-    def safe_float(val, default=0.0):
-        """Bezpiecznie konwertuj na float."""
-        if val is None:
-            return default
-        try:
-            f = float(val)
-            if str(f) == 'nan':
-                return default
-            return f
-        except (ValueError, TypeError):
-            return default
     
     def get_time_str(match):
         """Wyciąga godzinę meczu."""
@@ -586,43 +835,59 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
                 time_badge = time_match.group(1)
         
         # ========== KOMPAKTOWA KARTA MECZU Z IKONAMI ==========
-        # Zbierz wszystkie dane w jednym miejscu
+        # Zbierz wszystkie dane w jednym miejscu - UŻYWAMY BEZPIECZNYCH FUNKCJI
         
-        # FORMA
-        home_form_overall = match.get('home_form_overall', match.get('home_form', []))
-        home_form_home = match.get('home_form_home', [])
-        away_form_overall = match.get('away_form_overall', match.get('away_form', []))
-        away_form_away = match.get('away_form_away', [])
-        form_advantage = match.get('form_advantage', False)
-        last_meeting_date = match.get('last_meeting_date', '')
+        # FORMA - parsuj z różnych formatów (string/lista)
+        home_form_overall = parse_form_list(match.get('home_form_overall', match.get('home_form', [])))
+        home_form_home = parse_form_list(match.get('home_form_home', []))
+        away_form_overall = parse_form_list(match.get('away_form_overall', match.get('away_form', [])))
+        away_form_away = parse_form_list(match.get('away_form_away', []))
+        form_advantage = bool(match.get('form_advantage', False))
+        last_meeting_date = safe_value(match.get('last_meeting_date', ''), '—')
         
         def form_to_icons(form_list):
+            """Konwertuje listę wyników na ikony emoji."""
             icons = {'W': '🟢', 'L': '🔴', 'D': '🟡'}
-            return ''.join([icons.get(r, '⚪') for r in form_list[:5]]) if form_list else '—'
+            if not form_list:
+                return '—'
+            return ''.join([icons.get(str(r).upper(), '⚪') for r in form_list[:5]])
         
-        # H2H
-        h2h_count = match.get('h2h_count', 0)
-        win_rate = match.get('win_rate', 0.0)
+        # H2H - bezpieczne pobieranie liczb
+        h2h_count = int(safe_float(match.get('h2h_count', 0)))
+        win_rate = safe_float(match.get('win_rate', 0.0))
         if focus_team == 'away':
-            wins = match.get('away_wins_in_h2h_last5', 0)
+            wins = int(safe_float(match.get('away_wins_in_h2h_last5', 0)))
         else:
-            wins = match.get('home_wins_in_h2h_last5', 0)
+            wins = int(safe_float(match.get('home_wins_in_h2h_last5', 0)))
         
-        # SofaScore
-        ss_home = match.get('sofascore_home_win_prob') or match.get('sofascore_home')
-        ss_draw = match.get('sofascore_draw_prob') or match.get('sofascore_draw')
-        ss_away = match.get('sofascore_away_win_prob') or match.get('sofascore_away')
-        ss_votes = match.get('sofascore_total_votes') or match.get('sofascore_votes', 0)
+        # SofaScore - bezpieczne pobieranie z obsługą NaN
+        ss_home_raw = match.get('sofascore_home_win_prob') or match.get('sofascore_home')
+        ss_draw_raw = match.get('sofascore_draw_prob') or match.get('sofascore_draw')
+        ss_away_raw = match.get('sofascore_away_win_prob') or match.get('sofascore_away')
+        ss_votes_raw = match.get('sofascore_total_votes') or match.get('sofascore_votes', 0)
         
-        # Odds
-        home_odds = match.get('home_odds')
-        draw_odds = match.get('draw_odds')
-        away_odds = match.get('away_odds')
+        ss_home = safe_float(ss_home_raw) if not is_nan_or_none(ss_home_raw) else None
+        ss_draw = safe_float(ss_draw_raw) if not is_nan_or_none(ss_draw_raw) else None
+        ss_away = safe_float(ss_away_raw) if not is_nan_or_none(ss_away_raw) else None
+        ss_votes = int(safe_float(ss_votes_raw))
         
-        # Forebet
-        fb_pred = match.get('forebet_prediction')
-        fb_prob = match.get('forebet_probability')
-        fb_exact = match.get('forebet_exact_score')
+        # Odds - bezpieczne pobieranie z obsługą NaN
+        home_odds_raw = match.get('home_odds')
+        draw_odds_raw = match.get('draw_odds')
+        away_odds_raw = match.get('away_odds')
+        
+        home_odds = safe_float(home_odds_raw) if not is_nan_or_none(home_odds_raw) else None
+        draw_odds = safe_float(draw_odds_raw) if not is_nan_or_none(draw_odds_raw) else None
+        away_odds = safe_float(away_odds_raw) if not is_nan_or_none(away_odds_raw) else None
+        
+        # Sprawdź czy mamy ważne kursy do wyświetlenia
+        has_odds = (home_odds is not None and home_odds > 0) or (away_odds is not None and away_odds > 0)
+        
+        # Forebet - bezpieczne pobieranie
+        fb_pred = safe_value(match.get('forebet_prediction'), None)
+        fb_prob_raw = match.get('forebet_probability')
+        fb_prob = safe_float(fb_prob_raw) if not is_nan_or_none(fb_prob_raw) else None
+        fb_exact = safe_value(match.get('forebet_exact_score'), None)
         
         # Kolory podświetlenia
         advantage_icon = '🔥' if form_advantage else ''
@@ -700,39 +965,10 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
                     ''' if ss_home else ''}
                     
                     <!-- KURSY -->
-                    {f'''
-                    <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 8px;">
-                        <div style="font-size: 11px; color: #666; margin-bottom: 8px;">💰 Kursy bukmacherskie</div>
-                        <div style="display: flex; justify-content: space-around;">
-                            <div style="text-align: center; padding: 5px 15px; background: {'#4CAF50' if home_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#f5f5f5'}; border-radius: 8px;">
-                                <div style="font-size: 16px; font-weight: bold; color: {'white' if home_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#333'};">{home_odds:.2f}</div>
-                                <div style="font-size: 10px; color: {'white' if home_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#888'};">1</div>
-                            </div>
-                            {f'<div style="text-align: center; padding: 5px 15px; background: {chr(39)}#4CAF50{chr(39) if draw_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else chr(39)}#f5f5f5{chr(39)}; border-radius: 8px;"><div style="font-size: 16px; font-weight: bold; color: {chr(39)}white{chr(39) if draw_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else chr(39)}#333{chr(39)};">{draw_odds:.2f}</div><div style="font-size: 10px;">X</div></div>' if draw_odds else ''}
-                            <div style="text-align: center; padding: 5px 15px; background: {'#4CAF50' if away_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#f5f5f5'}; border-radius: 8px;">
-                                <div style="font-size: 16px; font-weight: bold; color: {'white' if away_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#333'};">{away_odds:.2f}</div>
-                                <div style="font-size: 10px; color: {'white' if away_odds == min([o for o in [home_odds, draw_odds, away_odds] if o]) else '#888'};">2</div>
-                            </div>
-                        </div>
-                    </div>
-                    ''' if home_odds and away_odds else ''}
+                    {_render_odds_section(home_odds, draw_odds, away_odds) if has_odds else ''}
                     
                     <!-- FOREBET PREDICTION -->
-                    {f'''
-                    <div style="padding: 10px; background: linear-gradient(135deg, #FF9800, #FF5722); border-radius: 8px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <div style="font-size: 11px; color: rgba(255,255,255,0.8);">🎯 Forebet</div>
-                                <div style="font-size: 20px; font-weight: bold; color: white;">{fb_pred}</div>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-size: 11px; color: rgba(255,255,255,0.8);">Prawdopodobieństwo</div>
-                                <div style="font-size: 24px; font-weight: bold; color: white;">{fb_prob:.0f}%</div>
-                            </div>
-                            {f'<div style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 5px;"><div style="font-size: 10px; color: rgba(255,255,255,0.8);">Wynik</div><div style="font-size: 14px; font-weight: bold; color: white;">{fb_exact}</div></div>' if fb_exact else ''}
-                        </div>
-                    </div>
-                    ''' if fb_pred and fb_prob and str(fb_prob) != 'nan' else ''}
+                    {_render_forebet_section(fb_pred, fb_prob, fb_exact) if fb_pred and fb_prob is not None and fb_prob > 0 else ''}
                     
                 </div>
                 
@@ -800,6 +1036,28 @@ def send_email_notification(
     # Wczytaj dane
     print(f"Wczytuje dane z: {csv_file}")
     df = pd.read_csv(csv_file, encoding='utf-8')
+    
+    # 🔧 Czyść DataFrame po wczytaniu z CSV - zamień string 'nan' na None
+    def clean_dataframe_for_email(df_in):
+        """Czyści DataFrame po wczytaniu z CSV - zamienia string 'nan' na None"""
+        # Zamień stringi 'nan' na None
+        df_in = df_in.replace({'nan': None, 'NaN': None, 'None': None})
+        
+        # Dla kolumn numerycznych (kursy, prawdopodobieństwa) - zamień NaN na None
+        numeric_cols = ['home_odds', 'draw_odds', 'away_odds', 
+                        'forebet_probability', 'sofascore_home_win_prob', 
+                        'sofascore_draw_prob', 'sofascore_away_win_prob',
+                        'sofascore_total_votes', 'gemini_confidence']
+        for col in numeric_cols:
+            if col in df_in.columns:
+                df_in[col] = df_in[col].apply(
+                    lambda x: None if pd.isna(x) or (isinstance(x, str) and x.lower() == 'nan') else x
+                )
+        
+        return df_in
+    
+    df = clean_dataframe_for_email(df)
+    print(f"   🔧 Wyczyszczono dane z 'nan' stringów")
     
     # Filtruj kwalifikujące się mecze
     qualified = df[df['qualifies'] == True]

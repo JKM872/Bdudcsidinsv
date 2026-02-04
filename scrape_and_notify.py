@@ -13,12 +13,72 @@ import argparse
 import os
 import sys
 import json
+import math
 from datetime import datetime
 from livesport_h2h_scraper import start_driver, get_match_links_from_day, process_match, process_match_tennis, detect_sport_from_url
 from email_notifier import send_email_notification
 from app_integrator import AppIntegrator, create_integrator_from_config
 import pandas as pd
+import numpy as np
 import time
+
+
+def clean_odds_value(val):
+    """
+    Czyści wartość kursu - zamienia NaN/None/string 'nan' na None.
+    Zwraca float lub None.
+    """
+    if val is None:
+        return None
+    if isinstance(val, str):
+        if val.lower() == 'nan' or val.strip() == '':
+            return None
+        try:
+            return float(val)
+        except ValueError:
+            return None
+    if isinstance(val, float):
+        if math.isnan(val):
+            return None
+        return val
+    try:
+        return float(val)
+    except (ValueError, TypeError):
+        return None
+
+
+def clean_for_json(value):
+    """
+    Czyści wartość przed eksportem JSON - zamienia NaN na None.
+    """
+    if value is None:
+        return None
+    if isinstance(value, float) and math.isnan(value):
+        return None
+    if isinstance(value, str) and value.lower() == 'nan':
+        return None
+    try:
+        if pd.isna(value):
+            return None
+    except (TypeError, ValueError):
+        pass
+    return value
+
+
+def clean_dataframe_for_csv(df):
+    """
+    Czyści DataFrame przed zapisem do CSV - zamienia NaN na None dla kursów.
+    """
+    # Zamień NaN na None w całym DataFrame
+    df = df.replace({pd.NA: None, np.nan: None})
+    
+    # Specjalne czyszczenie kolumn z kursami
+    odds_columns = ['home_odds', 'draw_odds', 'away_odds']
+    for col in odds_columns:
+        if col in df.columns:
+            df[col] = df[col].apply(clean_odds_value)
+    
+    return df
 
 # Import FlashScore odds scraper
 try:
@@ -128,14 +188,11 @@ def scrape_and_send_email(
             urls = urls[:max_matches]
             print(f"⚠️  Ograniczono do {max_matches} meczów (tryb testowy)")
         
-        # KROK 2: Przetwórz mecze
-        print(f"\n🔄 KROK 2/3: Przetwarzanie {len(urls)} meczów...")
-        print("="*70)
-        
-        rows = []
-        qualifying_count = 0
-        RESTART_INTERVAL = 40  # Restart Chrome co 40 meczów (zmniejszone z 80 dla stabilności)
-        CHECKPOINT_INTERVAL = 30  # Zapisz checkpoint co 30 meczów (bezpieczeństwo danych)
+        # ========================================================================
+        # DWUFAZOWY PROCES OPTYMALIZACJI CZASOWEJ
+        # FAZA 1: Szybkie sprawdzenie kwalifikacji (bez Forebet/SofaScore)
+        # FAZA 2: Wzbogacenie danych tylko dla kwalifikujących się meczów
+        # ========================================================================
         
         # Przygotuj nazwę pliku
         sport_suffix = '_'.join(sports) if len(sports) <= 2 else 'multi'
@@ -145,8 +202,32 @@ def scrape_and_send_email(
             outfn = f'outputs/livesport_h2h_{date}_{sport_suffix}_EMAIL.csv'
         os.makedirs('outputs', exist_ok=True)
         
+        rows = []
+        qualifying_count = 0
+        qualifying_indices = []  # Indeksy kwalifikujących się meczów
+        RESTART_INTERVAL = 50  # Zwiększone dla szybszego przetwarzania w FAZIE 1
+        CHECKPOINT_INTERVAL = 40  # Zwiększone dla FAZY 1
+        
+        # ========================================================================
+        # FAZA 1: SZYBKIE SPRAWDZENIE KWALIFIKACJI (BEZ Forebet/SofaScore)
+        # ========================================================================
+        phase1_start = time_module.time()
+        print(f"\n" + "="*70)
+        print(f"⚡ FAZA 1/2: SZYBKIE SPRAWDZENIE KWALIFIKACJI ({len(urls)} meczów)")
+        print(f"   (bez Forebet/SofaScore - tylko H2H + forma)")
+        print("="*70)
+        
         for i, url in enumerate(urls, 1):
-            print(f"\n[{i}/{len(urls)}] Przetwarzam...")
+            # Oblicz ETA
+            if i > 1:
+                elapsed = time_module.time() - phase1_start
+                avg_per_match = elapsed / (i - 1)
+                remaining = (len(urls) - i + 1) * avg_per_match
+                eta_min = remaining / 60
+                progress_pct = (i / len(urls)) * 100
+                print(f"\n[FAZA 1: {i}/{len(urls)} ({progress_pct:.0f}%)] ETA: {eta_min:.1f} min")
+            else:
+                print(f"\n[FAZA 1: {i}/{len(urls)}] Przetwarzam...")
             
             # RETRY LOGIC - w CI tylko 1 próba, lokalnie 3 próby
             max_retries = 1 if IS_CI else 3
@@ -165,6 +246,7 @@ def scrape_and_send_email(
                         
                         if info['qualifies']:
                             qualifying_count += 1
+                            qualifying_indices.append(len(rows) - 1)
                             player_a_wins = info['home_wins_in_h2h_last5']
                             player_b_wins = info.get('away_wins_in_h2h', 0)
                             advanced_score = info.get('advanced_score', 0)
@@ -186,18 +268,19 @@ def scrape_and_send_email(
                             advanced_score = info.get('advanced_score', 0)
                             print(f"   ❌ Nie kwalifikuje (Score: {advanced_score:.1f}/100, H2H: {player_a_wins}-{player_b_wins})")
                         
-                        success = True  # Sukces, wyjdź z retry loop
+                        success = True
                     
                     else:
-                        # Sporty drużynowe
+                        # Sporty drużynowe - FAZA 1: BEZ Forebet/SofaScore
                         current_sport = detect_sport_from_url(url)
                         info = process_match(url, driver, away_team_focus=away_team_focus,
-                                           use_forebet=use_forebet, use_gemini=use_gemini, 
-                                           use_sofascore=use_sofascore, sport=current_sport)
+                                           use_forebet=False, use_gemini=False, 
+                                           use_sofascore=False, sport=current_sport)
                         rows.append(info)
                         
                         if info['qualifies']:
                             qualifying_count += 1
+                            qualifying_indices.append(len(rows) - 1)
                             h2h_count = info.get('h2h_count', 0)
                             win_rate = info.get('win_rate', 0.0)
                             home_form = info.get('home_form', [])
@@ -206,7 +289,6 @@ def scrape_and_send_email(
                             home_form_str = '-'.join(home_form) if home_form else 'N/A'
                             away_form_str = '-'.join(away_form) if away_form else 'N/A'
                             
-                            # Wybierz co pokazać w zależności od trybu
                             if away_team_focus:
                                 wins_count = info.get('away_wins_in_h2h_last5', 0)
                                 focused_team = info['away_team']
@@ -215,10 +297,7 @@ def scrape_and_send_email(
                                 focused_team = info['home_team']
                             
                             print(f"   ✅ KWALIFIKUJE! {info['home_team']} vs {info['away_team']}")
-                            print(f"      Fokus: {focused_team}")
-                            print(f"      H2H: {wins_count}/{h2h_count} ({win_rate*100:.0f}%)")
-                            if home_form or away_form:
-                                print(f"      Forma: {info['home_team']} [{home_form_str}] | {info['away_team']} [{away_form_str}]")
+                            print(f"      Fokus: {focused_team}, H2H: {wins_count}/{h2h_count} ({win_rate*100:.0f}%)")
                         else:
                             h2h_count = info.get('h2h_count', 0)
                             win_rate = info.get('win_rate', 0.0)
@@ -231,7 +310,7 @@ def scrape_and_send_email(
                             else:
                                 print(f"   ⚠️  Brak H2H")
                         
-                        success = True  # Sukces, wyjdź z retry loop
+                        success = True
                     
                 except (ConnectionResetError, ConnectionError, Exception) as e:
                     retry_count += 1
@@ -242,47 +321,217 @@ def scrape_and_send_email(
                             driver.quit()
                         except:
                             pass
-                        time.sleep(3)
+                        time.sleep(2 if IS_CI else 3)
                         driver = start_driver(headless=headless)
                     else:
                         print(f"   ❌ Błąd po {max_retries} próbach: {str(e)[:100]}")
                         print(f"   ⏭️  Pomijam ten mecz i kontynuuję...")
             
-            # CHECKPOINT - zapisz co 30 meczów (bezpieczeństwo danych!)
+            # CHECKPOINT - zapisz co 40 meczów
             if i % CHECKPOINT_INTERVAL == 0 and len(rows) > 0:
-                print(f"\n💾 CHECKPOINT: Zapisywanie postępu ({i}/{len(urls)} meczów)...")
+                print(f"\n💾 CHECKPOINT FAZA 1: ({i}/{len(urls)} meczów)...")
                 try:
                     df_checkpoint = pd.DataFrame(rows)
                     if 'h2h_last5' in df_checkpoint.columns:
                         df_checkpoint['h2h_last5'] = df_checkpoint['h2h_last5'].apply(lambda x: str(x) if x else '')
+                    # 🔧 Czyść kursy przed zapisem - zamień NaN na None
+                    df_checkpoint = clean_dataframe_for_csv(df_checkpoint)
                     df_checkpoint.to_csv(outfn, index=False, encoding='utf-8-sig')
-                    print(f"   ✅ Checkpoint zapisany! ({len(rows)} meczów, {qualifying_count} kwalifikujących)")
+                    print(f"   ✅ Zapisano! ({qualifying_count} kwalifikujących)")
                 except Exception as e:
-                    print(f"   ⚠️  Błąd zapisu checkpointu: {e}")
+                    print(f"   ⚠️  Błąd zapisu: {e}")
             
-            # AUTO-RESTART przeglądarki co N meczów (zapobiega crashom)
+            # AUTO-RESTART przeglądarki
             if i % RESTART_INTERVAL == 0 and i < len(urls):
-                print(f"\n🔄 AUTO-RESTART: Restartowanie przeglądarki po {i} meczach...")
-                print(f"   ✅ Przetworzone dane ({len(rows)} meczów) są bezpieczne w pamięci i na dysku!")
+                print(f"\n🔄 AUTO-RESTART po {i} meczach...")
                 try:
                     driver.quit()
-                    time.sleep(2)
+                    time.sleep(1.5 if IS_CI else 2)
                     driver = start_driver(headless=headless)
-                    print(f"   ✅ Przeglądarka zrestartowana! Kontynuuję od meczu {i+1}...\n")
+                    print(f"   ✅ OK! Kontynuuję...")
                 except Exception as e:
                     print(f"   ⚠️  Błąd restartu: {e}")
                     driver = start_driver(headless=headless)
             
-            # Rate limiting - w CI szybsze, ale nadal bezpieczne
+            # Rate limiting - zoptymalizowane dla szybkości
             elif i < len(urls):
-                time.sleep(0.8 if IS_CI else 1.5)
+                time.sleep(0.3 if IS_CI else 0.8)
+        
+        phase1_end = time_module.time()
+        phase1_duration = phase1_end - phase1_start
+        
+        print(f"\n" + "="*70)
+        print(f"⚡ FAZA 1 ZAKOŃCZONA!")
+        print(f"   Czas: {phase1_duration/60:.1f} min ({phase1_duration:.0f}s)")
+        print(f"   Przetworzone: {len(rows)} meczów")
+        print(f"   Kwalifikujące się: {qualifying_count} ({100*qualifying_count/len(rows):.1f}%)" if len(rows) > 0 else "")
+        print(f"   Średni czas/mecz: {phase1_duration/len(rows):.2f}s" if len(rows) > 0 else "")
+        print("="*70)
+        
+        # ========================================================================
+        # FAZA 2: WZBOGACENIE DANYCH (tylko kwalifikujące się mecze)
+        # ========================================================================
+        if qualifying_count > 0 and (use_forebet or use_sofascore or use_gemini):
+            phase2_start = time_module.time()
+            print(f"\n" + "="*70)
+            print(f"🎯 FAZA 2/2: WZBOGACENIE DANYCH ({qualifying_count} kwalifikujących meczów)")
+            if use_forebet:
+                print(f"   ✓ Forebet: predykcje i prawdopodobieństwa")
+            if use_sofascore:
+                print(f"   ✓ SofaScore: Fan Vote")
+            if use_gemini:
+                print(f"   ✓ Gemini AI: analiza")
+            print("="*70)
+            
+            # 🔥 PRE-FETCH: Pobierz HTML Forebet dla wszystkich sportów na raz
+            if use_forebet:
+                try:
+                    from forebet_scraper import prefetch_all_sports, search_forebet_prediction
+                    FOREBET_AVAILABLE = True
+                    print(f"\n🔥 PRE-FETCH: Pobieranie HTML Forebet dla wszystkich sportów...")
+                    unique_sports = list(set(sports))
+                    prefetch_results = prefetch_all_sports(unique_sports, date)
+                    for sport_name, success in prefetch_results.items():
+                        status = "✅" if success else "❌"
+                        print(f"   {status} {sport_name}")
+                except ImportError:
+                    FOREBET_AVAILABLE = False
+                    print(f"   ⚠️ Forebet scraper niedostępny")
+            
+            # Import SofaScore jeśli potrzebny
+            if use_sofascore:
+                try:
+                    from sofascore_scraper import get_sofascore_prediction
+                    SOFASCORE_AVAILABLE = True
+                except ImportError:
+                    SOFASCORE_AVAILABLE = False
+                    print(f"   ⚠️ SofaScore scraper niedostępny")
+            
+            # Przetwórz każdy kwalifikujący się mecz
+            enriched_count = 0
+            for j, idx in enumerate(qualifying_indices, 1):
+                row = rows[idx]
+                home_team = row.get('home_team', '')
+                away_team = row.get('away_team', '')
+                match_time = row.get('match_time', '')
+                current_sport = detect_sport_from_url(row.get('match_url', ''))
+                
+                # ETA dla FAZY 2
+                if j > 1:
+                    elapsed = time_module.time() - phase2_start
+                    avg_per_match = elapsed / (j - 1)
+                    remaining = (qualifying_count - j + 1) * avg_per_match
+                    eta_min = remaining / 60
+                    print(f"\n[FAZA 2: {j}/{qualifying_count}] {home_team} vs {away_team} (ETA: {eta_min:.1f} min)")
+                else:
+                    print(f"\n[FAZA 2: {j}/{qualifying_count}] {home_team} vs {away_team}")
+                
+                # FOREBET
+                if use_forebet and FOREBET_AVAILABLE:
+                    try:
+                        # Wyciągnij datę z match_time
+                        match_date = None
+                        if match_time:
+                            import re
+                            date_match = re.search(r'(\d{1,2}\.\d{1,2}\.\d{4})', match_time)
+                            if date_match:
+                                day, month, year = date_match.group(1).split('.')
+                                match_date = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                        
+                        if not match_date:
+                            match_date = date
+                        
+                        forebet_result = search_forebet_prediction(
+                            home_team=home_team,
+                            away_team=away_team,
+                            match_date=match_date,
+                            sport=current_sport
+                        )
+                        
+                        if forebet_result.get('found'):
+                            row['forebet_prediction'] = forebet_result.get('prediction')
+                            row['forebet_probability'] = forebet_result.get('probability')
+                            row['forebet_exact_score'] = forebet_result.get('exact_score')
+                            row['forebet_over_under'] = forebet_result.get('over_under')
+                            row['forebet_btts'] = forebet_result.get('btts')
+                            row['forebet_avg_goals'] = forebet_result.get('avg_goals')
+                            print(f"   ✅ Forebet: {row['forebet_prediction']} ({row['forebet_probability']}%)")
+                        else:
+                            print(f"   ⚠️ Forebet: nie znaleziono")
+                    except Exception as e:
+                        print(f"   ❌ Forebet błąd: {str(e)[:50]}")
+                
+                # SOFASCORE
+                if use_sofascore and SOFASCORE_AVAILABLE:
+                    try:
+                        sofascore_result = get_sofascore_prediction(
+                            home_team=home_team,
+                            away_team=away_team,
+                            sport=current_sport
+                        )
+                        
+                        if sofascore_result.get('found'):
+                            row['sofascore_home_win_prob'] = sofascore_result.get('home_win_prob')
+                            row['sofascore_draw_prob'] = sofascore_result.get('draw_prob')
+                            row['sofascore_away_win_prob'] = sofascore_result.get('away_win_prob')
+                            row['sofascore_total_votes'] = sofascore_result.get('total_votes')
+                            print(f"   ✅ SofaScore: H:{row['sofascore_home_win_prob']}% D:{row['sofascore_draw_prob']}% A:{row['sofascore_away_win_prob']}%")
+                        else:
+                            print(f"   ⚠️ SofaScore: nie znaleziono")
+                    except Exception as e:
+                        print(f"   ❌ SofaScore błąd: {str(e)[:50]}")
+                
+                # GEMINI AI (jeśli włączone)
+                if use_gemini:
+                    try:
+                        from gemini_analyzer import analyze_match_with_gemini
+                        gemini_result = analyze_match_with_gemini(row)
+                        if gemini_result:
+                            row['gemini_prediction'] = gemini_result.get('prediction')
+                            row['gemini_confidence'] = gemini_result.get('confidence')
+                            row['gemini_reasoning'] = gemini_result.get('reasoning')
+                            row['gemini_recommendation'] = gemini_result.get('recommendation')
+                            print(f"   ✅ Gemini: {row['gemini_recommendation']} ({row['gemini_confidence']}%)")
+                    except Exception as e:
+                        print(f"   ❌ Gemini błąd: {str(e)[:50]}")
+                
+                # Oznacz jako wzbogacony
+                if row.get('forebet_prediction') or row.get('sofascore_home_win_prob') or row.get('gemini_prediction'):
+                    enriched_count += 1
+                
+                # Rate limiting między meczami w FAZIE 2
+                if j < qualifying_count:
+                    time.sleep(0.5 if IS_CI else 1.0)
+            
+            phase2_end = time_module.time()
+            phase2_duration = phase2_end - phase2_start
+            
+            print(f"\n" + "="*70)
+            print(f"🎯 FAZA 2 ZAKOŃCZONA!")
+            print(f"   Czas: {phase2_duration/60:.1f} min ({phase2_duration:.0f}s)")
+            print(f"   Wzbogaconych: {enriched_count}/{qualifying_count}")
+            print(f"   Średni czas/mecz: {phase2_duration/qualifying_count:.2f}s" if qualifying_count > 0 else "")
+            print("="*70)
+        else:
+            if qualifying_count == 0:
+                print(f"\n⚠️ Brak kwalifikujących się meczów - pomijam FAZĘ 2")
+            elif not (use_forebet or use_sofascore or use_gemini):
+                print(f"\n⚠️ Forebet/SofaScore/Gemini wyłączone - pomijam FAZĘ 2")
         
         # Zapisz finalne wyniki (plik już istnieje jeśli były checkpointy)
         print("\n💾 Zapisywanie finalnych wyników...")
         
+        # 🔧 Upewnij się, że odds_source jest ustawiony (dla emaila)
+        for row in rows:
+            if row.get('odds_bookmaker') and not row.get('odds_source'):
+                row['odds_source'] = row.get('odds_bookmaker')
+        
         df = pd.DataFrame(rows)
         if 'h2h_last5' in df.columns:
             df['h2h_last5'] = df['h2h_last5'].apply(lambda x: str(x) if x else '')
+        
+        # 🔧 Czyść kursy przed zapisem - zamień NaN na None
+        df = clean_dataframe_for_csv(df)
         
         df.to_csv(outfn, index=False, encoding='utf-8-sig')
         print(f"✅ Zapisano do: {outfn}")
@@ -321,55 +570,9 @@ def scrape_and_send_email(
                 json.dump(qualifying_rows, f, ensure_ascii=False, indent=2)
             print(f"✅ Przewidywania zapisane do: {predictions_file}")
         
-        # KROK 2.5: Pobierz kursy z FlashScore (tylko dla kwalifikujących się meczów)
-        if use_odds and FLASHSCORE_AVAILABLE and qualifying_count > 0:
-            print(f"\n💰 KROK 2.5/4: Pobieranie kursów z FlashScore...")
-            print("="*70)
-            
-            odds_scraper = FlashScoreOddsScraper(headless=False)
-            odds_fetched = 0
-            
-            for row in rows:
-                if row.get('qualifies', False):
-                    try:
-                        home_team = row.get('home_team', '')
-                        away_team = row.get('away_team', '')
-                        current_sport = detect_sport_from_url(row.get('url', ''))
-                        
-                        odds_result = odds_scraper.get_odds(
-                            home_team=home_team,
-                            away_team=away_team,
-                            sport=current_sport
-                        )
-                        
-                        if odds_result.get('odds_found'):
-                            row['home_odds'] = odds_result.get('home_odds')
-                            row['draw_odds'] = odds_result.get('draw_odds')
-                            row['away_odds'] = odds_result.get('away_odds')
-                            row['odds_source'] = odds_result.get('odds_source')
-                            odds_fetched += 1
-                            print(f"   ✅ {home_team} vs {away_team}: {row['home_odds']}/{row['draw_odds']}/{row['away_odds']}")
-                        else:
-                            row['home_odds'] = None
-                            row['draw_odds'] = None
-                            row['away_odds'] = None
-                            row['odds_source'] = None
-                            print(f"   ⚠️ {home_team} vs {away_team}: Kursy nie znalezione")
-                        
-                    except Exception as e:
-                        print(f"   ❌ Błąd pobierania kursów: {e}")
-                        row['home_odds'] = None
-                        row['draw_odds'] = None
-                        row['away_odds'] = None
-            
-            print(f"\n   📊 Pobrano kursy dla {odds_fetched}/{qualifying_count} meczów")
-            
-            # Zapisz ponownie CSV z kursami
-            df = pd.DataFrame(rows)
-            if 'h2h_last5' in df.columns:
-                df['h2h_last5'] = df['h2h_last5'].apply(lambda x: str(x) if x else '')
-            df.to_csv(outfn, index=False, encoding='utf-8-sig')
-            print(f"   ✅ CSV zaktualizowany o kursy: {outfn}")
+        # 📝 UWAGA: Kursy są pobierane z Livesport API w FAZIE 1 (process_match)
+        # Preferowany bukmacher: Pinnacle (ID=3)
+        # Nie używamy FlashScore - tylko Livesport API
         
         # 📊 EKSPORT JSON DLA FRONTEND API
         print(f"\n📊 Eksport danych JSON dla frontendu...")
@@ -405,28 +608,28 @@ def scrape_and_send_email(
                 'homeFormHome': row.get('home_form_home', []),
                 'awayFormAway': row.get('away_form_away', []),
                 'formAdvantage': row.get('form_advantage', False),
-                # Odds
+                # Odds - czyść NaN przed eksportem
                 'odds': {
-                    'home': row.get('home_odds'),
-                    'draw': row.get('draw_odds'),
-                    'away': row.get('away_odds'),
-                    'bookmaker': row.get('odds_source', row.get('odds_bookmaker', 'Unknown'))
-                } if row.get('home_odds') or row.get('away_odds') else None,
-                # Forebet
+                    'home': clean_odds_value(row.get('home_odds')),
+                    'draw': clean_odds_value(row.get('draw_odds')),
+                    'away': clean_odds_value(row.get('away_odds')),
+                    'bookmaker': clean_for_json(row.get('odds_source', row.get('odds_bookmaker', 'Pinnacle')))
+                } if clean_odds_value(row.get('home_odds')) or clean_odds_value(row.get('away_odds')) else None,
+                # Forebet - czyść NaN przed eksportem
                 'forebet': {
-                    'prediction': row.get('forebet_prediction'),
-                    'probability': row.get('forebet_probability'),
-                    'exactScore': row.get('forebet_score'),
-                    'overUnder': row.get('forebet_over_under'),
-                    'btts': row.get('forebet_btts')
-                } if row.get('forebet_prediction') else None,
-                # SofaScore
+                    'prediction': clean_for_json(row.get('forebet_prediction')),
+                    'probability': clean_for_json(row.get('forebet_probability')),
+                    'exactScore': clean_for_json(row.get('forebet_score')),
+                    'overUnder': clean_for_json(row.get('forebet_over_under')),
+                    'btts': clean_for_json(row.get('forebet_btts'))
+                } if clean_for_json(row.get('forebet_prediction')) else None,
+                # SofaScore - czyść NaN przed eksportem
                 'sofascore': {
-                    'home': row.get('sofascore_home_win_prob'),
-                    'draw': row.get('sofascore_draw_prob'),
-                    'away': row.get('sofascore_away_win_prob'),
-                    'votes': row.get('sofascore_total_votes', 0)
-                } if row.get('sofascore_home_win_prob') else None,
+                    'home': clean_for_json(row.get('sofascore_home_win_prob')),
+                    'draw': clean_for_json(row.get('sofascore_draw_prob')),
+                    'away': clean_for_json(row.get('sofascore_away_win_prob')),
+                    'votes': clean_for_json(row.get('sofascore_total_votes', 0))
+                } if clean_for_json(row.get('sofascore_home_win_prob')) else None,
                 # Focus
                 'focusTeam': 'away' if away_team_focus else 'home'
             }

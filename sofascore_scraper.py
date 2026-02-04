@@ -141,7 +141,7 @@ IS_CI = os.getenv('CI') == 'true' or os.getenv('GITHUB_ACTIONS') == 'true'
 
 # W CI: tylko 1 próba (brak retry), lokalnie: 3 próby
 MAX_RETRIES = 1 if IS_CI else 3
-RETRY_BACKOFF = [1, 2, 4]  # Exponential backoff: 1s, 2s, 4s (używane tylko lokalnie)
+RETRY_BACKOFF = [0.5, 1, 2] if IS_CI else [1, 2, 4]  # Szybsze w CI
 
 
 def _retry_request(request_func, *args, **kwargs):

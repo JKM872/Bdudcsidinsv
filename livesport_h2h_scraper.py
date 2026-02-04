@@ -658,24 +658,24 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
     
     for attempt in range(max_retries):
         try:
-            # 🔥 Strategy 1: Normal navigation
+            # 🔥 Strategy 1: Normal navigation - szybsze w CI
             if attempt == 0:
                 driver.get(url)
-                time.sleep(3.0)  # Longer initial wait
+                time.sleep(1.5 if _is_ci else 3.0)  # CI: szybciej
             
             # 🔥 Strategy 2: Refresh if first failed
             elif attempt == 1:
                 print(f"   🔄 Próba #2: Refresh...")
                 driver.refresh()
-                time.sleep(3.0)
+                time.sleep(1.5 if _is_ci else 3.0)
             
             # 🔥 Strategy 3: Navigate to main page first, then match
             elif attempt == 2:
                 print(f"   🔄 Próba #3: Via main page...")
                 driver.get("https://www.livesport.com/pl/")
-                time.sleep(2.0)
+                time.sleep(1.0 if _is_ci else 2.0)
                 driver.get(url)
-                time.sleep(3.0)
+                time.sleep(1.5 if _is_ci else 3.0)
             
             # 🔥 Strategy 4: Clear cache and try
             elif attempt == 3:
@@ -684,19 +684,19 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
                     driver.delete_all_cookies()
                 except WebDriverException:
                     pass  # Ignoruj błędy przy czyszczeniu cookies
-                time.sleep(1.0)
+                time.sleep(0.5 if _is_ci else 1.0)
                 driver.get(url)
-                time.sleep(3.0)
+                time.sleep(1.5 if _is_ci else 3.0)
             
             # 🔥 Strategy 5: Last resort - direct URL
             else:
                 print(f"   🔄 Próba #5: Direct URL (last resort)...")
                 driver.get(url)
-                time.sleep(5.0)  # Extra long wait
+                time.sleep(2.0 if _is_ci else 5.0)  # CI: szybciej
             
             # Teraz spróbuj kliknąć zakładkę H2H
             click_h2h_tab(driver)
-            time.sleep(2.5)  # Czekaj na załadowanie H2H
+            time.sleep(1.5 if _is_ci else 2.5)  # CI: szybciej
             break  # Success - wyjdź z pętli
             
         except (WebDriverException, ConnectionResetError, ConnectionError, TimeoutError, TimeoutException) as e:
@@ -1830,10 +1830,15 @@ def fetch_odds_from_livesport(driver: webdriver.Chrome, match_url: str, sport: s
         api_result = get_livesport_odds(match_url, sport)
         
         if api_result and api_result.get('odds_found'):
-            result['home_odds'] = api_result.get('home_odds')
-            result['draw_odds'] = api_result.get('draw_odds')
-            result['away_odds'] = api_result.get('away_odds')
-            result['bookmaker'] = api_result.get('bookmaker')
+            # 🔧 Upewnij się że kursy to float lub None (nie string 'nan')
+            home_val = api_result.get('home_odds')
+            draw_val = api_result.get('draw_odds')
+            away_val = api_result.get('away_odds')
+            
+            result['home_odds'] = float(home_val) if home_val is not None else None
+            result['draw_odds'] = float(draw_val) if draw_val is not None else None
+            result['away_odds'] = float(away_val) if away_val is not None else None
+            result['bookmaker'] = api_result.get('bookmaker', 'Pinnacle')
             result['odds_found'] = True
         else:
             # Fallback: Spróbuj wydobyć Event ID z URL ręcznie i próbuj ponownie
@@ -1862,10 +1867,15 @@ def fetch_odds_from_livesport(driver: webdriver.Chrome, match_url: str, sport: s
                 api_result = api.get_odds_from_multiple_bookmakers(event_id, sport)
                 
                 if api_result and api_result.get('success'):
-                    result['home_odds'] = api_result.get('home_odds')
-                    result['draw_odds'] = api_result.get('draw_odds')
-                    result['away_odds'] = api_result.get('away_odds')
-                    result['bookmaker'] = api_result.get('bookmaker')
+                    # 🔧 Upewnij się że kursy to float lub None
+                    home_val = api_result.get('home_odds')
+                    draw_val = api_result.get('draw_odds')
+                    away_val = api_result.get('away_odds')
+                    
+                    result['home_odds'] = float(home_val) if home_val is not None else None
+                    result['draw_odds'] = float(draw_val) if draw_val is not None else None
+                    result['away_odds'] = float(away_val) if away_val is not None else None
+                    result['bookmaker'] = api_result.get('bookmaker', 'Pinnacle')
                     result['odds_found'] = True
                     print(f"   ✅ Livesport API (retry): {result['bookmaker']} - {result['home_odds']}/{result.get('draw_odds', '-')}/{result['away_odds']}")
             

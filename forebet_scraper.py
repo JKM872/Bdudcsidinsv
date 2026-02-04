@@ -32,6 +32,13 @@ from typing import Dict, Optional, Tuple
 # ========================================================================
 _forebet_cache: Dict[str, Dict] = {}
 
+# 🔥 CACHE DLA ZNORMALIZOWANYCH NAZW DRUŻYN - unika wielokrotnego normalizowania
+_normalized_names_cache: Dict[str, str] = {}
+
+# 🔥 CACHE DLA WYNIKÓW AI (Gemini/Groq) - unika wielokrotnych wywołań API
+_ai_match_cache: Dict[str, Optional[tuple]] = {}
+_AI_CACHE_TTL = 86400  # 24 godziny - mecze się nie zmieniają
+
 def _get_forebet_cache_key(sport: str, home_team: str, away_team: str, match_date: str) -> str:
     """Generuje klucz cache dla danego meczu."""
     return f"{sport}|{home_team.lower().strip()}|{away_team.lower().strip()}|{match_date}"
@@ -45,6 +52,35 @@ def _set_cached_forebet(sport: str, home_team: str, away_team: str, match_date: 
     """Zapisuje wynik do cache."""
     key = _get_forebet_cache_key(sport, home_team, away_team, match_date)
     _forebet_cache[key] = result
+
+def _get_cached_normalized_name(name: str) -> Optional[str]:
+    """Pobiera znormalizowaną nazwę z cache."""
+    return _normalized_names_cache.get(name)
+
+def _set_cached_normalized_name(name: str, normalized: str):
+    """Zapisuje znormalizowaną nazwę do cache."""
+    _normalized_names_cache[name] = normalized
+
+def _get_ai_match_cache_key(home_team: str, away_team: str) -> str:
+    """Generuje klucz cache dla AI match finding."""
+    return f"{home_team.lower().strip()}|{away_team.lower().strip()}"
+
+def _get_cached_ai_match(home_team: str, away_team: str) -> Optional[tuple]:
+    """Pobiera wynik AI match finding z cache."""
+    key = _get_ai_match_cache_key(home_team, away_team)
+    cached = _ai_match_cache.get(key)
+    if cached is not None:
+        result, timestamp = cached
+        if time.time() - timestamp < _AI_CACHE_TTL:
+            return result
+        # Cache expired
+        del _ai_match_cache[key]
+    return None
+
+def _set_cached_ai_match(home_team: str, away_team: str, result: Optional[tuple]):
+    """Zapisuje wynik AI match finding do cache."""
+    key = _get_ai_match_cache_key(home_team, away_team)
+    _ai_match_cache[key] = (result, time.time())
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -153,8 +189,8 @@ def prefetch_forebet_html(sport: str, match_date: str = None) -> bool:
     }
     keywords = sport_check_keywords.get(sport_lower, ['predictions'])
     
-    # Retry loop
-    max_retries = 3
+    # Retry loop - w CI mniej prób dla szybkości
+    max_retries = 2 if IS_CI_CD else 3
     for attempt in range(max_retries):
         try:
             fetch_url = url
@@ -162,7 +198,7 @@ def prefetch_forebet_html(sport: str, match_date: str = None) -> bool:
                 cache_buster = int(time.time())
                 fetch_url = f"{url}{'&' if '?' in url else '?'}_cb={cache_buster}"
                 print(f"   🔄 Retry {attempt + 1}/{max_retries}...")
-                time.sleep(3)
+                time.sleep(1.5 if IS_CI_CD else 3)
             
             if CLOUDFLARE_BYPASS_AVAILABLE:
                 html_content = fetch_forebet_with_bypass(fetch_url, debug=False, sport=sport_lower)
@@ -286,9 +322,15 @@ def normalize_team_name(name: str) -> str:
     """
     Normalizuje nazwę drużyny do porównania.
     Usuwa prefixy, sufixy, rozwiązuje skróty, lowercase, trim.
+    Używa cache dla wydajności.
     """
     if not name:
         return ""
+    
+    # 🔥 Sprawdź cache
+    cached = _get_cached_normalized_name(name)
+    if cached is not None:
+        return cached
     
     # Lowercase i trim
     normalized = name.lower().strip()
@@ -312,54 +354,102 @@ def normalize_team_name(name: str) -> str:
     for char, replacement in polish_chars.items():
         normalized = normalized.replace(char, replacement)
     
-    # 🔥 Usuń prefixy (ROZSZERZONE!)
-    prefixes_to_remove = ['fc ', 'afc ', 'cf ', 'club ', 'sporting ', 'real ', 
-                          'sc ', 'sv ', 'vfb ', 'tsv ', 'fk ', 'nk ', 'sk ',
-                          'ac ', 'as ', 'ss ', 'us ', 'cd ', 'ud ', 'rcd ',
-                          'ks ', 'mks ', 'gks ', 'rks ', 'wks ', 'ks ',  # Polskie kluby
-                          'bk ', 'if ', 'aik ', 'ik ', 'bsc ', 'vfl ', 'tsg ',  # Skandynawskie/Niemieckie
-                          'ca ', 'ce ', 'rc ', 'sd ', 'rb ', 'red bull ',  # Hiszpańskie/Austriackie
-                          'hapoel ', 'maccabi ', 'beitar ',  # Izraelskie
-                          'dinamo ', 'dynamo ', 'lokomotiv ', 'spartak ', 'cska ',  # Rosyjskie/Wschodnioeuropejskie
-                          'rapid ', 'austria ', 'admira ',  # Austriackie
-                          'ajax ', 'psv ', 'az ', 'nec ', 'ado ',  # Holenderskie
-                          'olympique ', 'stade ', 'as ', 'ogc ', 'fc ',  # Francuskie
-                          'inter ', 'juventus ', 'roma ', 'lazio ', 'napoli ']  # Włoskie
+    # 🔥 Usuń prefixy (ROZSZERZONE v2 - luty 2026!)
+    prefixes_to_remove = [
+        # Uniwersalne
+        'fc ', 'afc ', 'cf ', 'club ', 'sporting ', 'real ', 'royal ',
+        'sc ', 'sv ', 'vfb ', 'tsv ', 'fk ', 'nk ', 'sk ', 'hk ',
+        'ac ', 'as ', 'ss ', 'us ', 'cd ', 'ud ', 'rcd ', 'rc ',
+        # Polskie kluby
+        'ks ', 'mks ', 'gks ', 'rks ', 'wks ', 'lks ', 'zks ', 'oks ', 'sts ',
+        'azs ', 'awf ', 'mrks ', 'mkts ', 'mlks ', 'mzks ', 'tks ', 'luks ',
+        # Skandynawskie/Niemieckie
+        'bk ', 'if ', 'aik ', 'ik ', 'bsc ', 'vfl ', 'tsg ', 'tb ', 'sg ',
+        'spvgg ', 'fsv ', 'ssv ', 'usv ', 'ksc ', 'sfb ', 'eintracht ',
+        # Hiszpańskie/Portugalskie/Austriackie
+        'ca ', 'ce ', 'sd ', 'rb ', 'red bull ', 'sl ', 'sporting ',
+        'atletico ', 'deportivo ', 'racing ', 'cultural ', 'gimnastic ',
+        # Izraelskie
+        'hapoel ', 'maccabi ', 'beitar ', 'ironi ', 'bnei ',
+        # Rosyjskie/Wschodnioeuropejskie
+        'dinamo ', 'dynamo ', 'lokomotiv ', 'spartak ', 'cska ', 'ska ',
+        'zenit ', 'torpedo ', 'metalist ', 'shakhtar ', 'karpaty ',
+        # Austriackie
+        'rapid ', 'austria ', 'admira ', 'wolfsberger ', 'lask ', 'wac ',
+        # Holenderskie
+        'ajax ', 'psv ', 'az ', 'nec ', 'ado ', 'pec ', 'roda ', 'mvv ',
+        # Francuskie
+        'olympique ', 'stade ', 'ogc ', 'girondins ', 'losc ',
+        # Włoskie
+        'inter ', 'juventus ', 'roma ', 'lazio ', 'napoli ', 'atalanta ',
+        'torino ', 'fiorentina ', 'sampdoria ', 'genoa ', 'hellas ',
+        # Tureckie
+        'galatasaray ', 'fenerbahce ', 'besiktas ', 'trabzonspor ',
+        # Greckie
+        'olympiacos ', 'panathinaikos ', 'aek ', 'paok ', 'aris ',
+        # Siatkówka/Koszykówka
+        'skra ', 'resovia ', 'czarni ', 'trefl ', 'indykpol ', 'cuprum ',
+        'asseco ', 'cerrad ', 'projekt ', 'stal ', 'jastrzebski ',
+    ]
     for prefix in prefixes_to_remove:
         if normalized.startswith(prefix):
             normalized = normalized[len(prefix):]
     
-    # Usuń sufixy (ROZSZERZONE!)
-    suffixes_to_remove = [' fc', ' afc', ' cf', ' united', ' city', ' town', 
-                          ' wanderers', ' rovers', ' athletic', ' sports',
-                          ' k', ' w', ' kobiety', ' kobiet', ' women', ' womens', ' ladies',
-                          ' m', ' men', ' mezczyzni',
-                          ' sc', ' sv', ' fk', ' nk', ' sk', ' kv', ' bk',
-                          ' sa', ' ssa', ' srl', ' spa', ' ssd',
-                          ' b', ' ii', ' iii', ' u21', ' u19', ' u18', ' u17', ' u16', ' u23',
-                          ' reserves', ' youth', ' juniors', ' academy', ' b team',
-                          ' 1912', ' 1893', ' 1896', ' 1899', ' 1900', ' 1903', ' 1904', ' 1905',  # Rok założenia
-                          ' calcio', ' futbol', ' football',  # Włoskie/Hiszpańskie
-                          ' moscow', ' minsk', ' kyiv', ' kiev',  # Miasta w nazwach
-                          ' hotspur', ' albion', ' county', ' argyle', ' borough',  # Angielskie
-                          ' 04', ' 05', ' 06', ' 07', ' 08', ' 09', ' 1860', ' 1899']  # Niemieckie
+    # Usuń sufixy (ROZSZERZONE v2!)
+    suffixes_to_remove = [
+        # Uniwersalne
+        ' fc', ' afc', ' cf', ' united', ' city', ' town', ' club',
+        ' wanderers', ' rovers', ' athletic', ' sports', ' sportif',
+        # Płeć/kategorie wiekowe
+        ' k', ' w', ' kobiety', ' kobiet', ' women', ' womens', ' ladies', ' female',
+        ' m', ' men', ' mezczyzni', ' male',
+        ' u21', ' u20', ' u19', ' u18', ' u17', ' u16', ' u15', ' u23', ' u25',
+        ' b', ' ii', ' iii', ' iv', ' 2', ' 3',
+        ' reserves', ' youth', ' juniors', ' academy', ' b team', ' res',
+        # Skróty organizacyjne
+        ' sc', ' sv', ' fk', ' nk', ' sk', ' kv', ' bk', ' hk',
+        ' sa', ' ssa', ' srl', ' spa', ' ssd', ' ag', ' gmbh',
+        # Lata założenia
+        ' 1900', ' 1901', ' 1902', ' 1903', ' 1904', ' 1905', ' 1906', ' 1907', ' 1908', ' 1909',
+        ' 1910', ' 1911', ' 1912', ' 1913', ' 1914', ' 1915', ' 1916', ' 1917', ' 1918', ' 1919',
+        ' 1893', ' 1894', ' 1895', ' 1896', ' 1897', ' 1898', ' 1899', ' 1860', ' 1889',
+        ' 04', ' 05', ' 06', ' 07', ' 08', ' 09',
+        # Włoskie/Hiszpańskie
+        ' calcio', ' futbol', ' football', ' futebol', ' voetbal',
+        # Miasta w nazwach (czasem sufiks)
+        ' moscow', ' minsk', ' kyiv', ' kiev', ' st petersburg',
+        # Angielskie
+        ' hotspur', ' albion', ' county', ' argyle', ' borough', ' dons', ' vale',
+        # Polskie
+        ' rzeszow', ' bielsko biala', ' warszawa', ' krakow', ' wroclaw',
+        ' poznan', ' gdansk', ' lodz', ' szczecin', ' lublin', ' katowice',
+    ]
     for suffix in suffixes_to_remove:
         if normalized.endswith(suffix):
             normalized = normalized[:-len(suffix)].strip()
     
-    # 🔥 Rozwiń popularne skróty (NOWE!)
+    # 🔥 Rozwiń popularne skróty (ROZSZERZONE v2!)
     abbreviations = {
-        'st.': 'sint', 'st ': 'sint ', 'st-': 'sint-',
+        # Angielskie
+        'st.': 'saint', 'st ': 'saint ', 'st-': 'saint-',
         'man ': 'manchester ', 'man.': 'manchester',
         'utd': 'united', 'utd.': 'united',
         'ath ': 'athletic ', 'ath.': 'athletic',
         'int ': 'inter ', 'int.': 'inter',
+        'liv ': 'liverpool ', 'ars ': 'arsenal ',
+        'che ': 'chelsea ', 'tot ': 'tottenham ',
+        # Wschodnioeuropejskie
         'dynamo': 'dinamo',  # Wariant transliteracji
-        'cska': 'cska',  # Zostaw bez zmian
-        'spartak': 'spartak',
+        'kyiv': 'kiev',  # Wariant pisowni
+        # Niemieckie
+        'munchen': 'munich', 'koln': 'cologne',
+        'dusseldorf': 'duesseldorf', 'nurnberg': 'nuernberg',
         # Polskie
         'ziel ': 'zielona ', 'ziel.': 'zielona',
-        'gora': 'gora',
+        'b-b': 'bielsko biala', 'b.b.': 'bielsko biala',
+        'wwa': 'warszawa', 'krk': 'krakow', 'wroc': 'wroclaw',
+        # Siatkówka
+        'bb ': 'bielsko biala ', 'bb': 'bielsko biala',
     }
     for abbr, full in abbreviations.items():
         normalized = normalized.replace(abbr, full)
@@ -371,19 +461,28 @@ def normalize_team_name(name: str) -> str:
     while '  ' in normalized:
         normalized = normalized.replace('  ', ' ')
     
-    return normalized.strip()
+    result = normalized.strip()
+    
+    # 🔥 Zapisz do cache
+    _set_cached_normalized_name(name, result)
+    
+    return result
 
 
 def similarity_score(name1: str, name2: str) -> float:
     """
     Oblicza similarity score między dwoma nazwami drużyn (0.0 - 1.0).
-    Używa SequenceMatcher z difflib + token-based Jaccard jako fallback.
+    Używa wielu metod dla lepszego dopasowania (v2 - luty 2026).
     """
     norm1 = normalize_team_name(name1)
     norm2 = normalize_team_name(name2)
     
     if not norm1 or not norm2:
         return 0.0
+    
+    # Dokładne dopasowanie po normalizacji
+    if norm1 == norm2:
+        return 1.0
     
     # Metoda 1: SequenceMatcher (character-based)
     seq_score = SequenceMatcher(None, norm1, norm2).ratio()
@@ -402,10 +501,12 @@ def similarity_score(name1: str, name2: str) -> float:
     containment = 0.0
     if len(norm1) >= 3 and len(norm2) >= 3:
         if norm1 in norm2 or norm2 in norm1:
-            containment = 0.85  # Wysoki score dla zawierania
+            # Zwiększ score w zależności od długości dopasowania
+            shorter = min(len(norm1), len(norm2))
+            longer = max(len(norm1), len(norm2))
+            containment = 0.85 + (shorter / longer) * 0.10  # 0.85 - 0.95
     
     # 🔥 Metoda 4: First-word matching (dla nazw miast vs pełnych nazw klubów)
-    # np. "Hamburg" vs "Hamburg Towers", "Jerusalem" vs "Hapoel Jerusalem"
     first_word_score = 0.0
     words1 = norm1.split()
     words2 = norm2.split()
@@ -413,12 +514,56 @@ def similarity_score(name1: str, name2: str) -> float:
         # Sprawdź czy pierwsze słowo jednej nazwy jest w drugiej
         if words1[0] in words2 or words2[0] in words1:
             first_word_score = 0.75
-        # Sprawdź też ostatnie słowo (np. "Jerusalem" w "Hapoel Jerusalem")
+        # Sprawdź też ostatnie słowo
         if words1[-1] in words2 or words2[-1] in words1:
             first_word_score = max(first_word_score, 0.75)
+        # Jeśli pierwsze słowa są identyczne - jeszcze wyższy score
+        if words1[0] == words2[0]:
+            first_word_score = max(first_word_score, 0.80)
     
-    # Zwróć najwyższy wynik z czterech metod
-    return max(seq_score, jaccard, containment, first_word_score)
+    # 🔥 Metoda 5: Levenshtein-like dla krótkich nazw (bez biblioteki)
+    # Sprawdź czy nazwy różnią się tylko o 1-2 znaki
+    levenshtein_score = 0.0
+    if abs(len(norm1) - len(norm2)) <= 2:
+        # Prosta heurystyka: policz wspólne znaki
+        common_chars = sum(1 for c in norm1 if c in norm2)
+        max_len = max(len(norm1), len(norm2))
+        if max_len > 0:
+            char_ratio = common_chars / max_len
+            if char_ratio >= 0.8:  # 80% wspólnych znaków
+                levenshtein_score = char_ratio * 0.9  # Do 0.72
+    
+    # 🔥 Metoda 6: Dopasowanie "głównego słowa" (najdłuższego słowa)
+    main_word_score = 0.0
+    if words1 and words2:
+        # Znajdź najdłuższe słowo w każdej nazwie (często to nazwa miasta/klubu)
+        main1 = max(words1, key=len) if words1 else ''
+        main2 = max(words2, key=len) if words2 else ''
+        if main1 and main2 and len(main1) >= 3 and len(main2) >= 3:
+            if main1 == main2:
+                main_word_score = 0.85
+            elif main1 in main2 or main2 in main1:
+                main_word_score = 0.70
+            elif SequenceMatcher(None, main1, main2).ratio() >= 0.8:
+                main_word_score = 0.65
+    
+    # 🔥 Metoda 7: Prefix matching (dla nazw zaczynających się tak samo)
+    prefix_score = 0.0
+    min_len = min(len(norm1), len(norm2))
+    if min_len >= 4:
+        # Sprawdź wspólny prefix
+        common_prefix = 0
+        for i in range(min_len):
+            if norm1[i] == norm2[i]:
+                common_prefix += 1
+            else:
+                break
+        if common_prefix >= 4:  # Minimum 4 wspólne znaki na początku
+            prefix_score = 0.50 + (common_prefix / min_len) * 0.35  # 0.50 - 0.85
+    
+    # Zwróć najwyższy wynik ze wszystkich metod
+    return max(seq_score, jaccard, containment, first_word_score, 
+               levenshtein_score, main_word_score, prefix_score)
 
 
 def find_best_match(target_team: str, available_teams: list) -> Tuple[Optional[str], float]:
@@ -497,9 +642,136 @@ def _call_groq_api(prompt: str) -> Optional[str]:
         return None
 
 
+# 🔥 RATE LIMITING dla AI API - unika 429 errors
+_last_ai_call_time = 0.0
+_AI_MIN_INTERVAL = 2.0  # Minimum 2 sekundy między wywołaniami AI
+
+# 🔥 BATCH PROCESSING - kolejka meczów do analizy AI
+_ai_batch_queue: list = []  # Lista (home_team, away_team) do analizy
+_ai_batch_available_matches: list = []  # Lista dostępnych meczów z Forebet
+_AI_BATCH_SIZE = 5  # Analizuj 5 meczów naraz
+
+
+def find_forebet_matches_batch_ai(matches_to_find: list, available_matches: list) -> Dict[str, Optional[tuple]]:
+    """
+    🤖 BATCH: Używa AI do znalezienia WIELU meczów naraz (oszczędza wywołania API).
+    
+    Args:
+        matches_to_find: Lista [(home_team, away_team), ...] do znalezienia
+        available_matches: Lista dostępnych meczów jako stringi 'Home vs Away'
+        
+    Returns:
+        Dict { "home|away": (matching_home, matching_away) lub None }
+    """
+    import os
+    import time as time_module
+    global _last_ai_call_time
+    
+    if not matches_to_find or not available_matches:
+        return {}
+    
+    results = {}
+    
+    # Sprawdź cache dla wszystkich meczów
+    uncached_matches = []
+    for home, away in matches_to_find:
+        cached = _get_cached_ai_match(home, away)
+        if cached is not None:
+            key = f"{home.lower().strip()}|{away.lower().strip()}"
+            results[key] = cached
+            print(f"      📋 AI Batch (cache): {home} vs {away}")
+        else:
+            uncached_matches.append((home, away))
+    
+    if not uncached_matches:
+        return results
+    
+    # Rate limiting
+    time_since_last = time_module.time() - _last_ai_call_time
+    if time_since_last < _AI_MIN_INTERVAL:
+        wait_time = _AI_MIN_INTERVAL - time_since_last
+        print(f"      ⏳ AI Batch Rate limit: czekam {wait_time:.1f}s...")
+        time_module.sleep(wait_time)
+    
+    # Buduj prompt dla wielu meczów naraz
+    matches_text = '\n'.join(available_matches[:50])
+    
+    matches_to_find_text = '\n'.join([f"- {h} vs {a}" for h, a in uncached_matches])
+    
+    prompt = f"""Find the best matching matches for these teams from the list below.
+
+TEAMS TO FIND:
+{matches_to_find_text}
+
+AVAILABLE MATCHES:
+{matches_text}
+
+For each team pair, return the best matching line from AVAILABLE MATCHES.
+If no match found for a pair, return "NONE" for that pair.
+
+Return format (one line per team pair, in order):
+1. <matching line or NONE>
+2. <matching line or NONE>
+...
+
+Do not add any explanation or additional text."""
+
+    _last_ai_call_time = time_module.time()
+    
+    # Próbuj Groq (szybszy i tańszy)
+    answer = _call_groq_api(prompt)
+    
+    # Fallback do Gemini jeśli Groq nie zadziałał
+    if not answer:
+        gemini_key = os.environ.get('GEMINI_API_KEY')
+        if gemini_key:
+            try:
+                import google.generativeai as genai
+                genai.configure(api_key=gemini_key)
+                model = genai.GenerativeModel('gemini-2.0-flash-exp')
+                response = model.generate_content(prompt)
+                answer = response.text.strip()
+            except Exception as e:
+                print(f"      ⚠️ AI Batch Gemini error: {e}")
+    
+    # Parsuj odpowiedź
+    if answer:
+        lines = answer.strip().split('\n')
+        for i, (home, away) in enumerate(uncached_matches):
+            key = f"{home.lower().strip()}|{away.lower().strip()}"
+            
+            if i < len(lines):
+                line = lines[i].strip()
+                # Usuń numerację jeśli jest (np. "1. ")
+                if line and line[0].isdigit() and '. ' in line:
+                    line = line.split('. ', 1)[1]
+                
+                if line and line.upper() != 'NONE' and 'vs' in line.lower():
+                    parts = None
+                    for sep in [' vs ', ' VS ', ' Vs ', ' - ']:
+                        if sep in line:
+                            parts = line.split(sep)
+                            break
+                    
+                    if parts and len(parts) == 2:
+                        result = (parts[0].strip(), parts[1].strip())
+                        results[key] = result
+                        _set_cached_ai_match(home, away, result)
+                        print(f"      ✅ AI Batch: {home} vs {away} → {result[0]} vs {result[1]}")
+                        continue
+            
+            # Nie znaleziono
+            results[key] = None
+            _set_cached_ai_match(home, away, None)
+            print(f"      ⚠️ AI Batch: {home} vs {away} → nie znaleziono")
+    
+    return results
+
+
 def find_forebet_match_with_gemini(home_team: str, away_team: str, available_matches: list) -> Optional[tuple]:
     """
     🤖 Używa Gemini AI (+ Groq fallback) do znalezienia meczu na Forebet gdy similarity matching zawodzi.
+    Używa cache i rate limiting dla optymalizacji (v2 - luty 2026).
     
     Args:
         home_team: Szukana drużyna gospodarzy
@@ -509,8 +781,22 @@ def find_forebet_match_with_gemini(home_team: str, away_team: str, available_mat
     Returns:
         (matching_home, matching_away) lub None jeśli nie znaleziono
     """
+    global _last_ai_call_time
     import os
     import time as time_module
+    
+    # 🔥 Sprawdź cache przed wywołaniem AI
+    cached_result = _get_cached_ai_match(home_team, away_team)
+    if cached_result is not None:
+        print(f"      📋 AI Match (cache hit): {cached_result}")
+        return cached_result
+    
+    # 🔥 Rate limiting - czekaj jeśli zbyt szybko
+    time_since_last = time_module.time() - _last_ai_call_time
+    if time_since_last < _AI_MIN_INTERVAL:
+        wait_time = _AI_MIN_INTERVAL - time_since_last
+        print(f"      ⏳ AI Rate limit: czekam {wait_time:.1f}s...")
+        time_module.sleep(wait_time)
     
     # Ograniczenie listy meczów do 50 dla mniejszego zużycia tokenów
     matches_text = '\n'.join(available_matches[:50])
@@ -577,6 +863,9 @@ Do not add any explanation or additional text."""
         if groq_answer:
             answer = groq_answer
     
+    # 🔥 Aktualizuj czas ostatniego wywołania AI
+    _last_ai_call_time = time_module.time()
+    
     # Parsuj odpowiedź
     if answer and answer.upper() != 'NONE' and 'vs' in answer.lower():
         parts = None
@@ -588,14 +877,19 @@ Do not add any explanation or additional text."""
         if parts and len(parts) == 2:
             match_home = parts[0].strip()
             match_away = parts[1].strip()
+            result = (match_home, match_away)
             print(f"      ✅ AI Match: Znaleziono mecz: {match_home} vs {match_away}")
-            return (match_home, match_away)
+            # 🔥 Zapisz do cache
+            _set_cached_ai_match(home_team, away_team, result)
+            return result
     
     if answer:
         print(f"      ⚠️ AI: Nie znaleziono dopasowania (odpowiedź: {answer[:50]})")
     else:
         print(f"      ⚠️ AI: Brak odpowiedzi od Gemini i Groq")
     
+    # 🔥 Zapisz negatywny wynik do cache (żeby nie pytać ponownie)
+    _set_cached_ai_match(home_team, away_team, None)
     return None
 
 
@@ -604,7 +898,7 @@ def search_forebet_prediction(
     away_team: str,
     match_date: str,
     driver: webdriver.Chrome = None,
-    min_similarity: float = 0.45,  # 🔥 Zmniejszone z 0.6 dla lepszego znajdywania meczów
+    min_similarity: float = 0.35,  # 🔥 Zmniejszone z 0.45 do 0.35 dla jeszcze lepszego znajdywania meczów
     timeout: int = 10,
     headless: bool = False,
     sport: str = 'football',
@@ -1189,19 +1483,23 @@ def search_forebet_prediction(
                 if combined_score > best_similarity:
                     best_similarity = combined_score
                 
-                # 🔄 POPRAWIONE WARUNKI - jeszcze bardziej elastyczne dopasowanie
-                # Warunek 1: Obie drużyny >= 0.45 (poluzowane z 0.55)
-                condition1 = home_score >= 0.45 and away_score >= 0.45
-                # Warunek 2: Średnia >= 0.50 i minimum >= 0.35 (poluzowane)
-                condition2 = combined_score >= 0.50 and min_score >= 0.35
-                # Warunek 3: Jedna drużyna bardzo pewna (>=0.80) i druga >= 0.30
-                condition3 = max_score >= 0.80 and min_score >= 0.30
-                # Warunek 4: Obie drużyny mają > 0.40 (poluzowane)
-                condition4 = home_score > 0.40 and away_score > 0.40
-                # Warunek 5: Kombinowana suma >= 0.9 (NOWY - łapie częściowe dopasowania)
-                condition5 = (home_score + away_score) >= 0.90
+                # 🔄 POPRAWIONE WARUNKI - jeszcze bardziej elastyczne dopasowanie (v2 - luty 2026)
+                # Warunek 1: Obie drużyny >= 0.40 (poluzowane z 0.45)
+                condition1 = home_score >= 0.40 and away_score >= 0.40
+                # Warunek 2: Średnia >= 0.45 i minimum >= 0.30 (poluzowane)
+                condition2 = combined_score >= 0.45 and min_score >= 0.30
+                # Warunek 3: Jedna drużyna bardzo pewna (>=0.75) i druga >= 0.25
+                condition3 = max_score >= 0.75 and min_score >= 0.25
+                # Warunek 4: Obie drużyny mają > 0.35 (poluzowane)
+                condition4 = home_score > 0.35 and away_score > 0.35
+                # Warunek 5: Kombinowana suma >= 0.80 (poluzowane z 0.9)
+                condition5 = (home_score + away_score) >= 0.80
+                # Warunek 6: NOWY - jedna drużyna ma dokładne dopasowanie (>=0.90)
+                condition6 = max_score >= 0.90
+                # Warunek 7: NOWY - obie drużyny mają przyzwoite dopasowanie (>=0.30) i średnia >= 0.40
+                condition7 = min_score >= 0.30 and combined_score >= 0.40
                 
-                if condition1 or condition2 or condition3 or condition4 or condition5:
+                if condition1 or condition2 or condition3 or condition4 or condition5 or condition6 or condition7:
                     print(f"      ✅ Znaleziono mecz na Forebet: {forebet_home} vs {forebet_away}")
                     print(f"         Similarity: Home={home_score:.2f}, Away={away_score:.2f}")
                     
