@@ -599,6 +599,14 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         use_gemini: Jeśli True, używa Gemini AI do analizy
         sport: Sport (football, volleyball, etc.)
     """
+    # #region agent log
+    try:
+        import json as _json_debug
+        import time as _time_debug
+        with open(r'c:\Users\hp\Bdudcsidinsv\debug.log', 'a', encoding='utf-8') as _f:
+            _f.write(_json_debug.dumps({"hypothesisId": "ENTRY", "location": "livesport_h2h_scraper.py:591", "message": "process_match called", "data": {"url": url[:80] if url else "None", "sport": sport}, "timestamp": int(_time_debug.time() * 1000)}) + '\n')
+    except: pass
+    # #endregion
     # ========================================================================
     # PROFILOWANIE CZASU - rozpoczęcie pomiaru
     # ========================================================================
@@ -840,7 +848,6 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
             score = item.get('score', '')
             
             # Parsuj wynik
-            import re
             score_match = re.search(r"(\d+)\s*[:\-]\s*(\d+)", score)
             if not score_match:
                 continue
@@ -983,6 +990,13 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         # Nie kwalifikuje się podstawowo - ale nadal pobierz formę dla wyświetlenia
         out['qualifies'] = False
         # Pobierz podstawową formę (dla meczów niekwalifikujących się)
+        # #region agent log
+        try:
+            import json as _json_debug
+            with open(r'c:\Users\hp\Bdudcsidinsv\debug.log', 'a', encoding='utf-8') as _f:
+                _f.write(_json_debug.dumps({"hypothesisId": "A", "location": "livesport_h2h_scraper.py:987", "message": "Non-qualifying match form extraction", "data": {"soup_defined": 'soup' in dir(), "home_team": out.get('home_team'), "away_team": out.get('away_team')}, "timestamp": int(time.time() * 1000)}) + '\n')
+        except: pass
+        # #endregion
         try:
             home_form = extract_team_form(soup, driver, 'home', out.get('home_team'))
             away_form = extract_team_form(soup, driver, 'away', out.get('away_team'))
@@ -990,7 +1004,14 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
             out['away_form'] = away_form
             out['home_form_overall'] = home_form
             out['away_form_overall'] = away_form
-        except (AttributeError, TypeError, WebDriverException) as e:
+        except (AttributeError, TypeError, WebDriverException, NameError) as e:
+            # #region agent log
+            try:
+                import json as _json_debug
+                with open(r'c:\Users\hp\Bdudcsidinsv\debug.log', 'a', encoding='utf-8') as _f:
+                    _f.write(_json_debug.dumps({"hypothesisId": "A", "location": "livesport_h2h_scraper.py:995", "message": "Form extraction error", "data": {"error_type": type(e).__name__, "error": str(e)[:100]}, "timestamp": int(time.time() * 1000)}) + '\n')
+            except: pass
+            # #endregion
             logger.debug(f"Błąd przy pobieraniu formy dla niekwalifikujących: {e}")
     
     # ⏱️ TIMING: Koniec kwalifikacji (Etap 1)
@@ -1056,7 +1077,6 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
             match_date_str = dt_forebet.now().strftime('%Y-%m-%d')  # Domyślna data = dzisiaj
             if out.get('match_time'):
                 try:
-                    import re
                     # Obsługa zarówno DD.MM.YY jak i DD.MM.YYYY
                     date_match = re.search(r'(\d{2})\.(\d{2})\.(\d{2,4})', out['match_time'])
                     if date_match:
@@ -1848,8 +1868,26 @@ def fetch_odds_from_livesport(driver: webdriver.Chrome, match_url: str, sport: s
         # Import API client
         from livesport_odds_api import LivesportOddsAPI, get_livesport_odds
         
+        # #region agent log
+        _odds_start_time = time.time()
+        try:
+            import json as _json_debug
+            with open(r'c:\Users\hp\Bdudcsidinsv\debug.log', 'a', encoding='utf-8') as _f:
+                _f.write(_json_debug.dumps({"hypothesisId": "D", "location": "livesport_h2h_scraper.py:1866", "message": "Odds API call start", "data": {"match_url": match_url[:80], "sport": sport}, "timestamp": int(time.time() * 1000)}) + '\n')
+        except: pass
+        # #endregion
+        
         # Użyj API do pobrania kursów
         api_result = get_livesport_odds(match_url, sport)
+        
+        # #region agent log
+        _odds_duration = time.time() - _odds_start_time
+        try:
+            import json as _json_debug
+            with open(r'c:\Users\hp\Bdudcsidinsv\debug.log', 'a', encoding='utf-8') as _f:
+                _f.write(_json_debug.dumps({"hypothesisId": "D", "location": "livesport_h2h_scraper.py:1870", "message": "Odds API call complete", "data": {"duration_sec": round(_odds_duration, 2), "odds_found": api_result.get('odds_found') if api_result else False}, "timestamp": int(time.time() * 1000)}) + '\n')
+        except: pass
+        # #endregion
         
         if api_result and api_result.get('odds_found'):
             # 🔧 Upewnij się że kursy to float lub None (nie string 'nan')
@@ -1869,8 +1907,6 @@ def fetch_odds_from_livesport(driver: webdriver.Chrome, match_url: str, sport: s
                 print(f"   ✅ {sport.title()}: Kursy znalezione - {result['home_odds']}/{result['away_odds']} ({result['bookmaker']})")
         else:
             # Fallback: Spróbuj wydobyć Event ID z URL ręcznie i próbuj ponownie
-            import re
-            
             # Wydobądź event ID z URL
             event_id = None
             
@@ -2367,7 +2403,6 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
     try:
         title = soup.title.string if soup.title else ''
         if title:
-            import re
             # Tennis: często "Zawodnik A - Zawodnik B"
             m = re.split(r"\s[-–—|]\s|\svs\s|\sv\s", title)
             if len(m) >= 2:
@@ -2405,7 +2440,6 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
         
         if not out['match_time'] and soup.title:
             title = soup.title.string
-            import re
             date_match = re.search(r'(\d{1,2}\.\d{1,2}\.\d{2,4})\s*(\d{1,2}:\d{2})?', title)
             if date_match:
                 date_str = date_match.group(1)
@@ -2432,7 +2466,6 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
             score = item.get('score', '')
             
             # Parsuj wynik (w tenisie może być np. "6-4, 7-5" lub "2-1" dla setów)
-            import re
             score_match = re.search(r"(\d+)\s*[:\-]\s*(\d+)", score)
             if not score_match:
                 continue
