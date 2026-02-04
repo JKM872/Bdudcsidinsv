@@ -155,6 +155,11 @@ class LivesportOddsAPI:
         bet_type = sport_config['betType']
         has_draw = sport_config['has_draw']
         
+        # Debug logging dla volleyball/tennis (sporty bez remisu)
+        is_no_draw_sport = sport.lower() in ['volleyball', 'tennis', 'badminton', 'table_tennis']
+        if is_no_draw_sport:
+            print(f"   🔍 {sport.title()} API: event_id={event_id}, betType={bet_type}, has_draw={has_draw}")
+        
         result = {
             'home_odds': None,
             'draw_odds': None,
@@ -246,6 +251,14 @@ class LivesportOddsAPI:
             print(f"   ⚠️ Livesport API error: {e}")
         except Exception as e:
             print(f"   ⚠️ Livesport API parsing error: {e}")
+        
+        # 🔧 Zawsze ustaw draw_odds na None dla sportów bez remisu
+        if not has_draw:
+            result['draw_odds'] = None
+        
+        # Debug logging dla volleyball/tennis gdy brak kursów
+        if is_no_draw_sport and not result['success']:
+            print(f"   ⚠️ {sport.title()} API: Brak kursów dla event {event_id}")
         
         return result
     

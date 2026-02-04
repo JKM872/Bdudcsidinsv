@@ -1822,6 +1822,11 @@ def fetch_odds_from_livesport(driver: webdriver.Chrome, match_url: str, sport: s
         'odds_found': False
     }
     
+    # Debug logging dla sportów bez remisu (volleyball, tennis)
+    is_no_draw_sport = sport.lower() in ['volleyball', 'tennis', 'badminton', 'table_tennis']
+    if is_no_draw_sport:
+        print(f"   🏐 {sport.title()}: Pobieranie kursów z Livesport API (HOME_AWAY, bez remisu)...")
+    
     try:
         # Import API client
         from livesport_odds_api import LivesportOddsAPI, get_livesport_odds
@@ -1840,6 +1845,11 @@ def fetch_odds_from_livesport(driver: webdriver.Chrome, match_url: str, sport: s
             result['away_odds'] = float(away_val) if away_val is not None else None
             result['bookmaker'] = api_result.get('bookmaker', 'Pinnacle')
             result['odds_found'] = True
+            
+            # 🔧 Dla sportów bez remisu, zawsze ustaw draw_odds na None
+            if is_no_draw_sport:
+                result['draw_odds'] = None
+                print(f"   ✅ {sport.title()}: Kursy znalezione - {result['home_odds']}/{result['away_odds']} ({result['bookmaker']})")
         else:
             # Fallback: Spróbuj wydobyć Event ID z URL ręcznie i próbuj ponownie
             import re
@@ -1877,10 +1887,19 @@ def fetch_odds_from_livesport(driver: webdriver.Chrome, match_url: str, sport: s
                     result['away_odds'] = float(away_val) if away_val is not None else None
                     result['bookmaker'] = api_result.get('bookmaker', 'Pinnacle')
                     result['odds_found'] = True
-                    print(f"   ✅ Livesport API (retry): {result['bookmaker']} - {result['home_odds']}/{result.get('draw_odds', '-')}/{result['away_odds']}")
+                    
+                    # 🔧 Dla sportów bez remisu, zawsze ustaw draw_odds na None
+                    if is_no_draw_sport:
+                        result['draw_odds'] = None
+                        print(f"   ✅ {sport.title()} (retry): Kursy znalezione - {result['home_odds']}/{result['away_odds']} ({result['bookmaker']})")
+                    else:
+                        print(f"   ✅ Livesport API (retry): {result['bookmaker']} - {result['home_odds']}/{result.get('draw_odds', '-')}/{result['away_odds']}")
             
             if not result['odds_found']:
-                print(f"   ⚠️ Livesport API: Brak kursów na stronie")
+                if is_no_draw_sport:
+                    print(f"   ⚠️ {sport.title()}: Brak kursów - event_id może być niepoprawny lub mecz nie ma kursów")
+                else:
+                    print(f"   ⚠️ Livesport API: Brak kursów na stronie")
                 
     except ImportError:
         print(f"   ⚠️ Livesport API: Moduł livesport_odds_api niedostępny")
