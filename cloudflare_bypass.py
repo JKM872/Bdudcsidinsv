@@ -163,6 +163,85 @@ except ImportError:
     METHODS_AVAILABLE['httpx'] = False
 
 
+# 🔥 FlareSolverr health check cache
+_flaresolverr_health_cache = {
+    'last_check': 0,
+    'is_healthy': None,
+    'cache_ttl': 60  # Cache health status for 60 seconds
+}
+
+
+def check_flaresolverr_health(force: bool = False) -> bool:
+    """
+    Sprawdź czy FlareSolverr działa poprawnie.
+    
+    Args:
+        force: Jeśli True, ignoruj cache i sprawdź na żywo
+    
+    Returns:
+        True jeśli FlareSolverr działa, False w przeciwnym wypadku
+    """
+    global _flaresolverr_health_cache
+    
+    current_time = time.time()
+    
+    # Sprawdź cache (chyba że force=True)
+    if not force and _flaresolverr_health_cache['is_healthy'] is not None:
+        time_since_check = current_time - _flaresolverr_health_cache['last_check']
+        if time_since_check < _flaresolverr_health_cache['cache_ttl']:
+            return _flaresolverr_health_cache['is_healthy']
+    
+    # Wykonaj health check
+    try:
+        # Buduj URL health endpoint
+        health_url = FLARESOLVERR_URL.replace('/v1', '/health')
+        if not health_url.endswith('/health'):
+            health_url = FLARESOLVERR_URL.rstrip('/').replace('/v1', '') + '/health'
+        
+        response = requests.get(health_url, timeout=5)
+        
+        if response.status_code == 200:
+            try:
+                data = response.json()
+                is_healthy = data.get('status') == 'ok'
+            except:
+                # Jeśli odpowiedź nie jest JSON, ale status 200 - przyjmij że działa
+                is_healthy = True
+            
+            if is_healthy:
+                print(f"      🔥 FlareSolverr health check: ✅ OK")
+            else:
+                print(f"      🔥 FlareSolverr health check: ⚠️ Unhealthy response")
+            
+            _flaresolverr_health_cache['is_healthy'] = is_healthy
+            _flaresolverr_health_cache['last_check'] = current_time
+            return is_healthy
+        else:
+            print(f"      🔥 FlareSolverr health check: ❌ HTTP {response.status_code}")
+            _flaresolverr_health_cache['is_healthy'] = False
+            _flaresolverr_health_cache['last_check'] = current_time
+            return False
+            
+    except requests.exceptions.ConnectionError:
+        print(f"      🔥 FlareSolverr health check: ❌ Connection refused")
+        print(f"         URL: {FLARESOLVERR_URL}")
+        if IS_CI:
+            print(f"         W CI/CD: sprawdź czy FlareSolverr Docker service jest uruchomiony")
+        _flaresolverr_health_cache['is_healthy'] = False
+        _flaresolverr_health_cache['last_check'] = current_time
+        return False
+    except requests.exceptions.Timeout:
+        print(f"      🔥 FlareSolverr health check: ❌ Timeout")
+        _flaresolverr_health_cache['is_healthy'] = False
+        _flaresolverr_health_cache['last_check'] = current_time
+        return False
+    except Exception as e:
+        print(f"      🔥 FlareSolverr health check: ❌ Error: {str(e)[:50]}")
+        _flaresolverr_health_cache['is_healthy'] = False
+        _flaresolverr_health_cache['last_check'] = current_time
+        return False
+
+
 def get_random_user_agent() -> str:
     """Zwraca losowy, aktualny User-Agent"""
     agents = [
@@ -304,6 +383,14 @@ class CloudflareBypass:
         Próbuje kolejnych metod aż jedna zadziała.
         """
         
+        # 🔍 CI/CD Environment logging (dla debugowania)
+        if IS_CI:
+            self.log(f"🔍 CI/CD Environment detected:")
+            self.log(f"   CI: {os.environ.get('CI')}")
+            self.log(f"   GITHUB_ACTIONS: {os.environ.get('GITHUB_ACTIONS')}")
+            self.log(f"   FLARESOLVERR_URL: {FLARESOLVERR_URL}")
+            self.log(f"   DISPLAY: {os.environ.get('DISPLAY', 'not set')}")
+        
         # Uruchom Xvfb jeśli w CI/CD (dla metod przeglądarkowych)
         if IS_CI:
             start_xvfb()
@@ -379,6 +466,11 @@ class CloudflareBypass:
         Najlepsza metoda dla CI/CD! Działa przez HTTP API.
         Próbuje 3 razy z rosnącym timeoutem.
         """
+        # 🔥 Health check przed użyciem FlareSolverr
+        if not check_flaresolverr_health():
+            self.log("⚠️ FlareSolverr health check failed - skipping FlareSolverr")
+            return None
+        
         # 🔥 Forebet wymaga DUŻO czasu - próbujemy 3 razy
         timeouts = [120000, 180000, 300000]  # 2, 3, 5 minut
         
@@ -503,14 +595,25 @@ class CloudflareBypass:
                 else:
                     self.log(f"⚠️ FlareSolverr HTTP {response.status_code}")
                     
-            except requests.exceptions.ConnectionError:
+            except requests.exceptions.ConnectionError as e:
                 self.log("⚠️ FlareSolverr: serwer niedostępny")
+                self.log(f"   URL: {FLARESOLVERR_URL}")
+                if IS_CI:
+                    self.log("   W CI/CD: sprawdź czy FlareSolverr Docker service jest uruchomiony w workflow")
+                    self.log("   Hint: sprawdź 'services:' w GitHub Actions i 'Wait for FlareSolverr' step")
+                else:
+                    self.log("   Lokalnie: upewnij się że FlareSolverr Docker jest uruchomiony")
+                    self.log("   Hint: docker run -d -p 8191:8191 ghcr.io/flaresolverr/flaresolverr:latest")
                 return None  # Nie ma sensu próbować dalej
             except requests.exceptions.Timeout:
-                self.log(f"⚠️ FlareSolverr: timeout próby {attempt}")
+                self.log(f"⚠️ FlareSolverr: timeout próby {attempt} ({flare_timeout//1000}s)")
+                if attempt < len(timeouts):
+                    self.log(f"   Próbuję ponownie z dłuższym timeout ({timeouts[attempt]//1000}s)...")
                 continue  # Spróbuj z dłuższym timeout
             except Exception as e:
-                self.log(f"⚠️ FlareSolverr error: {str(e)[:50]}")
+                self.log(f"⚠️ FlareSolverr error: {type(e).__name__}: {str(e)[:80]}")
+                if IS_CI:
+                    self.log(f"   CI Environment: CI={os.environ.get('CI')}, GITHUB_ACTIONS={os.environ.get('GITHUB_ACTIONS')}")
                 continue
         
         return None
@@ -520,6 +623,11 @@ class CloudflareBypass:
         🔥 FlareSolverr z sesją - tworzy sesję, rozwiązuje challenge, potem pobiera stronę
         Czasami challenge wymaga wielu prób.
         """
+        # 🔥 Health check przed użyciem FlareSolverr
+        if not check_flaresolverr_health():
+            self.log("⚠️ FlareSolverr health check failed - skipping FlareSolverr SESSION")
+            return None
+        
         import uuid
         session_id = f"forebet_{uuid.uuid4().hex[:8]}"
         
@@ -600,8 +708,18 @@ class CloudflareBypass:
             # Usuń sesję po nieudanych próbach
             self._cleanup_flaresolverr_session(session_id)
             
+        except requests.exceptions.ConnectionError:
+            self.log("⚠️ FlareSolverr SESSION: serwer niedostępny")
+            self.log(f"   URL: {FLARESOLVERR_URL}")
+            if IS_CI:
+                self.log("   W CI/CD: sprawdź czy FlareSolverr Docker service jest uruchomiony")
+        except requests.exceptions.Timeout:
+            self.log(f"⚠️ FlareSolverr SESSION: timeout")
+            self._cleanup_flaresolverr_session(session_id)
         except Exception as e:
-            self.log(f"⚠️ FlareSolverr SESSION error: {str(e)[:50]}")
+            self.log(f"⚠️ FlareSolverr SESSION error: {type(e).__name__}: {str(e)[:80]}")
+            if IS_CI:
+                self.log(f"   CI Environment: CI={os.environ.get('CI')}, GITHUB_ACTIONS={os.environ.get('GITHUB_ACTIONS')}")
             self._cleanup_flaresolverr_session(session_id)
         
         return None

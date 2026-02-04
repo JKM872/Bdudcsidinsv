@@ -93,14 +93,27 @@ jobs:
       # 7. Wait for FlareSolverr to be ready
       - name: Wait for FlareSolverr
         run: |
-          echo "Waiting for FlareSolverr..."
+          echo "⏳ Waiting for FlareSolverr to be ready..."
+          FLARESOLVERR_READY=false
           for i in {1..30}; do
-            if curl -s http://localhost:8191/health | grep -q "ok"; then
-              echo "FlareSolverr is ready!"
-              break
+            if curl -s http://localhost:8191/health | grep -q '"status"'; then
+              echo "✅ FlareSolverr health endpoint responding!"
+              TEST_RESPONSE=$(curl -s -X POST http://localhost:8191/v1 \
+                -H "Content-Type: application/json" \
+                -d '{"cmd":"request.get","url":"https://www.google.com","maxTimeout":10000}' \
+                --max-time 15 2>/dev/null || echo "TIMEOUT")
+              if echo "$TEST_RESPONSE" | grep -q '"status":"ok"'; then
+                echo "✅ FlareSolverr verified - working correctly!"
+                FLARESOLVERR_READY=true
+                break
+              fi
             fi
+            echo "Waiting... ($i/30)"
             sleep 2
           done
+          if [ "$FLARESOLVERR_READY" != "true" ]; then
+            echo "⚠️ FlareSolverr may not be fully ready, continuing anyway..."
+          fi
       
       # 8. Run the scraper for this sport
       - name: Run scraper - ${{ matrix.sport }}
