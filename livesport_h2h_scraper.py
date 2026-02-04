@@ -642,6 +642,8 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         'gemini_confidence': None,  # 0-100% pewności
         'gemini_reasoning': None,  # Szczegółowe uzasadnienie
         'gemini_recommendation': None,  # HIGH/MEDIUM/LOW/SKIP
+        # SPORT INFO
+        'sport': sport,  # Nazwa sportu (football, basketball, volleyball, etc.)
     }
 
     # 🔥🔥🔥🔥 QUADRUPLE FORCE: Ultra-aggressive retry logic with multiple strategies
@@ -970,11 +972,26 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
                 away_form = extract_team_form(soup, driver, 'away', out.get('away_team'))
                 out['home_form'] = home_form
                 out['away_form'] = away_form
+                # Mapuj na pola _overall dla kompatybilności z email_notifier
+                out['home_form_overall'] = home_form
+                out['away_form_overall'] = away_form
+                out['home_form_home'] = home_form  # Używamy tej samej formy jako fallback
+                out['away_form_away'] = away_form
             except (AttributeError, TypeError, WebDriverException) as e:
                 logger.debug(f"Błąd przy pobieraniu formy fallback: {e}")
     else:
-        # Nie kwalifikuje się podstawowo - nie sprawdzaj formy
+        # Nie kwalifikuje się podstawowo - ale nadal pobierz formę dla wyświetlenia
         out['qualifies'] = False
+        # Pobierz podstawową formę (dla meczów niekwalifikujących się)
+        try:
+            home_form = extract_team_form(soup, driver, 'home', out.get('home_team'))
+            away_form = extract_team_form(soup, driver, 'away', out.get('away_team'))
+            out['home_form'] = home_form
+            out['away_form'] = away_form
+            out['home_form_overall'] = home_form
+            out['away_form_overall'] = away_form
+        except (AttributeError, TypeError, WebDriverException) as e:
+            logger.debug(f"Błąd przy pobieraniu formy dla niekwalifikujących: {e}")
     
     # ⏱️ TIMING: Koniec kwalifikacji (Etap 1)
     _timings['qualify'] = time_module.time() - _t_start - _timings['h2h']
@@ -1822,8 +1839,8 @@ def fetch_odds_from_livesport(driver: webdriver.Chrome, match_url: str, sport: s
         'odds_found': False
     }
     
-    # Debug logging dla sportów bez remisu (volleyball, tennis)
-    is_no_draw_sport = sport.lower() in ['volleyball', 'tennis', 'badminton', 'table_tennis']
+    # Debug logging dla sportów bez remisu (volleyball, tennis, basketball)
+    is_no_draw_sport = sport.lower() in ['volleyball', 'tennis', 'basketball', 'badminton', 'table_tennis']
     if is_no_draw_sport:
         print(f"   🏐 {sport.title()}: Pobieranie kursów z Livesport API (HOME_AWAY, bez remisu)...")
     

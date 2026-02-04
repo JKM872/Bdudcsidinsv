@@ -391,6 +391,32 @@ def scrape_and_send_email(
                 print(f"         Form A: {sample.get('form_a', sample.get('home_form', 'N/A'))}")
                 print(f"         H2H: {sample.get('home_wins_in_h2h_last5', 0)}-{sample.get('away_wins_in_h2h', 0)}")
         
+        # 🏐 VOLLEYBALL SUMMARY
+        if 'volleyball' in sports:
+            vol_matches = [r for r in rows if r.get('sport') == 'volleyball' or '/siatkowka/' in str(r.get('match_url', '')).lower()]
+            vol_qualifying = [r for r in vol_matches if r.get('qualifies')]
+            vol_with_form = [r for r in vol_qualifying if r.get('home_form_overall') or r.get('home_form')]
+            vol_with_odds = [r for r in vol_qualifying if r.get('home_odds') or r.get('away_odds')]
+            
+            print(f"\n   🏐 VOLLEYBALL SUMMARY:")
+            print(f"      Total matches: {len(vol_matches)}")
+            print(f"      Qualifying: {len(vol_qualifying)}")
+            print(f"      With form: {len(vol_with_form)}")
+            print(f"      With odds: {len(vol_with_odds)}")
+        
+        # 🏀 BASKETBALL SUMMARY
+        if 'basketball' in sports:
+            bball_matches = [r for r in rows if r.get('sport') == 'basketball' or '/koszykowka/' in str(r.get('match_url', '')).lower()]
+            bball_qualifying = [r for r in bball_matches if r.get('qualifies')]
+            bball_with_form = [r for r in bball_qualifying if r.get('home_form_overall') or r.get('home_form')]
+            bball_with_odds = [r for r in bball_qualifying if r.get('home_odds') or r.get('away_odds')]
+            
+            print(f"\n   🏀 BASKETBALL SUMMARY:")
+            print(f"      Total matches: {len(bball_matches)}")
+            print(f"      Qualifying: {len(bball_qualifying)}")
+            print(f"      With form: {len(bball_with_form)}")
+            print(f"      With odds: {len(bball_with_odds)}")
+        
         print("="*70)
         
         # ========================================================================
