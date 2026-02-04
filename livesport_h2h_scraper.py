@@ -2459,6 +2459,33 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
     # ADVANCED SCORING: Multi-factor analysis
     # ===================================================================
     
+    # WALIDACJA: Sprawdź czy mamy wymagane dane
+    if not player_a or not player_b:
+        print(f"   ⚠️ Tennis: Brak nazw zawodników (A: {player_a}, B: {player_b})")
+        out['qualifies'] = False
+        out['advanced_score'] = 0.0
+        return out
+    
+    # Walidacja H2H - jeśli brak, użyj fallback opartego na rankingu
+    if len(h2h) == 0:
+        print(f"   ⚠️ Tennis: Brak danych H2H - używam fallback logic (tylko ranking)")
+        # Fallback: użyj tylko ranking jeśli dostępny
+        if out['ranking_a'] and out['ranking_b']:
+            ranking_diff = abs(out['ranking_a'] - out['ranking_b'])
+            # Jeśli duża różnica w rankingu (≥20 miejsc), kwalifikuj
+            out['qualifies'] = ranking_diff >= 20
+            out['advanced_score'] = ranking_diff * 0.5  # Przybliżony score
+            if out['ranking_a'] < out['ranking_b']:
+                out['favorite'] = 'player_a'
+            else:
+                out['favorite'] = 'player_b'
+            print(f"   📊 Ranking fallback: diff={ranking_diff}, score={out['advanced_score']:.1f}, qualifies={out['qualifies']}")
+        else:
+            out['qualifies'] = False
+            out['advanced_score'] = 0.0
+            print(f"   ❌ Brak H2H i rankingu - nie można ocenić meczu")
+        return out
+    
     try:
         from tennis_advanced import TennisMatchAnalyzer
         
@@ -2491,15 +2518,62 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
         
         # Zapisz wyniki
         out['advanced_score'] = abs(analysis['total_score'])  # Zawsze wartość bezwzględna
+        out['raw_score'] = analysis['total_score']  # Zachowaj oryginalny znak dla debugowania
         out['qualifies'] = analysis['qualifies']
         out['score_breakdown'] = analysis['breakdown']
         out['favorite'] = analysis['details'].get('favorite', 'unknown')  # Kto jest faworytem
         
+        # Szczegółowe logowanie scoringu
+        breakdown = analysis.get('breakdown', {})
+        if analysis.get('qualifies'):
+            print(f"   ✅ Tennis QUALIFIES! Score: {out['advanced_score']:.1f}/100")
+            print(f"      Breakdown: H2H={breakdown.get('h2h_score', 0):.1f}, "
+                  f"Ranking={breakdown.get('ranking_score', 0):.1f}, "
+                  f"Form={breakdown.get('form_score', 0):.1f}, "
+                  f"Surface={breakdown.get('surface_score', 0):.1f}")
+            print(f"      Favorite: {out.get('favorite', 'unknown')}")
+        else:
+            print(f"   ❌ Tennis NIE kwalifikuje: Score: {out['advanced_score']:.1f}/100 "
+                  f"(threshold: {analyzer.config['threshold']})")
+            print(f"      Breakdown: H2H={breakdown.get('h2h_score', 0):.1f}, "
+                  f"Ranking={breakdown.get('ranking_score', 0):.1f}, "
+                  f"Form={breakdown.get('form_score', 0):.1f}, "
+                  f"Surface={breakdown.get('surface_score', 0):.1f}")
+        
     except Exception as e:
         # Fallback do prostej logiki jeśli advanced analysis nie działa
         print(f"   ⚠️ Advanced analysis error: {e}, using basic logic")
-        out['qualifies'] = (player_a_wins >= 1 and player_a_wins > player_b_wins)
-        out['advanced_score'] = 0.0
+        
+        # Ulepszona fallback logic: H2H + ranking
+        fallback_score = 0.0
+        
+        # 1. H2H (50% wagi) - 10 pkt za każdą wygraną różnicy
+        if player_a_wins > 0 or player_b_wins > 0:
+            h2h_advantage = player_a_wins - player_b_wins
+            fallback_score += h2h_advantage * 10.0
+        
+        # 2. Ranking (25% wagi) - 0.5 pkt za każde miejsce różnicy
+        if out['ranking_a'] and out['ranking_b']:
+            ranking_diff = abs(out['ranking_a'] - out['ranking_b'])
+            if out['ranking_a'] < out['ranking_b']:  # A lepszy (niższy numer = lepszy)
+                fallback_score += ranking_diff * 0.5
+            else:  # B lepszy
+                fallback_score -= ranking_diff * 0.5
+        
+        # Kwalifikacja: abs(score) >= 50 (zgodnie z threshold)
+        out['qualifies'] = abs(fallback_score) >= 50.0
+        out['advanced_score'] = abs(fallback_score)
+        out['raw_score'] = fallback_score
+        
+        # Ustal faworyta
+        if fallback_score > 0:
+            out['favorite'] = 'player_a'
+        elif fallback_score < 0:
+            out['favorite'] = 'player_b'
+        else:
+            out['favorite'] = 'even'
+        
+        print(f"   📊 Fallback score: {fallback_score:.1f} -> abs={out['advanced_score']:.1f} (qualifies: {out['qualifies']})")
 
     return out
 
