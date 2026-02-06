@@ -871,7 +871,11 @@ def search_and_get_votes(
         return result
         
     except Exception as e:
-        print(f"   ❌ SofaScore: Błąd: {e}")
+        print(f"   ❌ SofaScore: Błąd: {type(e).__name__}: {e}")
+        # 🔥 FIX: Jeśli mecz został znaleziony (match_url jest ustawiony), zachowaj found=True
+        if result.get('sofascore_url'):
+            result['sofascore_found'] = True
+            print(f"   ℹ️ SofaScore: Mecz znaleziony, ale ekstrakcja danych nie powiodła się")
         return result
 
 

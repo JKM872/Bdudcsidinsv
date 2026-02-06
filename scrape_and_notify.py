@@ -447,18 +447,24 @@ def scrape_and_send_email(
                     for sport_name, success in prefetch_results.items():
                         status = "✅" if success else "❌"
                         print(f"   {status} {sport_name}")
-                except ImportError:
+                except ImportError as ie:
                     FOREBET_AVAILABLE = False
-                    print(f"   ⚠️ Forebet scraper niedostępny")
+                    print(f"   ⚠️ Forebet scraper niedostępny: ImportError - {ie}")
+                except Exception as e:
+                    FOREBET_AVAILABLE = False
+                    print(f"   ⚠️ Forebet scraper niedostępny: {type(e).__name__} - {e}")
             
             # Import SofaScore jeśli potrzebny
             if use_sofascore:
                 try:
                     from sofascore_scraper import get_sofascore_prediction
                     SOFASCORE_AVAILABLE = True
-                except ImportError:
+                except ImportError as ie:
                     SOFASCORE_AVAILABLE = False
-                    print(f"   ⚠️ SofaScore scraper niedostępny")
+                    print(f"   ⚠️ SofaScore scraper niedostępny: ImportError - {ie}")
+                except Exception as e:
+                    SOFASCORE_AVAILABLE = False
+                    print(f"   ⚠️ SofaScore scraper niedostępny: {type(e).__name__} - {e}")
             
             # Przetwórz każdy kwalifikujący się mecz
             enriched_count = 0

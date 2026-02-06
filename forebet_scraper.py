@@ -1504,11 +1504,21 @@ def search_forebet_prediction(
                     print(f"      ✅ Znaleziono mecz na Forebet: {forebet_home} vs {forebet_away}")
                     print(f"         Similarity: Home={home_score:.2f}, Away={away_score:.2f}")
                     
+                    # 🔥 FIX: Ustaw success/found NATYCHMIAST po znalezieniu meczu
+                    # Dzięki temu nawet jeśli ekstrakcja danych rzuci wyjątek,
+                    # mecz będzie oznaczony jako znaleziony
+                    result['success'] = True
+                    result['found'] = True  # Wymagane przez scrape_and_notify.py
+                    result['home_team_forebet'] = forebet_home
+                    result['away_team_forebet'] = forebet_away
+                    
                     # Wyciągnij predykcję - POPRAWIONA STRUKTURA
                     extraction_success = False
                     
-                    # 1. Prawdopodobieństwa (div.fprc > spans)
-                    fprc_div = row.find('div', class_='fprc')
+                    # 🔥 Wrap extraction in separate try/except to prevent losing the match
+                    try:
+                        # 1. Prawdopodobieństwa (div.fprc > spans)
+                        fprc_div = row.find('div', class_='fprc')
                     if fprc_div:
                         spans = fprc_div.find_all('span')
                         if len(spans) >= 3:
@@ -1620,22 +1630,23 @@ def search_forebet_prediction(
                                 except (ValueError, IndexError):
                                     pass
                     
-                    # 🔥 FIX: Ustaw oba klucze dla kompatybilności z scrape_and_notify.py
-                    result['success'] = True
-                    result['found'] = True  # Wymagane przez scrape_and_notify.py
-                    result['home_team_forebet'] = forebet_home
-                    result['away_team_forebet'] = forebet_away
+                        # Log status ekstrakcji
+                        if extraction_success:
+                            print(f"         ✅ Ekstrakcja danych zakończona sukcesem")
+                        else:
+                            print(f"         ⚠️ Mecz znaleziony, ale nie udało się wyciągnąć predykcji")
                     
-                    # Log status ekstrakcji
-                    if extraction_success:
-                        print(f"         ✅ Ekstrakcja danych zakończona sukcesem")
-                    else:
-                        print(f"         ⚠️ Mecz znaleziony, ale nie udało się wyciągnąć predykcji")
+                    except Exception as extraction_error:
+                        # 🔥 FIX: Loguj błędy ekstrakcji ale NIE resetuj found/success
+                        print(f"         ⚠️ Błąd ekstrakcji danych: {type(extraction_error).__name__}: {extraction_error}")
+                        print(f"         ℹ️ Mecz został znaleziony ale bez szczegółowych danych")
+                        # result['success'] i result['found'] pozostają True!
                     
+                    # Zawsze break po znalezieniu meczu (nawet jeśli ekstrakcja zawiodła)
                     break
                     
             except Exception as e:
-                print(f"      ⚠️ Błąd parsowania wiersza Forebet: {e}")
+                print(f"      ⚠️ Błąd parsowania wiersza Forebet: {type(e).__name__}: {e}")
                 continue
         
         if not result['success']:
@@ -1675,40 +1686,46 @@ def search_forebet_prediction(
                                 if (row_home.lower() == gemini_home.lower() and 
                                     row_away.lower() == gemini_away.lower()):
                                     print(f"      ✅ Gemini: Znaleziono predykcję dla {row_home} vs {row_away}")
+                                    
+                                    # 🔥 FIX: Ustaw success/found NATYCHMIAST
                                     result['found'] = True
+                                    result['success'] = True
                                     result['home_team_forebet'] = row_home
                                     result['away_team_forebet'] = row_away
                                     
                                     # Wyciągnij predykcję (taki sam kod jak wcześniej)
-                                    fprc_div = row.find('div', class_='fprc')
-                                    if fprc_div:
-                                        spans = fprc_div.find_all('span')
-                                        if len(spans) >= 3:
-                                            try:
-                                                home_prob = int(spans[0].get_text(strip=True))
-                                                draw_prob = int(spans[1].get_text(strip=True))
-                                                away_prob = int(spans[2].get_text(strip=True))
-                                                
-                                                max_prob = max(home_prob, draw_prob, away_prob)
-                                                result['probability'] = float(max_prob)
-                                                
-                                                if max_prob == home_prob:
-                                                    result['prediction'] = '1'
-                                                elif max_prob == draw_prob:
-                                                    result['prediction'] = 'X'
-                                                else:
-                                                    result['prediction'] = '2'
-                                            except (ValueError, IndexError):
-                                                pass
+                                    try:
+                                        fprc_div = row.find('div', class_='fprc')
+                                        if fprc_div:
+                                            spans = fprc_div.find_all('span')
+                                            if len(spans) >= 3:
+                                                try:
+                                                    home_prob = int(spans[0].get_text(strip=True))
+                                                    draw_prob = int(spans[1].get_text(strip=True))
+                                                    away_prob = int(spans[2].get_text(strip=True))
+                                                    
+                                                    max_prob = max(home_prob, draw_prob, away_prob)
+                                                    result['probability'] = float(max_prob)
+                                                    
+                                                    if max_prob == home_prob:
+                                                        result['prediction'] = '1'
+                                                    elif max_prob == draw_prob:
+                                                        result['prediction'] = 'X'
+                                                    else:
+                                                        result['prediction'] = '2'
+                                                except (ValueError, IndexError):
+                                                    pass
+                                        
+                                        # Exact score
+                                        ex_sc_elem = row.find('div', class_='ex_sc')
+                                        if ex_sc_elem:
+                                            result['exact_score'] = ex_sc_elem.get_text(strip=True)
+                                    except Exception as extraction_err:
+                                        print(f"      ⚠️ Gemini: Błąd ekstrakcji: {extraction_err}")
                                     
-                                    # Exact score
-                                    ex_sc_elem = row.find('div', class_='ex_sc')
-                                    if ex_sc_elem:
-                                        result['exact_score'] = ex_sc_elem.get_text(strip=True)
-                                    
-                                    result['success'] = True
                                     break
                         except Exception as e:
+                            print(f"      ⚠️ Gemini: Błąd przetwarzania wiersza: {e}")
                             continue
             
             # Jeśli nadal nie znaleziono - ustaw error
