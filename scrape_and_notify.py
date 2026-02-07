@@ -207,8 +207,8 @@ def scrape_and_send_email(
         rows = []
         qualifying_count = 0
         qualifying_indices = []  # Indeksy kwalifikujących się meczów
-        RESTART_INTERVAL = 50  # Zwiększone dla szybszego przetwarzania w FAZIE 1
-        CHECKPOINT_INTERVAL = 40  # Zwiększone dla FAZY 1
+        RESTART_INTERVAL = 80  # Zwiększone — mniej restartów = szybciej
+        CHECKPOINT_INTERVAL = 80  # Co 80 meczów checkpoint
         
         # ========================================================================
         # FAZA 1: SZYBKIE SPRAWDZENIE KWALIFIKACJI (BEZ Forebet/SofaScore)
@@ -355,9 +355,9 @@ def scrape_and_send_email(
                     print(f"   ⚠️  Błąd restartu: {e}")
                     driver = start_driver(headless=headless)
             
-            # Rate limiting - zoptymalizowane dla szybkości
+            # Rate limiting - minimalne w CI dla szybkości
             elif i < len(urls):
-                time.sleep(0.3 if IS_CI else 0.8)
+                time.sleep(0.15 if IS_CI else 0.8)
         
         phase1_end = time_module.time()
         phase1_duration = phase1_end - phase1_start

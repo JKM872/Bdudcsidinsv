@@ -666,13 +666,13 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
             # 🔥 Strategy 1: Normal navigation - szybsze w CI
             if attempt == 0:
                 driver.get(url)
-                time.sleep(1.5 if _is_ci else 3.0)  # CI: szybciej
+                time.sleep(1.0 if _is_ci else 3.0)  # CI: szybciej
             
             # 🔥 Strategy 2: Refresh if first failed
             elif attempt == 1:
                 print(f"   🔄 Próba #2: Refresh...")
                 driver.refresh()
-                time.sleep(1.5 if _is_ci else 3.0)
+                time.sleep(1.0 if _is_ci else 3.0)
             
             # 🔥 Strategy 3: Navigate to main page first, then match
             elif attempt == 2:
@@ -2657,8 +2657,111 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
     return out
 
 
+def _accept_cookies_on_page(driver: webdriver.Chrome):
+    """Akceptuje banner cookies/consent jeśli się pojawi (OneTrust itp.)."""
+    try:
+        cookie_btn = driver.find_element(By.ID, "onetrust-accept-btn-handler")
+        if cookie_btn.is_displayed():
+            cookie_btn.click()
+            time.sleep(0.5)
+            print("   🍪 Consent banner zaakceptowany")
+            return True
+    except NoSuchElementException:
+        pass
+    except Exception:
+        pass
+    # Fallback: szukaj innych popularnych przycisków consent
+    for selector in ['button#accept-cookies', 'button.cookie-accept', '[data-testid="accept-cookies"]']:
+        try:
+            btn = driver.find_element(By.CSS_SELECTOR, selector)
+            if btn.is_displayed():
+                btn.click()
+                time.sleep(0.3)
+                print("   🍪 Consent banner zaakceptowany (fallback)")
+                return True
+        except Exception:
+            continue
+    return False
+
+
+def _count_match_links_in_page(driver: webdriver.Chrome) -> int:
+    """Szybko liczy ile linków do meczów jest aktualnie na stronie (bez parsowania BS4)."""
+    try:
+        count = driver.execute_script("""
+            var links = document.querySelectorAll('a[href]');
+            var count = 0;
+            for (var i = 0; i < links.length; i++) {
+                var href = links[i].getAttribute('href') || '';
+                if (href.indexOf('/match/') !== -1 || href.indexOf('/mecz/') !== -1 || 
+                    href.indexOf('/#/match/') !== -1 || href.indexOf('/#id/') !== -1 ||
+                    href.indexOf('/event/') !== -1 || href.indexOf('/detail/') !== -1) {
+                    count++;
+                }
+            }
+            return count;
+        """)
+        return count or 0
+    except Exception:
+        return 0
+
+
+def _extract_match_links_from_soup(soup: BeautifulSoup, sport_url: str, existing_links: set, leagues: List[str] = None) -> List[str]:
+    """Wyciąga linki do meczów z BeautifulSoup. Zwraca unikalne nowe linki."""
+    sport_links = []
+    # Rozszerzone wzorce URL — Livesport zmienia endpointy
+    patterns = ['/match/', '/mecz/', '/#/match/', '/#id/', '/event/', '/detail/']
+    debug_patterns_found = {p: 0 for p in patterns}
+    
+    anchors = soup.find_all('a', href=True)
+    
+    for a in anchors:
+        href = a['href']
+        matched = False
+        for pattern in patterns:
+            if pattern in href:
+                debug_patterns_found[pattern] += 1
+                matched = True
+                break
+        
+        if not matched:
+            # Dodatkowy fallback: data-href lub onclick z URLem meczu
+            data_href = a.get('data-href', '')
+            for pattern in patterns:
+                if pattern in data_href:
+                    href = data_href
+                    debug_patterns_found[pattern] += 1
+                    matched = True
+                    break
+        
+        if matched:
+            # Normalizacja URLa
+            if href.startswith('/'):
+                href = 'https://www.livesport.com' + href
+            elif href.startswith('#'):
+                href = sport_url + href
+            
+            # Filtrowanie po ligach (jeśli podano)
+            if leagues:
+                if not any(league.lower() in href.lower() for league in leagues):
+                    link_text = a.get_text(strip=True).lower()
+                    if not any(league.lower() in link_text for league in leagues):
+                        continue
+            
+            if href not in existing_links:
+                existing_links.add(href)
+                sport_links.append(href)
+    
+    return sport_links, debug_patterns_found
+
+
 def get_match_links_from_day(driver: webdriver.Chrome, date: str, sports: List[str] = None, leagues: List[str] = None) -> List[str]:
     """Zbiera linki do meczów z głównej strony dla danego dnia.
+    
+    OPTYMALIZACJA CI:
+    - Smart scroll: liczy linki podczas scrollowania, wychodzi gdy brak nowych
+    - Cookie consent: automatycznie zamyka bannery blokujące lazy-load
+    - Rozszerzone wzorce URL: /match/, /mecz/, /event/, /detail/, /#id/
+    - Debug logging: w CI loguje szczegóły dla diagnozy problemów
     
     Args:
         driver: Selenium WebDriver
@@ -2672,7 +2775,9 @@ def get_match_links_from_day(driver: webdriver.Chrome, date: str, sports: List[s
     if not sports:
         sports = ['football']  # domyślnie piłka nożna
     
+    IS_CI = os.environ.get('GITHUB_ACTIONS') == 'true' or os.environ.get('CI') == 'true'
     all_links = []
+    all_links_set = set()
     
     for sport in sports:
         if sport not in SPORT_URLS:
@@ -2688,96 +2793,109 @@ def get_match_links_from_day(driver: webdriver.Chrome, date: str, sports: List[s
             print(f"   URL: {date_url}")
             driver.get(date_url)
             
-            # Volleyball i niektóre sporty potrzebują więcej czasu na załadowanie
+            # Czas na pierwsze załadowanie strony
             if sport in ['volleyball', 'handball', 'rugby']:
-                time.sleep(3.5)  # Dłuższy czas dla sportów z wolniejszym ładowaniem
+                time.sleep(3.5)
             else:
-                time.sleep(2.0)  # Standardowy czas
+                time.sleep(2.5)
             
-            # Scroll w dół aby załadować więcej meczów
-            # Więcej scrolli = więcej meczów (szczególnie football z 1000+ meczami)
-            IS_CI = os.environ.get('GITHUB_ACTIONS') == 'true' or os.environ.get('CI') == 'true'
-            scroll_count = 25 if sport == 'football' else (15 if sport in ['basketball', 'tennis'] else 8)
-            if IS_CI:
-                scroll_count = max(scroll_count, 30)  # W CI scrolluj więcej
+            # 🍪 Akceptuj consent banner (może blokować lazy-load!)
+            _accept_cookies_on_page(driver)
             
-            prev_height = 0
-            no_change_count = 0
-            for scroll_i in range(scroll_count):
-                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                time.sleep(1.0 if sport == 'football' else 0.7)
+            # 📊 DEBUG CI: Sprawdź co jest na stronie PRZED scrollowaniem
+            initial_link_count = _count_match_links_in_page(driver)
+            page_title = driver.title or 'N/A'
+            current_url = driver.current_url
+            print(f"   📊 Strona załadowana: title='{page_title[:60]}', linki_przed_scroll={initial_link_count}")
+            print(f"   📊 Aktualny URL: {current_url}")
+            
+            if IS_CI and initial_link_count == 0:
+                # DIAGNOZA: brak linków po załadowaniu — może Cloudflare/consent blokuje
+                page_source_len = len(driver.page_source)
+                print(f"   ⚠️  CI DEBUG: 0 linków! page_source_len={page_source_len}")
+                # Sprawdź czy strona ma treść sportową
+                has_content = driver.execute_script("""
+                    var body = document.body ? document.body.innerText : '';
+                    return {
+                        length: body.length,
+                        has_event: body.indexOf('event') !== -1 || body.indexOf('mecz') !== -1,
+                        has_league: body.indexOf('liga') !== -1 || body.indexOf('league') !== -1,
+                        has_cloudflare: body.indexOf('Cloudflare') !== -1 || body.indexOf('challenge') !== -1,
+                        sample: body.substring(0, 300)
+                    };
+                """)
+                print(f"   ⚠️  CI DEBUG: body_len={has_content.get('length')}, has_event={has_content.get('has_event')}, has_league={has_content.get('has_league')}, cloudflare={has_content.get('has_cloudflare')}")
+                if has_content.get('sample'):
+                    print(f"   ⚠️  CI DEBUG: body[0:300] = {has_content['sample'][:200]}")
                 
-                # Sprawdź czy strona się jeszcze ładuje
-                new_height = driver.execute_script("return document.body.scrollHeight")
-                if new_height == prev_height:
-                    no_change_count += 1
-                    if no_change_count >= 3:
-                        print(f"   ℹ️ Koniec scrollowania po {scroll_i+1} scrollach (brak nowych meczów)")
+                # Retry: poczekaj dodatkowe 3s i sprawdź ponownie
+                print(f"   🔄 Dodatkowe oczekiwanie 3s...")
+                time.sleep(3.0)
+                _accept_cookies_on_page(driver)
+                initial_link_count = _count_match_links_in_page(driver)
+                print(f"   📊 Po retry: linki={initial_link_count}")
+            
+            # ========================================
+            # SMART SCROLL: Dynamicznie wg znalezionych linków
+            # ========================================
+            # Maks scrolli: football=15, inne=8. Auto-exit jeśli 3x z rzędu brak nowych.
+            max_scrolls = 15 if sport == 'football' else (10 if sport in ['basketball', 'tennis'] else 8)
+            
+            prev_link_count = initial_link_count
+            no_new_links_count = 0
+            
+            for scroll_i in range(max_scrolls):
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(0.6)  # Krótki wait — wystarczy do lazy-load
+                
+                # Policz aktualną liczbę linków (szybkie JS, bez BS4)
+                current_count = _count_match_links_in_page(driver)
+                
+                if current_count <= prev_link_count:
+                    no_new_links_count += 1
+                    if no_new_links_count >= 3:
+                        print(f"   ℹ️ Stop scrollowania po {scroll_i+1} scrollach (brak nowych linków, total={current_count})")
                         break
                 else:
-                    no_change_count = 0
-                prev_height = new_height
-                
-                # Log postępu co 10 scrolli
-                if (scroll_i + 1) % 10 == 0:
-                    print(f"   📜 Scroll {scroll_i+1}/{scroll_count}...")
+                    no_new_links_count = 0
+                    if (scroll_i + 1) % 5 == 0:
+                        print(f"   📜 Scroll {scroll_i+1}/{max_scrolls}: {current_count} linków znalezionych")
+                prev_link_count = current_count
             
-            # Scroll do góry aby zobaczyć wszystkie mecze
+            # Scroll do góry i parsuj
             driver.execute_script("window.scrollTo(0, 0);")
-            time.sleep(0.5)
+            time.sleep(0.3)
             
             soup = BeautifulSoup(driver.page_source, 'html.parser')
-            anchors = soup.find_all('a', href=True)
+            sport_links, debug_patterns_found = _extract_match_links_from_soup(
+                soup, sport_url, all_links_set, leagues
+            )
             
-            sport_links = []
-            debug_patterns_found = {'/match/': 0, '/mecz/': 0, '/#/match/': 0, '/#id/': 0}
-            
-            for a in anchors:
-                href = a['href']
-                # Szukamy linków do meczów
-                patterns_match = ['/match/', '/mecz/', '/#/match/', '/#id/']
-                matched = False
-                
-                for pattern in patterns_match:
-                    if pattern in href:
-                        debug_patterns_found[pattern] += 1
-                        matched = True
-                        break
-                
-                if matched:
-                    # Normalizacja URLa
-                    if href.startswith('/'):
-                        href = 'https://www.livesport.com' + href
-                    elif href.startswith('#'):
-                        href = sport_url + href
-                    
-                    # Filtrowanie po ligach (jeśli podano)
-                    if leagues:
-                        # Sprawdź czy któraś z lig jest w URLu
-                        if not any(league.lower() in href.lower() for league in leagues):
-                            # Sprawdź też tekst linku
-                            link_text = a.get_text(strip=True).lower()
-                            if not any(league.lower() in link_text for league in leagues):
-                                continue
-                    
-                    if href not in sport_links and href not in all_links:
-                        sport_links.append(href)
-            
-            # Debug info dla volleyball gdy nic nie znaleziono
-            if sport == 'volleyball' and len(sport_links) == 0:
+            # Debug info gdy za mało meczów
+            if len(sport_links) < 20 or (sport == 'football' and len(sport_links) < 100):
                 print(f"   ⚠️  DEBUG - Wzorce znalezione: {debug_patterns_found}")
-                print(f"   ⚠️  DEBUG - Wszystkich linków: {len(anchors)}")
-                # Pokaż przykładowe hrefs
-                sample_hrefs = [a['href'] for a in anchors[:20] if a.get('href')]
-                print(f"   ⚠️  DEBUG - Przykładowe hrefs: {sample_hrefs[:5]}")
+                anchors = soup.find_all('a', href=True)
+                print(f"   ⚠️  DEBUG - Wszystkich <a> na stronie: {len(anchors)}")
+                sample_hrefs = [a['href'] for a in anchors[:30] if a.get('href')]
+                print(f"   ⚠️  DEBUG - Przykładowe hrefs (5): {sample_hrefs[:5]}")
+                
+                # Dodatkowe: szukaj elementów które mogą być meczami ale nie są <a>
+                match_elements = soup.select('[class*="event"], [class*="match"], [class*="sportName"], [data-id]')
+                if match_elements:
+                    print(f"   ⚠️  DEBUG - Elementy match/event (nie <a>): {len(match_elements)}")
+                    for el in match_elements[:3]:
+                        print(f"      tag={el.name}, classes={el.get('class', [])[:3]}, data-id={el.get('data-id', 'N/A')}")
             
             print(f"   ✓ Znaleziono {len(sport_links)} meczów dla {sport}")
             all_links.extend(sport_links)
             
         except Exception as e:
             print(f"   ✗ Błąd przy zbieraniu linków dla {sport}: {e}")
+            import traceback
+            traceback.print_exc()
             continue
     
+    print(f"\n📊 TOTAL: {len(all_links)} linków do meczów ze wszystkich sportów")
     return all_links
 
 
