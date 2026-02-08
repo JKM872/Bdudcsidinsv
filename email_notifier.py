@@ -245,23 +245,23 @@ def _render_forebet_section(fb_pred: Optional[str], fb_prob: Optional[float], fb
         return ''
     
     html = f'''
-    <div style="padding: 10px; background: linear-gradient(135deg, #FF9800, #FF5722); border-radius: 8px;">
+    <div style="padding: 15px; background: linear-gradient(135deg, #FF9800, #FF5722); border-radius: 10px; box-shadow: 0 2px 8px rgba(255,87,34,0.3);">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div>
-                <div style="font-size: 11px; color: rgba(255,255,255,0.8);">🎯 Forebet</div>
-                <div style="font-size: 20px; font-weight: bold; color: white;">{fb_pred}</div>
+                <div style="font-size: 14px; font-weight: bold; color: rgba(255,255,255,0.9); text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">🎯 Forebet</div>
+                <div style="font-size: 32px; font-weight: bold; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">{fb_pred}</div>
             </div>
             <div style="text-align: right;">
-                <div style="font-size: 11px; color: rgba(255,255,255,0.8);">Prawdopodobieństwo</div>
-                <div style="font-size: 24px; font-weight: bold; color: white;">{fb_prob:.0f}%</div>
+                <div style="font-size: 14px; font-weight: bold; color: rgba(255,255,255,0.9); text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">Prawdopodobieństwo</div>
+                <div style="font-size: 36px; font-weight: bold; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">{fb_prob:.0f}%</div>
             </div>
     '''
     
     if fb_exact:
         html += f'''
-            <div style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 5px;">
-                <div style="font-size: 10px; color: rgba(255,255,255,0.8);">Wynik</div>
-                <div style="font-size: 14px; font-weight: bold; color: white;">{fb_exact}</div>
+            <div style="background: rgba(255,255,255,0.25); padding: 8px 14px; border-radius: 8px;">
+                <div style="font-size: 12px; font-weight: bold; color: rgba(255,255,255,0.9); text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">Wynik</div>
+                <div style="font-size: 22px; font-weight: bold; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">{fb_exact}</div>
             </div>
         '''
     

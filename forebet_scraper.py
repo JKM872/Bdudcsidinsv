@@ -1555,7 +1555,17 @@ def search_forebet_prediction(
                     # 3. Dokładny wynik (div.ex_sc)
                     ex_sc_elem = row.find('div', class_='ex_sc')
                     if ex_sc_elem:
-                        result['exact_score'] = ex_sc_elem.get_text(strip=True)
+                        # Non-football sports (handball, basketball, hockey, volleyball)
+                        # use <br> tag as separator: "29<br><b>32</b>" -> "29-32"
+                        # Football uses text with " - ": "1 - 0"
+                        if ex_sc_elem.find('br'):
+                            scores = list(ex_sc_elem.stripped_strings)
+                            if len(scores) == 2:
+                                result['exact_score'] = f"{scores[0]}-{scores[1]}"
+                            else:
+                                result['exact_score'] = ex_sc_elem.get_text(strip=True)
+                        else:
+                            result['exact_score'] = ex_sc_elem.get_text(strip=True)
                     
                     # 4. Average Goals (div.avg_sc)
                     avg_sc_elem = row.find('div', class_='avg_sc')
@@ -1711,7 +1721,14 @@ def search_forebet_prediction(
                                         # Exact score
                                         ex_sc_elem = row.find('div', class_='ex_sc')
                                         if ex_sc_elem:
-                                            result['exact_score'] = ex_sc_elem.get_text(strip=True)
+                                            if ex_sc_elem.find('br'):
+                                                scores = list(ex_sc_elem.stripped_strings)
+                                                if len(scores) == 2:
+                                                    result['exact_score'] = f"{scores[0]}-{scores[1]}"
+                                                else:
+                                                    result['exact_score'] = ex_sc_elem.get_text(strip=True)
+                                            else:
+                                                result['exact_score'] = ex_sc_elem.get_text(strip=True)
                                     except Exception as extraction_err:
                                         print(f"      ⚠️ Gemini: Błąd ekstrakcji: {extraction_err}")
                                     
