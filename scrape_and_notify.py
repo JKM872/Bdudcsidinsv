@@ -485,20 +485,19 @@ def scrape_and_send_email(
                 else:
                     print(f"\n[FAZA 2: {j}/{qualifying_count}] {home_team} vs {away_team}")
                 
+                # Wyciągnij datę z match_time (wspólne dla Forebet i SofaScore)
+                match_date = None
+                if match_time:
+                    date_match = re.search(r'(\d{1,2}\.\d{1,2}\.\d{4})', match_time)
+                    if date_match:
+                        day, month, year = date_match.group(1).split('.')
+                        match_date = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+                if not match_date:
+                    match_date = date
+                
                 # FOREBET
                 if use_forebet and FOREBET_AVAILABLE:
                     try:
-                        # Wyciągnij datę z match_time
-                        match_date = None
-                        if match_time:
-                            date_match = re.search(r'(\d{1,2}\.\d{1,2}\.\d{4})', match_time)
-                            if date_match:
-                                day, month, year = date_match.group(1).split('.')
-                                match_date = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
-                        
-                        if not match_date:
-                            match_date = date
-                        
                         forebet_result = search_forebet_prediction(
                             home_team=home_team,
                             away_team=away_team,
@@ -525,7 +524,8 @@ def scrape_and_send_email(
                         sofascore_result = get_sofascore_prediction(
                             home_team=home_team,
                             away_team=away_team,
-                            sport=current_sport
+                            sport=current_sport,
+                            date_str=match_date
                         )
                         
                         if sofascore_result.get('found'):

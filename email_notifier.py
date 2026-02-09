@@ -881,8 +881,9 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
         ss_draw = safe_float(ss_draw_raw) if not is_nan_or_none(ss_draw_raw) else None
         ss_away = safe_float(ss_away_raw) if not is_nan_or_none(ss_away_raw) else None
         ss_votes = int(safe_float(ss_votes_raw))
-        # Flaga: pokaż SofaScore nawet gdy wartości = 0 (ale nie gdy None)
-        has_sofascore = ss_home is not None or ss_away is not None
+        # Flaga: pokaż SofaScore jeśli DOWOLNA wartość jest dostępna (home/away/draw/votes)
+        has_sofascore = (ss_home is not None or ss_away is not None or 
+                         ss_draw is not None or ss_votes > 0)
         
         # Odds - bezpieczne pobieranie z obsługą NaN
         home_odds_raw = match.get('home_odds')
@@ -997,7 +998,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
                                 <div style="font-size: 18px; font-weight: bold; color: {'#4CAF50' if ss_home and ss_home >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">{ss_home}%</div>
                                 <div style="font-size: 10px; color: #888;">🏠</div>
                             </div>
-                            {f'<div style="text-align: center;"><div style="font-size: 18px; font-weight: bold; color: {chr(39)}#FFC107{chr(39) if ss_draw and ss_draw >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else chr(39)}#333{chr(39)};">{ss_draw}%</div><div style="font-size: 10px; color: #888;">🤝</div></div>' if ss_draw else ''}
+                            {f'<div style="text-align: center;"><div style="font-size: 18px; font-weight: bold; color: {chr(39)}#FFC107{chr(39) if ss_draw is not None and ss_draw >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else chr(39)}#333{chr(39)};">{ss_draw}%</div><div style="font-size: 10px; color: #888;">🤝</div></div>' if ss_draw is not None else ''}
                             <div style="text-align: center;">
                                 <div style="font-size: 18px; font-weight: bold; color: {'#F44336' if ss_away and ss_away >= max(ss_home or 0, ss_draw or 0, ss_away or 0) else '#333'};">{ss_away}%</div>
                                 <div style="font-size: 10px; color: #888;">✈️</div>
