@@ -1,7 +1,8 @@
 {
-    "buildCommand": "cd frontend && npm run build",
-    "outputDirectory": "frontend/dist",
-    "framework": "vite",
+    "buildCommand": "cd sports-dashboard && npm run build",
+    "outputDirectory": "sports-dashboard/.next",
+    "installCommand": "cd sports-dashboard && npm install",
+    "framework": "nextjs",
     "rewrites": [
         {
             "source": "/api/(.*)",
@@ -9,7 +10,6 @@
         }
     ],
     "env": {
-        "VITE_SUPABASE_URL": "@supabase_url",
-        "VITE_SUPABASE_ANON_KEY": "@supabase_anon_key"
+        "NEXT_PUBLIC_API_URL": ""
     }
 }

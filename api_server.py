@@ -163,7 +163,10 @@ def get_matches():
     """Get matches for a specific date and sport."""
     date_str = request.args.get('date', datetime.now().strftime('%Y-%m-%d'))
     sport = request.args.get('sport', 'all')
+    search = request.args.get('search', '').strip().lower()
     only_qualifying = request.args.get('qualifying', 'false').lower() == 'true'
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 100, type=int)
     
     # Find matching files
     files = find_result_files(date_str, sport if sport != 'all' else None)
@@ -177,6 +180,10 @@ def get_matches():
                 continue
             if only_qualifying and not normalized['qualifies']:
                 continue
+            if search:
+                text = f"{normalized['homeTeam']} {normalized['awayTeam']} {normalized.get('league','')}".lower()
+                if search not in text:
+                    continue
             all_matches.append(normalized)
     
     # Calculate stats
@@ -189,16 +196,94 @@ def get_matches():
         s = m['sport']
         sport_counts[s] = sport_counts.get(s, 0) + 1
     
+    # Pagination
+    start = (page - 1) * per_page
+    end = start + per_page
+    
     return jsonify({
         'date': date_str,
         'sport': sport,
-        'matches': all_matches,
+        'data': all_matches[start:end],
+        'meta': {
+            'total': len(all_matches),
+            'page': page,
+            'per_page': per_page,
+            'pages': max(1, math.ceil(len(all_matches) / per_page)),
+        },
         'stats': {
             'total': len(all_matches),
             'qualifying': qualifying_count,
             'formAdvantage': form_adv_count
         },
         'sportCounts': sport_counts
+    })
+
+
+@app.route('/api/matches/<match_id>', methods=['GET'])
+def get_match(match_id):
+    """Get a single match by ID."""
+    # Search all available dates
+    files = find_result_files()
+    for f in files:
+        matches = load_matches_from_file(f)
+        for m in matches:
+            normalized = normalize_match(m)
+            if str(normalized['id']) == str(match_id):
+                return jsonify(normalized)
+    return jsonify({'error': 'Match not found'}), 404
+
+
+@app.route('/api/stats', methods=['GET'])
+def get_stats():
+    """Get aggregated statistics for the dashboard."""
+    days = request.args.get('days', 30, type=int)
+    
+    # Collect matches from recent days
+    total_matches = 0
+    matches_with_predictions = 0
+    matches_with_sofascore = 0
+    matches_with_odds = 0
+    sport_map = {}  # sport -> { total, with_preds }
+    
+    for d in range(days):
+        date_str = (datetime.now() - timedelta(days=d)).strftime('%Y-%m-%d')
+        files = find_result_files(date_str)
+        for f in files:
+            for m in load_matches_from_file(f):
+                nm = normalize_match(m)
+                total_matches += 1
+                sport = nm['sport']
+                if sport not in sport_map:
+                    sport_map[sport] = {'total': 0, 'with_predictions': 0}
+                sport_map[sport]['total'] += 1
+                if nm.get('forebet'):
+                    matches_with_predictions += 1
+                    sport_map[sport]['with_predictions'] += 1
+                if nm.get('sofascore'):
+                    matches_with_sofascore += 1
+                if nm.get('odds', {}).get('home'):
+                    matches_with_odds += 1
+    
+    sport_breakdown = [
+        {
+            'sport': s,
+            'total': info['total'],
+            'with_predictions': info['with_predictions'],
+            'accuracy': None  # TODO: compute from settled results
+        }
+        for s, info in sorted(sport_map.items(), key=lambda x: x[1]['total'], reverse=True)
+    ]
+    
+    return jsonify({
+        'total_matches': total_matches,
+        'matches_with_predictions': matches_with_predictions,
+        'matches_with_sofascore': matches_with_sofascore,
+        'matches_with_odds': matches_with_odds,
+        'accuracy_7d': None,
+        'accuracy_30d': None,
+        'roi_7d': None,
+        'roi_30d': None,
+        'sport_breakdown': sport_breakdown
     })
 
 
