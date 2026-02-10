@@ -901,7 +901,7 @@ def search_forebet_prediction(
     away_team: str,
     match_date: str,
     driver: webdriver.Chrome = None,
-    min_similarity: float = 0.35,  # 🔥 Zmniejszone z 0.45 do 0.35 dla jeszcze lepszego znajdywania meczów
+    min_similarity: float = 0.25,  # 🔥 v3.8: Zmniejszone z 0.35 do 0.25 dla agresywniejszego matchowania
     timeout: int = 10,
     headless: bool = False,
     sport: str = 'football',
@@ -1366,11 +1366,35 @@ def search_forebet_prediction(
         
         # DEBUG: Wypisz pierwsze 5 meczów z Forebet żeby zobaczyć format
         debug_matches = []
+        all_available_matches = []  # v3.8: Zbieraj WSZYSTKIE mecze do debug/Gemini
         best_similarity = 0.0  # Track najlepszy wynik similarity
         
         # 🔥 DEBUG: Wypisz CZEGO szukamy
         print(f"      🔎 Szukam meczu: '{home_team}' vs '{away_team}'")
         print(f"      🔎 Znormalizowane: '{normalize_team_name(home_team)}' vs '{normalize_team_name(away_team)}'")
+        
+        # v3.8: Pre-scan - zbierz WSZYSTKIE nazwy drużyn z page (dla debug i Gemini fallback)
+        for pre_row in match_rows:
+            try:
+                pre_home = None
+                pre_away = None
+                h_span = pre_row.find('span', class_='homeTeam')
+                a_span = pre_row.find('span', class_='awayTeam')
+                if h_span and a_span:
+                    h_inner = h_span.find('span', itemprop='name')
+                    a_inner = a_span.find('span', itemprop='name')
+                    pre_home = h_inner.get_text(strip=True) if h_inner else h_span.get_text(strip=True)
+                    pre_away = a_inner.get_text(strip=True) if a_inner else a_span.get_text(strip=True)
+                if pre_home and pre_away:
+                    all_available_matches.append(f"{pre_home} vs {pre_away}")
+            except Exception:
+                pass
+        
+        if all_available_matches:
+            print(f"      📋 Forebet: {len(all_available_matches)} meczów na stronie")
+            if len(all_available_matches) <= 30:
+                for i, m in enumerate(all_available_matches, 1):
+                    print(f"         {i}. {m}")
         
         # DEBUG: Zapisz surowy HTML pierwszych 2 wierszy do pliku
         if match_rows:
@@ -1686,15 +1710,16 @@ def search_forebet_prediction(
             # Zwiększono z 0.50 na 0.55 aby zmniejszyć liczbę wywołań AI i uniknąć rate limitów
             
             AI_SIMILARITY_THRESHOLD = 0.55
+            # v3.8: Use all_available_matches for Gemini (much better coverage)
+            available_for_ai = all_available_matches if all_available_matches else [m for m in debug_matches if 'vs' in m]
             use_gemini = (
                 best_similarity < AI_SIMILARITY_THRESHOLD and  # Brak pewnych dopasowań
-                debug_matches and 
-                len([m for m in debug_matches if 'vs' in m]) >= 2  # Min 2 mecze
+                len(available_for_ai) >= 2  # Min 2 mecze
             )
             
             if use_gemini:
-                print(f"      🤖 Forebet: Najlepszy score={best_similarity:.2f} < {AI_SIMILARITY_THRESHOLD} - używam Gemini AI ({len(debug_matches)} meczów)...")
-                gemini_match = find_forebet_match_with_gemini(home_team, away_team, debug_matches)
+                print(f"      🤖 Forebet: Najlepszy score={best_similarity:.2f} < {AI_SIMILARITY_THRESHOLD} - używam Gemini AI ({len(available_for_ai)} meczów)...")
+                gemini_match = find_forebet_match_with_gemini(home_team, away_team, available_for_ai[:50])
                 
                 if gemini_match:
                     gemini_home, gemini_away = gemini_match
@@ -1765,11 +1790,23 @@ def search_forebet_prediction(
                             print(f"      ⚠️ Gemini: Błąd przetwarzania wiersza: {e}")
                             continue
             
-            # Jeśli nadal nie znaleziono - ustaw error
+            # Jeśli nadal nie znaleziono - ustaw error z pełnym debug
             if not result['success']:
+                print(f"      ❌ Forebet: NIE ZNALEZIONO meczu {home_team} vs {away_team}")
                 if debug_matches:
-                    print(f"      📋 Próbki meczów na Forebet: {debug_matches[:5]}")
-                    print(f"      🔎 Szukany mecz: {home_team} vs {away_team}")
+                    print(f"      📋 Top 5 najbliższe similarity:")
+                    # Parse debug_matches that have 'vs' format and show similarity
+                    for dm in debug_matches[:5]:
+                        if 'vs' in dm:
+                            parts = dm.split(' vs ')
+                            if len(parts) == 2:
+                                hs = similarity_score(home_team, parts[0].strip())
+                                as_ = similarity_score(away_team, parts[1].strip())
+                                print(f"         {dm} (h:{hs:.2f} a:{as_:.2f} sum:{hs+as_:.2f})")
+                if all_available_matches and not debug_matches:
+                    print(f"      📋 WSZYSTKIE {len(all_available_matches)} meczów na Forebet (nazwy drużyn nie były parsowalne w głównym loop?):")
+                    for i, m in enumerate(all_available_matches[:10], 1):
+                        print(f"         {i}. {m}")
                 result['error'] = f'Nie znaleziono meczu {home_team} vs {away_team} na Forebet (similarity < {min_similarity})'
     
     except TimeoutException:

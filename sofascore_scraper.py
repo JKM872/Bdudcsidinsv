@@ -613,34 +613,48 @@ def get_odds_via_api(event_id: int) -> Optional[Dict]:
 
 
 
-def _search_event_for_date(home_team: str, away_team: str, sport_slug: str, search_date: str) -> Optional[int]:
+def _search_event_for_date(home_team: str, away_team: str, sport_slug: str, search_date: str, debug: bool = False) -> Optional[int]:
     """
     Wewnętrzna funkcja: szuka event ID dla konkretnej daty.
     v3.5: Wydzielono z search_event_via_api dla date window search.
+    v3.8: Dodano debug logging dla diagnostyki.
     """
     url = f"https://api.sofascore.com/api/v1/sport/{sport_slug}/scheduled-events/{search_date}"
     response = _retry_request_with_session(url, timeout=10)
     
     if not response:
+        if debug:
+            print(f"      [DEBUG] SofaScore API: No response for {search_date}")
         return None
         
     if response.status_code != 200:
+        if debug:
+            print(f"      [DEBUG] SofaScore API: Status {response.status_code} for {search_date}")
         return None
     
     try:
         data = response.json()
-    except Exception:
+    except Exception as e:
+        if debug:
+            print(f"      [DEBUG] SofaScore API: JSON parse error: {e}")
         return None
     
     events = data.get('events', [])
+    if debug:
+        print(f"      [DEBUG] SofaScore API returned {len(events)} events for {search_date}")
+    
     if not events:
         return None
     
     home_norm = normalize_team_name(home_team)
     away_norm = normalize_team_name(away_team)
     
+    if debug:
+        print(f"      [DEBUG] Searching for: '{home_norm}' vs '{away_norm}'")
+    
     best_match_id = None
     best_combined_sim = 0.0
+    best_match_info = None
     
     for event in events:
         event_home = event.get('homeTeam', {}).get('name', '')
@@ -679,8 +693,17 @@ def _search_event_for_date(home_team: str, away_team: str, sport_slug: str, sear
         if is_match and combined_sim > best_combined_sim:
             best_combined_sim = combined_sim
             best_match_id = event.get('id')
+            best_match_info = f"{event_home} vs {event_away}"
+            if debug:
+                print(f"      [DEBUG] ✅ Match candidate: {event_home} vs {event_away} (h:{home_sim:.2f} a:{away_sim:.2f} sum:{combined_sim:.2f})")
             logger.debug(f"SofaScore match: {event_home} vs {event_away} "
                        f"(h:{home_sim:.2f} a:{away_sim:.2f} sum:{combined_sim:.2f})")
+    
+    if debug:
+        if best_match_id:
+            print(f"      [DEBUG] Best match: {best_match_info} (score: {best_combined_sim:.2f})")
+        else:
+            print(f"      [DEBUG] No match found for '{home_norm}' vs '{away_norm}' in {len(events)} events")
     
     return best_match_id
 
@@ -721,14 +744,79 @@ def search_event_via_api(home_team: str, away_team: str, sport: str = 'football'
         (base_date + timedelta(days=3)).strftime('%Y-%m-%d'),    # +3 dni
     ]
     
+    # ====== STRATEGY 1: Standard search (both teams, strict matching) ======
     for search_date in dates_to_try:
-        event_id = _search_event_for_date(home_team, away_team, sport_slug, search_date)
+        event_id = _search_event_for_date(home_team, away_team, sport_slug, search_date, debug=False)
         if event_id:
-            logger.debug(f"SofaScore: Znaleziono mecz na dacie {search_date}")
+            logger.debug(f"SofaScore: Znaleziono mecz na dacie {search_date} (Strategy 1)")
             return event_id
     
-    # Jeśli nie znaleziono w żadnej dacie, wypisz log tylko raz
-    print(f"   ⚠️ SofaScore search API: Brak odpowiedzi ({sport}/{dates_to_try[0]})")
+    # ====== STRATEGY 2: Team search API (search by team name) ======
+    print(f"   🔄 SofaScore Strategy 2: Szukam przez team search API...")
+    for team_query in [home_team, away_team]:
+        try:
+            search_url = f"https://api.sofascore.com/api/v1/search/teams/{team_query.replace(' ', '%20')}"
+            response = _retry_request_with_session(search_url, timeout=10)
+            if response and response.status_code == 200:
+                search_data = response.json()
+                teams = search_data.get('teams', [])
+                if teams:
+                    team_id = teams[0].get('id')
+                    team_name = teams[0].get('name', '')
+                    print(f"      Found team: '{team_name}' (ID: {team_id})")
+                    # Get team's next/recent events
+                    for endpoint in ['next', 'last']:
+                        events_url = f"https://api.sofascore.com/api/v1/team/{team_id}/events/{endpoint}/0"
+                        ev_response = _retry_request_with_session(events_url, timeout=10)
+                        if ev_response and ev_response.status_code == 200:
+                            ev_data = ev_response.json()
+                            events = ev_data.get('events', [])
+                            for event in events:
+                                event_home = event.get('homeTeam', {}).get('name', '')
+                                event_away = event.get('awayTeam', {}).get('name', '')
+                                # Check if OTHER team matches
+                                other_team = away_team if team_query == home_team else home_team
+                                other_event = event_away if team_query == home_team else event_home
+                                other_sim = similarity_score(other_team, other_event)
+                                if other_sim >= 0.30:
+                                    print(f"   ✅ SofaScore Strategy 2: Found {event_home} vs {event_away} (sim:{other_sim:.2f})")
+                                    return event.get('id')
+        except Exception as e:
+            logger.debug(f"SofaScore team search error for '{team_query}': {e}")
+    
+    # ====== STRATEGY 3: Relaxed matching (home-only or away-only with lower threshold) ======
+    print(f"   🔄 SofaScore Strategy 3: Luźne dopasowanie (home/away osobno)...")
+    for search_date in dates_to_try[:3]:  # Only first 3 dates
+        url = f"https://api.sofascore.com/api/v1/sport/{sport_slug}/scheduled-events/{search_date}"
+        response = _retry_request_with_session(url, timeout=10)
+        if response and response.status_code == 200:
+            try:
+                data = response.json()
+                events = data.get('events', [])
+                best_event_id = None
+                best_score = 0.0
+                for event in events:
+                    event_home = event.get('homeTeam', {}).get('name', '')
+                    event_away = event.get('awayTeam', {}).get('name', '')
+                    home_sim = similarity_score(home_team, event_home)
+                    away_sim = similarity_score(away_team, event_away)
+                    # Relaxed: one team >= 0.70, other >= 0.20
+                    if (home_sim >= 0.70 and away_sim >= 0.20) or (away_sim >= 0.70 and home_sim >= 0.20):
+                        combined = home_sim + away_sim
+                        if combined > best_score:
+                            best_score = combined
+                            best_event_id = event.get('id')
+                            print(f"      Relaxed candidate: {event_home} vs {event_away} (h:{home_sim:.2f} a:{away_sim:.2f})")
+                if best_event_id:
+                    print(f"   ✅ SofaScore Strategy 3: Found match (score: {best_score:.2f})")
+                    return best_event_id
+            except Exception:
+                pass
+    
+    # ====== STRATEGY 4: Debug - log first date's events for diagnosis ======
+    print(f"   ⚠️ SofaScore: Nie znaleziono po 3 strategiach ({sport}/{dates_to_try[0]})")
+    # Debug: show what API returned for main date
+    _search_event_for_date(home_team, away_team, sport_slug, dates_to_try[0], debug=True)
     return None
 
 
