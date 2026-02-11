@@ -197,6 +197,8 @@ jobs:
           EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER || 'gmail' }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           FLARESOLVERR_URL: http://localhost:8191/v1
         run: |
           python scrape_and_notify.py \
@@ -336,6 +338,8 @@ jobs:
           EMAIL_PROVIDER: ${{ secrets.EMAIL_PROVIDER || 'gmail' }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           FLARESOLVERR_URL: http://localhost:8191/v1
         run: |
           python scrape_and_notify.py \
@@ -475,6 +479,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           FLARESOLVERR_URL: http://localhost:8191/v1
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \
@@ -613,6 +619,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           FLARESOLVERR_URL: http://localhost:8191/v1
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \
@@ -751,6 +759,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           FLARESOLVERR_URL: http://localhost:8191/v1
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \
@@ -889,6 +899,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           FLARESOLVERR_URL: http://localhost:8191/v1
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           python scrape_and_notify.py \
             --date ${{ needs.determine-sport.outputs.date }} \

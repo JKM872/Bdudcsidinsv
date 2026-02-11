@@ -103,6 +103,67 @@ def load_matches_from_file(filepath):
         return []
 
 
+def normalize_supabase_match(row):
+    """Normalize a Supabase predictions row to frontend format."""
+    return {
+        'id': row.get('id', 0),
+        'homeTeam': row.get('home_team', ''),
+        'awayTeam': row.get('away_team', ''),
+        'time': row.get('match_time', ''),
+        'date': row.get('match_date', ''),
+        'league': row.get('league', ''),
+        'country': '',
+        'sport': row.get('sport', 'football'),
+        'matchUrl': row.get('match_url', ''),
+        'qualifies': row.get('qualifies', False),
+        # H2H Data
+        'h2h': {
+            'home': row.get('livesport_h2h_home_wins') or 0,
+            'draw': 0,
+            'away': row.get('livesport_h2h_away_wins') or 0,
+            'total': 5,
+            'winRate': safe_value(row.get('livesport_win_rate'), 0),
+        },
+        # Form Data
+        'homeForm': list(row.get('livesport_home_form') or '') if isinstance(row.get('livesport_home_form'), str) else (row.get('livesport_home_form') or []),
+        'awayForm': list(row.get('livesport_away_form') or '') if isinstance(row.get('livesport_away_form'), str) else (row.get('livesport_away_form') or []),
+        'homeFormHome': [],
+        'awayFormAway': [],
+        'formAdvantage': False,
+        # Odds
+        'odds': {
+            'home': safe_value(row.get('forebet_home_odds')),
+            'draw': safe_value(row.get('forebet_draw_odds')),
+            'away': safe_value(row.get('forebet_away_odds')),
+            'bookmaker': 'Forebet',
+        } if row.get('forebet_home_odds') else None,
+        # Forebet
+        'forebet': {
+            'prediction': row.get('forebet_prediction'),
+            'probability': safe_value(row.get('forebet_probability')),
+            'exactScore': None,
+            'overUnder': None,
+            'btts': None,
+        } if row.get('forebet_prediction') else None,
+        # SofaScore
+        'sofascore': {
+            'home': safe_value(row.get('sofascore_home_win_prob')),
+            'draw': safe_value(row.get('sofascore_draw_prob')),
+            'away': safe_value(row.get('sofascore_away_win_prob')),
+            'votes': safe_value(row.get('sofascore_total_votes'), 0),
+        } if row.get('sofascore_home_win_prob') else None,
+        # Gemini AI
+        'gemini': {
+            'prediction': row.get('gemini_prediction'),
+            'confidence': safe_value(row.get('gemini_confidence')),
+            'recommendation': row.get('gemini_recommendation'),
+            'reasoning': row.get('gemini_reasoning'),
+        } if row.get('gemini_prediction') else None,
+        # Focus team
+        'focusTeam': 'home',
+    }
+
+
 def normalize_match(match):
     """Normalize match data to frontend format."""
     # Handle different key naming conventions
@@ -160,7 +221,7 @@ def normalize_match(match):
 
 @app.route('/api/matches', methods=['GET'])
 def get_matches():
-    """Get matches for a specific date and sport."""
+    """Get matches for a specific date and sport. Supabase first, file fallback."""
     date_str = request.args.get('date')
     sport = request.args.get('sport', 'all')
     search = request.args.get('search', '').strip().lower()
@@ -168,37 +229,68 @@ def get_matches():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 100, type=int)
     
-    # If no date specified, find the most recent date with data
-    if not date_str:
-        import re
-        date_pattern = re.compile(r'(\d{4}-\d{2}-\d{2})')
-        all_dates = set()
-        for f in glob.glob(os.path.join(RESULTS_DIR, '*.json')):
-            m = date_pattern.search(os.path.basename(f))
-            if m:
-                all_dates.add(m.group(1))
-        if all_dates:
-            date_str = sorted(all_dates, reverse=True)[0]
-        else:
-            date_str = datetime.now().strftime('%Y-%m-%d')
-    
-    # Find matching files
-    files = find_result_files(date_str, sport if sport != 'all' else None)
-    
     all_matches = []
-    for f in files:
-        matches = load_matches_from_file(f)
-        for m in matches:
-            normalized = normalize_match(m)
-            if sport != 'all' and normalized['sport'] != sport:
-                continue
-            if only_qualifying and not normalized['qualifies']:
-                continue
-            if search:
-                text = f"{normalized['homeTeam']} {normalized['awayTeam']} {normalized.get('league','')}".lower()
-                if search not in text:
+    source = 'none'
+    
+    # ── Try Supabase first ──────────────────────────────────────────
+    if SUPABASE_AVAILABLE:
+        try:
+            # If no date, get latest from Supabase
+            if not date_str:
+                dates = supabase.get_available_dates()
+                date_str = dates[0] if dates else datetime.now().strftime('%Y-%m-%d')
+            
+            rows = supabase.get_predictions(date=date_str, sport=sport if sport != 'all' else None)
+            
+            if rows:
+                source = 'supabase'
+                for row in rows:
+                    normalized = normalize_supabase_match(row)
+                    if sport != 'all' and normalized['sport'] != sport:
+                        continue
+                    if only_qualifying and not normalized['qualifies']:
+                        continue
+                    if search:
+                        text = f"{normalized['homeTeam']} {normalized['awayTeam']} {normalized.get('league','')}".lower()
+                        if search not in text:
+                            continue
+                    all_matches.append(normalized)
+        except Exception as e:
+            print(f"[WARNING] Supabase fetch failed: {e}")
+    
+    # ── Fallback to local JSON files ────────────────────────────────
+    if not all_matches:
+        if not date_str:
+            import re
+            date_pattern = re.compile(r'(\d{4}-\d{2}-\d{2})')
+            all_dates = set()
+            for f in glob.glob(os.path.join(RESULTS_DIR, '*.json')):
+                m = date_pattern.search(os.path.basename(f))
+                if m:
+                    all_dates.add(m.group(1))
+            if all_dates:
+                date_str = sorted(all_dates, reverse=True)[0]
+            else:
+                date_str = datetime.now().strftime('%Y-%m-%d')
+        
+        files = find_result_files(date_str, sport if sport != 'all' else None)
+        
+        for f in files:
+            matches = load_matches_from_file(f)
+            for m in matches:
+                normalized = normalize_match(m)
+                if sport != 'all' and normalized['sport'] != sport:
                     continue
-            all_matches.append(normalized)
+                if only_qualifying and not normalized['qualifies']:
+                    continue
+                if search:
+                    text = f"{normalized['homeTeam']} {normalized['awayTeam']} {normalized.get('league','')}".lower()
+                    if search not in text:
+                        continue
+                all_matches.append(normalized)
+        
+        if all_matches:
+            source = 'files'
     
     # Calculate stats
     qualifying_count = sum(1 for m in all_matches if m['qualifies'])
@@ -217,6 +309,7 @@ def get_matches():
     return jsonify({
         'date': date_str,
         'sport': sport,
+        'source': source,
         'data': all_matches[start:end],
         'meta': {
             'total': len(all_matches),
@@ -306,14 +399,23 @@ def get_sports():
     """Get list of available sports with counts."""
     date_str = request.args.get('date', datetime.now().strftime('%Y-%m-%d'))
     
-    files = find_result_files(date_str)
-    
     sport_counts = {}
-    for f in files:
-        matches = load_matches_from_file(f)
-        for m in matches:
-            sport = m.get('sport', 'football')
-            sport_counts[sport] = sport_counts.get(sport, 0) + 1
+    
+    # Try Supabase first
+    if SUPABASE_AVAILABLE:
+        try:
+            sport_counts = supabase.get_sport_counts(date_str)
+        except Exception as e:
+            print(f"[WARNING] Supabase sport counts failed: {e}")
+    
+    # Fallback to files
+    if not sport_counts:
+        files = find_result_files(date_str)
+        for f in files:
+            matches = load_matches_from_file(f)
+            for m in matches:
+                sport = m.get('sport', 'football')
+                sport_counts[sport] = sport_counts.get(sport, 0) + 1
     
     sports = []
     for sport_id, info in SPORT_INFO.items():
@@ -337,11 +439,20 @@ def get_available_dates():
     """Get list of dates with available data."""
     import re
     
-    files = glob.glob(os.path.join(RESULTS_DIR, '*.json'))
     dates = set()
     
-    date_pattern = re.compile(r'(\d{4}-\d{2}-\d{2})')
+    # Try Supabase first
+    if SUPABASE_AVAILABLE:
+        try:
+            sb_dates = supabase.get_available_dates()
+            if sb_dates:
+                dates.update(sb_dates)
+        except Exception as e:
+            print(f"[WARNING] Supabase dates failed: {e}")
     
+    # Also check local files
+    files = glob.glob(os.path.join(RESULTS_DIR, '*.json'))
+    date_pattern = re.compile(r'(\d{4}-\d{2}-\d{2})')
     for f in files:
         match = date_pattern.search(os.path.basename(f))
         if match:

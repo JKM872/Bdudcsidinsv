@@ -16,8 +16,8 @@ from datetime import datetime
 import os
 
 # Supabase credentials from environment (with fallback)
-SUPABASE_URL = os.environ.get('SUPABASE_URL', 'https://lczcittvuaocimqkhaho.supabase.co')
-SUPABASE_KEY = os.environ.get('SUPABASE_KEY', os.environ.get('SUPABASE_ANON_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjemNpdHR2dWFvY2ltcWtoYWhvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYwOTA3MDksImV4cCI6MjA4MTY2NjcwOX0.6CWKNB6nqqYgDUuSTEeNF61g2NvorXw4s5gf8hqy7Rc'))
+SUPABASE_URL = os.environ.get('SUPABASE_URL', 'https://suqysbmuisffeqwgvymp.supabase.co')
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY', os.environ.get('SUPABASE_ANON_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1cXlzYm11aXNmZmVxd2d2eW1wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4MzU2NTUsImV4cCI6MjA4NjQxMTY1NX0.FiPzJOe1rXyjja03Jk1wKgoZg1hE2bbJDtGQPoteLIg'))
 
 
 class SupabaseManager:
@@ -147,6 +147,63 @@ class SupabaseManager:
         
         print(f"[STATS] Saved {success_count}/{len(matches_data)} predictions to Supabase")
         return success_count
+    
+    
+    def get_predictions(self, date: str = None, sport: str = None, limit: int = 500) -> List[Dict]:
+        """
+        Pobiera predykcje z tabeli 'predictions'.
+        
+        Args:
+            date: Data meczu (YYYY-MM-DD). Jeśli None, zwraca najnowsze.
+            sport: Filtr sportu (football, basketball, ...). None = wszystkie.
+            limit: Maks. rekordów.
+        
+        Returns:
+            Lista dictów z danymi meczów.
+        """
+        try:
+            query = self.client.table('predictions').select('*')
+            
+            if date:
+                query = query.eq('match_date', date)
+            if sport and sport != 'all':
+                query = query.eq('sport', sport)
+            
+            query = query.order('match_date', desc=True).order('match_time', desc=False).limit(limit)
+            response = query.execute()
+            
+            return response.data if response.data else []
+        except Exception as e:
+            print(f"[ERROR] Error fetching predictions: {e}")
+            return []
+    
+    
+    def get_available_dates(self) -> List[str]:
+        """Zwraca listę dat dla których istnieją predykcje (desc)."""
+        try:
+            response = self.client.table('predictions').select('match_date').execute()
+            dates = sorted(set(r['match_date'] for r in response.data if r.get('match_date')), reverse=True)
+            return dates
+        except Exception as e:
+            print(f"[ERROR] Error fetching dates: {e}")
+            return []
+    
+    
+    def get_sport_counts(self, date: str = None) -> Dict[str, int]:
+        """Zwraca liczbę meczów per sport dla danej daty."""
+        try:
+            query = self.client.table('predictions').select('sport')
+            if date:
+                query = query.eq('match_date', date)
+            response = query.execute()
+            counts = {}
+            for r in response.data:
+                s = r.get('sport', 'football')
+                counts[s] = counts.get(s, 0) + 1
+            return counts
+        except Exception as e:
+            print(f"[ERROR] Error fetching sport counts: {e}")
+            return {}
     
     
     def update_match_result(

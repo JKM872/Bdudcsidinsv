@@ -23,6 +23,16 @@ import pandas as pd
 import numpy as np
 import time
 
+# Import Supabase manager for saving predictions to database
+try:
+    from supabase_manager import SupabaseManager
+    _supabase_mgr = SupabaseManager()
+    SUPABASE_AVAILABLE = True
+except Exception as e:
+    print(f"\u26a0\ufe0f Supabase not available: {e}")
+    _supabase_mgr = None
+    SUPABASE_AVAILABLE = False
+
 
 def clean_odds_value(val):
     """
@@ -710,8 +720,18 @@ def scrape_and_send_email(
             json.dump(json_output, f, ensure_ascii=False, indent=2)
         
         print(f"   ✅ JSON zapisany: {json_filename}")
-        
-        # Podsumowanie scrapingu
+                # \u2601\ufe0f SUPABASE: Zapisz mecze do bazy danych
+        if SUPABASE_AVAILABLE and _supabase_mgr:
+            print(f"\n\u2601\ufe0f Zapisywanie {len(rows)} mecz\u00f3w do Supabase...")
+            _sb_saved = 0
+            for row in rows:
+                try:
+                    _supabase_mgr.save_prediction(row)
+                    _sb_saved += 1
+                except Exception as e:
+                    pass  # Silent fail per match
+            print(f"   \u2705 Supabase: {_sb_saved}/{len(rows)} mecz\u00f3w zapisanych")
+                # Podsumowanie scrapingu
         print("\n📊 PODSUMOWANIE SCRAPINGU:")
         print(f"   Przetworzono: {len(rows)} meczów")
         print(f"   Kwalifikujących się: {qualifying_count}")
