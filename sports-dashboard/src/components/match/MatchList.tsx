@@ -6,11 +6,12 @@
 import { MatchCard } from './MatchCard'
 import { MatchCardSkeleton } from './MatchCardSkeleton'
 import { EmptyState } from '@/components/shared/EmptyState'
-import type { Match } from '@/lib/types'
+import type { Match, LiveScore } from '@/lib/types'
 import { useFilterStore } from '@/store/filterStore'
 
 interface Props {
   matches: Match[]
+  liveScores?: LiveScore[]
   isLoading?: boolean
   onSelect?: (match: Match) => void
 }
@@ -18,8 +19,13 @@ interface Props {
 function applyLocalFilters(matches: Match[], filters: ReturnType<typeof useFilterStore.getState>): Match[] {
   let result = matches
 
+  // Gemini recommendation filter
+  if (filters.geminiRecommendation && filters.geminiRecommendation !== 'all') {
+    result = result.filter((m) => m.gemini?.recommendation === filters.geminiRecommendation)
+  }
+
   if (filters.minConfidence > 0) {
-    result = result.filter((m) => (m.confidence ?? m.forebet?.probability ?? 0) >= filters.minConfidence)
+    result = result.filter((m) => (m.gemini?.confidence ?? m.confidence ?? m.forebet?.probability ?? 0) >= filters.minConfidence)
   }
   if (filters.hasOdds) {
     result = result.filter((m) => m.odds?.home != null)
@@ -40,11 +46,17 @@ function applyLocalFilters(matches: Match[], filters: ReturnType<typeof useFilte
     )
   }
 
-  // Sort
+  // Sort – HIGH recommendations first, then by selected sort
+  const recOrder: Record<string, number> = { HIGH: 0, MEDIUM: 1, LOW: 2 }
   result.sort((a, b) => {
+    // Recommendation priority first
+    const recA = recOrder[a.gemini?.recommendation ?? ''] ?? 3
+    const recB = recOrder[b.gemini?.recommendation ?? ''] ?? 3
+    if (recA !== recB) return recA - recB
+
     let cmp = 0
-    const confA = a.confidence ?? a.forebet?.probability ?? 0
-    const confB = b.confidence ?? b.forebet?.probability ?? 0
+    const confA = a.gemini?.confidence ?? a.confidence ?? a.forebet?.probability ?? 0
+    const confB = b.gemini?.confidence ?? b.confidence ?? b.forebet?.probability ?? 0
     if (filters.sortBy === 'confidence') cmp = confB - confA
     else if (filters.sortBy === 'sport') cmp = a.sport.localeCompare(b.sport)
     else cmp = (a.time ?? '').localeCompare(b.time ?? '')
@@ -54,9 +66,23 @@ function applyLocalFilters(matches: Match[], filters: ReturnType<typeof useFilte
   return result
 }
 
-export function MatchList({ matches, isLoading, onSelect }: Props) {
+export function MatchList({ matches, liveScores, isLoading, onSelect }: Props) {
   const filters = useFilterStore()
   const filtered = applyLocalFilters(matches, filters)
+
+  // Build live score lookup by team names
+  const liveMap = new Map<string, LiveScore>()
+  if (liveScores) {
+    for (const ls of liveScores) {
+      const key = `${ls.homeTeam.toLowerCase()}|${ls.awayTeam.toLowerCase()}`
+      liveMap.set(key, ls)
+    }
+  }
+
+  function findLiveScore(m: Match): LiveScore | undefined {
+    const key = `${m.homeTeam.toLowerCase()}|${m.awayTeam.toLowerCase()}`
+    return liveMap.get(key)
+  }
 
   if (isLoading) {
     return (
@@ -80,7 +106,7 @@ export function MatchList({ matches, isLoading, onSelect }: Props) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {filtered.map((m) => (
-        <MatchCard key={m.id} match={m} onSelect={onSelect} />
+        <MatchCard key={m.id} match={m} liveScore={findLiveScore(m)} onSelect={onSelect} />
       ))}
     </div>
   )

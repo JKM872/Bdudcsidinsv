@@ -3,7 +3,7 @@
 // ============================================================================
 import { create } from 'zustand'
 import { addDays } from 'date-fns'
-import type { Sport, MatchFilters } from '@/lib/types'
+import type { Sport, MatchFilters, GeminiRecommendation } from '@/lib/types'
 import { DEFAULT_FILTERS } from '@/lib/constants'
 
 interface FilterState extends MatchFilters {
@@ -18,6 +18,7 @@ interface FilterState extends MatchFilters {
   setHasPredictions: (v: boolean) => void
   setHasSofascore: (v: boolean) => void
   setSearch: (q: string) => void
+  setGeminiRecommendation: (r: GeminiRecommendation | 'all') => void
   setSortBy: (s: MatchFilters['sortBy']) => void
   toggleSortOrder: () => void
   resetFilters: () => void
@@ -33,6 +34,7 @@ function countActive(s: MatchFilters): number {
   if (s.hasPredictions) c++
   if (s.hasSofascore) c++
   if (s.search) c++
+  if (s.geminiRecommendation && s.geminiRecommendation !== 'all') c++
   return c
 }
 
@@ -71,6 +73,10 @@ export const useFilterStore = create<FilterState>((set) => ({
   }),
   setSearch: (search) => set((s) => {
     const next = { ...s, search }
+    return { ...next, activeFilterCount: countActive(next) }
+  }),
+  setGeminiRecommendation: (geminiRecommendation) => set((s) => {
+    const next = { ...s, geminiRecommendation }
     return { ...next, activeFilterCount: countActive(next) }
   }),
   setSortBy: (sortBy) => set({ sortBy }),

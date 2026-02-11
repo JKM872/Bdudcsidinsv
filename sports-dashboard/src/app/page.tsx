@@ -1,14 +1,22 @@
 // ============================================================================
-// Home Page – matches grid + filter sidebar
+// Home Page – matches grid + filter sidebar + AI top picks
 // ============================================================================
 'use client'
 
+import { useState } from 'react'
 import { MatchList } from '@/components/match/MatchList'
+import { MatchDetails } from '@/components/match/MatchDetails'
+import { TopPicksSection } from '@/components/match/TopPicksSection'
 import { FilterBar } from '@/components/filters/FilterBar'
-import { useMatches } from '@/hooks/useMatches'
+import { useMatches, useLiveScores } from '@/hooks/useMatches'
+import type { Match } from '@/lib/types'
 
 export default function HomePage() {
   const { data, isLoading, isError, error } = useMatches()
+  const { data: liveScores } = useLiveScores()
+  const [selectedMatch, setSelectedMatch] = useState<Match | null>(null)
+
+  const matches = data?.data ?? []
 
   return (
     <div className="container py-6 space-y-6">
@@ -18,9 +26,16 @@ export default function HomePage() {
           Today&apos;s Matches
         </h1>
         <p className="text-muted-foreground mt-1">
-          Live predictions, odds & fan sentiment across multiple sports.
+          Live predictions, odds &amp; AI recommendations across multiple sports.
         </p>
       </div>
+
+      {/* AI Top Picks Section */}
+      <TopPicksSection
+        matches={matches}
+        onSelect={setSelectedMatch}
+        isLoading={isLoading}
+      />
 
       {/* Main grid: filters sidebar + matches */}
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
@@ -38,11 +53,20 @@ export default function HomePage() {
           )}
 
           <MatchList
-            matches={data?.data ?? []}
+            matches={matches}
+            liveScores={liveScores ?? []}
             isLoading={isLoading}
+            onSelect={setSelectedMatch}
           />
         </section>
       </div>
+
+      {/* Match Details Dialog */}
+      <MatchDetails
+        match={selectedMatch}
+        open={!!selectedMatch}
+        onOpenChange={(open) => !open && setSelectedMatch(null)}
+      />
     </div>
   )
 }

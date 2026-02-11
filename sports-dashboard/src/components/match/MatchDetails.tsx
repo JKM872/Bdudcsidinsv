@@ -16,6 +16,7 @@ import {
 import { cn } from '@/lib/utils'
 import { SPORT_MAP, PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
 import { formatMatchTime, formatOdds, formatVotes } from '@/lib/format'
+import { RecommendationBadge } from './RecommendationBadge'
 import type { Match } from '@/lib/types'
 
 interface Props {
@@ -28,7 +29,7 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
   if (!match) return null
 
   const sportCfg = SPORT_MAP[match.sport]
-  const conf = match.confidence ?? match.forebet?.probability ?? 0
+  const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
   const confTier = getConfidenceTier(conf)
   const SportIcon = sportCfg?.icon
 
@@ -42,6 +43,7 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
             <span className="text-sm text-muted-foreground ml-auto">
               {formatMatchTime(match.time)}
             </span>
+            <RecommendationBadge recommendation={match.gemini?.recommendation} size="md" />
           </div>
           <DialogTitle className="text-xl">
             {match.homeTeam} vs {match.awayTeam}
@@ -213,8 +215,11 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
           <TabsContent value="ai" className="mt-4">
             {match.gemini ? (
               <div className="rounded-lg border p-4 space-y-3">
-                <div className="flex items-center gap-2 font-medium">
-                  <Brain className="h-4 w-4 text-violet-500" /> Gemini AI Analysis
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 font-medium">
+                    <Brain className="h-4 w-4 text-violet-500" /> Gemini AI Analysis
+                  </div>
+                  <RecommendationBadge recommendation={match.gemini.recommendation} size="lg" />
                 </div>
                 {match.gemini.prediction && (
                   <div className="flex items-center gap-2">

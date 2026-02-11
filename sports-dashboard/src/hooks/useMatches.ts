@@ -42,3 +42,13 @@ export function useAvailableDates() {
     staleTime: 600_000,
   })
 }
+
+export function useLiveScores(sport: string = 'football') {
+  return useQuery({
+    queryKey: ['live-scores', sport],
+    queryFn: () => api.getLiveScores(sport),
+    staleTime: 15_000,            // 15s stale
+    refetchInterval: 30_000,      // Poll every 30s
+    refetchIntervalInBackground: false,  // Stop when tab is inactive
+  })
+}

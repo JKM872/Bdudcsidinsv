@@ -44,6 +44,19 @@ except Exception as e:
     supabase = None
     SUPABASE_AVAILABLE = False
 
+# Import ESPN API client for live scores
+try:
+    from espn_api_client import ESPNAPIClient
+    espn_client = ESPNAPIClient()
+    ESPN_AVAILABLE = True
+except Exception as e:
+    print(f"[WARNING] ESPN API not available: {e}")
+    espn_client = None
+    ESPN_AVAILABLE = False
+
+# Live scores cache (30 second TTL)
+_live_scores_cache: dict = {'data': [], 'timestamp': 0}
+
 app = Flask(__name__)
 CORS(app, origins=[
     'http://localhost:3000',
@@ -670,6 +683,64 @@ def get_betting_stats():
     stats = supabase.get_user_betting_stats()
     
     return jsonify(stats)
+
+
+# =============================================================================
+# LIVE SCORES ENDPOINT
+# =============================================================================
+
+@app.route('/api/live-scores', methods=['GET'])
+def get_live_scores():
+    """Get live scores from ESPN API with 30-second cache."""
+    import time as _time
+
+    sport = request.args.get('sport', 'football')
+    now = _time.time()
+
+    # Return cached data if fresh (< 30s)
+    cache_key = f"{sport}"
+    if (_live_scores_cache.get('key') == cache_key and
+            now - _live_scores_cache.get('timestamp', 0) < 30):
+        return jsonify({
+            'scores': _live_scores_cache['data'],
+            'cached': True,
+            'sport': sport,
+            'timestamp': datetime.now().isoformat()
+        })
+
+    if not ESPN_AVAILABLE:
+        return jsonify({'scores': [], 'error': 'ESPN API not available', 'sport': sport})
+
+    try:
+        # Fetch from multiple soccer leagues for football
+        all_matches = []
+        if sport == 'football':
+            for league in ['premier_league', 'la_liga', 'bundesliga', 'serie_a',
+                           'ligue_1', 'champions_league', 'europa_league']:
+                try:
+                    matches = espn_client.get_soccer_scores(league)
+                    all_matches.extend(matches)
+                except Exception:
+                    continue
+        else:
+            all_matches = espn_client.get_live_scores(sport)
+
+        scores = [m.to_dict() for m in all_matches]
+
+        # Update cache
+        _live_scores_cache['data'] = scores
+        _live_scores_cache['timestamp'] = now
+        _live_scores_cache['key'] = cache_key
+
+        return jsonify({
+            'scores': scores,
+            'cached': False,
+            'sport': sport,
+            'count': len(scores),
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        return jsonify({'scores': [], 'error': str(e), 'sport': sport})
 
 
 # Serve sample data for development

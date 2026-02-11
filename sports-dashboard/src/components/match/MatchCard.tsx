@@ -10,18 +10,23 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { cn } from '@/lib/utils'
 import { SPORT_MAP, PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
 import { formatMatchTime, formatVotes, formatOdds } from '@/lib/format'
-import type { Match } from '@/lib/types'
+import { RecommendationBadge } from './RecommendationBadge'
+import { LiveScoreBadge } from './LiveScoreBadge'
+import type { Match, LiveScore } from '@/lib/types'
 
 interface Props {
   match: Match
+  liveScore?: LiveScore | null
   onSelect?: (match: Match) => void
 }
 
-export function MatchCard({ match, onSelect }: Props) {
+export function MatchCard({ match, liveScore, onSelect }: Props) {
   const sportCfg = SPORT_MAP[match.sport]
-  const conf = match.confidence ?? match.forebet?.probability ?? 0
+  const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
   const confTier = getConfidenceTier(conf)
   const SportIcon = sportCfg?.icon
+  const recommendation = match.gemini?.recommendation
+  const isHighPick = recommendation === 'HIGH'
 
   const forebetPred = match.forebet?.prediction
   const sofaHome = match.sofascore?.home
@@ -33,7 +38,8 @@ export function MatchCard({ match, onSelect }: Props) {
       className={cn(
         'group relative overflow-hidden transition-all duration-200 cursor-pointer',
         'hover:shadow-lg hover:scale-[1.01] hover:border-primary/50',
-        match.value_bet && 'ring-2 ring-amber-400/50',
+        isHighPick && 'ring-2 ring-red-500/40 border-red-500/30',
+        !isHighPick && match.value_bet && 'ring-2 ring-amber-400/50',
       )}
       onClick={() => onSelect?.(match)}
     >
@@ -48,9 +54,15 @@ export function MatchCard({ match, onSelect }: Props) {
               {match.league ?? match.sport}
             </Badge>
           </div>
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Clock className="h-3 w-3" />
-            {formatMatchTime(match.time)}
+          <div className="flex items-center gap-1.5">
+            <LiveScoreBadge liveScore={liveScore} />
+            <RecommendationBadge recommendation={recommendation} />
+            {!liveScore && (
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="h-3 w-3" />
+                {formatMatchTime(match.time)}
+              </span>
+            )}
           </div>
         </div>
       </CardHeader>
