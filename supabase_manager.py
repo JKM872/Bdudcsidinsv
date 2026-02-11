@@ -11,7 +11,7 @@ Database: Configured via environment variables
 """
 
 from supabase import create_client, Client
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional, cast
 from datetime import datetime
 import os
 
@@ -29,7 +29,7 @@ class SupabaseManager:
         print(f"[OK] Connected to Supabase: {SUPABASE_URL}")
     
     
-    def save_prediction(self, match_data: Dict) -> bool:
+    def save_prediction(self, match_data: Dict[str, Any]) -> bool:
         """
         Zapisuje predykcję meczu do tabeli 'predictions'
         
@@ -78,7 +78,7 @@ class SupabaseManager:
         """
         try:
             # Prepare data for insert
-            prediction_record = {
+            prediction_record: Dict[str, Any] = {
                 'match_date': match_data.get('match_date'),
                 'match_time': match_data.get('match_time'),
                 'home_team': match_data.get('home_team'),
@@ -119,7 +119,7 @@ class SupabaseManager:
             }
             
             # Insert do Supabase
-            response = self.client.table('predictions').insert(prediction_record).execute()
+            self.client.table('predictions').insert(prediction_record).execute()
             
             print(f"[OK] Saved to Supabase: {match_data.get('home_team')} vs {match_data.get('away_team')}")
             return True
@@ -129,7 +129,7 @@ class SupabaseManager:
             return False
     
     
-    def save_bulk_predictions(self, matches_data: List[Dict]) -> int:
+    def save_bulk_predictions(self, matches_data: List[Dict[str, Any]]) -> int:
         """
         Zapisuje wiele predykcji naraz (batch insert)
         
@@ -149,7 +149,7 @@ class SupabaseManager:
         return success_count
     
     
-    def get_predictions(self, date: str = None, sport: str = None, limit: int = 500) -> List[Dict]:
+    def get_predictions(self, date: Optional[str] = None, sport: Optional[str] = None, limit: int = 500) -> List[Dict[str, Any]]:
         """
         Pobiera predykcje z tabeli 'predictions'.
         
@@ -172,7 +172,7 @@ class SupabaseManager:
             query = query.order('match_date', desc=True).order('match_time', desc=False).limit(limit)
             response = query.execute()
             
-            return response.data if response.data else []
+            return cast(List[Dict[str, Any]], response.data) if response.data else []
         except Exception as e:
             print(f"[ERROR] Error fetching predictions: {e}")
             return []
@@ -182,23 +182,25 @@ class SupabaseManager:
         """Zwraca listę dat dla których istnieją predykcje (desc)."""
         try:
             response = self.client.table('predictions').select('match_date').execute()
-            dates = sorted(set(r['match_date'] for r in response.data if r.get('match_date')), reverse=True)
+            rows = cast(List[Dict[str, Any]], response.data)
+            dates: List[str] = sorted(set(r['match_date'] for r in rows if r.get('match_date')), reverse=True)
             return dates
         except Exception as e:
             print(f"[ERROR] Error fetching dates: {e}")
             return []
     
     
-    def get_sport_counts(self, date: str = None) -> Dict[str, int]:
+    def get_sport_counts(self, date: Optional[str] = None) -> Dict[str, int]:
         """Zwraca liczbę meczów per sport dla danej daty."""
         try:
             query = self.client.table('predictions').select('sport')
             if date:
                 query = query.eq('match_date', date)
             response = query.execute()
-            counts = {}
-            for r in response.data:
-                s = r.get('sport', 'football')
+            counts: Dict[str, int] = {}
+            rows = cast(List[Dict[str, Any]], response.data)
+            for r in rows:
+                s = str(r.get('sport', 'football'))
                 counts[s] = counts.get(s, 0) + 1
             return counts
         except Exception as e:
@@ -226,14 +228,14 @@ class SupabaseManager:
             True jeśli sukces
         """
         try:
-            update_data = {
+            update_data: Dict[str, Any] = {
                 'actual_result': actual_result,
                 'home_score': home_score,
                 'away_score': away_score,
                 'result_updated_at': datetime.now().isoformat(),
             }
             
-            response = self.client.table('predictions').update(update_data).eq('id', match_id).execute()
+            self.client.table('predictions').update(update_data).eq('id', match_id).execute()
             
             print(f"[OK] Updated result for match ID {match_id}: {actual_result} ({home_score}-{away_score})")
             return True
@@ -243,7 +245,7 @@ class SupabaseManager:
             return False
     
     
-    def get_source_accuracy(self, source: str, days: int = 30) -> Dict:
+    def get_source_accuracy(self, source: str, days: int = 30) -> Dict[str, Any]:
         """
         Oblicza accuracy danego źródła za ostatnie N dni
         
@@ -269,7 +271,7 @@ class SupabaseManager:
                 .not_.is_('actual_result', 'null')\
                 .execute()
             
-            predictions = response.data
+            predictions = cast(List[Dict[str, Any]], response.data)
             
             if not predictions:
                 return {
@@ -308,12 +310,12 @@ class SupabaseManager:
                 
                 elif source == 'sofascore':
                     # SofaScore predicts based on highest probability
-                    probs = {
+                    probs: Dict[str, Any] = {
                         '1': pred.get('sofascore_home_win_prob', 0) or 0,
                         'X': pred.get('sofascore_draw_prob', 0) or 0,
                         '2': pred.get('sofascore_away_win_prob', 0) or 0,
                     }
-                    source_pred = max(probs, key=probs.get)
+                    source_pred = max(probs, key=lambda k: float(probs[k]))
                     
                     if source_pred == '1':
                         source_odds = pred.get('forebet_home_odds', 1.0) or 1.0
@@ -360,7 +362,7 @@ class SupabaseManager:
             }
     
     
-    def get_all_sources_accuracy(self, days: int = 30) -> Dict:
+    def get_all_sources_accuracy(self, days: int = 30) -> Dict[str, Any]:
         """
         Pobiera accuracy wszystkich źródeł
         
@@ -369,7 +371,7 @@ class SupabaseManager:
         """
         sources = ['livesport', 'forebet', 'sofascore', 'gemini']
         
-        results = {}
+        results: Dict[str, Any] = {}
         for source in sources:
             results[source] = self.get_source_accuracy(source, days)
         
@@ -380,7 +382,7 @@ class SupabaseManager:
     # USER BETS METHODS
     # ========================================================================
     
-    def save_user_bet(self, bet_data: Dict) -> Optional[int]:
+    def save_user_bet(self, bet_data: Dict[str, Any]) -> Optional[int]:
         """
         Zapisuje zakład użytkownika do tabeli 'user_bets'
         
@@ -402,7 +404,7 @@ class SupabaseManager:
             ID nowego zakładu lub None jeśli błąd
         """
         try:
-            bet_record = {
+            bet_record: Dict[str, Any] = {
                 'prediction_id': bet_data.get('prediction_id'),
                 'match_date': bet_data.get('match_date'),
                 'match_time': bet_data.get('match_time'),
@@ -421,7 +423,8 @@ class SupabaseManager:
             response = self.client.table('user_bets').insert(bet_record).execute()
             
             if response.data:
-                bet_id = response.data[0]['id']
+                row = cast(Dict[str, Any], response.data[0])
+                bet_id = int(row['id'])
                 print(f"[OK] Saved bet: {bet_data.get('home_team')} vs {bet_data.get('away_team')} - {bet_data.get('bet_selection')} @ {bet_data.get('odds_at_bet')}")
                 return bet_id
             return None
@@ -436,7 +439,7 @@ class SupabaseManager:
         status: Optional[str] = None,
         days: Optional[int] = None,
         limit: int = 100
-    ) -> List[Dict]:
+    ) -> List[Dict[str, Any]]:
         """
         Pobiera zakłady użytkownika
         
@@ -462,7 +465,7 @@ class SupabaseManager:
             query = query.order('created_at', desc=True).limit(limit)
             
             response = query.execute()
-            return response.data or []
+            return cast(List[Dict[str, Any]], response.data or [])
             
         except Exception as e:
             print(f"[ERROR] Error fetching bets: {e}")
@@ -496,7 +499,7 @@ class SupabaseManager:
                 print(f"[ERROR] Bet ID {bet_id} not found")
                 return False
             
-            bet = response.data[0]
+            bet = cast(Dict[str, Any], response.data[0])
             bet_selection = bet['bet_selection']
             odds = float(bet['odds_at_bet'])
             stake = float(bet['stake'])
@@ -509,7 +512,7 @@ class SupabaseManager:
                 status = 'lost'
                 profit = -stake  # Strata = -stawka
             
-            update_data = {
+            update_data: Dict[str, Any] = {
                 'status': status,
                 'actual_result': actual_result,
                 'home_score': home_score,
@@ -528,7 +531,7 @@ class SupabaseManager:
             return False
     
     
-    def get_user_betting_stats(self) -> Dict:
+    def get_user_betting_stats(self) -> Dict[str, Any]:
         """
         Pobiera statystyki zakładów użytkownika
         
@@ -545,7 +548,7 @@ class SupabaseManager:
         """
         try:
             response = self.client.table('user_bets').select('*').execute()
-            bets = response.data or []
+            bets = cast(List[Dict[str, Any]], response.data or [])
             
             if not bets:
                 return {
@@ -703,7 +706,7 @@ if __name__ == "__main__":
     manager = SupabaseManager()
     
     # Test save prediction
-    test_match = {
+    test_match: Dict[str, Any] = {
         'match_date': '2025-11-18',
         'match_time': '20:00',
         'home_team': 'Test Home',

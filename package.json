@@ -10,7 +10,8 @@
     "scrape:tennis": "node forebet_puppeteer.js tennis forebet_tennis.html",
     "scrape:hockey": "node forebet_puppeteer.js hockey forebet_hockey.html",
     "scrape:volleyball": "node forebet_puppeteer.js volleyball forebet_volleyball.html",
-    "scrape:handball": "node forebet_puppeteer.js handball forebet_handball.html"
+    "scrape:handball": "node forebet_puppeteer.js handball forebet_handball.html",
+    "heroku-postbuild": "cd sports-dashboard && npm install && npm run build"
   },
   "dependencies": {
     "puppeteer": "^21.6.1",

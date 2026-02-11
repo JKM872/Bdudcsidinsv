@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Separator } from '@/components/ui/separator'
 import { Progress } from '@/components/ui/progress'
 import {
-  Target, BarChart3, TrendingUp, History, Brain, ExternalLink,
+  Target, BarChart3, TrendingUp, History, Brain,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { SPORT_MAP, PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'

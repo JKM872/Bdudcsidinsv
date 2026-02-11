@@ -3,13 +3,12 @@
 // ============================================================================
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback, useSyncExternalStore } from 'react'
 import {
   Plus, Trash2, TrendingUp, TrendingDown, Minus,
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -35,13 +34,12 @@ function saveBets(bets: UserBet[]) {
 }
 
 export default function MyBetsPage() {
-  const [bets, setBets] = useState<UserBet[]>([])
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setBets(loadBets())
-    setMounted(true)
-  }, [])
+  const [bets, setBets] = useState<UserBet[]>(() => loadBets())
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
 
   const persist = useCallback((next: UserBet[]) => {
     setBets(next)
@@ -84,7 +82,6 @@ export default function MyBetsPage() {
   const total = bets.length
   const won = bets.filter((b) => b.result === 'won').length
   const lost = bets.filter((b) => b.result === 'lost').length
-  const pending = bets.filter((b) => b.result === 'pending').length
   const profit = bets.reduce((acc, b) => {
     if (b.result === 'won' && b.odds && b.stake) return acc + b.stake * (b.odds - 1)
     if (b.result === 'lost' && b.stake) return acc - b.stake

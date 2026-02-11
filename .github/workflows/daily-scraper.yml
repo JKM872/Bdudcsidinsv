@@ -2,14 +2,14 @@
 
 on:
   schedule:
-    # Uruchomienie o 2:00 UTC (3:00 czasu polskiego zimÄ…, 4:00 latem)
-    # KaĹĽdy sport osobno z 5-minutowymi przerwami dla stabilnoĹ›ci
-    - cron: '0 2 * * *'   # Football o 2:00
-    - cron: '5 2 * * *'   # Basketball o 2:05
-    - cron: '10 2 * * *'  # Tennis o 2:10
-    - cron: '15 2 * * *'  # Hockey o 2:15
-    - cron: '20 2 * * *'  # Volleyball o 2:20
-    - cron: '25 2 * * *'  # Handball o 2:25
+    # Uruchomienie o 0:00 UTC = 2:00 czasu polskiego latem (CEST), 1:00 zimą (CET)
+    # Każdy sport osobno z 5-minutowymi przerwami dla stabilności
+    - cron: '0 0 * * *'   # Football o 0:00 UTC
+    - cron: '5 0 * * *'   # Basketball o 0:05 UTC
+    - cron: '10 0 * * *'  # Tennis o 0:10 UTC
+    - cron: '15 0 * * *'  # Hockey o 0:15 UTC
+    - cron: '20 0 * * *'  # Volleyball o 0:20 UTC
+    - cron: '25 0 * * *'  # Handball o 0:25 UTC
   
   workflow_dispatch:
     inputs:

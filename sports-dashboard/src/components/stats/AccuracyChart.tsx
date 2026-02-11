@@ -8,7 +8,6 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Cell,
 } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { SPORTS } from '@/lib/constants'
 import type { SportStat } from '@/lib/types'
 
 interface AccuracyChartProps {
@@ -17,7 +16,6 @@ interface AccuracyChartProps {
 
 // Resolve sport colour from constants or fallback
 function getSportColor(sportId: string) {
-  const s = SPORTS.find((sp) => sp.id === sportId)
   // map tailwind-style classname to a plain hex; we keep a small palette
   const palette: Record<string, string> = {
     football: '#22c55e',

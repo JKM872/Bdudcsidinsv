@@ -1,9 +1,9 @@
 name: Sports Scraper Pipeline
 
 on:
-  # Run daily at 2:00 AM UTC (3:00 CET / 4:00 CEST)
+  # Run daily at 0:00 UTC (2:00 CEST summer / 1:00 CET winter = ~2:00 Polish time)
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 0 * * *'
   
   # Allow manual trigger
   workflow_dispatch:

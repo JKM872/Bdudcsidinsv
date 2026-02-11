@@ -19,7 +19,7 @@ import json
 import glob
 import math
 from datetime import datetime, timedelta
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 
 
@@ -45,7 +45,12 @@ except Exception as e:
     SUPABASE_AVAILABLE = False
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for React frontend
+CORS(app, origins=[
+    'http://localhost:3000',
+    'http://localhost:5000',
+    'https://*.vercel.app',
+    'https://pickly-67e87ed00f70.herokuapp.com',
+])  # Enable CORS for frontend (Vercel + local dev)
 
 # Directory with scraper results
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), 'results')
@@ -742,6 +747,57 @@ def get_sample_data():
         },
         'sportCounts': {'football': 2, 'basketball': 1}
     })
+
+
+# ============================================================================
+# Serve Next.js static export (frontend)
+# ============================================================================
+FRONTEND_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sports-dashboard', 'out')
+
+
+@app.route('/')
+def serve_frontend():
+    """Serve the main index page."""
+    index_path = os.path.join(FRONTEND_DIR, 'index.html')
+    if os.path.isfile(index_path):
+        return send_from_directory(FRONTEND_DIR, 'index.html')
+    return jsonify({'error': 'Frontend not built. Run: cd sports-dashboard && npm run build'}), 404
+
+
+@app.route('/_next/<path:filename>')
+def serve_next_static(filename):
+    """Serve Next.js static assets (JS, CSS, fonts)."""
+    return send_from_directory(os.path.join(FRONTEND_DIR, '_next'), filename)
+
+
+@app.route('/<path:path>')
+def serve_frontend_pages(path):
+    """Catch-all: serve frontend pages, static files, or SPA fallback."""
+    # Skip API routes (handled by dedicated endpoints above)
+    if path.startswith('api/'):
+        return jsonify({'error': 'Not found'}), 404
+
+    # Try exact file (e.g. favicon.ico, robots.txt)
+    exact = os.path.join(FRONTEND_DIR, path)
+    if os.path.isfile(exact):
+        return send_from_directory(FRONTEND_DIR, path)
+
+    # Try with .html extension (e.g. /leaderboard → leaderboard.html)
+    html_file = path + '.html'
+    if os.path.isfile(os.path.join(FRONTEND_DIR, html_file)):
+        return send_from_directory(FRONTEND_DIR, html_file)
+
+    # Try as directory with index.html (e.g. /my-bets → my-bets/index.html)
+    dir_index = os.path.join(FRONTEND_DIR, path, 'index.html')
+    if os.path.isfile(dir_index):
+        return send_from_directory(os.path.join(FRONTEND_DIR, path), 'index.html')
+
+    # SPA fallback – let client-side router handle it
+    index_path = os.path.join(FRONTEND_DIR, 'index.html')
+    if os.path.isfile(index_path):
+        return send_from_directory(FRONTEND_DIR, 'index.html')
+
+    return jsonify({'error': 'Not found'}), 404
 
 
 if __name__ == '__main__':

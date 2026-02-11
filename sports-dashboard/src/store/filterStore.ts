@@ -82,7 +82,7 @@ export const useFilterStore = create<FilterState>((set) => ({
       if (overrides.date === 'today') date = new Date()
       else if (overrides.date === 'tomorrow') date = addDays(new Date(), 1)
     }
-    const { date: _, ...rest } = overrides as Record<string, unknown>
+    const { date: _date, ...rest } = overrides as Record<string, unknown> // eslint-disable-line @typescript-eslint/no-unused-vars
     const next = { ...s, ...rest, date } as MatchFilters
     return { ...next, activeFilterCount: countActive(next) }
   }),

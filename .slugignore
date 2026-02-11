@@ -9,7 +9,6 @@ __pycache__/
 *.md
 test_*.py
 debug_*.py
-*.html
 debug_html/
 node_modules/
 dashboard/node_modules/
