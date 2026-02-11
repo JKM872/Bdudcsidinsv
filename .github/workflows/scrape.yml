@@ -85,6 +85,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          # 🔥 Cloudflare Bypass packages (curl_cffi is PRIMARY bypass method)
+          sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+          pip install curl-cffi cloudscraper httpx[http2]
+          python -c "from curl_cffi import requests; print('curl_cffi OK')"
       
       # 6. Install Node.js dependencies (Puppeteer)
       - name: Install Node.js dependencies

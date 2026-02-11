@@ -1,9 +1,9 @@
-name: Daily Sports Scraper
+﻿name: Daily Sports Scraper
 
 on:
   schedule:
-    # Uruchomienie o 2:00 UTC (3:00 czasu polskiego zimą, 4:00 latem)
-    # Każdy sport osobno z 5-minutowymi przerwami dla stabilności
+    # Uruchomienie o 2:00 UTC (3:00 czasu polskiego zimÄ…, 4:00 latem)
+    # KaĹĽdy sport osobno z 5-minutowymi przerwami dla stabilnoĹ›ci
     - cron: '0 2 * * *'   # Football o 2:00
     - cron: '5 2 * * *'   # Basketball o 2:05
     - cron: '10 2 * * *'  # Tennis o 2:10
@@ -92,9 +92,9 @@ jobs:
     needs: determine-sport
     if: needs.determine-sport.outputs.sport == 'football' || needs.determine-sport.outputs.sport == 'all'
     runs-on: ubuntu-latest
-    timeout-minutes: 360  # 6 godzin dla 900+ meczów
+    timeout-minutes: 360  # 6 godzin dla 900+ meczĂłw
     
-    # 🔥 FlareSolverr Docker Service - omija Cloudflare!
+    # đź”Ą FlareSolverr Docker Service - omija Cloudflare!
     services:
       flaresolverr:
         image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -150,29 +150,31 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install xvfbwrapper
-          # 🔥 Cloudflare Bypass packages
-          pip install curl-cffi cloudscraper httpx[http2] || true
+          # đź”Ą Cloudflare Bypass packages (curl_cffi is PRIMARY bypass method)
+          sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+          pip install curl-cffi cloudscraper httpx[http2]
+          python -c "from curl_cffi import requests; print('curl_cffi OK')"
           playwright install firefox --with-deps || true
       
       - name: Wait for FlareSolverr
         run: |
-          echo "⏳ Waiting for FlareSolverr to be ready..."
+          echo "âŹł Waiting for FlareSolverr to be ready..."
           FLARESOLVERR_READY=false
           for i in {1..30}; do
-            # Sprawdź /health endpoint (zwraca JSON z statusem)
+            # SprawdĹş /health endpoint (zwraca JSON z statusem)
             if curl -s http://localhost:8191/health | grep -q '"status"'; then
-              echo "✅ FlareSolverr health endpoint responding!"
-              # Weryfikacja - spróbuj prostego request
+              echo "âś… FlareSolverr health endpoint responding!"
+              # Weryfikacja - sprĂłbuj prostego request
               TEST_RESPONSE=$(curl -s -X POST http://localhost:8191/v1 \
                 -H "Content-Type: application/json" \
                 -d '{"cmd":"request.get","url":"https://www.google.com","maxTimeout":10000}' \
                 --max-time 15 2>/dev/null || echo "TIMEOUT")
               if echo "$TEST_RESPONSE" | grep -q '"status":"ok"'; then
-                echo "✅ FlareSolverr verified - working correctly!"
+                echo "âś… FlareSolverr verified - working correctly!"
                 FLARESOLVERR_READY=true
                 break
               else
-                echo "⚠️ FlareSolverr health OK but test request not yet ready, retrying..."
+                echo "âš ď¸Ź FlareSolverr health OK but test request not yet ready, retrying..."
               fi
             fi
             echo "Waiting... ($i/30)"
@@ -181,9 +183,9 @@ jobs:
           
           # Final status
           if [ "$FLARESOLVERR_READY" = "true" ]; then
-            echo "🎉 FlareSolverr is fully operational!"
+            echo "đźŽ‰ FlareSolverr is fully operational!"
           else
-            echo "⚠️ WARNING: FlareSolverr may not be fully ready!"
+            echo "âš ď¸Ź WARNING: FlareSolverr may not be fully ready!"
             echo "   Continuing anyway - code will handle fallback methods..."
           fi
       
@@ -222,7 +224,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
       
-      # 🔍 Upload debug files for troubleshooting
+      # đź”Ť Upload debug files for troubleshooting
       - name: Upload debug artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -296,23 +298,25 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install xvfbwrapper
-          # 🔥 Cloudflare Bypass packages
-          pip install curl-cffi cloudscraper httpx[http2] || true
+          # đź”Ą Cloudflare Bypass packages (curl_cffi is PRIMARY bypass method)
+          sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+          pip install curl-cffi cloudscraper httpx[http2]
+          python -c "from curl_cffi import requests; print('curl_cffi OK')"
           playwright install firefox --with-deps || true
       
       - name: Wait for FlareSolverr
         run: |
-          echo "⏳ Waiting for FlareSolverr to be ready..."
+          echo "âŹł Waiting for FlareSolverr to be ready..."
           FLARESOLVERR_READY=false
           for i in {1..30}; do
             if curl -s http://localhost:8191/health | grep -q '"status"'; then
-              echo "✅ FlareSolverr health endpoint responding!"
+              echo "âś… FlareSolverr health endpoint responding!"
               TEST_RESPONSE=$(curl -s -X POST http://localhost:8191/v1 \
                 -H "Content-Type: application/json" \
                 -d '{"cmd":"request.get","url":"https://www.google.com","maxTimeout":10000}' \
                 --max-time 15 2>/dev/null || echo "TIMEOUT")
               if echo "$TEST_RESPONSE" | grep -q '"status":"ok"'; then
-                echo "✅ FlareSolverr verified - working correctly!"
+                echo "âś… FlareSolverr verified - working correctly!"
                 FLARESOLVERR_READY=true
                 break
               fi
@@ -321,7 +325,7 @@ jobs:
             sleep 2
           done
           if [ "$FLARESOLVERR_READY" != "true" ]; then
-            echo "⚠️ FlareSolverr may not be fully ready, continuing anyway..."
+            echo "âš ď¸Ź FlareSolverr may not be fully ready, continuing anyway..."
           fi
       
       - name: Run Basketball Scraper
@@ -432,23 +436,25 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install xvfbwrapper
-          # 🔥 Cloudflare Bypass packages
-          pip install curl-cffi cloudscraper httpx[http2] || true
+          # đź”Ą Cloudflare Bypass packages (curl_cffi is PRIMARY bypass method)
+          sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+          pip install curl-cffi cloudscraper httpx[http2]
+          python -c "from curl_cffi import requests; print('curl_cffi OK')"
           playwright install firefox --with-deps || true
       
       - name: Wait for FlareSolverr
         run: |
-          echo "⏳ Waiting for FlareSolverr to be ready..."
+          echo "âŹł Waiting for FlareSolverr to be ready..."
           FLARESOLVERR_READY=false
           for i in {1..30}; do
             if curl -s http://localhost:8191/health | grep -q '"status"'; then
-              echo "✅ FlareSolverr health endpoint responding!"
+              echo "âś… FlareSolverr health endpoint responding!"
               TEST_RESPONSE=$(curl -s -X POST http://localhost:8191/v1 \
                 -H "Content-Type: application/json" \
                 -d '{"cmd":"request.get","url":"https://www.google.com","maxTimeout":10000}' \
                 --max-time 15 2>/dev/null || echo "TIMEOUT")
               if echo "$TEST_RESPONSE" | grep -q '"status":"ok"'; then
-                echo "✅ FlareSolverr verified - working correctly!"
+                echo "âś… FlareSolverr verified - working correctly!"
                 FLARESOLVERR_READY=true
                 break
               fi
@@ -457,7 +463,7 @@ jobs:
             sleep 2
           done
           if [ "$FLARESOLVERR_READY" != "true" ]; then
-            echo "⚠️ FlareSolverr may not be fully ready, continuing anyway..."
+            echo "âš ď¸Ź FlareSolverr may not be fully ready, continuing anyway..."
           fi
       
       - name: Run Tennis Scraper
@@ -568,23 +574,25 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install xvfbwrapper
-          # 🔥 Cloudflare Bypass packages
-          pip install curl-cffi cloudscraper httpx[http2] || true
+          # đź”Ą Cloudflare Bypass packages (curl_cffi is PRIMARY bypass method)
+          sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+          pip install curl-cffi cloudscraper httpx[http2]
+          python -c "from curl_cffi import requests; print('curl_cffi OK')"
           playwright install firefox --with-deps || true
       
       - name: Wait for FlareSolverr
         run: |
-          echo "⏳ Waiting for FlareSolverr to be ready..."
+          echo "âŹł Waiting for FlareSolverr to be ready..."
           FLARESOLVERR_READY=false
           for i in {1..30}; do
             if curl -s http://localhost:8191/health | grep -q '"status"'; then
-              echo "✅ FlareSolverr health endpoint responding!"
+              echo "âś… FlareSolverr health endpoint responding!"
               TEST_RESPONSE=$(curl -s -X POST http://localhost:8191/v1 \
                 -H "Content-Type: application/json" \
                 -d '{"cmd":"request.get","url":"https://www.google.com","maxTimeout":10000}' \
                 --max-time 15 2>/dev/null || echo "TIMEOUT")
               if echo "$TEST_RESPONSE" | grep -q '"status":"ok"'; then
-                echo "✅ FlareSolverr verified - working correctly!"
+                echo "âś… FlareSolverr verified - working correctly!"
                 FLARESOLVERR_READY=true
                 break
               fi
@@ -593,7 +601,7 @@ jobs:
             sleep 2
           done
           if [ "$FLARESOLVERR_READY" != "true" ]; then
-            echo "⚠️ FlareSolverr may not be fully ready, continuing anyway..."
+            echo "âš ď¸Ź FlareSolverr may not be fully ready, continuing anyway..."
           fi
       
       - name: Run Hockey Scraper
@@ -704,23 +712,25 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install xvfbwrapper
-          # 🔥 Cloudflare Bypass packages
-          pip install curl-cffi cloudscraper httpx[http2] || true
+          # đź”Ą Cloudflare Bypass packages (curl_cffi is PRIMARY bypass method)
+          sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+          pip install curl-cffi cloudscraper httpx[http2]
+          python -c "from curl_cffi import requests; print('curl_cffi OK')"
           playwright install firefox --with-deps || true
       
       - name: Wait for FlareSolverr
         run: |
-          echo "⏳ Waiting for FlareSolverr to be ready..."
+          echo "âŹł Waiting for FlareSolverr to be ready..."
           FLARESOLVERR_READY=false
           for i in {1..30}; do
             if curl -s http://localhost:8191/health | grep -q '"status"'; then
-              echo "✅ FlareSolverr health endpoint responding!"
+              echo "âś… FlareSolverr health endpoint responding!"
               TEST_RESPONSE=$(curl -s -X POST http://localhost:8191/v1 \
                 -H "Content-Type: application/json" \
                 -d '{"cmd":"request.get","url":"https://www.google.com","maxTimeout":10000}' \
                 --max-time 15 2>/dev/null || echo "TIMEOUT")
               if echo "$TEST_RESPONSE" | grep -q '"status":"ok"'; then
-                echo "✅ FlareSolverr verified - working correctly!"
+                echo "âś… FlareSolverr verified - working correctly!"
                 FLARESOLVERR_READY=true
                 break
               fi
@@ -729,7 +739,7 @@ jobs:
             sleep 2
           done
           if [ "$FLARESOLVERR_READY" != "true" ]; then
-            echo "⚠️ FlareSolverr may not be fully ready, continuing anyway..."
+            echo "âš ď¸Ź FlareSolverr may not be fully ready, continuing anyway..."
           fi
       
       - name: Run Volleyball Scraper
@@ -840,23 +850,25 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install xvfbwrapper
-          # 🔥 Cloudflare Bypass packages
-          pip install curl-cffi cloudscraper httpx[http2] || true
+          # đź”Ą Cloudflare Bypass packages (curl_cffi is PRIMARY bypass method)
+          sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+          pip install curl-cffi cloudscraper httpx[http2]
+          python -c "from curl_cffi import requests; print('curl_cffi OK')"
           playwright install firefox --with-deps || true
       
       - name: Wait for FlareSolverr
         run: |
-          echo "⏳ Waiting for FlareSolverr to be ready..."
+          echo "âŹł Waiting for FlareSolverr to be ready..."
           FLARESOLVERR_READY=false
           for i in {1..30}; do
             if curl -s http://localhost:8191/health | grep -q '"status"'; then
-              echo "✅ FlareSolverr health endpoint responding!"
+              echo "âś… FlareSolverr health endpoint responding!"
               TEST_RESPONSE=$(curl -s -X POST http://localhost:8191/v1 \
                 -H "Content-Type: application/json" \
                 -d '{"cmd":"request.get","url":"https://www.google.com","maxTimeout":10000}' \
                 --max-time 15 2>/dev/null || echo "TIMEOUT")
               if echo "$TEST_RESPONSE" | grep -q '"status":"ok"'; then
-                echo "✅ FlareSolverr verified - working correctly!"
+                echo "âś… FlareSolverr verified - working correctly!"
                 FLARESOLVERR_READY=true
                 break
               fi
@@ -865,7 +877,7 @@ jobs:
             sleep 2
           done
           if [ "$FLARESOLVERR_READY" != "true" ]; then
-            echo "⚠️ FlareSolverr may not be fully ready, continuing anyway..."
+            echo "âš ď¸Ź FlareSolverr may not be fully ready, continuing anyway..."
           fi
       
       - name: Run Handball Scraper
@@ -903,7 +915,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
       
-      # 🔍 Upload debug files for troubleshooting
+      # đź”Ť Upload debug files for troubleshooting
       - name: Upload debug artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -925,23 +937,23 @@ jobs:
     steps:
       - name: Generate Summary
         run: |
-          echo "## 🏆 Daily Scraper Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## đźŹ† Daily Scraper Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📅 **Date:** $(date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
-          echo "⏰ **Time:** $(date -u +%H:%M) UTC" >> $GITHUB_STEP_SUMMARY
+          echo "đź“… **Date:** $(date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
+          echo "âŹ° **Time:** $(date -u +%H:%M) UTC" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Sport Results:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Sport | Status |" >> $GITHUB_STEP_SUMMARY
           echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| ⚽ Football | ${{ needs.scrape-football.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🏀 Basketball | ${{ needs.scrape-basketball.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🎾 Tennis | ${{ needs.scrape-tennis.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🏒 Hockey | ${{ needs.scrape-hockey.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🏐 Volleyball | ${{ needs.scrape-volleyball.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🤾 Handball | ${{ needs.scrape-handball.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| âš˝ Football | ${{ needs.scrape-football.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| đźŹ€ Basketball | ${{ needs.scrape-basketball.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| đźŽľ Tennis | ${{ needs.scrape-tennis.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| đźŹ’ Hockey | ${{ needs.scrape-hockey.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| đźŹ Volleyball | ${{ needs.scrape-volleyball.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| đź¤ľ Handball | ${{ needs.scrape-handball.result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
 
-  # 🎯 Weryfikacja wczorajszych predykcji
+  # đźŽŻ Weryfikacja wczorajszych predykcji
   verify-predictions:
     needs: [summary]
     if: always()
@@ -971,7 +983,7 @@ jobs:
       
       - name: Generate Accuracy Report
         run: |
-          echo "## 📊 Prediction Accuracy Report" >> $GITHUB_STEP_SUMMARY
+          echo "## đź“Š Prediction Accuracy Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Yesterday's predictions have been verified." >> $GITHUB_STEP_SUMMARY
           echo "Check Supabase dashboard for detailed stats." >> $GITHUB_STEP_SUMMARY

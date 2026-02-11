@@ -192,6 +192,31 @@ def prefetch_forebet_html(sport: str, match_date: str = None) -> bool:
     }
     keywords = sport_check_keywords.get(sport_lower, ['predictions'])
     
+    # 🔥 METODA 1: curl_cffi (najszybsza, bypass Cloudflare TLS fingerprint)
+    try:
+        from curl_cffi import requests as curl_requests
+        print(f"   🔥 Forebet {sport}: Próbuję curl_cffi...")
+        resp = curl_requests.get(url, impersonate='chrome', timeout=20)
+        if resp.status_code == 200:
+            curl_html = resp.text
+            is_forebet_curl = 'rcnt' in curl_html or 'fprc' in curl_html or 'forepr' in curl_html
+            is_cf_block = 'cf-browser-verification' in curl_html or 'challenge-platform' in curl_html
+            html_lower_curl = curl_html.lower()
+            sport_matches_curl = any(kw in html_lower_curl for kw in keywords)
+            
+            if is_forebet_curl and not is_cf_block and sport_matches_curl:
+                soup = BeautifulSoup(curl_html, 'html.parser')
+                _forebet_html_cache[sport_cache_key] = (curl_html, soup, time.time())
+                print(f"   ✅ Forebet {sport}: curl_cffi SUCCESS! ({len(curl_html)} znaków)")
+                return True
+            else:
+                print(f"   ⚠️ curl_cffi: forebet={is_forebet_curl}, cf_block={is_cf_block}, sport={sport_matches_curl}")
+    except ImportError:
+        pass
+    except Exception as e:
+        print(f"   ⚠️ curl_cffi error: {e}")
+    
+    # 🔥 METODA 2: Cloudflare Bypass (FlareSolverr etc.) - fallback
     # Retry loop - w CI mniej prób dla szybkości
     max_retries = 2 if IS_CI_CD else 3
     for attempt in range(max_retries):
@@ -211,8 +236,10 @@ def prefetch_forebet_html(sport: str, match_date: str = None) -> bool:
             
             if html_content:
                 is_forebet = (
-                    'class="rcnt"' in html_content or
-                    'class="tr_0"' in html_content
+                    'rcnt' in html_content or
+                    'fprc' in html_content or
+                    'forepr' in html_content or
+                    'tr_0' in html_content
                 )
                 html_lower = html_content.lower()
                 sport_matches = any(kw in html_lower for kw in keywords)
@@ -990,7 +1017,52 @@ def search_forebet_prediction(
     
     # 🔥 Pobierz HTML tylko jeśli nie ma w cache
     if html_content is None:
-        # W CI/CD - od razu FlareSolverr (Puppeteer nie działa)
+        # 🔥 METODA 0: curl_cffi - najszybsza, działa wszędzie (CI + local)
+        try:
+            from curl_cffi import requests as curl_requests
+            
+            _sport_urls_curl = {
+                'football': 'https://www.forebet.com/en/football-tips-and-predictions-for-today/predictions-1x2',
+                'soccer': 'https://www.forebet.com/en/football-tips-and-predictions-for-today/predictions-1x2',
+                'basketball': 'https://www.forebet.com/en/basketball/predictions-today',
+                'volleyball': 'https://www.forebet.com/en/volleyball/predictions-today',
+                'handball': 'https://www.forebet.com/en/handball/predictions-today',
+                'hockey': 'https://www.forebet.com/en/hockey/predictions-today',
+                'ice-hockey': 'https://www.forebet.com/en/hockey/predictions-today',
+                'tennis': 'https://www.forebet.com/en/tennis/predictions-today',
+                'rugby': 'https://www.forebet.com/en/rugby/predictions-today',
+                'baseball': 'https://www.forebet.com/en/baseball/predictions-today',
+            }
+            _base_url_curl = _sport_urls_curl.get(sport_lower, _sport_urls_curl['football'])
+            
+            from datetime import datetime as _dt_curl
+            _today_curl = _dt_curl.now().strftime('%Y-%m-%d')
+            _curl_url = f"{_base_url_curl}?date={match_date}" if match_date and match_date != _today_curl else _base_url_curl
+            
+            print(f"      🔥 curl_cffi: Próbuję pobrać {sport} → {_curl_url}")
+            _curl_resp = curl_requests.get(_curl_url, impersonate='chrome', timeout=20)
+            
+            if _curl_resp.status_code == 200:
+                _curl_html = _curl_resp.text
+                _is_fb = 'rcnt' in _curl_html or 'fprc' in _curl_html or 'forepr' in _curl_html
+                _is_cf = 'cf-browser-verification' in _curl_html or 'challenge-platform' in _curl_html
+                
+                if _is_fb and not _is_cf:
+                    html_content = _curl_html
+                    soup = BeautifulSoup(html_content, 'html.parser')
+                    _forebet_html_cache[sport_cache_key] = (html_content, soup, time.time())
+                    print(f"      ✅ curl_cffi SUCCESS! ({len(html_content)} znaków)")
+                else:
+                    print(f"      ⚠️ curl_cffi: forebet={_is_fb}, cf_block={_is_cf}")
+            else:
+                print(f"      ⚠️ curl_cffi: status {_curl_resp.status_code}")
+        except ImportError:
+            print(f"      ⚠️ curl_cffi niedostępne, próbuję inne metody...")
+        except Exception as e:
+            print(f"      ⚠️ curl_cffi error: {e}")
+    
+    if html_content is None:
+        # W CI/CD - FlareSolverr (Puppeteer nie działa)
         if IS_CI_CD and CLOUDFLARE_BYPASS_AVAILABLE:
             print(f"      🔥 CI/CD: Używam FlareSolverr (skip Puppeteer - nie działa)")
             
@@ -1061,10 +1133,11 @@ def search_forebet_prediction(
                         )
                         
                         is_forebet = (
-                            'class="rcnt"' in html_content or
-                            'class="forepr"' in html_content or
-                            'class="tr_0"' in html_content or
-                            'class="tr_1"' in html_content
+                            'rcnt' in html_content or
+                            'fprc' in html_content or
+                            'forepr' in html_content or
+                            'tr_0' in html_content or
+                            'tr_1' in html_content
                         )
                         
                         html_lower = html_content.lower()
@@ -1097,21 +1170,74 @@ def search_forebet_prediction(
                     print(f"      ⚠️ Cloudflare Bypass error: {e}")
                     html_content = None
         
-        # Lokalnie - Puppeteer + fallback
+        # Lokalnie - curl_cffi (najszybsza metoda) → Puppeteer → Selenium fallback
         elif not IS_CI_CD:
-            print(f"      🚀 Lokalnie: Próbuję Puppeteer Stealth...")
-            html_content = fetch_forebet_with_puppeteer(sport)
-            
-            if html_content:
-                is_cloudflare = 'loading-verifying' in html_content or 'lds-ring' in html_content
-                is_forebet = 'class="rcnt"' in html_content or 'class="tr_0"' in html_content
+            # 🔥 METODA 1: curl_cffi - fastest, bypasses Cloudflare with Chrome TLS
+            try:
+                from curl_cffi import requests as curl_requests
                 
-                if is_forebet and not is_cloudflare:
-                    print(f"      ✅ Puppeteer SUCCESS! ({len(html_content)} znaków)")
-                    soup = BeautifulSoup(html_content, 'html.parser')
-                    _forebet_html_cache[sport_cache_key] = (html_content, soup, time.time())
+                sport_urls_local = {
+                    'football': 'https://www.forebet.com/en/football-tips-and-predictions-for-today/predictions-1x2',
+                    'soccer': 'https://www.forebet.com/en/football-tips-and-predictions-for-today/predictions-1x2',
+                    'basketball': 'https://www.forebet.com/en/basketball/predictions-today',
+                    'volleyball': 'https://www.forebet.com/en/volleyball/predictions-today',
+                    'handball': 'https://www.forebet.com/en/handball/predictions-today',
+                    'hockey': 'https://www.forebet.com/en/hockey/predictions-today',
+                    'ice-hockey': 'https://www.forebet.com/en/hockey/predictions-today',
+                    'tennis': 'https://www.forebet.com/en/tennis/predictions-today',
+                    'rugby': 'https://www.forebet.com/en/rugby/predictions-today',
+                    'baseball': 'https://www.forebet.com/en/baseball/predictions-today',
+                }
+                base_url_local = sport_urls_local.get(sport_lower, sport_urls_local['football'])
+                
+                from datetime import datetime
+                today_local = datetime.now().strftime('%Y-%m-%d')
+                if match_date and match_date != today_local:
+                    curl_url = f"{base_url_local}?date={match_date}"
                 else:
-                    html_content = None
+                    curl_url = base_url_local
+                
+                print(f"      🔥 Lokalnie: curl_cffi → {curl_url}")
+                resp = curl_requests.get(curl_url, impersonate='chrome', timeout=20)
+                
+                if resp.status_code == 200:
+                    curl_html = resp.text
+                    is_forebet_curl = 'rcnt' in curl_html or 'fprc' in curl_html or 'forepr' in curl_html
+                    is_cf_block = 'cf-browser-verification' in curl_html or 'challenge-platform' in curl_html
+                    
+                    if is_forebet_curl and not is_cf_block:
+                        html_content = curl_html
+                        soup = BeautifulSoup(html_content, 'html.parser')
+                        _forebet_html_cache[sport_cache_key] = (html_content, soup, time.time())
+                        print(f"      ✅ curl_cffi SUCCESS! ({len(html_content)} znaków)")
+                    else:
+                        print(f"      ⚠️ curl_cffi: Cloudflare block lub brak danych")
+                else:
+                    print(f"      ⚠️ curl_cffi: status {resp.status_code}")
+            except ImportError:
+                print(f"      ⚠️ curl_cffi niedostępne")
+            except Exception as e:
+                print(f"      ⚠️ curl_cffi error: {e}")
+            
+            # 🔥 METODA 2: Puppeteer Stealth (fallback jeśli curl_cffi nie zadziałał)
+            if html_content is None:
+                print(f"      🚀 Lokalnie: Próbuję Puppeteer Stealth...")
+                html_content = fetch_forebet_with_puppeteer(sport)
+                
+                if html_content:
+                    is_cloudflare = 'loading-verifying' in html_content or 'lds-ring' in html_content
+                    is_forebet = 'rcnt' in html_content or 'fprc' in html_content or 'forepr' in html_content or 'tr_0' in html_content
+                    
+                    if is_forebet and not is_cloudflare:
+                        print(f"      ✅ Puppeteer SUCCESS! ({len(html_content)} znaków)")
+                        soup = BeautifulSoup(html_content, 'html.parser')
+                        _forebet_html_cache[sport_cache_key] = (html_content, soup, time.time())
+                    elif is_forebet and is_cloudflare:
+                        print(f"      ✅ Puppeteer SUCCESS (z Cloudflare residuals)! ({len(html_content)} znaków)")
+                        soup = BeautifulSoup(html_content, 'html.parser')
+                        _forebet_html_cache[sport_cache_key] = (html_content, soup, time.time())
+                    else:
+                        html_content = None
     
     try:
         # Jeśli mamy już HTML, parsuj go i POMIŃ całą logikę Selenium!
@@ -1408,7 +1534,10 @@ def search_forebet_prediction(
             except Exception as e:
                 print(f"      ⚠️ Nie udało się zapisać debug HTML: {e}")
         
-        # Szukaj naszego meczu
+        # Szukaj naszego meczu - ZBIERZ WSZYSTKIE KANDYDATY i wybierz najlepszego
+        best_candidate = None  # (row, home_score, away_score, forebet_home, forebet_away)
+        best_combined = 0.0
+        
         for row in match_rows:
             try:
                 # Wyciągnij nazwy drużyn - WIELE WARIANTÓW
@@ -1522,186 +1651,176 @@ def search_forebet_prediction(
                 cond_exact = max_score >= 0.90
                 
                 if cond_both or cond_sum or cond_one_strong or cond_exact:
-                    print(f"      ✅ Znaleziono mecz na Forebet: {forebet_home} vs {forebet_away}")
-                    print(f"         Similarity: Home={home_score:.2f}, Away={away_score:.2f}")
-                    
-                    # 🔥 FIX: Ustaw success/found NATYCHMIAST po znalezieniu meczu
-                    # Dzięki temu nawet jeśli ekstrakcja danych rzuci wyjątek,
-                    # mecz będzie oznaczony jako znaleziony
-                    result['success'] = True
-                    result['found'] = True  # Wymagane przez scrape_and_notify.py
-                    result['home_team_forebet'] = forebet_home
-                    result['away_team_forebet'] = forebet_away
-                    
-                    # Wyciągnij predykcję - POPRAWIONA STRUKTURA
-                    extraction_success = False
-                    
-                    # 1. Prawdopodobieństwa (div.fprc > spans)
-                    fprc_div = row.find('div', class_='fprc')
-                    if fprc_div:
-                        spans = fprc_div.find_all('span')
-                        if len(spans) >= 3:
-                            try:
-                                home_prob = int(spans[0].get_text(strip=True))
-                                draw_prob = int(spans[1].get_text(strip=True))
-                                away_prob = int(spans[2].get_text(strip=True))
-                                
-                                # Najwyższe prawdopodobieństwo to predykcja
-                                max_prob = max(home_prob, draw_prob, away_prob)
-                                result['probability'] = float(max_prob)
-                                
-                                if max_prob == home_prob:
-                                    result['prediction'] = '1'  # Home win
-                                elif max_prob == draw_prob:
-                                    result['prediction'] = 'X'  # Draw
-                                else:
-                                    result['prediction'] = '2'  # Away win
-                                
-                                extraction_success = True
-                                print(f"         📊 Probability: {home_prob}%-{draw_prob}%-{away_prob}% → {result['prediction']}")
-                            except (ValueError, IndexError) as e:
-                                print(f"         ⚠️ Błąd parsowania prawdopodobieństw: {e}")
-                    else:
-                        print(f"         ⚠️ Brak div.fprc - szukam alternatyw...")
-                    
-                    # 2. Predykcja tekstowa (div.predict > span.forepr)
-                    forepr_elem = row.find('span', class_='forepr')
-                    if forepr_elem and not result.get('prediction'):
-                        pred_text = forepr_elem.get_text(strip=True)
-                        if pred_text in ['1', 'X', '2']:
-                            result['prediction'] = pred_text
-                            extraction_success = True
-                            print(f"         📊 Prediction (forepr): {pred_text}")
-                    
-                    # 3. Dokładny wynik (div.ex_sc)
-                    ex_sc_elem = row.find('div', class_='ex_sc')
-                    if ex_sc_elem:
-                        # Non-football sports (handball, basketball, hockey, volleyball)
-                        # use <br> tag as separator: "29<br><b>32</b>" -> "29-32"
-                        # Football uses text with " - ": "1 - 0"
-                        if ex_sc_elem.find('br'):
-                            scores = list(ex_sc_elem.stripped_strings)
-                            if len(scores) == 2:
-                                result['exact_score'] = f"{scores[0]}-{scores[1]}"
-                            else:
-                                result['exact_score'] = ex_sc_elem.get_text(strip=True)
-                        else:
-                            result['exact_score'] = ex_sc_elem.get_text(strip=True)
-                    
-                    # 4. Average Goals (div.avg_sc)
-                    avg_sc_elem = row.find('div', class_='avg_sc')
-                    if avg_sc_elem:
-                        avg_text = avg_sc_elem.get_text(strip=True)
-                        try:
-                            result['avg_goals'] = float(avg_text)
-                            # Over/Under - różne thresholdy per sport
-                            if sport_lower in ['football', 'soccer']:
-                                # Football: Over/Under 2.5 goli
-                                if result['avg_goals'] > 2.5:
-                                    result['over_under'] = 'Over 2.5'
-                                else:
-                                    result['over_under'] = 'Under 2.5'
-                            elif sport_lower in ['hockey', 'ice-hockey']:
-                                # Hockey: Over/Under 5.5 goli
-                                if result['avg_goals'] > 5.5:
-                                    result['over_under'] = 'Over 5.5'
-                                else:
-                                    result['over_under'] = 'Under 5.5'
-                            elif sport_lower in ['basketball']:
-                                # Basketball: Over/Under - wartość z Forebet (punkty, nie gole)
-                                pass  # avg_goals jest saved, ale Over/Under threshold zależy od ligi
-                            elif sport_lower in ['handball']:
-                                # Handball: Over/Under - wartość z Forebet 
-                                pass  # avg_goals saved
-                            # Inne sporty: zachowaj avg_goals bez Over/Under
-                        except ValueError:
-                            pass
-                    
-                    # 5. BTTS - sprawdź czy oba zespoły strzelą
-                    # TYLKO dla football i hockey - nie ma sensu dla basketball/handball/volleyball
-                    # (tam wyniki są np. 78-95 / 29-32 - oba zawsze "strzelają")
-                    if sport_lower in ['football', 'soccer']:
-                        if result.get('exact_score'):
-                            score_parts = result['exact_score'].split('-')
-                            if len(score_parts) == 2:
-                                try:
-                                    home_goals = int(score_parts[0].strip())
-                                    away_goals = int(score_parts[1].strip())
-                                    if home_goals > 0 and away_goals > 0:
-                                        result['btts'] = 'Yes'
-                                    else:
-                                        result['btts'] = 'No'
-                                except ValueError:
-                                    pass
-                    elif sport_lower in ['hockey', 'ice-hockey']:
-                        # Hockey też ma niskie wyniki - BTTS ma sens
-                        if result.get('exact_score'):
-                            score_parts = result['exact_score'].split('-')
-                            if len(score_parts) == 2:
-                                try:
-                                    home_goals = int(score_parts[0].strip())
-                                    away_goals = int(score_parts[1].strip())
-                                    if home_goals > 0 and away_goals > 0:
-                                        result['btts'] = 'Yes'
-                                    else:
-                                        result['btts'] = 'No'
-                                except ValueError:
-                                    pass
-                    
-                    # 🔥 ALTERNATYWNA EKSTRAKCJA: Jeśli fprc nie znaleziono, szukaj w innych miejscach
-                    if not result.get('prediction'):
-                        # Alternatywa 1: span.ex_sc może zawierać predykcję dla niektórych sportów
-                        ex_spans = row.find_all('span', class_=['ex_sc', 'ex1', 'ex2', 'ex3'])
-                        for ex_span in ex_spans:
-                            text = ex_span.get_text(strip=True)
-                            if text in ['1', 'X', '2', '1X', 'X2', '12']:
-                                result['prediction'] = text
-                                extraction_success = True
-                                print(f"         📊 Prediction (ex_span): {text}")
-                                break
-                        
-                        # Alternatywa 2: Szukaj w całym wierszu
-                        if not result.get('prediction'):
-                            all_text = row.get_text()
-                            # Szukaj wzorca prawdopodobieństw (np. 45% 30% 25%)
-                            import re
-                            probs = re.findall(r'(\d{1,2})%', all_text)
-                            if len(probs) >= 2:
-                                try:
-                                    # Dla sportów bez remisu (handball, volleyball, basketball)
-                                    if sport_lower in ['handball', 'volleyball', 'basketball', 'tennis']:
-                                        p1, p2 = int(probs[0]), int(probs[1])
-                                        result['probability'] = float(max(p1, p2))
-                                        result['prediction'] = '1' if p1 > p2 else '2'
-                                        extraction_success = True
-                                        print(f"         📊 Probability (regex 2-way): {p1}%-{p2}% → {result['prediction']}")
-                                    elif len(probs) >= 3:
-                                        p1, px, p2 = int(probs[0]), int(probs[1]), int(probs[2])
-                                        max_prob = max(p1, px, p2)
-                                        result['probability'] = float(max_prob)
-                                        if max_prob == p1:
-                                            result['prediction'] = '1'
-                                        elif max_prob == px:
-                                            result['prediction'] = 'X'
-                                        else:
-                                            result['prediction'] = '2'
-                                        extraction_success = True
-                                        print(f"         📊 Probability (regex 3-way): {p1}%-{px}%-{p2}% → {result['prediction']}")
-                                except (ValueError, IndexError):
-                                    pass
-                    
-                    # Log status ekstrakcji
-                    if extraction_success:
-                        print(f"         ✅ Ekstrakcja danych zakończona sukcesem")
-                    else:
-                        print(f"         ⚠️ Mecz znaleziony, ale nie udało się wyciągnąć predykcji")
-                    
-                    # Zawsze break po znalezieniu meczu (nawet jeśli ekstrakcja zawiodła)
-                    break
+                    candidate_combined = (home_score + away_score) / 2
+                    if candidate_combined > best_combined:
+                        best_combined = candidate_combined
+                        best_candidate = (row, home_score, away_score, forebet_home, forebet_away)
+                        print(f"      🎯 Nowy najlepszy kandydat: {forebet_home} vs {forebet_away} (combined={candidate_combined:.2f})")
                     
             except Exception as e:
                 print(f"      ⚠️ Błąd parsowania wiersza Forebet: {type(e).__name__}: {e}")
                 continue
+        
+        # 🔥 WYCIĄGNIJ DANE Z NAJLEPSZEGO KANDYDATA
+        if best_candidate:
+            row, home_score, away_score, forebet_home, forebet_away = best_candidate
+            print(f"      ✅ Znaleziono mecz na Forebet: {forebet_home} vs {forebet_away}")
+            print(f"         Similarity: Home={home_score:.2f}, Away={away_score:.2f}")
+            
+            # 🔥 FIX: Ustaw success/found NATYCHMIAST po znalezieniu meczu
+            result['success'] = True
+            result['found'] = True
+            result['home_team_forebet'] = forebet_home
+            result['away_team_forebet'] = forebet_away
+            
+            # Wyciągnij predykcję - POPRAWIONA STRUKTURA
+            extraction_success = False
+            
+            # 1. Prawdopodobieństwa (div.fprc > spans)
+            fprc_div = row.find('div', class_='fprc')
+            if fprc_div:
+                spans = fprc_div.find_all('span')
+                if len(spans) >= 3:
+                    try:
+                        home_prob = int(spans[0].get_text(strip=True))
+                        draw_prob = int(spans[1].get_text(strip=True))
+                        away_prob = int(spans[2].get_text(strip=True))
+                        
+                        max_prob = max(home_prob, draw_prob, away_prob)
+                        result['probability'] = float(max_prob)
+                        
+                        if max_prob == home_prob:
+                            result['prediction'] = '1'
+                        elif max_prob == draw_prob:
+                            result['prediction'] = 'X'
+                        else:
+                            result['prediction'] = '2'
+                        
+                        extraction_success = True
+                        print(f"         📊 Probability: {home_prob}%-{draw_prob}%-{away_prob}% → {result['prediction']}")
+                    except (ValueError, IndexError) as e:
+                        print(f"         ⚠️ Błąd parsowania prawdopodobieństw: {e}")
+                elif len(spans) == 2:
+                    # 2-way sports: basketball, volleyball, handball, tennis, hockey
+                    try:
+                        home_prob = int(spans[0].get_text(strip=True))
+                        away_prob = int(spans[1].get_text(strip=True))
+                        
+                        max_prob = max(home_prob, away_prob)
+                        result['probability'] = float(max_prob)
+                        result['prediction'] = '1' if home_prob > away_prob else '2'
+                        
+                        extraction_success = True
+                        print(f"         📊 Probability (2-way): {home_prob}%-{away_prob}% → {result['prediction']}")
+                    except (ValueError, IndexError) as e:
+                        print(f"         ⚠️ Błąd parsowania prawdopodobieństw (2-way): {e}")
+            else:
+                print(f"         ⚠️ Brak div.fprc - szukam alternatyw...")
+            
+            # 2. Predykcja tekstowa (div.predict > span.forepr)
+            forepr_elem = row.find('span', class_='forepr')
+            if forepr_elem and not result.get('prediction'):
+                pred_text = forepr_elem.get_text(strip=True)
+                if pred_text in ['1', 'X', '2']:
+                    result['prediction'] = pred_text
+                    extraction_success = True
+                    print(f"         📊 Prediction (forepr): {pred_text}")
+            
+            # 3. Dokładny wynik (div.ex_sc)
+            ex_sc_elem = row.find('div', class_='ex_sc')
+            if ex_sc_elem:
+                if ex_sc_elem.find('br'):
+                    scores = list(ex_sc_elem.stripped_strings)
+                    if len(scores) == 2:
+                        result['exact_score'] = f"{scores[0]}-{scores[1]}"
+                    else:
+                        result['exact_score'] = ex_sc_elem.get_text(strip=True)
+                else:
+                    result['exact_score'] = ex_sc_elem.get_text(strip=True)
+            
+            # 4. Average Goals (div.avg_sc)
+            avg_sc_elem = row.find('div', class_='avg_sc')
+            if avg_sc_elem:
+                avg_text = avg_sc_elem.get_text(strip=True)
+                try:
+                    result['avg_goals'] = float(avg_text)
+                    if sport_lower in ['football', 'soccer']:
+                        if result['avg_goals'] > 2.5:
+                            result['over_under'] = 'Over 2.5'
+                        else:
+                            result['over_under'] = 'Under 2.5'
+                    elif sport_lower in ['hockey', 'ice-hockey']:
+                        if result['avg_goals'] > 5.5:
+                            result['over_under'] = 'Over 5.5'
+                        else:
+                            result['over_under'] = 'Under 5.5'
+                except ValueError:
+                    pass
+            
+            # 5. BTTS - TYLKO dla football i hockey
+            if sport_lower in ['football', 'soccer']:
+                if result.get('exact_score'):
+                    score_parts = result['exact_score'].split('-')
+                    if len(score_parts) == 2:
+                        try:
+                            home_goals = int(score_parts[0].strip())
+                            away_goals = int(score_parts[1].strip())
+                            result['btts'] = 'Yes' if home_goals > 0 and away_goals > 0 else 'No'
+                        except ValueError:
+                            pass
+            elif sport_lower in ['hockey', 'ice-hockey']:
+                if result.get('exact_score'):
+                    score_parts = result['exact_score'].split('-')
+                    if len(score_parts) == 2:
+                        try:
+                            home_goals = int(score_parts[0].strip())
+                            away_goals = int(score_parts[1].strip())
+                            result['btts'] = 'Yes' if home_goals > 0 and away_goals > 0 else 'No'
+                        except ValueError:
+                            pass
+            
+            # 🔥 ALTERNATYWNA EKSTRAKCJA
+            if not result.get('prediction'):
+                ex_spans = row.find_all('span', class_=['ex_sc', 'ex1', 'ex2', 'ex3'])
+                for ex_span in ex_spans:
+                    text = ex_span.get_text(strip=True)
+                    if text in ['1', 'X', '2', '1X', 'X2', '12']:
+                        result['prediction'] = text
+                        extraction_success = True
+                        print(f"         📊 Prediction (ex_span): {text}")
+                        break
+                
+                if not result.get('prediction'):
+                    all_text = row.get_text()
+                    import re
+                    probs = re.findall(r'(\d{1,2})%', all_text)
+                    if len(probs) >= 2:
+                        try:
+                            if sport_lower in ['handball', 'volleyball', 'basketball', 'tennis']:
+                                p1, p2 = int(probs[0]), int(probs[1])
+                                result['probability'] = float(max(p1, p2))
+                                result['prediction'] = '1' if p1 > p2 else '2'
+                                extraction_success = True
+                                print(f"         📊 Probability (regex 2-way): {p1}%-{p2}% → {result['prediction']}")
+                            elif len(probs) >= 3:
+                                p1, px, p2 = int(probs[0]), int(probs[1]), int(probs[2])
+                                max_prob = max(p1, px, p2)
+                                result['probability'] = float(max_prob)
+                                if max_prob == p1:
+                                    result['prediction'] = '1'
+                                elif max_prob == px:
+                                    result['prediction'] = 'X'
+                                else:
+                                    result['prediction'] = '2'
+                                extraction_success = True
+                                print(f"         📊 Probability (regex 3-way): {p1}%-{px}%-{p2}% → {result['prediction']}")
+                        except (ValueError, IndexError):
+                            pass
+            
+            if extraction_success:
+                print(f"         ✅ Ekstrakcja danych zakończona sukcesem")
+            else:
+                print(f"         ⚠️ Mecz znaleziony, ale nie udało się wyciągnąć predykcji")
         
         if not result['success']:
             # 🤖 GEMINI/GROQ FALLBACK: Użyj gdy algorytm nie znalazł meczu
