@@ -3,13 +3,14 @@
 // ============================================================================
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { MatchList } from '@/components/match/MatchList'
 import { MatchDetails } from '@/components/match/MatchDetails'
 import { TopPicksSection } from '@/components/match/TopPicksSection'
 import { FilterBar } from '@/components/filters/FilterBar'
 import { useMatches, useLiveScores } from '@/hooks/useMatches'
 import type { Match } from '@/lib/types'
+import { format, isToday, parseISO } from 'date-fns'
 
 export default function HomePage() {
   const { data, isLoading, isError, error } = useMatches()
@@ -18,13 +19,24 @@ export default function HomePage() {
 
   const matches = data?.data ?? []
 
+  const heading = useMemo(() => {
+    const apiDate = data?.date
+    if (!apiDate) return "Today's Matches"
+    try {
+      const d = parseISO(apiDate)
+      return isToday(d) ? "Today's Matches" : `Matches – ${format(d, 'dd MMM yyyy')}`
+    } catch {
+      return "Today's Matches"
+    }
+  }, [data?.date])
+
   return (
     <div className="container max-w-6xl py-6 space-y-6">
       {/* Page heading */}
       <div className="flex items-end justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
-            Today&apos;s Matches
+            {heading}
           </h1>
           <p className="text-sm text-muted-foreground mt-0.5">
             Live predictions, odds &amp; AI analysis

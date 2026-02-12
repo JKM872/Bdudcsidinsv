@@ -240,7 +240,8 @@ def normalize_match(match):
 @app.route('/api/matches', methods=['GET'])
 def get_matches():
     """Get matches for a specific date and sport. Supabase first, file fallback."""
-    date_str = request.args.get('date')
+    user_date = request.args.get('date')          # explicitly requested by client
+    date_str = user_date
     sport = request.args.get('sport', 'all')
     search = request.args.get('search', '').strip().lower()
     only_qualifying = request.args.get('qualifying', 'false').lower() == 'true'
@@ -256,9 +257,13 @@ def get_matches():
             # If no date, get latest from Supabase
             if not date_str:
                 dates = supabase.get_available_dates()
-                date_str = dates[0] if dates else datetime.now().strftime('%Y-%m-%d')
+                if dates:
+                    date_str = dates[0]
             
-            rows = supabase.get_predictions(date=date_str, sport=sport if sport != 'all' else None)
+            if date_str:
+                rows = supabase.get_predictions(date=date_str, sport=sport if sport != 'all' else None)
+            else:
+                rows = []
             
             if rows:
                 source = 'supabase'
@@ -278,7 +283,8 @@ def get_matches():
     
     # ── Fallback to local JSON files ────────────────────────────────
     if not all_matches:
-        if not date_str:
+        # Auto-detect latest date from files when user didn't specify one
+        if not user_date:
             import re
             date_pattern = re.compile(r'(\d{4}-\d{2}-\d{2})')
             all_dates = set()
@@ -288,7 +294,7 @@ def get_matches():
                     all_dates.add(m.group(1))
             if all_dates:
                 date_str = sorted(all_dates, reverse=True)[0]
-            else:
+            elif not date_str:
                 date_str = datetime.now().strftime('%Y-%m-%d')
         
         files = find_result_files(date_str, sport if sport != 'all' else None)
