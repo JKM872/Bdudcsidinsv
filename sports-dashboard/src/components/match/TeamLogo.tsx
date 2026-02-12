@@ -1,0 +1,70 @@
+// ============================================================================
+// TeamLogo – Avatar with team badge or initials fallback
+// ============================================================================
+'use client'
+
+import { useState, useEffect, useCallback } from 'react'
+import { cn } from '@/lib/utils'
+import { getTeamLogoUrl, getTeamInitials, getTeamColor } from '@/lib/team-logos'
+
+interface Props {
+  name: string
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  className?: string
+}
+
+const SIZES = {
+  xs: 'h-5 w-5 text-[8px]',
+  sm: 'h-7 w-7 text-[10px]',
+  md: 'h-9 w-9 text-xs',
+  lg: 'h-12 w-12 text-sm',
+  xl: 'h-16 w-16 text-base',
+}
+
+export function TeamLogo({ name, size = 'md', className }: Props) {
+  const [logoUrl, setLogoUrl] = useState<string | null>(null)
+  const [failed, setFailed] = useState(false)
+
+  const loadLogo = useCallback(async () => {
+    const url = await getTeamLogoUrl(name)
+    if (url) setLogoUrl(url)
+  }, [name])
+
+  useEffect(() => {
+    loadLogo()
+  }, [loadLogo])
+
+  const initials = getTeamInitials(name)
+  const color = getTeamColor(name)
+  const sizeClass = SIZES[size]
+
+  if (logoUrl && !failed) {
+    return (
+      <div className={cn('relative shrink-0 rounded-full overflow-hidden bg-muted', sizeClass, className)}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={logoUrl}
+          alt={name}
+          className="h-full w-full object-contain p-0.5"
+          onError={() => setFailed(true)}
+          loading="lazy"
+        />
+      </div>
+    )
+  }
+
+  // Fallback: initials circle
+  return (
+    <div
+      className={cn(
+        'shrink-0 rounded-full flex items-center justify-center font-bold text-white select-none',
+        sizeClass,
+        className,
+      )}
+      style={{ backgroundColor: color }}
+      title={name}
+    >
+      {initials}
+    </div>
+  )
+}

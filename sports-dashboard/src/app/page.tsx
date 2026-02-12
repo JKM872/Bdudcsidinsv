@@ -1,5 +1,5 @@
 // ============================================================================
-// Home Page – matches grid + filter sidebar + AI top picks
+// Home Page – SofaScore-style matches layout
 // ============================================================================
 'use client'
 
@@ -19,18 +19,23 @@ export default function HomePage() {
   const matches = data?.data ?? []
 
   return (
-    <div className="container py-6 space-y-6">
+    <div className="container max-w-6xl py-6 space-y-6">
       {/* Page heading */}
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">
-          Today&apos;s Matches
-        </h1>
-        <p className="text-muted-foreground mt-1">
-          Live predictions, odds &amp; AI recommendations across multiple sports.
-        </p>
+      <div className="flex items-end justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">
+            Today&apos;s Matches
+          </h1>
+          <p className="text-sm text-muted-foreground mt-0.5">
+            Live predictions, odds &amp; AI analysis
+          </p>
+        </div>
+        <span className="text-xs text-muted-foreground tabular-nums">
+          {matches.length} matches
+        </span>
       </div>
 
-      {/* AI Top Picks Section */}
+      {/* AI Top Picks – horizontal scroll */}
       <TopPicksSection
         matches={matches}
         onSelect={setSelectedMatch}
@@ -38,16 +43,16 @@ export default function HomePage() {
       />
 
       {/* Main grid: filters sidebar + matches */}
-      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6">
         <aside className="order-2 lg:order-1">
-          <div className="lg:sticky lg:top-20">
+          <div className="lg:sticky lg:top-20 space-y-4">
             <FilterBar />
           </div>
         </aside>
 
         <section className="order-1 lg:order-2">
           {isError && (
-            <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
+            <div className="rounded-xl border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
               Failed to load matches: {(error as Error)?.message ?? 'Unknown error'}
             </div>
           )}

@@ -1,17 +1,19 @@
 // ============================================================================
-// MatchCard – premium card for a single match
+// MatchCard – SofaScore-style premium card
 // ============================================================================
 'use client'
 
-import { Clock, Target, BarChart3, TrendingUp, ChevronRight } from 'lucide-react'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Clock, TrendingUp, ChevronRight } from 'lucide-react'
+import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { SPORT_MAP, PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
-import { formatMatchTime, formatVotes, formatOdds } from '@/lib/format'
+import { formatMatchTime, formatOdds } from '@/lib/format'
 import { RecommendationBadge } from './RecommendationBadge'
 import { LiveScoreBadge } from './LiveScoreBadge'
+import { TeamLogo } from './TeamLogo'
+import { RadialProgress } from '@/components/charts/RadialProgress'
+import { FormTimeline } from '@/components/charts/FormTimeline'
 import type { Match, LiveScore } from '@/lib/types'
 
 interface Props {
@@ -27,152 +29,147 @@ export function MatchCard({ match, liveScore, onSelect }: Props) {
   const SportIcon = sportCfg?.icon
   const recommendation = match.gemini?.recommendation
   const isHighPick = recommendation === 'HIGH'
-
+  const isLive = liveScore?.status === 'live' || liveScore?.status === 'halftime'
   const forebetPred = match.forebet?.prediction
-  const sofaHome = match.sofascore?.home
-  const sofaDraw = match.sofascore?.draw
-  const sofaAway = match.sofascore?.away
 
   return (
     <Card
       className={cn(
-        'group relative overflow-hidden transition-all duration-200 cursor-pointer',
-        'hover:shadow-lg hover:scale-[1.01] hover:border-primary/50',
-        isHighPick && 'ring-2 ring-red-500/40 border-red-500/30',
-        !isHighPick && match.value_bet && 'ring-2 ring-amber-400/50',
+        'group relative overflow-hidden cursor-pointer transition-all duration-200',
+        'hover:shadow-xl hover:-translate-y-0.5',
+        'border-border/60',
+        isHighPick && 'ring-1 ring-red-500/30 shadow-red-500/10 shadow-lg',
+        isLive && 'ring-1 ring-emerald-500/40',
+        !isHighPick && match.value_bet && 'ring-1 ring-amber-400/30',
       )}
       onClick={() => onSelect?.(match)}
     >
-      {/* Sport colour stripe */}
-      <div className={cn('absolute inset-y-0 left-0 w-1', sportCfg?.bgColor)} />
+      {/* ── Header bar ── */}
+      <div className={cn(
+        'flex items-center justify-between px-3.5 py-2 border-b border-border/40',
+        'bg-muted/30',
+      )}>
+        <div className="flex items-center gap-1.5 min-w-0">
+          {SportIcon && <SportIcon className={cn('h-3.5 w-3.5 shrink-0', sportCfg.color)} />}
+          <span className="text-[11px] text-muted-foreground truncate">
+            {match.league ?? match.sport}
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <LiveScoreBadge liveScore={liveScore} />
+          <RecommendationBadge recommendation={recommendation} />
+          {!liveScore && (
+            <span className="flex items-center gap-0.5 text-[11px] text-muted-foreground tabular-nums">
+              <Clock className="h-3 w-3" />
+              {formatMatchTime(match.time)}
+            </span>
+          )}
+        </div>
+      </div>
 
-      <CardHeader className="pb-2 pl-5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {SportIcon && <SportIcon className={cn('h-4 w-4', sportCfg.color)} />}
-            <Badge variant="outline" className="text-[10px] font-normal">
-              {match.league ?? match.sport}
-            </Badge>
+      {/* ── Teams section ── */}
+      <div className="px-3.5 py-3">
+        <div className="flex items-center gap-3">
+          {/* Left: team logos + names */}
+          <div className="flex-1 space-y-2.5 min-w-0">
+            {/* Home team */}
+            <div className="flex items-center gap-2.5">
+              <TeamLogo name={match.homeTeam} size="sm" />
+              <span className={cn(
+                'font-semibold text-sm leading-tight truncate',
+                forebetPred === '1' && 'text-emerald-600 dark:text-emerald-400',
+              )}>
+                {match.homeTeam}
+              </span>
+              {forebetPred === '1' && (
+                <Badge className={cn('text-[9px] px-1 py-0 shrink-0', PREDICTION_COLORS['1'])}>W</Badge>
+              )}
+            </div>
+            {/* Away team */}
+            <div className="flex items-center gap-2.5">
+              <TeamLogo name={match.awayTeam} size="sm" />
+              <span className={cn(
+                'font-semibold text-sm leading-tight truncate',
+                forebetPred === '2' && 'text-rose-600 dark:text-rose-400',
+              )}>
+                {match.awayTeam}
+              </span>
+              {forebetPred === '2' && (
+                <Badge className={cn('text-[9px] px-1 py-0 shrink-0', PREDICTION_COLORS['2'])}>W</Badge>
+              )}
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <LiveScoreBadge liveScore={liveScore} />
-            <RecommendationBadge recommendation={recommendation} />
-            {!liveScore && (
-              <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Clock className="h-3 w-3" />
-                {formatMatchTime(match.time)}
+
+          {/* Right: confidence ring */}
+          {conf > 0 && (
+            <RadialProgress value={conf} size={48} strokeWidth={3.5} />
+          )}
+        </div>
+
+        {/* ── Form timeline ── */}
+        {(match.homeForm?.length > 0 || match.awayForm?.length > 0) && (
+          <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-border/30">
+            <FormTimeline form={match.homeForm} teamName={match.homeTeam} maxItems={5} />
+            <span className="text-[9px] text-muted-foreground/60 px-1">FORM</span>
+            <FormTimeline form={match.awayForm} teamName={match.awayTeam} maxItems={5} />
+          </div>
+        )}
+      </div>
+
+      {/* ── Footer: odds + prediction ── */}
+      <div className={cn(
+        'flex items-center justify-between px-3.5 py-2 border-t border-border/40',
+        'bg-muted/20',
+      )}>
+        {/* Odds row */}
+        {match.odds ? (
+          <div className="flex gap-1">
+            <span className={cn(
+              'inline-flex items-center justify-center rounded px-1.5 py-0.5',
+              'bg-muted text-[10px] font-mono font-medium tabular-nums',
+              forebetPred === '1' && 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400',
+            )}>
+              {formatOdds(match.odds.home)}
+            </span>
+            {match.odds.draw != null && (
+              <span className={cn(
+                'inline-flex items-center justify-center rounded px-1.5 py-0.5',
+                'bg-muted text-[10px] font-mono font-medium tabular-nums',
+                forebetPred === 'X' && 'bg-amber-500/15 text-amber-700 dark:text-amber-400',
+              )}>
+                {formatOdds(match.odds.draw)}
               </span>
             )}
+            <span className={cn(
+              'inline-flex items-center justify-center rounded px-1.5 py-0.5',
+              'bg-muted text-[10px] font-mono font-medium tabular-nums',
+              forebetPred === '2' && 'bg-rose-500/15 text-rose-700 dark:text-rose-400',
+            )}>
+              {formatOdds(match.odds.away)}
+            </span>
           </div>
-        </div>
-      </CardHeader>
-
-      <CardContent className="space-y-3 pl-5">
-        {/* Teams */}
-        <div className="space-y-0.5">
-          <div className="flex items-center justify-between">
-            <span className="font-semibold leading-tight">{match.homeTeam}</span>
-            {forebetPred === '1' && (
-              <Badge className={cn('text-[10px] px-1.5 py-0', PREDICTION_COLORS['1'])}>W</Badge>
-            )}
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="font-semibold leading-tight">{match.awayTeam}</span>
-            {forebetPred === '2' && (
-              <Badge className={cn('text-[10px] px-1.5 py-0', PREDICTION_COLORS['2'])}>W</Badge>
-            )}
-          </div>
-        </div>
-
-        {/* Predictions row */}
-        <div className="grid grid-cols-2 gap-3 border-t pt-2">
-          {/* Forebet */}
-          {match.forebet && (
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
-                <Target className="h-3 w-3" /> Forebet
-              </div>
-              <div className="flex items-center gap-1.5">
-                {forebetPred && (
-                  <Badge className={cn('text-xs', PREDICTION_COLORS[forebetPred] ?? 'bg-zinc-500 text-white')}>
-                    {forebetPred}
-                  </Badge>
-                )}
-                {match.forebet.probability != null && (
-                  <span className="text-xs font-medium">{match.forebet.probability}%</span>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* SofaScore */}
-          {sofaHome != null && (
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
-                <BarChart3 className="h-3 w-3" /> SofaScore
-              </div>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div className="flex items-center gap-1 text-xs">
-                      <span className="text-emerald-600 font-medium">{sofaHome}%</span>
-                      {sofaDraw != null && (
-                        <>
-                          <span className="text-muted-foreground">·</span>
-                          <span className="text-amber-600 font-medium">{sofaDraw}%</span>
-                        </>
-                      )}
-                      <span className="text-muted-foreground">·</span>
-                      <span className="text-rose-600 font-medium">{sofaAway}%</span>
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p className="text-xs">
-                      Fan vote: Home {sofaHome}% · Draw {sofaDraw ?? 0}% · Away {sofaAway}%
-                      <br />
-                      {match.sofascore?.votes
-                        ? `${formatVotes(match.sofascore.votes)} votes`
-                        : ''}
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
-          )}
-        </div>
-
-        {/* Odds + value */}
-        {match.odds && (
-          <div className="flex items-center justify-between border-t pt-2">
-            <div className="flex gap-1.5 text-xs">
-              <Badge variant="outline" className="font-mono text-[10px]">1: {formatOdds(match.odds.home)}</Badge>
-              {match.odds.draw != null && (
-                <Badge variant="outline" className="font-mono text-[10px]">X: {formatOdds(match.odds.draw)}</Badge>
-              )}
-              <Badge variant="outline" className="font-mono text-[10px]">2: {formatOdds(match.odds.away)}</Badge>
-            </div>
-            {match.value_bet && (
-              <Badge variant="secondary" className="gap-0.5 text-amber-600 border-amber-300 text-[10px]">
-                <TrendingUp className="h-3 w-3" /> Value
+        ) : (
+          <div className="flex items-center gap-1 text-[10px] text-muted-foreground/50">
+            {match.forebet?.prediction && (
+              <Badge className={cn('text-[9px] px-1 py-0', PREDICTION_COLORS[match.forebet.prediction] ?? 'bg-zinc-500 text-white')}>
+                {match.forebet.prediction}
               </Badge>
+            )}
+            {match.forebet?.probability != null && (
+              <span className="font-medium">{match.forebet.probability}%</span>
             )}
           </div>
         )}
 
-        {/* Confidence bar */}
-        <div className="flex items-center gap-2">
-          <div className="flex-1 h-1 rounded-full bg-secondary overflow-hidden">
-            <div
-              className={cn('h-full rounded-full transition-all', confTier.bg)}
-              style={{ width: `${conf}%` }}
-            />
-          </div>
-          <span className={cn('text-[10px] font-medium', confTier.color)}>
-            {conf}%
-          </span>
-          <ChevronRight className="h-3.5 w-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="flex items-center gap-1.5">
+          {match.value_bet && (
+            <Badge variant="secondary" className="gap-0.5 text-amber-600 border-amber-300/50 text-[9px] px-1.5 py-0">
+              <TrendingUp className="h-2.5 w-2.5" /> Value
+            </Badge>
+          )}
+          <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/40 group-hover:text-foreground transition-colors" />
         </div>
-      </CardContent>
+      </div>
     </Card>
   )
 }

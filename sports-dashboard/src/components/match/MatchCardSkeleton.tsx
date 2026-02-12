@@ -1,27 +1,39 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export function MatchCardSkeleton() {
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
-          <Skeleton className="h-5 w-24" />
-          <Skeleton className="h-4 w-12" />
+      {/* Header bar */}
+      <div className="flex items-center justify-between px-3.5 py-2 border-b border-border/40 bg-muted/30">
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="h-4 w-12" />
+      </div>
+      {/* Teams section */}
+      <div className="px-3.5 py-3 space-y-3">
+        <div className="flex items-center gap-3">
+          <div className="flex-1 space-y-2.5">
+            <div className="flex items-center gap-2.5">
+              <Skeleton className="h-7 w-7 rounded-full" />
+              <Skeleton className="h-5 w-32" />
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Skeleton className="h-7 w-7 rounded-full" />
+              <Skeleton className="h-5 w-28" />
+            </div>
+          </div>
+          <Skeleton className="h-12 w-12 rounded-full" />
         </div>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        <div className="space-y-1">
-          <Skeleton className="h-5 w-40" />
-          <Skeleton className="h-5 w-36" />
+      </div>
+      {/* Footer */}
+      <div className="flex items-center justify-between px-3.5 py-2 border-t border-border/40 bg-muted/20">
+        <div className="flex gap-1">
+          <Skeleton className="h-5 w-10 rounded" />
+          <Skeleton className="h-5 w-10 rounded" />
+          <Skeleton className="h-5 w-10 rounded" />
         </div>
-        <div className="grid grid-cols-2 gap-3 border-t pt-2">
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-10 w-full" />
-        </div>
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-1.5 w-full rounded-full" />
-      </CardContent>
+        <Skeleton className="h-4 w-4" />
+      </div>
     </Card>
   )
 }
