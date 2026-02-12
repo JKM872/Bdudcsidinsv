@@ -211,7 +211,8 @@ jobs:
             --headless \
             --use-forebet \
             --use-sofascore \
-            --use-odds
+            --use-odds \
+            --use-gemini
       
       - name: Upload results
         if: always()
@@ -352,7 +353,8 @@ jobs:
             --headless \
             --use-forebet \
             --use-sofascore \
-            --use-odds
+            --use-odds \
+            --use-gemini
       
       - name: Upload results
         if: always()
@@ -492,7 +494,8 @@ jobs:
             --headless \
             --use-forebet \
             --use-sofascore \
-            --use-odds
+            --use-odds \
+            --use-gemini
       
       - name: Upload results
         if: always()
@@ -632,7 +635,8 @@ jobs:
             --headless \
             --use-forebet \
             --use-sofascore \
-            --use-odds
+            --use-odds \
+            --use-gemini
       
       - name: Upload results
         if: always()
@@ -772,7 +776,8 @@ jobs:
             --headless \
             --use-forebet \
             --use-sofascore \
-            --use-odds
+            --use-odds \
+            --use-gemini
       
       - name: Upload results
         if: always()
@@ -912,7 +917,8 @@ jobs:
             --headless \
             --use-forebet \
             --use-sofascore \
-            --use-odds
+            --use-odds \
+            --use-gemini
       
       - name: Upload results
         if: always()

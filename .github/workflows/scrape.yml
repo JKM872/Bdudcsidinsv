@@ -125,6 +125,8 @@ jobs:
           FLARESOLVERR_URL: "http://localhost:8191/v1"
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           echo "🏃 Scraping ${{ matrix.sport }}..."
           TODAY=$(date +%Y-%m-%d)
@@ -138,6 +140,7 @@ jobs:
             --use-forebet \
             --use-sofascore \
             --use-odds \
+            --use-gemini \
             --headless
       
       # 9. Upload results as artifact

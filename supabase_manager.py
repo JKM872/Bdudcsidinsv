@@ -16,8 +16,10 @@ from datetime import datetime
 import os
 
 # Supabase credentials from environment (with fallback)
-SUPABASE_URL = os.environ.get('SUPABASE_URL', 'https://suqysbmuisffeqwgvymp.supabase.co')
-SUPABASE_KEY = os.environ.get('SUPABASE_KEY', os.environ.get('SUPABASE_ANON_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1cXlzYm11aXNmZmVxd2d2eW1wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4MzU2NTUsImV4cCI6MjA4NjQxMTY1NX0.FiPzJOe1rXyjja03Jk1wKgoZg1hE2bbJDtGQPoteLIg'))
+# NOTE: Use `or` instead of default param — GitHub Actions sets env vars to empty
+# string '' when secrets are missing, which bypasses os.environ.get() defaults.
+SUPABASE_URL = os.environ.get('SUPABASE_URL') or 'https://suqysbmuisffeqwgvymp.supabase.co'
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY') or os.environ.get('SUPABASE_ANON_KEY') or 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1cXlzYm11aXNmZmVxd2d2eW1wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4MzU2NTUsImV4cCI6MjA4NjQxMTY1NX0.FiPzJOe1rXyjja03Jk1wKgoZg1hE2bbJDtGQPoteLIg'
 
 
 class SupabaseManager:
