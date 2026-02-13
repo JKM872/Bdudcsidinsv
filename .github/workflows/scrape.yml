@@ -200,5 +200,24 @@ jobs:
             git push
             echo "✅ Results committed and pushed"
           fi
+
+      - name: Deploy to Heroku
+        if: success()
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          if [ -z "$HEROKU_API_KEY" ]; then
+            echo "⚠️ HEROKU_API_KEY not set — skipping Heroku deploy"
+            echo "Set HEROKU_API_KEY secret to enable auto-deploy"
+            exit 0
+          fi
+          # Trigger Heroku build from latest commit
+          curl -s -n -X POST https://api.heroku.com/apps/pickly/builds \
+            -d '{"source_blob":{"url":"https://github.com/JKM872/zapasowy1903138-2/tarball/main"}}' \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/vnd.heroku+json; version=3" \
+            -H "Authorization: Bearer $HEROKU_API_KEY" \
+            && echo "✅ Heroku build triggered" \
+            || echo "⚠️ Heroku deploy failed (non-critical)"
           fi
 
