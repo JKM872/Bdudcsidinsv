@@ -127,6 +127,7 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           echo "🏃 Scraping ${{ matrix.sport }}..."
           TODAY=$(date +%Y-%m-%d)
@@ -150,9 +151,54 @@ jobs:
         with:
           name: results-${{ matrix.sport }}-${{ github.run_id }}
           path: |
-            *.json
+            results/*.json
             *.html
             outputs/*.csv
             logs/
           retention-days: 7
+
+  # ── Commit scraped results back to the repo ──
+  commit-results:
+    needs: scrape
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: false
+
+      - name: Collect JSON results
+        run: |
+          mkdir -p results
+          echo "📦 Collecting JSON results from artifacts..."
+          find artifacts -name '*.json' -path '*/results/*' | while read f; do
+            fname=$(basename "$f")
+            echo "  → $fname"
+            cp "$f" "results/$fname"
+          done
+          echo "📋 Results directory:"
+          ls -la results/ || echo "No results found"
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add results/*.json
+          if git diff --cached --quiet; then
+            echo "ℹ️ No new results to commit"
+          else
+            TODAY=$(date +%Y-%m-%d)
+            git commit -m "data: scraped results for $TODAY [skip ci]"
+            git push
+            echo "✅ Results committed and pushed"
+          fi
+          fi
 
