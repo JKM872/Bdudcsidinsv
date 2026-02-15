@@ -1,5 +1,5 @@
 // ============================================================================
-// Header – top navigation bar
+// Header – minimal top bar (logo + theme toggle)
 // ============================================================================
 'use client'
 
@@ -14,7 +14,6 @@ import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 const NAV_ITEMS = [
-  { href: '/',            label: 'Matches',     icon: Trophy     },
   { href: '/stats',       label: 'Statistics',  icon: BarChart3  },
   { href: '/my-bets',     label: 'My Bets',     icon: Ticket     },
   { href: '/leaderboard', label: 'Leaderboard', icon: Users      },

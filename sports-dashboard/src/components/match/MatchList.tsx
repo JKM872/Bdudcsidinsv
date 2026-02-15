@@ -1,13 +1,14 @@
 // ============================================================================
-// MatchList – responsive grid of match cards
+// MatchList – FlashScore-style grouped list of match rows
 // ============================================================================
 'use client'
 
-import { MatchCard } from './MatchCard'
-import { MatchCardSkeleton } from './MatchCardSkeleton'
+import { MatchRow, MatchRowSkeleton } from './MatchRow'
+import { LeagueGroup } from './LeagueGroup'
 import { EmptyState } from '@/components/shared/EmptyState'
 import type { Match, LiveScore } from '@/lib/types'
 import { useFilterStore } from '@/store/filterStore'
+import { groupMatchesByLeague, sortLeagueGroups } from '@/lib/utils'
 
 interface Props {
   matches: Match[]
@@ -72,10 +73,14 @@ export function MatchList({ matches, liveScores, isLoading, onSelect }: Props) {
 
   // Build live score lookup by team names
   const liveMap = new Map<string, LiveScore>()
+  const liveMatchIds = new Set<string | number>()
   if (liveScores) {
     for (const ls of liveScores) {
       const key = `${ls.homeTeam.toLowerCase()}|${ls.awayTeam.toLowerCase()}`
       liveMap.set(key, ls)
+      if (ls.status === 'live' || ls.status === 'halftime') {
+        liveMatchIds.add(ls.id)
+      }
     }
   }
 
@@ -86,9 +91,13 @@ export function MatchList({ matches, liveScores, isLoading, onSelect }: Props) {
 
   if (isLoading) {
     return (
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <MatchCardSkeleton key={i} />
+      <div className="rounded-xl border bg-card overflow-hidden">
+        {/* Skeleton league header */}
+        <div className="bg-muted/50 px-4 py-2 animate-pulse">
+          <div className="h-3.5 w-40 bg-muted rounded" />
+        </div>
+        {Array.from({ length: 8 }).map((_, i) => (
+          <MatchRowSkeleton key={i} />
         ))}
       </div>
     )
@@ -103,11 +112,38 @@ export function MatchList({ matches, liveScores, isLoading, onSelect }: Props) {
     )
   }
 
+  // Group matches by league
+  const grouped = groupMatchesByLeague(filtered)
+  const sortedGroups = sortLeagueGroups(grouped, liveMatchIds)
+
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {filtered.map((m) => (
-        <MatchCard key={m.id} match={m} liveScore={findLiveScore(m)} onSelect={onSelect} />
-      ))}
+    <div className="rounded-xl border bg-card overflow-hidden shadow-sm">
+      {sortedGroups.map(([league, leagueMatches]) => {
+        const hasLive = leagueMatches.some(m => {
+          const ls = findLiveScore(m)
+          return ls?.status === 'live' || ls?.status === 'halftime'
+        })
+
+        return (
+          <LeagueGroup
+            key={league}
+            league={league}
+            country={leagueMatches[0]?.country}
+            matchCount={leagueMatches.length}
+            hasLive={hasLive}
+            defaultOpen={true}
+          >
+            {leagueMatches.map((m) => (
+              <MatchRow
+                key={m.id}
+                match={m}
+                liveScore={findLiveScore(m)}
+                onSelect={onSelect}
+              />
+            ))}
+          </LeagueGroup>
+        )
+      })}
     </div>
   )
 }

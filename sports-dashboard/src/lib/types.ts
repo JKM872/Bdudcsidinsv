@@ -132,6 +132,7 @@ export interface ApiResponse<T> {
   data: T
   date?: string
   source?: string
+  sportCounts?: Record<string, number>
   meta?: {
     total: number
     page: number

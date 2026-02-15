@@ -1,16 +1,16 @@
 // ============================================================================
-// Home Page – SofaScore-style matches layout
+// Home Page – FlashScore-style layout: SportTabs → DateCarousel → Filters → Grouped Matches
 // ============================================================================
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { MatchList } from '@/components/match/MatchList'
 import { MatchDetails } from '@/components/match/MatchDetails'
-import { TopPicksSection } from '@/components/match/TopPicksSection'
-import { FilterBar } from '@/components/filters/FilterBar'
+import { SportTabs } from '@/components/navigation/SportTabs'
+import { DateCarousel } from '@/components/navigation/DateCarousel'
+import { CompactFilters } from '@/components/filters/CompactFilters'
 import { useMatches, useLiveScores } from '@/hooks/useMatches'
 import type { Match } from '@/lib/types'
-import { format, isToday, parseISO } from 'date-fns'
 
 export default function HomePage() {
   const { data, isLoading, isError, error } = useMatches()
@@ -18,65 +18,38 @@ export default function HomePage() {
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null)
 
   const matches = data?.data ?? []
-
-  const heading = useMemo(() => {
-    const apiDate = data?.date
-    if (!apiDate) return "Today's Matches"
-    try {
-      const d = parseISO(apiDate)
-      return isToday(d) ? "Today's Matches" : `Matches – ${format(d, 'dd MMM yyyy')}`
-    } catch {
-      return "Today's Matches"
-    }
-  }, [data?.date])
+  const sportCounts = data?.sportCounts ?? {}
 
   return (
-    <div className="container max-w-6xl py-6 space-y-6">
-      {/* Page heading */}
-      <div className="flex items-end justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">
-            {heading}
-          </h1>
-          <p className="text-sm text-muted-foreground mt-0.5">
-            Live predictions, odds &amp; AI analysis
-          </p>
+    <>
+      {/* Sport navigation tabs – sticky below header */}
+      <SportTabs sportCounts={sportCounts} />
+
+      {/* Date carousel – sticky below sport tabs */}
+      <DateCarousel />
+
+      {/* Compact filters bar */}
+      <div className="border-b bg-background">
+        <div className="mx-auto max-w-5xl px-4 py-2">
+          <CompactFilters />
         </div>
-        <span className="text-xs text-muted-foreground tabular-nums">
-          {matches.length} matches
-        </span>
       </div>
 
-      {/* AI Top Picks – horizontal scroll */}
-      <TopPicksSection
-        matches={matches}
-        onSelect={setSelectedMatch}
-        isLoading={isLoading}
-      />
-
-      {/* Main grid: filters sidebar + matches */}
-      <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6">
-        <aside className="order-2 lg:order-1">
-          <div className="lg:sticky lg:top-20 space-y-4">
-            <FilterBar />
+      {/* Main content */}
+      <main className="mx-auto max-w-5xl px-4 py-4">
+        {isError && (
+          <div className="mb-4 rounded-xl border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
+            Failed to load matches: {(error as Error)?.message ?? 'Unknown error'}
           </div>
-        </aside>
+        )}
 
-        <section className="order-1 lg:order-2">
-          {isError && (
-            <div className="rounded-xl border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
-              Failed to load matches: {(error as Error)?.message ?? 'Unknown error'}
-            </div>
-          )}
-
-          <MatchList
-            matches={matches}
-            liveScores={liveScores ?? []}
-            isLoading={isLoading}
-            onSelect={setSelectedMatch}
-          />
-        </section>
-      </div>
+        <MatchList
+          matches={matches}
+          liveScores={liveScores ?? []}
+          isLoading={isLoading}
+          onSelect={setSelectedMatch}
+        />
+      </main>
 
       {/* Match Details Dialog */}
       <MatchDetails
@@ -84,6 +57,6 @@ export default function HomePage() {
         open={!!selectedMatch}
         onOpenChange={(open) => !open && setSelectedMatch(null)}
       />
-    </div>
+    </>
   )
 }
