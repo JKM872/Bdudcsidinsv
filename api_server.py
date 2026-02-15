@@ -198,11 +198,11 @@ def normalize_match(match):
         'qualifies': match.get('qualifies', False),
         # H2H Data
         'h2h': {
-            'home': match.get('h2h_home_wins') or match.get('h2h', {}).get('home', 0),
-            'draw': match.get('h2h_draws') or match.get('h2h', {}).get('draw', 0),
-            'away': match.get('h2h_away_wins') or match.get('h2h', {}).get('away', 0),
-            'total': match.get('h2h_total') or match.get('h2h', {}).get('total', 5),
-            'winRate': match.get('h2h_win_rate') or match.get('h2h', {}).get('winRate', 0),
+            'home': match.get('h2h_home_wins') or (match.get('h2h') or {}).get('home', 0),
+            'draw': match.get('h2h_draws') or (match.get('h2h') or {}).get('draw', 0),
+            'away': match.get('h2h_away_wins') or (match.get('h2h') or {}).get('away', 0),
+            'total': match.get('h2h_total') or (match.get('h2h') or {}).get('total', 5),
+            'winRate': match.get('h2h_win_rate') or (match.get('h2h') or {}).get('winRate', 0),
         },
         # Form Data
         'homeForm': match.get('home_form') or match.get('homeForm', []),
@@ -212,25 +212,25 @@ def normalize_match(match):
         'formAdvantage': match.get('form_advantage') or match.get('formAdvantage', False),
         # Odds - używamy safe_value() aby filtrować NaN
         'odds': {
-            'home': safe_value(match.get('home_odds')) or safe_value(match.get('odds', {}).get('home')),
-            'draw': safe_value(match.get('draw_odds')) or safe_value(match.get('odds', {}).get('draw')),
-            'away': safe_value(match.get('away_odds')) or safe_value(match.get('odds', {}).get('away')),
-            'bookmaker': match.get('odds_bookmaker') or match.get('odds', {}).get('bookmaker', 'Unknown'),
+            'home': safe_value(match.get('home_odds')) or safe_value((match.get('odds') or {}).get('home')),
+            'draw': safe_value(match.get('draw_odds')) or safe_value((match.get('odds') or {}).get('draw')),
+            'away': safe_value(match.get('away_odds')) or safe_value((match.get('odds') or {}).get('away')),
+            'bookmaker': match.get('odds_bookmaker') or (match.get('odds') or {}).get('bookmaker', 'Unknown'),
         },
         # Forebet - używamy safe_value() dla probability
         'forebet': {
-            'prediction': match.get('forebet_prediction') or match.get('forebet', {}).get('prediction'),
-            'probability': safe_value(match.get('forebet_probability')) or safe_value(match.get('forebet', {}).get('probability')),
-            'exactScore': match.get('forebet_score') or match.get('forebet', {}).get('exactScore'),
-            'overUnder': match.get('forebet_over_under') or match.get('forebet', {}).get('overUnder'),
-            'btts': match.get('forebet_btts') or match.get('forebet', {}).get('btts'),
+            'prediction': match.get('forebet_prediction') or (match.get('forebet') or {}).get('prediction'),
+            'probability': safe_value(match.get('forebet_probability')) or safe_value((match.get('forebet') or {}).get('probability')),
+            'exactScore': match.get('forebet_score') or (match.get('forebet') or {}).get('exactScore'),
+            'overUnder': match.get('forebet_over_under') or (match.get('forebet') or {}).get('overUnder'),
+            'btts': match.get('forebet_btts') or (match.get('forebet') or {}).get('btts'),
         } if match.get('forebet_prediction') or match.get('forebet') else None,
         # SofaScore - używamy safe_value() aby filtrować NaN
         'sofascore': {
-            'home': safe_value(match.get('sofascore_home_win_prob')) or safe_value(match.get('sofascore', {}).get('home')),
-            'draw': safe_value(match.get('sofascore_draw_prob')) or safe_value(match.get('sofascore', {}).get('draw')),
-            'away': safe_value(match.get('sofascore_away_win_prob')) or safe_value(match.get('sofascore', {}).get('away')),
-            'votes': safe_value(match.get('sofascore_total_votes'), 0) or safe_value(match.get('sofascore', {}).get('votes'), 0),
+            'home': safe_value(match.get('sofascore_home_win_prob')) or safe_value((match.get('sofascore') or {}).get('home')),
+            'draw': safe_value(match.get('sofascore_draw_prob')) or safe_value((match.get('sofascore') or {}).get('draw')),
+            'away': safe_value(match.get('sofascore_away_win_prob')) or safe_value((match.get('sofascore') or {}).get('away')),
+            'votes': safe_value(match.get('sofascore_total_votes'), 0) or safe_value((match.get('sofascore') or {}).get('votes'), 0),
         } if safe_value(match.get('sofascore_home_win_prob')) or match.get('sofascore') else None,
         # Focus team
         'focusTeam': match.get('focus_team') or match.get('focusTeam', 'home'),
