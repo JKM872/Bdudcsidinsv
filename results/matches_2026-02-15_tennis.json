@@ -1,0 +1,4533 @@
+{
+  "date": "2026-02-15",
+  "sport": "tennis",
+  "generatedAt": "2026-02-15T00:42:04.794032",
+  "stats": {
+    "total": 119,
+    "qualifying": 78,
+    "formAdvantage": 0
+  },
+  "matches": [
+    {
+      "id": 3311083670462634691,
+      "homeTeam": "Cerundolo F.",
+      "awayTeam": "Darderi L.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 4,
+        "winRate": 50
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4694108471766332005,
+      "homeTeam": "Shapovalov D.",
+      "awayTeam": "Shelton B.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 67.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 18,
+        "draw": null,
+        "away": 82,
+        "votes": 8344
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1396473830114757121,
+      "homeTeam": "De Minaur A.",
+      "awayTeam": "Auger-Aliassime F.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2227932668654010264,
+      "homeTeam": "Schoolkate T.",
+      "awayTeam": "Wong C.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2132519653518704596,
+      "homeTeam": "Svajda Z.",
+      "awayTeam": "Wu Y.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 55.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 62,
+        "draw": null,
+        "away": 38,
+        "votes": 340
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4896698176531690614,
+      "homeTeam": "Svrcina D.",
+      "awayTeam": "Hijikata R.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5770971239728649173,
+      "homeTeam": "Walton A.",
+      "awayTeam": "Shimabukuro S.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 84.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 90,
+        "draw": null,
+        "away": 10,
+        "votes": 1918
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7266048841392746131,
+      "homeTeam": "Carreno-Busta P.",
+      "awayTeam": "Harris B.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 88,
+        "draw": null,
+        "away": 12,
+        "votes": 874
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1883258605704633464,
+      "homeTeam": "Halys Q.",
+      "awayTeam": "Choinski J.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 62.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 896
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1219956123625227871,
+      "homeTeam": "Herbert P.H.",
+      "awayTeam": "Ymer E.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5535365966013622059,
+      "homeTeam": "Mochizuki S.",
+      "awayTeam": "Carballes Baena R.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 61,
+        "draw": null,
+        "away": 39,
+        "votes": 716
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4284609935886172404,
+      "homeTeam": "Barrios Vera T.",
+      "awayTeam": "Prizmic D.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2464974321457716874,
+      "homeTeam": "Marcondes I.",
+      "awayTeam": "Faria J.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 62.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 22,
+        "draw": null,
+        "away": 78,
+        "votes": 240
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4677951493332386088,
+      "homeTeam": "Monteiro T.",
+      "awayTeam": "Lajovic D.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2253415882601692504,
+      "homeTeam": "Passaro F.",
+      "awayTeam": "Gaubas V.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3147558814434004985,
+      "homeTeam": "Jastremska D.",
+      "awayTeam": "Tjen J.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2691899887487918474,
+      "homeTeam": "Noskova L.",
+      "awayTeam": "Li A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 1730
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1044016503746912910,
+      "homeTeam": "Bouzkova M.",
+      "awayTeam": "Mertens E.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7397431078044648454,
+      "homeTeam": "Maria T.",
+      "awayTeam": "Birrell K.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 83,
+        "draw": null,
+        "away": 17,
+        "votes": 83
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1192326266062163293,
+      "homeTeam": "Stearns P.",
+      "awayTeam": "Zheng Q.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4946931156361348459,
+      "homeTeam": "Pawluczenkowa A.",
+      "awayTeam": "Krejcikova B.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 9,
+        "draw": null,
+        "away": 91,
+        "votes": 1224
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6801364100052897785,
+      "homeTeam": "Samsonowa L.",
+      "awayTeam": "Fernandez L.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8011451010734323466,
+      "homeTeam": "Seidel E.",
+      "awayTeam": "Bucsa C.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 26,
+        "draw": null,
+        "away": 74,
+        "votes": 977
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 442572298542175455,
+      "homeTeam": "Sznajder D.",
+      "awayTeam": "Joint M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3220022016456344050,
+      "homeTeam": "Sun L.",
+      "awayTeam": "Linette M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 12,
+        "draw": null,
+        "away": 88,
+        "votes": 1090
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8799902578399241556,
+      "homeTeam": "Baptiste H.",
+      "awayTeam": "Eala A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8685776510066475796,
+      "homeTeam": "Sonmez Z.",
+      "awayTeam": "Bejlek S.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3062599576545428805,
+      "homeTeam": "Galarneau A.",
+      "awayTeam": "Dostanic S.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 64.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 84,
+        "draw": null,
+        "away": 16,
+        "votes": 148
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2126921444360521823,
+      "homeTeam": "Zhang Z.",
+      "awayTeam": "Bolt A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 38,
+        "draw": null,
+        "away": 62,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7250354835220321396,
+      "homeTeam": "Ferreira Silva F.",
+      "awayTeam": "Gomez F. A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 52.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 39,
+        "draw": null,
+        "away": 61,
+        "votes": 657
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1887944260702630063,
+      "homeTeam": "Collignon R.",
+      "awayTeam": "Bonzi B.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 64.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 82,
+        "draw": null,
+        "away": 18,
+        "votes": 696
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4450897281063361857,
+      "homeTeam": "Moro Canas A.",
+      "awayTeam": "Harris L.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 16,
+        "draw": null,
+        "away": 84,
+        "votes": 624
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 3759421254707392041,
+      "homeTeam": "Houkes M.",
+      "awayTeam": "Faut P. A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 61.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 79,
+        "draw": null,
+        "away": 21,
+        "votes": 112
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6635392974164255713,
+      "homeTeam": "Vrbensky M.",
+      "awayTeam": "Bertrand R.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 12,
+        "draw": null,
+        "away": 88,
+        "votes": 83
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2673968080322204027,
+      "homeTeam": "Dodig M.",
+      "awayTeam": "Barranco Cosano J.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 58.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 79,
+        "draw": null,
+        "away": 21,
+        "votes": 103
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6447423976579160019,
+      "homeTeam": "Vandermeersch C.",
+      "awayTeam": "Hemery C.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 64.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 12,
+        "draw": null,
+        "away": 88,
+        "votes": 89
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2659031285325531717,
+      "homeTeam": "Broska F.",
+      "awayTeam": "Barton H.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 12,
+        "draw": null,
+        "away": 88,
+        "votes": 65
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4075911363410989272,
+      "homeTeam": "Rodesch C.",
+      "awayTeam": "Cuenin S.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 60.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 96,
+        "draw": null,
+        "away": 4,
+        "votes": 129
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7377499576412448041,
+      "homeTeam": "Kukuszkin M.",
+      "awayTeam": "Trotter J. K.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -325120611091708391,
+      "homeTeam": "Massard L.",
+      "awayTeam": "Zahraj P.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 54.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 8,
+        "draw": null,
+        "away": 92,
+        "votes": 71
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7629696735041215298,
+      "homeTeam": "Basavareddy N.",
+      "awayTeam": "Sanchez L.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6103475645812770174,
+      "homeTeam": "Paul J.",
+      "awayTeam": "Sharipov M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 58.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 35,
+        "draw": null,
+        "away": 65,
+        "votes": 81
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8990369721440229563,
+      "homeTeam": "Coppejans K.",
+      "awayTeam": "Mrva M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 55.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 76,
+        "draw": null,
+        "away": 24,
+        "votes": 94
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2972077083440283353,
+      "homeTeam": "Balshaw F.",
+      "awayTeam": "Squire H.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 11,
+        "draw": null,
+        "away": 89,
+        "votes": 93
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7593571887428899367,
+      "homeTeam": "Kamboj U.",
+      "awayTeam": "Binda A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 64.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 5,
+        "draw": null,
+        "away": 95,
+        "votes": 146
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6844230543007606242,
+      "homeTeam": "Rawat S.",
+      "awayTeam": "Vanshelboim E.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 15,
+        "draw": null,
+        "away": 85,
+        "votes": 199
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8578648368772171323,
+      "homeTeam": "Xilas I.",
+      "awayTeam": "Eqbal I.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 55.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 97,
+        "draw": null,
+        "away": 3,
+        "votes": 217
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 162619591811854664,
+      "homeTeam": "Castelnuovo L.",
+      "awayTeam": "Aggarwal P.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 54.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 96,
+        "draw": null,
+        "away": 4,
+        "votes": 119
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 20922532215939238,
+      "homeTeam": "Donski A.",
+      "awayTeam": "Dev S D P.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 55.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 69,
+        "draw": null,
+        "away": 31,
+        "votes": 142
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1849891963634274601,
+      "homeTeam": "Yevseyev D.",
+      "awayTeam": "Leong M. W. K.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 95,
+        "draw": null,
+        "away": 5,
+        "votes": 197
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 36754900460178432,
+      "homeTeam": "Carboni L.",
+      "awayTeam": "Sureshkumar M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 134
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7349271158546465403,
+      "homeTeam": "Chung H.",
+      "awayTeam": "Sinha N. K.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 38,
+        "draw": null,
+        "away": 62,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8458976299489945755,
+      "homeTeam": "Lomakin G.",
+      "awayTeam": "Agafonov E.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 16,
+        "draw": null,
+        "away": 84,
+        "votes": 113
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 473376896261984747,
+      "homeTeam": "Kaśnikowski M.",
+      "awayTeam": "Derepasko T.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 63.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 129
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2904778722618879586,
+      "homeTeam": "Park U.",
+      "awayTeam": "Sasikumar M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 31,
+        "draw": null,
+        "away": 69,
+        "votes": 114
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2991127825708858575,
+      "homeTeam": "Ramanathan R.",
+      "awayTeam": "Huang T.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 67.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 25,
+        "draw": null,
+        "away": 75,
+        "votes": 118
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -790325132375249326,
+      "homeTeam": "Del Pino M.",
+      "awayTeam": "Pereira J.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 18,
+        "draw": null,
+        "away": 82,
+        "votes": 33
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 3649398962574448906,
+      "homeTeam": "Garay V.",
+      "awayTeam": "Huertas Del Pino C.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 14,
+        "draw": null,
+        "away": 86,
+        "votes": 28
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2256348692257207604,
+      "homeTeam": "Palosi S.",
+      "awayTeam": "Vilicich B.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 67.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 83,
+        "draw": null,
+        "away": 17,
+        "votes": 30
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5959575550085823531,
+      "homeTeam": "Arcuschin R.",
+      "awayTeam": "Aguilar Cardozo J.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 64.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 10,
+        "draw": null,
+        "away": 90,
+        "votes": 31
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2480422829612005227,
+      "homeTeam": "Olivo R.",
+      "awayTeam": "Zanellato N.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 52.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 79,
+        "draw": null,
+        "away": 21,
+        "votes": 29
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2464095452077213308,
+      "homeTeam": "Rodriguez L. J.",
+      "awayTeam": "Martinez T.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 85,
+        "draw": null,
+        "away": 15,
+        "votes": 27
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1814756457009613208,
+      "homeTeam": "Aboian V.",
+      "awayTeam": "Bieldiugin T.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 72.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 35
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5693711660502083213,
+      "homeTeam": "Fernandez B.",
+      "awayTeam": "De La Fuente S.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 84.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 38,
+        "draw": null,
+        "away": 62,
+        "votes": 24
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8399213484488859642,
+      "homeTeam": "Zeitune M.",
+      "awayTeam": "Farjat T.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 28,
+        "draw": null,
+        "away": 72,
+        "votes": 25
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7741184934555121232,
+      "homeTeam": "Cigarran T.",
+      "awayTeam": "Watt J.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 62.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 18,
+        "draw": null,
+        "away": 82,
+        "votes": 34
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6789746064344933288,
+      "homeTeam": "Estevez J.",
+      "awayTeam": "Chelia B.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 62.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 90,
+        "draw": null,
+        "away": 10,
+        "votes": 29
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5288736025332013370,
+      "homeTeam": "Schiessl J. E.",
+      "awayTeam": "Monferrer E.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 59.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 82,
+        "draw": null,
+        "away": 18,
+        "votes": 28
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4486463371982425725,
+      "homeTeam": "Korneeva A.",
+      "awayTeam": "Vidmanova D.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 63.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 59,
+        "draw": null,
+        "away": 41,
+        "votes": 401
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7987814923727599729,
+      "homeTeam": "Yang Y.",
+      "awayTeam": "Dudeney A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 76,
+        "draw": null,
+        "away": 24,
+        "votes": 83
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5023273492637910793,
+      "homeTeam": "Lew Yan Foon A.",
+      "awayTeam": "Berecoechea N.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 68,
+        "draw": null,
+        "away": 32,
+        "votes": 73
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6334087685516205451,
+      "homeTeam": "Kazionova E.",
+      "awayTeam": "Noel M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6833229889838132501,
+      "homeTeam": "Lemaitre T.",
+      "awayTeam": "Martynov D.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2471039199279124779,
+      "homeTeam": "Capurro Taborda M.",
+      "awayTeam": "Cabezas Dominguez E.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 61.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 14
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6070762408898688890,
+      "homeTeam": "Hewitt D.",
+      "awayTeam": "Strakhova V.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 60.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 17,
+        "draw": null,
+        "away": 83,
+        "votes": 18
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 736269545085616777,
+      "homeTeam": "Hosogi S.",
+      "awayTeam": "Tanguilig C.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 85,
+        "draw": null,
+        "away": 15,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4228057249402429494,
+      "homeTeam": "Hu V.",
+      "awayTeam": "Lewis M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 59.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 79,
+        "draw": null,
+        "away": 21,
+        "votes": 14
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8896209330274909839,
+      "homeTeam": "Ma L.",
+      "awayTeam": "Loeb J.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 62.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 76,
+        "draw": null,
+        "away": 24,
+        "votes": 46
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4113052078020700221,
+      "homeTeam": "Matuszewski S.",
+      "awayTeam": "Daavettila S.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -774623785995916300,
+      "homeTeam": "Schoppe E.",
+      "awayTeam": "Smith A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 60.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 9,
+        "draw": null,
+        "away": 91,
+        "votes": 11
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7215317648579429363,
+      "homeTeam": "Xu S.",
+      "awayTeam": "Tkacheva M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 58.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 33,
+        "draw": null,
+        "away": 67,
+        "votes": 15
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 654244676022365655,
+      "homeTeam": "Lanca S.",
+      "awayTeam": "Radisic N.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 62.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3726320428508979979,
+      "homeTeam": "Mansouri Y.",
+      "awayTeam": "Freitas A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 61.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7431430939658110209,
+      "homeTeam": "Jakupovic D.",
+      "awayTeam": "Christie F.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 61.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 12
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5810761226556763406,
+      "homeTeam": "Liang E. S.",
+      "awayTeam": "Franco Dias T.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4963782779361983317,
+      "homeTeam": "Lima K.",
+      "awayTeam": "Dittmann G. M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -743435588446405914,
+      "homeTeam": "Bains N.",
+      "awayTeam": "Ninomiya M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6406556001549236167,
+      "homeTeam": "Silva E.",
+      "awayTeam": "Ciric Bagaric L.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1843242563941621215,
+      "homeTeam": "Amorim G.",
+      "awayTeam": "Kolb N.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7944445058658701044,
+      "homeTeam": "Juan Mano A.",
+      "awayTeam": "Perez Contri S.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 55.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 31,
+        "draw": null,
+        "away": 69,
+        "votes": 52
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2742977422328048031,
+      "homeTeam": "Erel Y.",
+      "awayTeam": "Rapagnetta D.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 54.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 83,
+        "draw": null,
+        "away": 17,
+        "votes": 41
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 3931909089981421460,
+      "homeTeam": "Jubb P.",
+      "awayTeam": "Moeller M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 56.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 53
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2455153715510470484,
+      "homeTeam": "Purtseladze S.",
+      "awayTeam": "Faucon R.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 61.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 84,
+        "draw": null,
+        "away": 16,
+        "votes": 70
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7938274237576137158,
+      "homeTeam": "Cazacu D. N.",
+      "awayTeam": "Johnson A.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 11
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2945027387481041628,
+      "homeTeam": "Boitan G. A.",
+      "awayTeam": "Alcala Gurri M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 59,
+        "draw": null,
+        "away": 41,
+        "votes": 82
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5061625768755420010,
+      "homeTeam": "Coulibaly E.",
+      "awayTeam": "Faurel T.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 83,
+        "draw": null,
+        "away": 17,
+        "votes": 18
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2950789689086826852,
+      "homeTeam": "Soriano Barrera A.",
+      "awayTeam": "Basing M.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "X",
+        "probability": null,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 29,
+        "draw": null,
+        "away": 71,
+        "votes": 14
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -9029007879392814341,
+      "homeTeam": "Torner Sensano N.",
+      "awayTeam": "Jialin T.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 64.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 47,
+        "draw": null,
+        "away": 53,
+        "votes": 49
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5770741168594508753,
+      "homeTeam": "Ivanova I.",
+      "awayTeam": "Falkowska W.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 53.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 55,
+        "draw": null,
+        "away": 45,
+        "votes": 11
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 774553389695359893,
+      "homeTeam": "Samir S.",
+      "awayTeam": "Alhussein L.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1368780393968627996,
+      "homeTeam": "Giovannini L.",
+      "awayTeam": "Zolotareva R.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 64.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 77,
+        "draw": null,
+        "away": 23,
+        "votes": 62
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4842404499048258156,
+      "homeTeam": "Naef C.",
+      "awayTeam": "Vandromme J.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 60.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 80,
+        "draw": null,
+        "away": 20,
+        "votes": 15
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5124461721348923980,
+      "homeTeam": "Jones E.",
+      "awayTeam": "Zhu L.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7846187905904856474,
+      "homeTeam": "Kraus S.",
+      "awayTeam": "Martincova T.",
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 62.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 77,
+        "draw": null,
+        "away": 23,
+        "votes": 93
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2521511040560695749,
+      "homeTeam": null,
+      "awayTeam": null,
+      "time": "",
+      "date": "2026-02-15",
+      "league": "",
+      "country": "",
+      "sport": "tennis",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    }
+  ]
+}
