@@ -53,7 +53,7 @@ export function DateCarousel() {
   }
 
   return (
-    <div className="sticky top-[105px] z-30 w-full border-b bg-muted/30 backdrop-blur supports-[backdrop-filter]:bg-muted/20">
+    <div className="sticky top-[100px] z-30 w-full border-b bg-muted/30 backdrop-blur supports-[backdrop-filter]:bg-muted/20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex items-center justify-center gap-1 py-1.5">
           {/* Back arrow */}

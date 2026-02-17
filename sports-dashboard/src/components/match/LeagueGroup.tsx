@@ -34,7 +34,6 @@ export function LeagueGroup({
           className={cn(
             'flex w-full items-center gap-2 px-3 sm:px-4 py-2 text-left transition-colors',
             'bg-muted/50 hover:bg-muted/80',
-            'sticky top-[148px] z-20',
             'border-b border-border/40',
             hasLive && 'bg-red-500/5',
           )}

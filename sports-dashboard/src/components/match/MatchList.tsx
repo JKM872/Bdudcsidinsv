@@ -117,7 +117,7 @@ export function MatchList({ matches, liveScores, isLoading, onSelect }: Props) {
   const sortedGroups = sortLeagueGroups(grouped, liveMatchIds)
 
   return (
-    <div className="rounded-xl border bg-card overflow-hidden shadow-sm">
+    <div className="rounded-xl border bg-card shadow-sm">
       {sortedGroups.map(([league, leagueMatches]) => {
         const hasLive = leagueMatches.some(m => {
           const ls = findLiveScore(m)
