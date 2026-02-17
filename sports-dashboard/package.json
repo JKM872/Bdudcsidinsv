@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:build": "node tests/smoke-build.js",
+    "test:api": "node tests/api-contract.js",
+    "test": "npm run build && npm run test:build && npm run test:api"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

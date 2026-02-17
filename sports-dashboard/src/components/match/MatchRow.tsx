@@ -3,10 +3,10 @@
 // ============================================================================
 'use client'
 
-import { Clock, ChevronRight, TrendingUp, Gem } from 'lucide-react'
+import { Clock, ChevronRight, Gem } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { SPORT_MAP, PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
+import { PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
 import { formatMatchTime, formatOdds } from '@/lib/format'
 import { LiveScoreBadge } from './LiveScoreBadge'
 import { RecommendationBadge } from './RecommendationBadge'
@@ -23,7 +23,6 @@ interface Props {
 
 export function MatchRow({ match, liveScore, onSelect }: Props) {
   const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
-  const confTier = getConfidenceTier(conf)
   const isLive = liveScore?.status === 'live' || liveScore?.status === 'halftime'
   const isFinished = liveScore?.status === 'finished'
   const recommendation = match.gemini?.recommendation
@@ -35,7 +34,6 @@ export function MatchRow({ match, liveScore, onSelect }: Props) {
   const sofaA = match.sofascore?.away ?? 0
   const sofaMax = Math.max(sofaH, sofaD, sofaA)
   const sofaPred = sofaMax > 0 ? (sofaMax === sofaH ? '1' : sofaMax === sofaD ? 'X' : '2') : null
-  const sofaVotes = match.sofascore?.votes ?? 0
 
   return (
     <div

@@ -278,3 +278,36 @@ jobs:
       run: |
         pip install -r requirements.txt
         safety check || echo "⚠️  Dependency vulnerabilities found (non-blocking)"
+
+  # ── Frontend (sports-dashboard) Tests ──────────────────────────────────────
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sports-dashboard
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: sports-dashboard/package-lock.json
+
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+
+    - name: Lint
+      run: npm run lint || echo "⚠️  Lint warnings (non-blocking)"
+
+    - name: Build (static export)
+      run: npm run build
+
+    - name: Smoke test – verify build output
+      run: npm run test:build
+
+    - name: API contract test
+      run: npm run test:api
