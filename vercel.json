@@ -3,6 +3,9 @@
     "outputDirectory": "sports-dashboard/out",
     "installCommand": "echo skip",
     "framework": null,
+    "env": {
+      "NEXT_PUBLIC_API_URL": ""
+    },
     "rewrites": [
         {
             "source": "/api/:path*",
