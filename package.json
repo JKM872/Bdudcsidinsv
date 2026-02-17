@@ -11,7 +11,9 @@
     "scrape:hockey": "node forebet_puppeteer.js hockey forebet_hockey.html",
     "scrape:volleyball": "node forebet_puppeteer.js volleyball forebet_volleyball.html",
     "scrape:handball": "node forebet_puppeteer.js handball forebet_handball.html",
-    "heroku-postbuild": "cd sports-dashboard && npm install && npm run build"
+    "heroku-postbuild": "cd sports-dashboard && npm install && npm run build",
+    "build": "cd sports-dashboard && npm install --legacy-peer-deps && npm run build",
+    "start": "cd sports-dashboard && npm start"
   },
   "dependencies": {
     "puppeteer": "^21.6.1",
