@@ -1,0 +1,6543 @@
+{
+  "date": "2026-02-18",
+  "sport": "basketball",
+  "generatedAt": "2026-02-18T03:00:11.307542",
+  "stats": {
+    "total": 152,
+    "qualifying": 62,
+    "formAdvantage": 29
+  },
+  "matches": [
+    {
+      "id": -5041769929893563269,
+      "homeTeam": "Gran Canaria",
+      "awayTeam": "Bilbao",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -826327169279623025,
+      "homeTeam": "Tirana",
+      "awayTeam": "Partizani Tirana",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 46
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4560363506368878369,
+      "homeTeam": "Vllaznia",
+      "awayTeam": "Teuta Durres",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4836999825748142809,
+      "homeTeam": "Apolonia Fier",
+      "awayTeam": "Kamza Basket",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 80,
+        "draw": null,
+        "away": 20,
+        "votes": 25
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 3499169211728634740,
+      "homeTeam": "Atenas",
+      "awayTeam": "Union De Santa Fe",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.8,
+        "draw": null,
+        "away": 2.15,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 53,
+        "draw": null,
+        "away": 47,
+        "votes": 380
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4566565292983653671,
+      "homeTeam": "San Jose K",
+      "awayTeam": "Gorriones K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 4,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1350202936746570366,
+      "homeTeam": "Quimsa K",
+      "awayTeam": "Instituto K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8577802371144380209,
+      "homeTeam": "Tasmania JackJumpers",
+      "awayTeam": "Illawarra Hawks",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 153266161270885839,
+      "homeTeam": "Southside K",
+      "awayTeam": "Townsville K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4275705780644036323,
+      "homeTeam": "Al-Riyadi",
+      "awayTeam": "Shahrdari Gorgan",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.12,
+        "draw": null,
+        "away": 6.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 222
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -444107104325590656,
+      "homeTeam": "Al-Hala",
+      "awayTeam": "Al Najma",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 870444258715743175,
+      "homeTeam": "Nuwaidrad",
+      "awayTeam": "Al Manama",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2268973235630429932,
+      "homeTeam": "Brest",
+      "awayTeam": "Minsk",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6243966425073899125,
+      "homeTeam": "Rubon",
+      "awayTeam": "Borisfen",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8673881296024927575,
+      "homeTeam": "BC Minsk Youth K",
+      "awayTeam": "Minsk K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 40695700598756007,
+      "homeTeam": "Olimpia Grodno K",
+      "awayTeam": "Horizont Minsk K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6830804543736285375,
+      "homeTeam": "Cearense",
+      "awayTeam": "Pato",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.05,
+        "draw": null,
+        "away": 1.78,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "2",
+        "probability": 54.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 52,
+        "draw": null,
+        "away": 48,
+        "votes": 126
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3507050573360844502,
+      "homeTeam": "Corinthians Paulista",
+      "awayTeam": "Mogi",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.5,
+        "draw": null,
+        "away": 2.55,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 94,
+        "draw": null,
+        "away": 6,
+        "votes": 142
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6016480167840220609,
+      "homeTeam": "Split",
+      "awayTeam": "Omis",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6003495423735913071,
+      "homeTeam": "Zadar",
+      "awayTeam": "Dinamo Zagreb",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.07,
+        "draw": null,
+        "away": 8.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 83,
+        "draw": null,
+        "away": 17,
+        "votes": 363
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -9207575756399595517,
+      "homeTeam": "Pardubice",
+      "awayTeam": "Nymburk",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8700538431550209615,
+      "homeTeam": "Decin",
+      "awayTeam": "Srsni Pisek",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.5,
+        "draw": null,
+        "away": 2.65,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 61.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 76,
+        "draw": null,
+        "away": 24,
+        "votes": 42
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1442878183434667622,
+      "homeTeam": "Opawa",
+      "awayTeam": "Usti n. Labem",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.58,
+        "draw": null,
+        "away": 2.35,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 85,
+        "draw": null,
+        "away": 15,
+        "votes": 47
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7239623164987922497,
+      "homeTeam": "Svendborg",
+      "awayTeam": "Randers",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.33,
+        "draw": null,
+        "away": 3.35,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 84,
+        "draw": null,
+        "away": 16,
+        "votes": 37
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8083565325997869291,
+      "homeTeam": "Den Helder",
+      "awayTeam": "Zwolle",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7534838744754176311,
+      "homeTeam": "BAL Weert",
+      "awayTeam": "Kortrijk",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1148659296646035805,
+      "homeTeam": "Leiden",
+      "awayTeam": "Brussels Basketball",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8389091669443871147,
+      "homeTeam": "Rotterdam",
+      "awayTeam": "LWD Basket",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.1,
+        "draw": null,
+        "away": 1.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 16,
+        "draw": null,
+        "away": 84,
+        "votes": 51
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5863425075102128039,
+      "homeTeam": "Mechelen",
+      "awayTeam": "Belfius Mons",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.25,
+        "draw": null,
+        "away": 3.55,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 88,
+        "draw": null,
+        "away": 12,
+        "votes": 51
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -764067321417759030,
+      "homeTeam": "Oostende",
+      "awayTeam": "Spotter Leuven",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.23,
+        "draw": null,
+        "away": 3.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 69
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1496910198002746150,
+      "homeTeam": "Spirou Charleroi",
+      "awayTeam": "Limburg",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5158457970941639354,
+      "homeTeam": "BK Liepaja",
+      "awayTeam": "Ventspils",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4188222008287154396,
+      "homeTeam": "Rigas Zelli",
+      "awayTeam": "BK Ogre",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.2,
+        "draw": null,
+        "away": 4.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 95,
+        "draw": null,
+        "away": 5,
+        "votes": 65
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6824860543002160635,
+      "homeTeam": "Fenerbahce K",
+      "awayTeam": "Uni Girona K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 4,
+        "winRate": 75
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.13,
+        "draw": null,
+        "away": 6.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 253
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4711731742680787437,
+      "homeTeam": "USK Prague K",
+      "awayTeam": "Zaragoza K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2044545761337308870,
+      "homeTeam": "Venezia K",
+      "awayTeam": "Schio K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7440416548640971649,
+      "homeTeam": "Bisons Loimaa",
+      "awayTeam": "Lahti Basketball",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.5,
+        "draw": null,
+        "away": 2.55,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 76,
+        "draw": null,
+        "away": 24,
+        "votes": 62
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4551763599626620566,
+      "homeTeam": "ACO Basket",
+      "awayTeam": "HBA-Marsky Helsinki",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.02,
+        "draw": null,
+        "away": 13.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 73,
+        "draw": null,
+        "away": 27,
+        "votes": 282
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5000469272035653515,
+      "homeTeam": "Huima",
+      "awayTeam": "Kipina",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7517024183390023881,
+      "homeTeam": "Lyon-Villeurbanne U21",
+      "awayTeam": "Nanterre U21",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4675256442783500696,
+      "homeTeam": "Iraklis",
+      "awayTeam": "Mykonos",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2437770184290895772,
+      "homeTeam": "Panathinaikos",
+      "awayTeam": "PAOK",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.07,
+        "draw": null,
+        "away": 7.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 75,
+        "draw": null,
+        "away": 25,
+        "votes": 2032
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8161105228888960852,
+      "homeTeam": "PAOK K",
+      "awayTeam": "Panathlitikos K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2216600027631540203,
+      "homeTeam": "Giannina K",
+      "awayTeam": "Proteas Voulas K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 3.1,
+        "draw": null,
+        "away": 1.43,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 64.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 62,
+        "draw": null,
+        "away": 38,
+        "votes": 52
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3090790053617429684,
+      "homeTeam": "Amyntas K",
+      "awayTeam": "Anorthosis Volou K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4743397189296326137,
+      "homeTeam": "Neas Ionias K",
+      "awayTeam": "Panathinaikos K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5315682677272955309,
+      "homeTeam": "Real Madryt U22",
+      "awayTeam": "Zaragoza U22",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 941825215649417870,
+      "homeTeam": "QSTA United K",
+      "awayTeam": "Triple Threat K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4726584123538516745,
+      "homeTeam": "TopKip Lions K",
+      "awayTeam": "Grasshoppers K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3425470499216718344,
+      "homeTeam": "Borneo Hornbills",
+      "awayTeam": "Dewa United",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4073245183613614179,
+      "homeTeam": "Hamar K",
+      "awayTeam": "KR Reykjavik K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5706044153756499766,
+      "homeTeam": "Keflavik K",
+      "awayTeam": "Grindavik K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.83,
+        "draw": null,
+        "away": 2.05,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 66.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 74,
+        "draw": null,
+        "away": 26,
+        "votes": 42
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8926402036568179196,
+      "homeTeam": "Hapoel Tel-Aviv",
+      "awayTeam": "Maccabi Ironi Ramat Gan",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.09,
+        "draw": null,
+        "away": 7.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 96,
+        "draw": null,
+        "away": 4,
+        "votes": 134
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5811557951190848342,
+      "homeTeam": "Aktau K",
+      "awayTeam": "Okzhetpes K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7555521773625845081,
+      "homeTeam": "Anyang JungKwanJang",
+      "awayTeam": "Wonju DB",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5763377755452462753,
+      "homeTeam": "KCC Egis",
+      "awayTeam": "LG Sakers",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2118497229303164953,
+      "homeTeam": "Samsung Blue Minx K",
+      "awayTeam": "KB Stars K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2040263901416451336,
+      "homeTeam": "Antranik Beirut",
+      "awayTeam": "Beirut Club",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 617340804230021555,
+      "homeTeam": "Lietkabelis",
+      "awayTeam": "Siauliai",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.5,
+        "draw": null,
+        "away": 2.65,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 64.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 74,
+        "draw": null,
+        "away": 26,
+        "votes": 152
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 3011332300860202628,
+      "homeTeam": "Nevezis",
+      "awayTeam": "Żalgiris Kowno",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2830936146049208391,
+      "homeTeam": "LCC K",
+      "awayTeam": "Klaipedos Neptunas K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1897665726622715022,
+      "homeTeam": "Astros",
+      "awayTeam": "Angeles CDMX",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.43,
+        "draw": null,
+        "away": 3.05,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 56.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 20,
+        "draw": null,
+        "away": 80,
+        "votes": 105
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2337915934287284096,
+      "homeTeam": "Frayles de Guasave",
+      "awayTeam": "Rayos de Hermosillo",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5117127170268744812,
+      "homeTeam": "Pioneros de Los Mochis",
+      "awayTeam": "Halcones de Obregon",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1738369737034579499,
+      "homeTeam": "Zonkeys de Tijuana",
+      "awayTeam": "Ostioneros de Guaymas",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.45,
+        "draw": null,
+        "away": 2.95,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 44,
+        "draw": null,
+        "away": 56,
+        "votes": 128
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8445231025641504339,
+      "homeTeam": "Braunschweig",
+      "awayTeam": "Wurzburg",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8612407102810420799,
+      "homeTeam": "Rostock",
+      "awayTeam": "Bamberg",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.9,
+        "draw": null,
+        "away": 2.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 66.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 70,
+        "draw": null,
+        "away": 30,
+        "votes": 183
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8258212684918561905,
+      "homeTeam": "Ulm",
+      "awayTeam": "Oldenburg",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.48,
+        "draw": null,
+        "away": 2.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 249
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -913611290540454991,
+      "homeTeam": "Bonn",
+      "awayTeam": "Vechta",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6714929129160565420,
+      "homeTeam": "Chemnitz",
+      "awayTeam": "Heidelberg",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2269006084671789497,
+      "homeTeam": "Centrum Tigers",
+      "awayTeam": "Asker",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.01,
+        "draw": null,
+        "away": 13.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 95,
+        "draw": null,
+        "away": 5,
+        "votes": 40
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5108842284044782287,
+      "homeTeam": "Gimle",
+      "awayTeam": "Fyllingen",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3779932968740574050,
+      "homeTeam": "Asker/Bærums Verk K",
+      "awayTeam": "Ullern K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.33,
+        "draw": null,
+        "away": 3.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 21
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7854155879850827275,
+      "homeTeam": "CAB Madeira K",
+      "awayTeam": "Sporting CP K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -158418975545872973,
+      "homeTeam": "Samara",
+      "awayTeam": "Nizhny Novgorod",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -9004419500595662168,
+      "homeTeam": "MBA Moscow",
+      "awayTeam": "CSKA Moskwa",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5588903750731603825,
+      "homeTeam": "Chelyabinsk",
+      "awayTeam": "University-Ugra",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5912782403088959355,
+      "homeTeam": "Metallurg",
+      "awayTeam": "Ufa",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4369910431033240918,
+      "homeTeam": "CSKA Moskwa 2",
+      "awayTeam": "Novosibirsk",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.38,
+        "draw": null,
+        "away": 3.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 87,
+        "draw": null,
+        "away": 13,
+        "votes": 31
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7370360829661447028,
+      "homeTeam": "Tambov",
+      "awayTeam": "Barnaul",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "D",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 67.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 26
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1411120394349988940,
+      "homeTeam": "CSM Oradea",
+      "awayTeam": "Cluj-Napoca",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 430842789155732249,
+      "homeTeam": "Mladost Zemun",
+      "awayTeam": "Vrsac",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2862271883514503827,
+      "homeTeam": "Spartak Subotica",
+      "awayTeam": "Zlatibor",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.38,
+        "draw": null,
+        "away": 3.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 85,
+        "draw": null,
+        "away": 15,
+        "votes": 650
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8210639978782152720,
+      "homeTeam": "Crvena zvezda",
+      "awayTeam": "Borac",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.16,
+        "draw": null,
+        "away": 5.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 1983
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3167734523237355791,
+      "homeTeam": "MBK Ruzomberok K",
+      "awayTeam": "Slavia Banska Bystrica K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7323850612451776791,
+      "homeTeam": "Piestanske Cajky K",
+      "awayTeam": "Slovan Bratislava K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.0,
+        "draw": null,
+        "away": 15.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 87,
+        "draw": null,
+        "away": 13,
+        "votes": 31
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7696228727317126629,
+      "homeTeam": "Fribourg Olympic",
+      "awayTeam": "Sdent BBC Nyon",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.01,
+        "draw": null,
+        "away": 14.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 98,
+        "draw": null,
+        "away": 2,
+        "votes": 45
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2899063954883025369,
+      "homeTeam": "Regio Basel",
+      "awayTeam": "Neuchatel",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.75,
+        "draw": null,
+        "away": 2.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 32,
+        "draw": null,
+        "away": 68,
+        "votes": 37
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7742346336420080490,
+      "homeTeam": "SAM Massagno",
+      "awayTeam": "BBC Monthey",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.43,
+        "draw": null,
+        "away": 2.8,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": null,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 80,
+        "draw": null,
+        "away": 20,
+        "votes": 50
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6406496745352637221,
+      "homeTeam": "Alvik",
+      "awayTeam": "Huddinge",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.8,
+        "draw": null,
+        "away": 2.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 21
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6978995377353762274,
+      "homeTeam": "Sodertalje K",
+      "awayTeam": "Lulea K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1719653230078556889,
+      "homeTeam": "Tofas",
+      "awayTeam": "Besiktas",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6155751944997955280,
+      "homeTeam": "Bahcesehir Kol.",
+      "awayTeam": "Anadolu Efes",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1438009159462468364,
+      "homeTeam": "Bigua",
+      "awayTeam": "Welcome",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.09,
+        "draw": null,
+        "away": 6.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 28
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3872966899031722646,
+      "homeTeam": "Bowling Green",
+      "awayTeam": "Kent State",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2806589500817876308,
+      "homeTeam": "Florida",
+      "awayTeam": "South Carolina",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.02,
+        "draw": null,
+        "away": 15.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 60.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 1341
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2152718651152998183,
+      "homeTeam": "N.C. State",
+      "awayTeam": "North Carolina",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2843688553854342195,
+      "homeTeam": "Ohio",
+      "awayTeam": "Ball State",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.18,
+        "draw": null,
+        "away": 5.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 61.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 88,
+        "draw": null,
+        "away": 12,
+        "votes": 449
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -611561876501123277,
+      "homeTeam": "Rhode Island",
+      "awayTeam": "St. Louis Billikens",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2867007887002648120,
+      "homeTeam": "SMU Mustangs",
+      "awayTeam": "Louisville",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7023042201889544805,
+      "homeTeam": "UCF Knights",
+      "awayTeam": "TCU",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.05,
+        "draw": null,
+        "away": 1.88,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 70,
+        "draw": null,
+        "away": 30,
+        "votes": 599
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -260051552503463569,
+      "homeTeam": "UMass",
+      "awayTeam": "Miami (Ohio)",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 4,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3411720291660744574,
+      "homeTeam": "Western Michigan",
+      "awayTeam": "Akron",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4998015942569489462,
+      "homeTeam": "Miami",
+      "awayTeam": "Virginia Tech",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.25,
+        "draw": null,
+        "away": 4.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 84,
+        "draw": null,
+        "away": 16,
+        "votes": 591
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 702169111273933285,
+      "homeTeam": "VCU Rams",
+      "awayTeam": "George Washington",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.38,
+        "draw": null,
+        "away": 3.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 90,
+        "draw": null,
+        "away": 10,
+        "votes": 508
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1631905558115769994,
+      "homeTeam": "Michigan State",
+      "awayTeam": "UCLA",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8428029651192850646,
+      "homeTeam": "Ohio State",
+      "awayTeam": "Wisconsin",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7373177098427903613,
+      "homeTeam": "Tenn. Martin",
+      "awayTeam": "SE Missouri State",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.7,
+        "draw": null,
+        "away": 2.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 79,
+        "draw": null,
+        "away": 21,
+        "votes": 388
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 9160856524296242830,
+      "homeTeam": "Wyoming",
+      "awayTeam": "Fresno State",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3281165773497152781,
+      "homeTeam": "Iowa",
+      "awayTeam": "Nebraska",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.93,
+        "draw": null,
+        "away": 2.05,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 71.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 68,
+        "draw": null,
+        "away": 32,
+        "votes": 1791
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2042241707363003276,
+      "homeTeam": "Kansas State",
+      "awayTeam": "Baylor",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.55,
+        "draw": null,
+        "away": 1.55,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "2",
+        "probability": 54.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 18,
+        "draw": null,
+        "away": 82,
+        "votes": 597
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6460840901689705691,
+      "homeTeam": "Kentucky",
+      "awayTeam": "Gruzja",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.4,
+        "draw": null,
+        "away": 3.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 66.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 1510
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5311109759343424713,
+      "homeTeam": "New Mexico",
+      "awayTeam": "Air Force",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.01,
+        "draw": null,
+        "away": 23.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 90.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 313
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7953969160646820954,
+      "homeTeam": "Texas",
+      "awayTeam": "LSU",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.15,
+        "draw": null,
+        "away": 5.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 77.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 88,
+        "draw": null,
+        "away": 12,
+        "votes": 1106
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6543562578284225840,
+      "homeTeam": "San Diego State",
+      "awayTeam": "Grand Canyon",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7577794357259156719,
+      "homeTeam": "San Jose State",
+      "awayTeam": "Nevada",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 210847970558883965,
+      "homeTeam": "Oregon",
+      "awayTeam": "Minnesota",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4625786628536831925,
+      "homeTeam": "Arizona State",
+      "awayTeam": "Texas Tech",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 4,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 9025169404577741242,
+      "homeTeam": "Holy Cross",
+      "awayTeam": "Lafayette",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -149201383781084300,
+      "homeTeam": "Penn State",
+      "awayTeam": "Rutgers",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5759900636421956838,
+      "homeTeam": "Wofford",
+      "awayTeam": "VMI",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.06,
+        "draw": null,
+        "away": 8.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 97,
+        "draw": null,
+        "away": 3,
+        "votes": 31
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2943535994749267819,
+      "homeTeam": "Furman",
+      "awayTeam": "East Tennessee St",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.9,
+        "draw": null,
+        "away": 2.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 79,
+        "draw": null,
+        "away": 21,
+        "votes": 34
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 3955988020688911473,
+      "homeTeam": "Georgetown",
+      "awayTeam": "Butler",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2238695656285031578,
+      "homeTeam": "Youngstown State",
+      "awayTeam": "Cleveland State",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2244765840995874711,
+      "homeTeam": "Illinois Fighting Illini K",
+      "awayTeam": "Rutgers K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 67.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 100
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8550067907965858945,
+      "homeTeam": "Ole Miss K",
+      "awayTeam": "Tennessee Volunteers K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1863012173939027939,
+      "homeTeam": "North Texas K",
+      "awayTeam": "UAB K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 77.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 94,
+        "draw": null,
+        "away": 6,
+        "votes": 72
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4020424256664066380,
+      "homeTeam": "Arizona Wildcats K",
+      "awayTeam": "Colorado Buffaloes K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8412000744520884414,
+      "homeTeam": "Memphis Tigers K",
+      "awayTeam": "Tulane Green Wave K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 74
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5083507644615710703,
+      "homeTeam": "Rice K",
+      "awayTeam": "South Florida K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 4,
+        "winRate": 25
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1783196645755032100,
+      "homeTeam": "BYU K",
+      "awayTeam": "Cincinnati Bearcats K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8854907176862409227,
+      "homeTeam": "Coastal Carolina K",
+      "awayTeam": "Appalachian State K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 2,
+        "draw": null,
+        "away": 98,
+        "votes": 41
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7291690101824664923,
+      "homeTeam": "Bellarmine K",
+      "awayTeam": "North Alabama K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3085417538310887436,
+      "homeTeam": "South Carolina State K",
+      "awayTeam": "N.Carolina Central K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8789411889903302470,
+      "homeTeam": "Akron K",
+      "awayTeam": "Ohio Bobcats K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 79679149524327218,
+      "homeTeam": "American University K",
+      "awayTeam": "Bucknell K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7887385699004096988,
+      "homeTeam": "Army K",
+      "awayTeam": "Loyola Maryland Greyhounds K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 12
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1413610565528800595,
+      "homeTeam": "Buffalo K",
+      "awayTeam": "Ball State K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1532239913849986642,
+      "homeTeam": "Colgate K",
+      "awayTeam": "Boston University K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 57.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 8,
+        "draw": null,
+        "away": 92,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3294590675516250819,
+      "homeTeam": "George Washington K",
+      "awayTeam": "Richmond Spiders K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5358595704024845275,
+      "homeTeam": "Lafayette K",
+      "awayTeam": "Holy Cross K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6735417523338642451,
+      "homeTeam": "Lehigh K",
+      "awayTeam": "Navy K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 12
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5303106511099057392,
+      "homeTeam": "Presbyterian College K",
+      "awayTeam": "Winthrop K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -498867287620246025,
+      "homeTeam": "UMass K",
+      "awayTeam": "Toledo K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4122903914828833551,
+      "homeTeam": "VA Commonwealth K",
+      "awayTeam": "Davidson K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1197545629798675430,
+      "homeTeam": "La Salle K",
+      "awayTeam": "Rhode Island K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 271273256285429122,
+      "homeTeam": "Michigan State K",
+      "awayTeam": "Northwestern K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 61.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 88,
+        "draw": null,
+        "away": 12,
+        "votes": 17
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5241746302065529511,
+      "homeTeam": "UNC Asheville K",
+      "awayTeam": "High Point K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 4,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1360625211148344813,
+      "homeTeam": "Xavier K",
+      "awayTeam": "Seton Hall K",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 4,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8418359648739577509,
+      "homeTeam": "Manchester Basketball",
+      "awayTeam": "Newcastle Eagles",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.68,
+        "draw": null,
+        "away": 2.35,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 56.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 87,
+        "draw": null,
+        "away": 13,
+        "votes": 77
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7134564306880912512,
+      "homeTeam": "Brescia",
+      "awayTeam": "Udine",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.5,
+        "draw": null,
+        "away": 3.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 455
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8736963362962042221,
+      "homeTeam": "Milano",
+      "awayTeam": "Trieste",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.3,
+        "draw": null,
+        "away": 4.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 61.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 503
+      },
+      "focusTeam": "home"
+    }
+  ]
+}

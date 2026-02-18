@@ -1,0 +1,4082 @@
+{
+  "date": "2026-02-18",
+  "sport": "hockey",
+  "generatedAt": "2026-02-18T02:52:07.081245",
+  "stats": {
+    "total": 91,
+    "qualifying": 46,
+    "formAdvantage": 25
+  },
+  "matches": [
+    {
+      "id": -6225723936122032678,
+      "homeTeam": "Ässät",
+      "awayTeam": "Jukurit",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.73,
+        "draw": 4.0,
+        "away": 3.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 159
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6215750579410126580,
+      "homeTeam": "Kiekko-Espoo",
+      "awayTeam": "Lukko",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8760613813579907461,
+      "homeTeam": "KooKoo",
+      "awayTeam": "Kärpät",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.58,
+        "draw": 4.3,
+        "away": 4.1,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 52.0,
+        "exactScore": null,
+        "overUnder": "Over 5.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 66,
+        "draw": null,
+        "away": 34,
+        "votes": 145
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5486578839236761406,
+      "homeTeam": "Tappara",
+      "awayTeam": "JYP",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.58,
+        "draw": 4.4,
+        "away": 4.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 90,
+        "draw": null,
+        "away": 10,
+        "votes": 197
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5768724506985681542,
+      "homeTeam": "HK Olimpija",
+      "awayTeam": "Vienna",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.6,
+        "draw": 4.3,
+        "away": 4.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 128
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4699309411304229070,
+      "homeTeam": "Vorarlberg",
+      "awayTeam": "Black Wings Linz",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5050253050669773002,
+      "homeTeam": "Brest",
+      "awayTeam": "Baranavichy",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.3,
+        "draw": 5.0,
+        "away": 5.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 52.0,
+        "exactScore": null,
+        "overUnder": "Over 5.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 97,
+        "draw": null,
+        "away": 3,
+        "votes": 29
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8680924247994952871,
+      "homeTeam": "Gomel",
+      "awayTeam": "Slavutych",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5254003902722960398,
+      "homeTeam": "Vitebsk",
+      "awayTeam": "Lokomotiv Orsha",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.38,
+        "draw": 4.9,
+        "away": 5.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 26
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 883863393871037926,
+      "homeTeam": "Jihlava",
+      "awayTeam": "Vsetin",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1246997966015927713,
+      "homeTeam": "Zlin",
+      "awayTeam": "Tabor",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5900926554004853341,
+      "homeTeam": "Litomerice",
+      "awayTeam": "Przerów",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3693750292431625070,
+      "homeTeam": "Pardubice B",
+      "awayTeam": "Frydek-Mistek",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8334358480287043594,
+      "homeTeam": "Slavia Praga",
+      "awayTeam": "Poruba",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3310312862110866158,
+      "homeTeam": "Sokolov",
+      "awayTeam": "Kolin",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 9042686772476144683,
+      "homeTeam": "Trebic",
+      "awayTeam": "Chomutov",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5925163906002273358,
+      "homeTeam": "AZ Hawierzów",
+      "awayTeam": "Kromeriz",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 1
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4086014938091376972,
+      "homeTeam": "Nowy Jiczyn",
+      "awayTeam": "Technika Brno",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -110819329827819385,
+      "homeTeam": "Prościejów",
+      "awayTeam": "Sumperk",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 32
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4339027415302204272,
+      "homeTeam": "Uhersky Brod",
+      "awayTeam": "SHKM Hodonin",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8956498878146083645,
+      "homeTeam": "Velke Mezirici",
+      "awayTeam": "Koprivnice",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 36,
+        "draw": null,
+        "away": 64,
+        "votes": 11
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 243626802985412617,
+      "homeTeam": "Zdar nad Sazavou",
+      "awayTeam": "Valasske Mezirici",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "D",
+        "D",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "D",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": null,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 83,
+        "draw": null,
+        "away": 17,
+        "votes": 12
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2912793679840248440,
+      "homeTeam": "Znojmo",
+      "awayTeam": "Opawa",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3076892879991234400,
+      "homeTeam": "Cheb",
+      "awayTeam": "Kadan",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6919543781279011169,
+      "homeTeam": "Havl. Brod",
+      "awayTeam": "Benatky",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 17,
+        "draw": null,
+        "away": 83,
+        "votes": 12
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8302925496685026645,
+      "homeTeam": "HC Vrchlabi",
+      "awayTeam": "Mostecti lvi",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "D",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 54.0,
+        "exactScore": null,
+        "overUnder": "Over 5.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 14
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6777754181269274419,
+      "homeTeam": "Hronov",
+      "awayTeam": "Milevsko",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "D",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 82,
+        "draw": null,
+        "away": 18,
+        "votes": 11
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8004047613062920294,
+      "homeTeam": "Pisek",
+      "awayTeam": "Decin",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -177318331263019519,
+      "homeTeam": "Kralupy",
+      "awayTeam": "Usti",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "D",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3847707633413993981,
+      "homeTeam": "Przybram",
+      "awayTeam": "Kobra Praha",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5286846568429684699,
+      "homeTeam": "North Wings Usti nad Labem",
+      "awayTeam": "Black Dogs Budweis",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1711608834841276103,
+      "homeTeam": "Masaryk University",
+      "awayTeam": "UK Prague",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5917190793629304777,
+      "homeTeam": "Cavaliers Brno",
+      "awayTeam": "Engineers Prague",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5841644064911561641,
+      "homeTeam": "Quebec Remparts",
+      "awayTeam": "Drummondville Voltigeurs",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 422286686948977712,
+      "homeTeam": "Torpedo",
+      "awayTeam": "Gornyak Rudny",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.2,
+        "draw": 5.75,
+        "away": 7.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 30
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7970412873958755054,
+      "homeTeam": "Nomad Astana",
+      "awayTeam": "Almaty",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8092370975725513834,
+      "homeTeam": "HC Panter",
+      "awayTeam": "Liepaja",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 4,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5400455405090774791,
+      "homeTeam": "Zemgale",
+      "awayTeam": "Energija Elektrenai",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.04,
+        "draw": 10.0,
+        "away": 19.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 26
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8579541321433352423,
+      "homeTeam": "Kyiv Capitals",
+      "awayTeam": "Riga Prizma",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 4,
+        "winRate": 75
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "D",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.18,
+        "draw": 5.75,
+        "away": 8.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 21
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7525186331196528156,
+      "homeTeam": "Nowosybirsk",
+      "awayTeam": "Chabarowsk",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.9,
+        "draw": 4.1,
+        "away": 3.45,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 291
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4644253720438456617,
+      "homeTeam": "Traktor Czelabińsk",
+      "awayTeam": "Ufa",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -9180172970253108149,
+      "homeTeam": "Din. Mińsk",
+      "awayTeam": "Sp. Moskwa",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "D",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.85,
+        "draw": 4.3,
+        "away": 3.45,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 85,
+        "draw": null,
+        "away": 15,
+        "votes": 306
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4335532266470074528,
+      "homeTeam": "Niżny Nowogród",
+      "awayTeam": "Shanghai",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.48,
+        "draw": 4.9,
+        "away": 5.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 236
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7861043775906132530,
+      "homeTeam": "St. Petersburg",
+      "awayTeam": "Czerepowiec",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.2,
+        "draw": 4.1,
+        "away": 2.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 54.0,
+        "exactScore": null,
+        "overUnder": "Over 5.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 69,
+        "draw": null,
+        "away": 31,
+        "votes": 253
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5452412776272998729,
+      "homeTeam": "Dyn. Altay",
+      "awayTeam": "Tiumeń",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7909062211466948606,
+      "homeTeam": "Krasnojarsk",
+      "awayTeam": "Omskie Krylia",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2185802277489270822,
+      "homeTeam": "Novokuznetsk",
+      "awayTeam": "Kurgan",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.6,
+        "draw": 4.3,
+        "away": 4.1,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 57
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6810238037263499745,
+      "homeTeam": "AKM",
+      "awayTeam": "Perm",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "D"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.45,
+        "draw": 3.7,
+        "away": 2.35,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 26,
+        "draw": null,
+        "away": 74,
+        "votes": 42
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5833693734892850371,
+      "homeTeam": "Dinamo St. Petersburg",
+      "awayTeam": "Torpedo Gorky",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8802551237100260735,
+      "homeTeam": "Dizel",
+      "awayTeam": "Iżewsk",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "D",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.95,
+        "draw": 3.8,
+        "away": 3.05,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 74,
+        "draw": null,
+        "away": 26,
+        "votes": 42
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2860548456397195839,
+      "homeTeam": "Riazań",
+      "awayTeam": "Toros Neftekamsk",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.8,
+        "draw": 3.95,
+        "away": 3.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 53,
+        "draw": null,
+        "away": 47,
+        "votes": 38
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5726096007948548049,
+      "homeTeam": "SKA-VMF St. Petersburg",
+      "awayTeam": "Khimik",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8763239018935124458,
+      "homeTeam": "Din. St. Petersburg",
+      "awayTeam": "Tayfun",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.3,
+        "draw": 5.25,
+        "away": 6.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 54.0,
+        "exactScore": null,
+        "overUnder": "Over 5.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 37
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4981257136445682197,
+      "homeTeam": "Molot Perm",
+      "awayTeam": "Snezhnye Barsy",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.48,
+        "draw": 4.7,
+        "away": 4.6,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 94,
+        "draw": null,
+        "away": 6,
+        "votes": 32
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -745346475252872625,
+      "homeTeam": "Kristall BDK",
+      "awayTeam": "Lipetsk",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 57
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7182481844733311686,
+      "homeTeam": "HK Samara",
+      "awayTeam": "Tambov",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7138872748617610921,
+      "homeTeam": "Polot",
+      "awayTeam": "Buran Moscow",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8157069876603507760,
+      "homeTeam": "Granit",
+      "awayTeam": "Fakel",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4774730953269130222,
+      "homeTeam": "Gyergyoi",
+      "awayTeam": "Brasov",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 90,
+        "draw": null,
+        "away": 10,
+        "votes": 3054
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2378564773777896254,
+      "homeTeam": "Martin",
+      "awayTeam": "HK Detva",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.12,
+        "draw": 8.5,
+        "away": 9.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 97,
+        "draw": null,
+        "away": 3,
+        "votes": 30
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5881095626737752393,
+      "homeTeam": "Pov. Bystrica",
+      "awayTeam": "HC 19 Humenne",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -382509543777499260,
+      "homeTeam": "TEBS Bratislava",
+      "awayTeam": "Skalica",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 579267774792721302,
+      "homeTeam": "Topolcany",
+      "awayTeam": "HK Levice",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7568893223683847849,
+      "homeTeam": "Trnava",
+      "awayTeam": "Ziar nad Hronom",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7473048968625519740,
+      "homeTeam": "Slavija",
+      "awayTeam": "Mladost",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 61,
+        "draw": null,
+        "away": 39,
+        "votes": 1669
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4505735749323104939,
+      "homeTeam": "Clemensnas",
+      "awayTeam": "Sundsvall",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3835241801785220549,
+      "homeTeam": "Enkoping",
+      "awayTeam": "Vasby",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2725043831918658925,
+      "homeTeam": "Hudiksvalls",
+      "awayTeam": "Falu",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.09,
+        "draw": 7.75,
+        "away": 15.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 96,
+        "draw": null,
+        "away": 4,
+        "votes": 57
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6414880187811292290,
+      "homeTeam": "Surahammar",
+      "awayTeam": "Sollentuna",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "D",
+        "L",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.15,
+        "draw": 4.0,
+        "away": 2.45,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "2",
+        "probability": 58.0,
+        "exactScore": null,
+        "overUnder": "Over 5.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 32
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -532881019972825922,
+      "homeTeam": "Grastorps",
+      "awayTeam": "Mjolby",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7141005487235510229,
+      "homeTeam": "Halmstad",
+      "awayTeam": "Tingsryd",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "D",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.5,
+        "draw": 3.85,
+        "away": 2.1,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 32,
+        "draw": null,
+        "away": 68,
+        "votes": 37
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7684865982794641851,
+      "homeTeam": "Huddinge",
+      "awayTeam": "Vita Hasten",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3520585646942241382,
+      "homeTeam": "Tranås",
+      "awayTeam": "Morrums GoIS",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.25,
+        "draw": 5.0,
+        "away": 6.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 31
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4027561035285752485,
+      "homeTeam": "Västerås U20",
+      "awayTeam": "Sodertalje U20",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3044036800299839314,
+      "homeTeam": "Słowacja",
+      "awayTeam": "Niemcy",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.6,
+        "draw": 4.0,
+        "away": 2.35,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 61,
+        "draw": null,
+        "away": 39,
+        "votes": 1669
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3582663856550854937,
+      "homeTeam": "Kanada",
+      "awayTeam": "Czechy",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.2,
+        "draw": 7.0,
+        "away": 12.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 87,
+        "draw": null,
+        "away": 13,
+        "votes": 1109
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4290723899197949870,
+      "homeTeam": "Finlandia",
+      "awayTeam": "Szwajcaria",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2128612499401034845,
+      "homeTeam": "USA",
+      "awayTeam": "Szwecja",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.65,
+        "draw": 4.6,
+        "away": 4.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 66,
+        "draw": null,
+        "away": 34,
+        "votes": 640
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 3915577092778791935,
+      "homeTeam": "Tajlandia U18",
+      "awayTeam": "Turkmenistan U18",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1279229644886442874,
+      "homeTeam": "Islandia U18",
+      "awayTeam": "Bośnia i Hercegowina U18",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 78,
+        "draw": null,
+        "away": 22,
+        "votes": 1236
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8736436326880725450,
+      "homeTeam": "Republika Południowej Afryki U18",
+      "awayTeam": "Luksemburg U18",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 80,
+        "draw": null,
+        "away": 20,
+        "votes": 5
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6658998795464827193,
+      "homeTeam": "Bridgeport Islanders",
+      "awayTeam": "Utica Comets",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7934875605704869680,
+      "homeTeam": "Toronto Marlies",
+      "awayTeam": "Hershey Bears",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "D",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.25,
+        "draw": 3.95,
+        "away": 2.45,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 81,
+        "draw": null,
+        "away": 19,
+        "votes": 149
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6181033999234932617,
+      "homeTeam": "South Carolina Stingrays",
+      "awayTeam": "Greenville Swamp Rabbits",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 43
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1178528296961455166,
+      "homeTeam": "Athens Rock Lobsters",
+      "awayTeam": "Columbus River Dragons",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 54.0,
+        "exactScore": null,
+        "overUnder": "Over 5.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 97,
+        "draw": null,
+        "away": 3,
+        "votes": 32
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7163762473034656634,
+      "homeTeam": "Des Moines Buccaneers",
+      "awayTeam": "Lincoln Stars",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5598518995950201557,
+      "homeTeam": "DVTK",
+      "awayTeam": "DEAC",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3299768869989574628,
+      "homeTeam": "Budapest Akademia",
+      "awayTeam": "Ujpest",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3743609101727351929,
+      "homeTeam": "Guildford",
+      "awayTeam": "Dundee",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5235558007014004703,
+      "homeTeam": "Belfast",
+      "awayTeam": "Coventry",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5755825422007885386,
+      "homeTeam": "Nottingham",
+      "awayTeam": "Sheffield",
+      "time": "",
+      "date": "2026-02-18",
+      "league": "",
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "D",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 72,
+        "draw": null,
+        "away": 28,
+        "votes": 32
+      },
+      "focusTeam": "home"
+    }
+  ]
+}
