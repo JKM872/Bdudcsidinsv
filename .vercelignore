@@ -21,8 +21,6 @@ app.json
 
 # Root node_modules (only for Puppeteer)
 /node_modules/
-/package.json
-/package-lock.json
 
 # Results & debug
 results/
