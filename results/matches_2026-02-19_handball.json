@@ -1,0 +1,1026 @@
+{
+  "date": "2026-02-19",
+  "sport": "handball",
+  "generatedAt": "2026-02-19T02:34:21.641745",
+  "stats": {
+    "total": 22,
+    "qualifying": 12,
+    "formAdvantage": 6
+  },
+  "matches": [
+    {
+      "id": -457557570802260824,
+      "homeTeam": "Dinamo Bukareszt",
+      "awayTeam": "Fuechse Berlin",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8026939108904985093,
+      "homeTeam": "Iskra Kielce",
+      "awayTeam": "Veszprem",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6095673906476667383,
+      "homeTeam": "Eurofarm Pelister",
+      "awayTeam": "Orlen Wisła Płock",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7138051336133559039,
+      "homeTeam": "Nantes",
+      "awayTeam": "Sporting",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.75,
+        "draw": 8.0,
+        "away": 2.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 70,
+        "draw": 2,
+        "away": 28,
+        "votes": 594
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 9041640396524814869,
+      "homeTeam": "Gummersbach",
+      "awayTeam": "Eisenach",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.2,
+        "draw": 10.0,
+        "away": 5.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 95,
+        "draw": 2,
+        "away": 3,
+        "votes": 241
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5974976870295823690,
+      "homeTeam": "Bjerringbro/Silkeborg",
+      "awayTeam": "Nordsjælland",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "D",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "D",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.38,
+        "draw": 8.5,
+        "away": 3.8,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 91,
+        "draw": 3,
+        "away": 6,
+        "votes": 159
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6442759075108995005,
+      "homeTeam": "Ribe-Esbjerg",
+      "awayTeam": "Skjern",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 353769412690358616,
+      "homeTeam": "Skive",
+      "awayTeam": "Raekker Molle",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "D",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "D",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.03,
+        "draw": 18.0,
+        "away": 12.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 91,
+        "draw": 9,
+        "away": 0,
+        "votes": 35
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3414856561426924216,
+      "homeTeam": "Tik Taastrup",
+      "awayTeam": "HC Kobenhavn",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "D",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.8,
+        "draw": 8.0,
+        "away": 2.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 91,
+        "draw": 9,
+        "away": 0,
+        "votes": 22
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7331541115937381512,
+      "homeTeam": "Kolding",
+      "awayTeam": "Sydhavsøerne",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.4,
+        "draw": 9.0,
+        "away": 3.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 72,
+        "draw": 7,
+        "away": 21,
+        "votes": 29
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2695676927102017373,
+      "homeTeam": "Odder",
+      "awayTeam": "Vendsyssel",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "D",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "D",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.75,
+        "draw": 7.5,
+        "away": 2.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 92,
+        "draw": 8,
+        "away": 0,
+        "votes": 24
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1330998931899559378,
+      "homeTeam": "EH Aalborg K",
+      "awayTeam": "Sønderjyske K",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5011575318268453454,
+      "homeTeam": "AGF K",
+      "awayTeam": "Fredericia K",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.05,
+        "draw": 17.0,
+        "away": 9.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 88,
+        "draw": 6,
+        "away": 6,
+        "votes": 32
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4210656775267158863,
+      "homeTeam": "Ka Thor K",
+      "awayTeam": "Haukar K",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 817295346840061237,
+      "homeTeam": "Afturelding",
+      "awayTeam": "Stjarnan",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.25,
+        "draw": 10.0,
+        "away": 4.6,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 95,
+        "draw": 3,
+        "away": 3,
+        "votes": 38
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2673457478101542827,
+      "homeTeam": "Haukar",
+      "awayTeam": "FH Hafnarfjordur",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5741344706046262309,
+      "homeTeam": "Incheon City",
+      "awayTeam": "Chungnam Athletic",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "D",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.2,
+        "draw": 9.5,
+        "away": 5.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 95,
+        "draw": 2,
+        "away": 2,
+        "votes": 41
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1736630300651281981,
+      "homeTeam": "SK Hawks",
+      "awayTeam": "Doosan",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3752385822542902127,
+      "homeTeam": "Storhamar 2 K",
+      "awayTeam": "Levanger K",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5461024056352135715,
+      "homeTeam": "Oborniki Śląskie",
+      "awayTeam": "Orlik Brzeg",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 8,
+        "draw": 9,
+        "away": 83,
+        "votes": 89
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6331967746871379723,
+      "homeTeam": "Kobierzyce II K",
+      "awayTeam": "Zagłębie Lubin K",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 8
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8628526991182690668,
+      "homeTeam": "Dunarea Braila K",
+      "awayTeam": "Bistrita K",
+      "time": "",
+      "date": "2026-02-19",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    }
+  ]
+}
