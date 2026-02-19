@@ -123,9 +123,9 @@ _session_initialized: bool = False
 
 # Circuit breaker dla Selenium fallback w CI
 _selenium_failures: int = 0
-_selenium_max_failures: int = 3  # Po 3 failures, skip Selenium w CI
+_selenium_max_failures: int = 5  # v4: Raised from 3 to 5 for more resilience before tripping
 _selenium_last_reset: float = 0.0
-_SELENIUM_RESET_INTERVAL: int = 300  # Reset co 5 minut
+_SELENIUM_RESET_INTERVAL: int = 180  # v4: Faster reset (3 min instead of 5)
 
 def _get_api_session():
     """

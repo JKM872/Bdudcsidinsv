@@ -185,11 +185,45 @@ def normalize_supabase_match(row):
 def normalize_match(match):
     """Normalize match data to frontend format."""
     # Handle different key naming conventions
+    
+    # v4: Extract match time - prefer HH:MM format
+    raw_time = match.get('time') or match.get('match_time', '')
+    if raw_time and len(raw_time) > 5 and ':' in raw_time:
+        # If it contains date+time like '19.02.2026 20:00', extract just the time
+        parts = raw_time.strip().split()
+        raw_time = parts[-1] if len(parts) > 1 else raw_time
+    
+    # v4: Build forebet with all 3 probabilities
+    forebet_data = None
+    if match.get('forebet_prediction') or match.get('forebet'):
+        fb = match.get('forebet') or {}
+        forebet_data = {
+            'prediction': match.get('forebet_prediction') or fb.get('prediction'),
+            'probability': safe_value(match.get('forebet_probability')) or safe_value(fb.get('probability')),
+            'exactScore': match.get('forebet_exact_score') or match.get('forebet_score') or fb.get('exactScore'),
+            'overUnder': match.get('forebet_over_under') or fb.get('overUnder'),
+            'btts': match.get('forebet_btts') or fb.get('btts'),
+            'homeProb': safe_value(match.get('forebet_home_prob')) or safe_value(fb.get('homeProb')),
+            'drawProb': safe_value(match.get('forebet_draw_prob')) or safe_value(fb.get('drawProb')),
+            'awayProb': safe_value(match.get('forebet_away_prob')) or safe_value(fb.get('awayProb')),
+        }
+    
+    # v4: Build gemini from JSON files (was missing before!)
+    gemini_data = None
+    if match.get('gemini_prediction') or match.get('gemini'):
+        gm = match.get('gemini') or {}
+        gemini_data = {
+            'prediction': match.get('gemini_prediction') or gm.get('prediction'),
+            'confidence': safe_value(match.get('gemini_confidence')) or safe_value(gm.get('confidence')),
+            'recommendation': match.get('gemini_recommendation') or gm.get('recommendation'),
+            'reasoning': match.get('gemini_reasoning') or gm.get('reasoning'),
+        }
+    
     return {
         'id': match.get('id') or hash(f"{match.get('home_team', match.get('homeTeam', ''))}_{match.get('away_team', match.get('awayTeam', ''))}"),
         'homeTeam': match.get('home_team') or match.get('homeTeam', ''),
         'awayTeam': match.get('away_team') or match.get('awayTeam', ''),
-        'time': match.get('time') or match.get('match_time', ''),
+        'time': raw_time,
         'date': match.get('date') or match.get('match_date', ''),
         'league': match.get('league') or match.get('tournament', ''),
         'country': match.get('country', ''),
@@ -198,11 +232,11 @@ def normalize_match(match):
         'qualifies': match.get('qualifies', False),
         # H2H Data
         'h2h': {
-            'home': match.get('h2h_home_wins') or (match.get('h2h') or {}).get('home', 0),
+            'home': match.get('h2h_home_wins') or match.get('home_wins_in_h2h_last5') or (match.get('h2h') or {}).get('home', 0),
             'draw': match.get('h2h_draws') or (match.get('h2h') or {}).get('draw', 0),
-            'away': match.get('h2h_away_wins') or (match.get('h2h') or {}).get('away', 0),
-            'total': match.get('h2h_total') or (match.get('h2h') or {}).get('total', 5),
-            'winRate': match.get('h2h_win_rate') or (match.get('h2h') or {}).get('winRate', 0),
+            'away': match.get('h2h_away_wins') or match.get('away_wins_in_h2h_last5') or (match.get('h2h') or {}).get('away', 0),
+            'total': match.get('h2h_total') or match.get('h2h_count') or (match.get('h2h') or {}).get('total', 5),
+            'winRate': safe_value(match.get('h2h_win_rate')) or safe_value(match.get('win_rate')) or safe_value((match.get('h2h') or {}).get('winRate', 0)),
         },
         # Form Data
         'homeForm': match.get('home_form') or match.get('homeForm', []),
@@ -217,14 +251,8 @@ def normalize_match(match):
             'away': safe_value(match.get('away_odds')) or safe_value((match.get('odds') or {}).get('away')),
             'bookmaker': match.get('odds_bookmaker') or (match.get('odds') or {}).get('bookmaker', 'Unknown'),
         },
-        # Forebet - używamy safe_value() dla probability
-        'forebet': {
-            'prediction': match.get('forebet_prediction') or (match.get('forebet') or {}).get('prediction'),
-            'probability': safe_value(match.get('forebet_probability')) or safe_value((match.get('forebet') or {}).get('probability')),
-            'exactScore': match.get('forebet_score') or (match.get('forebet') or {}).get('exactScore'),
-            'overUnder': match.get('forebet_over_under') or (match.get('forebet') or {}).get('overUnder'),
-            'btts': match.get('forebet_btts') or (match.get('forebet') or {}).get('btts'),
-        } if match.get('forebet_prediction') or match.get('forebet') else None,
+        # Forebet - v4: includes all 3 probabilities
+        'forebet': forebet_data,
         # SofaScore - używamy safe_value() aby filtrować NaN
         'sofascore': {
             'home': safe_value(match.get('sofascore_home_win_prob')) or safe_value((match.get('sofascore') or {}).get('home')),
@@ -232,6 +260,8 @@ def normalize_match(match):
             'away': safe_value(match.get('sofascore_away_win_prob')) or safe_value((match.get('sofascore') or {}).get('away')),
             'votes': safe_value(match.get('sofascore_total_votes'), 0) or safe_value((match.get('sofascore') or {}).get('votes'), 0),
         } if safe_value(match.get('sofascore_home_win_prob')) or match.get('sofascore') else None,
+        # Gemini AI - v4: now included for JSON files too!
+        'gemini': gemini_data,
         # Focus team
         'focusTeam': match.get('focus_team') or match.get('focusTeam', 'home'),
     }

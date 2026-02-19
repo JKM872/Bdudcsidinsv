@@ -923,12 +923,35 @@ Do not add any explanation or additional text."""
     return None
 
 
+# 🔥 FOREBET SHORT TAG → LEAGUE NAME MAPPING
+_FOREBET_LEAGUE_MAP = {
+    # Top leagues
+    'CH': 'Champions League', 'EL': 'Europa League', 'EC': 'Europa Conference League',
+    'En1': 'Premier League', 'En2': 'Championship', 'En3': 'League One', 'En4': 'League Two',
+    'Es1': 'La Liga', 'Es2': 'La Liga 2', 'It1': 'Serie A', 'It2': 'Serie B', 'It3': 'Serie C',
+    'De1': 'Bundesliga', 'De2': '2. Bundesliga', 'Fr1': 'Ligue 1', 'Fr2': 'Ligue 2',
+    'Pt1': 'Primeira Liga', 'Pt2': 'Liga Portugal 2', 'Nl1': 'Eredivisie', 'Nl2': 'Eerste Divisie',
+    'Be1': 'Pro League', 'Tr1': 'Super Lig', 'Gr1': 'Super League', 'Ru1': 'Premier Liga',
+    'Sc1': 'Scottish Premiership', 'At1': 'Bundesliga Austria', 'Ch1': 'Super League Swiss',
+    'Pl1': 'Ekstraklasa', 'Pl2': 'I Liga', 'Cz1': 'Czech Liga',
+    'Dk1': 'Superligaen', 'Se1': 'Allsvenskan', 'No1': 'Eliteserien',
+    'Ua1': 'Premier League Ukraine', 'Hr1': 'HNL', 'Rs1': 'SuperLiga Serbia',
+    'Ro1': 'Liga I', 'Bg1': 'First League Bulgaria', 'Hu1': 'NB I',
+    'Il1': 'Israeli Premier', 'Dz1': 'Ligue 1 Algeria', 'Acn': 'Africa Cup of Nations',
+    'BrS': 'Brasileirao Serie A', 'BrB': 'Brasileirao Serie B', 'Ar1': 'Liga Profesional',
+    'MxW': 'Liga MX', 'Us1': 'MLS', 'Jp1': 'J-League', 'Cn1': 'Chinese Super League',
+    'Au1': 'A-League', 'Sa1': 'Saudi Pro League', 'Jm': 'Jamaica Premier', 'Kr1': 'K League',
+    'In1': 'Indian Super League', 'EgP': 'Egyptian Premier', 'Wc': 'World Cup',
+    'WCQ': 'World Cup Qualifiers', 'Euc': 'Euro Championship', 'EuQ': 'Euro Qualifiers',
+}
+
+
 def search_forebet_prediction(
     home_team: str,
     away_team: str,
     match_date: str,
     driver: webdriver.Chrome = None,
-    min_similarity: float = 0.25,  # 🔥 v3.8: Zmniejszone z 0.35 do 0.25 dla agresywniejszego matchowania
+    min_similarity: float = 0.30,  # 🔥 v4: Raised from 0.25 to 0.30 for fewer false matches
     timeout: int = 10,
     headless: bool = False,
     sport: str = 'football',
@@ -988,9 +1011,14 @@ def search_forebet_prediction(
         'success': False,
         'prediction': None,
         'probability': None,
+        'home_prob': None,
+        'draw_prob': None,
+        'away_prob': None,
         'over_under': None,
         'btts': None,
         'avg_goals': None,
+        'match_time': None,
+        'league': None,
         'error': None
     }
     
@@ -1673,6 +1701,28 @@ def search_forebet_prediction(
             result['home_team_forebet'] = forebet_home
             result['away_team_forebet'] = forebet_away
             
+            # 🔥 EXTRACT MATCH TIME from date_bah span
+            date_bah = row.find('span', class_='date_bah')
+            if date_bah:
+                raw_dt = date_bah.get_text(strip=True)  # e.g. '05/01/2026 19:30'
+                try:
+                    from datetime import datetime as _dt_parse
+                    parsed = _dt_parse.strptime(raw_dt, '%d/%m/%Y %H:%M')
+                    result['match_time'] = parsed.strftime('%H:%M')
+                    print(f"         ⏰ Match time: {result['match_time']}")
+                except (ValueError, TypeError):
+                    # Try raw text if parsing fails
+                    if ':' in raw_dt:
+                        parts = raw_dt.strip().split()
+                        result['match_time'] = parts[-1] if parts else raw_dt
+            
+            # 🔥 EXTRACT LEAGUE from shortTag
+            short_tag_el = row.find('span', class_='shortTag')
+            if short_tag_el:
+                tag_code = short_tag_el.get_text(strip=True)
+                result['league'] = _FOREBET_LEAGUE_MAP.get(tag_code, tag_code)
+                print(f"         🏆 League: {result['league']} ({tag_code})")
+            
             # Wyciągnij predykcję - POPRAWIONA STRUKTURA
             extraction_success = False
             
@@ -1688,6 +1738,9 @@ def search_forebet_prediction(
                         
                         max_prob = max(home_prob, draw_prob, away_prob)
                         result['probability'] = float(max_prob)
+                        result['home_prob'] = home_prob
+                        result['draw_prob'] = draw_prob
+                        result['away_prob'] = away_prob
                         
                         if max_prob == home_prob:
                             result['prediction'] = '1'
@@ -1708,6 +1761,9 @@ def search_forebet_prediction(
                         
                         max_prob = max(home_prob, away_prob)
                         result['probability'] = float(max_prob)
+                        result['home_prob'] = home_prob
+                        result['draw_prob'] = None
+                        result['away_prob'] = away_prob
                         result['prediction'] = '1' if home_prob > away_prob else '2'
                         
                         extraction_success = True

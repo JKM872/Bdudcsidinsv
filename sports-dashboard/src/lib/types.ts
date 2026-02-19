@@ -12,6 +12,9 @@ export interface ForebetData {
   exactScore: string | null
   overUnder: string | null
   btts: string | null
+  homeProb: number | null
+  drawProb: number | null
+  awayProb: number | null
 }
 
 export interface SofascoreData {

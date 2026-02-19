@@ -101,6 +101,39 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
                   <div className="flex items-center gap-2 text-sm font-medium">
                     <Target className="h-4 w-4 text-blue-500" /> Forebet Prediction
                   </div>
+
+                  {/* Probability bar – all 3 outcomes */}
+                  {(match.forebet.homeProb != null || match.forebet.probability != null) && (
+                    <div className="space-y-2">
+                      {match.forebet.homeProb != null && match.forebet.awayProb != null ? (
+                        <>
+                          <div className="flex h-5 rounded-full overflow-hidden text-[10px] font-bold text-white">
+                            <div className="flex items-center justify-center bg-emerald-500" style={{ width: `${match.forebet.homeProb}%` }}>
+                              {match.forebet.homeProb > 10 ? `${match.forebet.homeProb}%` : ''}
+                            </div>
+                            {match.forebet.drawProb != null && match.forebet.drawProb > 0 && (
+                              <div className="flex items-center justify-center bg-amber-500" style={{ width: `${match.forebet.drawProb}%` }}>
+                                {match.forebet.drawProb > 10 ? `${match.forebet.drawProb}%` : ''}
+                              </div>
+                            )}
+                            <div className="flex items-center justify-center bg-rose-500" style={{ width: `${match.forebet.awayProb}%` }}>
+                              {match.forebet.awayProb > 10 ? `${match.forebet.awayProb}%` : ''}
+                            </div>
+                          </div>
+                          <div className="flex justify-between text-[10px] text-muted-foreground">
+                            <span>Home {match.forebet.homeProb}%</span>
+                            {match.forebet.drawProb != null && <span>Draw {match.forebet.drawProb}%</span>}
+                            <span>Away {match.forebet.awayProb}%</span>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="text-center">
+                          <span className="font-bold text-lg">{match.forebet.probability ?? '-'}%</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <StatBox label="Prediction" value={
                       match.forebet.prediction ? (
@@ -109,22 +142,16 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
                         </Badge>
                       ) : '-'
                     } />
-                    <StatBox label="Probability" value={
-                      <span className="font-bold text-lg">{match.forebet.probability ?? '-'}%</span>
-                    } />
                     <StatBox label="Exact Score" value={
                       <span className="font-bold">{match.forebet.exactScore ?? '-'}</span>
                     } />
                     <StatBox label="Over / Under" value={
                       <span className="font-bold">{match.forebet.overUnder ?? '-'}</span>
                     } />
+                    <StatBox label="BTTS" value={
+                      <span className="font-bold">{match.forebet.btts ?? '-'}</span>
+                    } />
                   </div>
-                  {match.forebet.btts && (
-                    <div className="text-xs">
-                      <span className="text-muted-foreground">BTTS: </span>
-                      <Badge variant="outline" className="text-xs">{match.forebet.btts}</Badge>
-                    </div>
-                  )}
                 </div>
               )}
 

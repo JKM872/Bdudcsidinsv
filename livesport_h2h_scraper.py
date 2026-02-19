@@ -647,6 +647,7 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
         'gemini_recommendation': None,  # HIGH/MEDIUM/LOW/SKIP
         # SPORT INFO
         'sport': sport,  # Nazwa sportu (football, basketball, volleyball, etc.)
+        'league': None,  # League/competition name (extracted from Forebet or Livesport)
     }
 
     # 🔥🔥🔥🔥 QUADRUPLE FORCE: Ultra-aggressive retry logic with multiple strategies
@@ -1073,6 +1074,18 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
                 out['forebet_over_under'] = forebet_result.get('over_under')
                 out['forebet_btts'] = forebet_result.get('btts')
                 out['forebet_avg_goals'] = forebet_result.get('avg_goals')
+                # v4: Store all 3 probabilities separately
+                out['forebet_home_prob'] = forebet_result.get('home_prob')
+                out['forebet_draw_prob'] = forebet_result.get('draw_prob')
+                out['forebet_away_prob'] = forebet_result.get('away_prob')
+                
+                # v4: Extract match_time from Forebet if not already set
+                if not out.get('match_time') and forebet_result.get('match_time'):
+                    out['match_time'] = forebet_result.get('match_time')
+                    
+                # v4: Extract league from Forebet if not already set
+                if not out.get('league') and forebet_result.get('league'):
+                    out['league'] = forebet_result.get('league')
                 
                 print(f"      ✅ {format_forebet_result(forebet_result)}")
             else:
@@ -1144,7 +1157,7 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
     # SOFASCORE INTEGRATION - "Who will win?" predictions
     # ========================================================================
     _t_sofascore_start = time_module.time()
-    if use_sofascore and out.get('qualifies'):
+    if use_sofascore and out.get('home_team') and out.get('away_team'):
         try:
             print(f"   🎯 SofaScore: Pobieranie predykcji...")
             from sofascore_scraper import scrape_sofascore_full

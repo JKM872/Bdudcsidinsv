@@ -3,7 +3,7 @@
 // ============================================================================
 'use client'
 
-import { Clock, ChevronRight, Gem } from 'lucide-react'
+import { Clock, ChevronRight, Gem, BarChart3 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
@@ -21,12 +21,27 @@ interface Props {
   onSelect?: (match: Match) => void
 }
 
+/** Calculate data completeness as % (0-100) */
+function calcCompleteness(m: Match): number {
+  let filled = 0
+  let total = 7
+  if (m.time) filled++
+  if (m.forebet?.prediction) filled++
+  if (m.sofascore?.home != null) filled++
+  if (m.odds?.home != null) filled++
+  if (m.homeForm?.length > 0) filled++
+  if (m.h2h && m.h2h.total > 0 && (m.h2h.home > 0 || m.h2h.away > 0)) filled++
+  if (m.gemini?.prediction) filled++
+  return Math.round((filled / total) * 100)
+}
+
 export function MatchRow({ match, liveScore, onSelect }: Props) {
   const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
   const isLive = liveScore?.status === 'live' || liveScore?.status === 'halftime'
   const isFinished = liveScore?.status === 'finished'
   const recommendation = match.gemini?.recommendation
   const forebetPred = match.forebet?.prediction
+  const completeness = calcCompleteness(match)
 
   // Derive SofaScore majority prediction
   const sofaH = match.sofascore?.home ?? 0
@@ -127,17 +142,37 @@ export function MatchRow({ match, liveScore, onSelect }: Props) {
 
         {/* Predictions + Odds row */}
         <div className="flex items-center gap-2 flex-wrap">
-          {/* Forebet prediction */}
+          {/* Forebet prediction + all 3 probabilities */}
           {forebetPred && (
             <div className="flex items-center gap-1">
               <Badge className={cn('text-[9px] px-1.5 py-0 font-bold', PREDICTION_COLORS[forebetPred] ?? 'bg-zinc-500 text-white')}>
                 {forebetPred}
               </Badge>
-              {match.forebet?.probability != null && (
+              {/* Show all 3 probabilities if available, otherwise just max */}
+              {match.forebet?.homeProb != null && match.forebet?.awayProb != null ? (
+                <span className="text-[9px] text-muted-foreground tabular-nums font-mono">
+                  <span className={cn(forebetPred === '1' && 'text-emerald-600 dark:text-emerald-400 font-semibold')}>
+                    {match.forebet.homeProb}
+                  </span>
+                  {match.forebet.drawProb != null && (
+                    <>
+                      <span className="text-muted-foreground/40">-</span>
+                      <span className={cn(forebetPred === 'X' && 'text-amber-600 dark:text-amber-400 font-semibold')}>
+                        {match.forebet.drawProb}
+                      </span>
+                    </>
+                  )}
+                  <span className="text-muted-foreground/40">-</span>
+                  <span className={cn(forebetPred === '2' && 'text-rose-600 dark:text-rose-400 font-semibold')}>
+                    {match.forebet.awayProb}
+                  </span>
+                  <span className="text-muted-foreground/50">%</span>
+                </span>
+              ) : match.forebet?.probability != null ? (
                 <span className="text-[10px] text-muted-foreground tabular-nums">
                   {match.forebet.probability}%
                 </span>
-              )}
+              ) : null}
               <span className="text-[9px] text-muted-foreground/60">FB</span>
             </div>
           )}
@@ -190,8 +225,16 @@ export function MatchRow({ match, liveScore, onSelect }: Props) {
             </Badge>
           )}
 
+          {/* Data completeness indicator */}
+          {completeness < 100 && !forebetPred && !sofaPred && (
+            <div className="flex items-center gap-0.5 text-muted-foreground/50" title={`Data completeness: ${completeness}%`}>
+              <BarChart3 className="h-3 w-3" />
+              <span className="text-[9px] tabular-nums">{completeness}%</span>
+            </div>
+          )}
+
           {/* Odds inline (all screen sizes) */}
-          {match.odds && (
+          {match.odds && (match.odds.home != null || match.odds.away != null) && (
             <div className="flex items-center gap-0.5 ml-auto">
               <span className={cn(
                 'inline-flex items-center justify-center rounded px-1 py-0.5',
