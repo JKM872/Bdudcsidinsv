@@ -148,3 +148,17 @@ export interface ApiResponse<T> {
   }
   error?: string
 }
+
+// Weather data from Open-Meteo (via /api/weather)
+export interface WeatherData {
+  city: string
+  date: string
+  tempMax: number | null
+  tempMin: number | null
+  feelsLike: number | null
+  precipitation: number | null
+  windSpeed: number | null
+  weatherCode: number | null
+  description: string
+  unit: string
+}

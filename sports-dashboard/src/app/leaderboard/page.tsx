@@ -1,149 +1,240 @@
 // ============================================================================
-// Leaderboard Page – top tipsters / accuracy ranking (placeholder data)
+// Leaderboard Page – Prediction source performance ranking
 // ============================================================================
 'use client'
 
-import { Trophy, Medal, ArrowUpRight } from 'lucide-react'
+import { Trophy, Medal, Target, Brain, BarChart3, TrendingUp, Loader2 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
+import { useStats, useBetStats } from '@/hooks/useMatches'
 
-interface LeaderboardEntry {
-  rank: number
-  name: string
-  accuracy: number
-  totalBets: number
-  profit: number
-  streak: number
-}
-
-// Placeholder data until backend leaderboard API is ready
-const LEADERBOARD_DATA: LeaderboardEntry[] = [
-  { rank: 1, name: 'ProTipster', accuracy: 72.3, totalBets: 156, profit: 342.50, streak: 8 },
-  { rank: 2, name: 'GoalMaster', accuracy: 68.9, totalBets: 201, profit: 287.10, streak: 5 },
-  { rank: 3, name: 'OddsFinder', accuracy: 65.4, totalBets: 178, profit: 198.75, streak: 3 },
-  { rank: 4, name: 'ValueBetKing', accuracy: 63.1, totalBets: 143, profit: 156.20, streak: 4 },
-  { rank: 5, name: 'ScorePredict', accuracy: 61.8, totalBets: 189, profit: 124.30, streak: 2 },
-  { rank: 6, name: 'BetAnalyst', accuracy: 59.5, totalBets: 132, profit: 89.60, streak: 1 },
-  { rank: 7, name: 'MatchGuru', accuracy: 58.2, totalBets: 167, profit: 67.40, streak: 0 },
-  { rank: 8, name: 'PredictorX', accuracy: 56.7, totalBets: 198, profit: 45.90, streak: 2 },
-  { rank: 9, name: 'TipMaster', accuracy: 55.1, totalBets: 121, profit: 23.10, streak: 0 },
-  { rank: 10, name: 'WinStreak', accuracy: 53.8, totalBets: 145, profit: -12.50, streak: 0 },
-]
-
-function getRankBadge(rank: number) {
+function getRankIcon(rank: number) {
   if (rank === 1) return <Trophy className="h-5 w-5 text-yellow-500" />
   if (rank === 2) return <Medal className="h-5 w-5 text-gray-400" />
   if (rank === 3) return <Medal className="h-5 w-5 text-amber-700" />
   return <span className="text-sm font-mono text-muted-foreground w-5 text-center">{rank}</span>
 }
 
+interface SourceEntry {
+  rank: number
+  name: string
+  icon: typeof Target
+  color: string
+  coverage: number
+  matchesTracked: number
+  description: string
+}
+
 export default function LeaderboardPage() {
+  const { data: stats, isLoading: statsLoading } = useStats(30)
+  const { data: betStats, isLoading: betsLoading } = useBetStats()
+
+  const isLoading = statsLoading || betsLoading
+  const totalMatches = stats?.total_matches ?? 0
+
+  const sources: SourceEntry[] = [
+    {
+      rank: 1,
+      name: 'Forebet AI',
+      icon: Target,
+      color: 'text-blue-500',
+      coverage: totalMatches > 0 ? Math.round(((stats?.matches_with_predictions ?? 0) / totalMatches) * 100) : 0,
+      matchesTracked: stats?.matches_with_predictions ?? 0,
+      description: 'Algorithm-based match outcome predictions with probability scores',
+    },
+    {
+      rank: 2,
+      name: 'SofaScore Votes',
+      icon: BarChart3,
+      color: 'text-orange-500',
+      coverage: totalMatches > 0 ? Math.round(((stats?.matches_with_sofascore ?? 0) / totalMatches) * 100) : 0,
+      matchesTracked: stats?.matches_with_sofascore ?? 0,
+      description: 'Community voting predictions from SofaScore users',
+    },
+    {
+      rank: 3,
+      name: 'Gemini AI',
+      icon: Brain,
+      color: 'text-violet-500',
+      coverage: totalMatches > 0 ? Math.round(((stats?.matches_with_predictions ?? 0) / totalMatches) * 100) : 0,
+      matchesTracked: stats?.matches_with_predictions ?? 0,
+      description: 'Google Gemini deep analysis with reasoning and confidence scores',
+    },
+    {
+      rank: 4,
+      name: 'Bookmaker Odds',
+      icon: TrendingUp,
+      color: 'text-emerald-500',
+      coverage: totalMatches > 0 ? Math.round(((stats?.matches_with_odds ?? 0) / totalMatches) * 100) : 0,
+      matchesTracked: stats?.matches_with_odds ?? 0,
+      description: 'Pre-match odds from major bookmakers via FlashScore',
+    },
+  ].sort((a, b) => b.coverage - a.coverage).map((s, i) => ({ ...s, rank: i + 1 }))
+
   return (
     <div className="container py-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Leaderboard</h1>
         <p className="text-muted-foreground mt-1">
-          Top predictors ranked by accuracy and profit.
+          Prediction source coverage &amp; performance across {totalMatches} tracked matches (last 30 days).
         </p>
       </div>
 
-      {/* Leader podium */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {LEADERBOARD_DATA.slice(0, 3).map((entry) => (
-          <Card
-            key={entry.rank}
-            className={cn(
-              'relative overflow-hidden',
-              entry.rank === 1 && 'border-yellow-500/50 bg-yellow-500/5',
-              entry.rank === 2 && 'border-gray-400/50 bg-gray-400/5',
-              entry.rank === 3 && 'border-amber-700/50 bg-amber-700/5',
-            )}
-          >
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                {getRankBadge(entry.rank)}
-                <Badge variant="secondary" className="text-xs">
-                  {entry.streak > 0 ? `${entry.streak} win streak` : 'No streak'}
-                </Badge>
-              </div>
+      {isLoading ? (
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+        </div>
+      ) : (
+        <>
+          {/* Podium – top 3 sources */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {sources.slice(0, 3).map((entry) => {
+              const Icon = entry.icon
+              return (
+                <Card
+                  key={entry.name}
+                  className={cn(
+                    'relative overflow-hidden',
+                    entry.rank === 1 && 'border-yellow-500/50 bg-yellow-500/5',
+                    entry.rank === 2 && 'border-gray-400/50 bg-gray-400/5',
+                    entry.rank === 3 && 'border-amber-700/50 bg-amber-700/5',
+                  )}
+                >
+                  <CardHeader className="pb-2">
+                    <div className="flex items-center justify-between">
+                      {getRankIcon(entry.rank)}
+                      <Badge variant="secondary" className="text-xs">
+                        {entry.matchesTracked} matches
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className={cn('rounded-full bg-muted p-2', entry.color)}>
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <p className="font-semibold">{entry.name}</p>
+                        <p className="text-xs text-muted-foreground line-clamp-1">{entry.description}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between text-sm mb-1">
+                        <span className="text-muted-foreground">Coverage</span>
+                        <span className="font-mono font-semibold">{entry.coverage}%</span>
+                      </div>
+                      <Progress value={entry.coverage} className="h-2" />
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+
+          {/* Full source table */}
+          <Card>
+            <CardHeader>
+              <CardTitle>All Data Sources</CardTitle>
+              <CardDescription>Coverage across all tracked matches in the last 30 days</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center gap-3">
-                <Avatar className="h-10 w-10">
-                  <AvatarFallback className="font-semibold text-sm">
-                    {entry.name.slice(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="font-semibold">{entry.name}</p>
-                  <p className="text-xs text-muted-foreground">{entry.totalBets} bets</p>
-                </div>
+            <CardContent>
+              <div className="space-y-2">
+                {sources.map((entry) => {
+                  const Icon = entry.icon
+                  return (
+                    <div key={entry.name} className="flex items-center gap-4 px-3 py-2.5 rounded-lg hover:bg-muted/50 transition-colors">
+                      <div className="w-8 flex justify-center shrink-0">
+                        {getRankIcon(entry.rank)}
+                      </div>
+                      <div className={cn('rounded-full bg-muted p-1.5 shrink-0', entry.color)}>
+                        <Icon className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{entry.name}</p>
+                        <p className="text-xs text-muted-foreground truncate">{entry.description}</p>
+                      </div>
+                      <div className="hidden sm:flex items-center gap-2 w-32">
+                        <Progress value={entry.coverage} className="h-1.5 flex-1" />
+                        <span className="text-sm font-mono w-10 text-right">{entry.coverage}%</span>
+                      </div>
+                      <div className="w-24 text-right">
+                        <span className="text-xs text-muted-foreground">{entry.matchesTracked} matches</span>
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
-              <div>
-                <div className="flex items-center justify-between text-sm mb-1">
-                  <span className="text-muted-foreground">Accuracy</span>
-                  <span className="font-mono font-semibold">{entry.accuracy}%</span>
-                </div>
-                <Progress value={entry.accuracy} className="h-2" />
-              </div>
-              <p className={cn('text-sm font-mono font-semibold', entry.profit >= 0 ? 'text-emerald-500' : 'text-red-500')}>
-                {entry.profit >= 0 ? '+' : ''}{entry.profit.toFixed(2)} units
-              </p>
             </CardContent>
           </Card>
-        ))}
-      </div>
 
-      {/* Full table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Full Rankings</CardTitle>
-          <CardDescription>All-time performance across verified predictions</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            {LEADERBOARD_DATA.map((entry) => (
-              <div key={entry.rank} className="flex items-center gap-4 px-3 py-2.5 rounded-lg hover:bg-muted/50 transition-colors">
-                <div className="w-8 flex justify-center shrink-0">
-                  {getRankBadge(entry.rank)}
+          {/* Sport breakdown */}
+          {stats?.sport_breakdown && stats.sport_breakdown.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Coverage by Sport</CardTitle>
+                <CardDescription>Prediction availability per sport category</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {stats.sport_breakdown.map((sp) => {
+                    const pct = sp.total > 0 ? Math.round((sp.with_predictions / sp.total) * 100) : 0
+                    return (
+                      <div key={sp.sport} className="flex items-center gap-3 rounded-lg border p-3">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium capitalize">{sp.sport}</p>
+                          <p className="text-xs text-muted-foreground">{sp.total} matches &middot; {sp.with_predictions} with predictions</p>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <Progress value={pct} className="h-1.5 w-16" />
+                          <span className="text-xs font-mono w-8 text-right">{pct}%</span>
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-                <Avatar className="h-8 w-8 shrink-0">
-                  <AvatarFallback className="text-xs font-medium">
-                    {entry.name.slice(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{entry.name}</p>
-                </div>
-                <div className="hidden sm:block w-24 text-right">
-                  <span className="text-sm font-mono">{entry.accuracy}%</span>
-                </div>
-                <div className="hidden md:block w-20 text-right">
-                  <span className="text-xs text-muted-foreground">{entry.totalBets} bets</span>
-                </div>
-                <div className="w-24 text-right">
-                  <span className={cn('text-sm font-mono', entry.profit >= 0 ? 'text-emerald-500' : 'text-red-500')}>
-                    {entry.profit >= 0 ? '+' : ''}{entry.profit.toFixed(2)}
-                  </span>
-                </div>
-                {entry.streak > 0 && (
-                  <Badge variant="outline" className="text-[10px] shrink-0">
-                    <ArrowUpRight className="h-3 w-3 mr-0.5" />
-                    {entry.streak}
-                  </Badge>
-                )}
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              </CardContent>
+            </Card>
+          )}
 
-      <p className="text-xs text-center text-muted-foreground">
-        Leaderboard data is currently using placeholder values. Connect to backend API for live rankings.
-      </p>
+          {/* Your betting stats */}
+          {betStats && betStats.total_bets > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Your Betting Performance</CardTitle>
+                <CardDescription>Personal stats from tracked bets</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="text-center">
+                    <p className="text-2xl font-bold">{betStats.total_bets}</p>
+                    <p className="text-xs text-muted-foreground">Total Bets</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-2xl font-bold text-emerald-500">
+                      {betStats.win_rate != null ? `${betStats.win_rate.toFixed(1)}%` : '—'}
+                    </p>
+                    <p className="text-xs text-muted-foreground">Win Rate</p>
+                  </div>
+                  <div className="text-center">
+                    <p className={cn('text-2xl font-bold tabular-nums', betStats.total_profit >= 0 ? 'text-emerald-500' : 'text-red-500')}>
+                      {betStats.total_profit >= 0 ? '+' : ''}{betStats.total_profit.toFixed(2)}
+                    </p>
+                    <p className="text-xs text-muted-foreground">Profit/Loss</p>
+                  </div>
+                  <div className="text-center">
+                    <p className={cn('text-2xl font-bold tabular-nums', (betStats.roi ?? 0) >= 0 ? 'text-emerald-500' : 'text-red-500')}>
+                      {betStats.roi != null ? `${betStats.roi.toFixed(1)}%` : '—'}
+                    </p>
+                    <p className="text-xs text-muted-foreground">ROI</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </>
+      )}
     </div>
   )
 }

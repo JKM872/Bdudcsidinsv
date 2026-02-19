@@ -2,7 +2,7 @@
 // SPORTS DASHBOARD - React‑Query hooks
 // ============================================================================
 'use client'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import * as api from '@/lib/api'
 import { useFilterStore } from '@/store/filterStore'
@@ -50,5 +50,73 @@ export function useLiveScores(sport: string = 'football') {
     staleTime: 15_000,            // 15s stale
     refetchInterval: 30_000,      // Poll every 30s
     refetchIntervalInBackground: false,  // Stop when tab is inactive
+  })
+}
+
+// ---------------------------------------------------------------------------
+// User Bets hooks
+// ---------------------------------------------------------------------------
+
+export function useBets(params?: { status?: string; days?: number; limit?: number }) {
+  return useQuery({
+    queryKey: ['bets', params?.status, params?.days, params?.limit],
+    queryFn: () => api.getBets(params),
+    staleTime: 30_000,
+  })
+}
+
+export function useBetStats() {
+  return useQuery({
+    queryKey: ['bet-stats'],
+    queryFn: () => api.getBetStats(),
+    staleTime: 60_000,
+  })
+}
+
+export function useCreateBet() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: api.createBet,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['bets'] })
+      qc.invalidateQueries({ queryKey: ['bet-stats'] })
+    },
+  })
+}
+
+export function useSettleBet() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: ({ betId, ...data }: { betId: number; actual_result: string; home_score: number; away_score: number }) =>
+      api.settleBet(betId, data),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['bets'] })
+      qc.invalidateQueries({ queryKey: ['bet-stats'] })
+    },
+  })
+}
+
+export function useDeleteBet() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: api.deleteBet,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['bets'] })
+      qc.invalidateQueries({ queryKey: ['bet-stats'] })
+    },
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Weather
+// ---------------------------------------------------------------------------
+
+export function useWeather(city: string, date?: string) {
+  return useQuery({
+    queryKey: ['weather', city, date],
+    queryFn: () => api.getWeather(city, date),
+    enabled: !!city,
+    staleTime: 3600_000,       // 1 hour
+    retry: 1,                  // Don't hammer on failure
   })
 }

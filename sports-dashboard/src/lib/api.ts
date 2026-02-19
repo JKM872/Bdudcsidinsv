@@ -2,7 +2,7 @@
 // SPORTS DASHBOARD - API Client
 // ============================================================================
 import { API_BASE_URL } from './constants'
-import type { Match, StatsData, ApiResponse, LiveScore } from './types'
+import type { Match, StatsData, ApiResponse, LiveScore, UserBet, WeatherData } from './types'
 
 async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`
@@ -69,7 +69,103 @@ export async function getLiveScores(sport: string = 'football'): Promise<LiveSco
   try {
     const res = await fetchApi<{ scores: LiveScore[] }>(`/api/live-scores?sport=${sport}`)
     return res.scores ?? []
-  } catch {
+  } catch (err) {
+    console.warn('[LiveScores] Fetch failed:', err instanceof Error ? err.message : err)
     return []
   }
+}
+
+// ---------------------------------------------------------------------------
+// User Bets (backed by Heroku API → Supabase)
+// ---------------------------------------------------------------------------
+
+export interface ApiBet {
+  id: number
+  home_team: string
+  away_team: string
+  match_date: string
+  match_time?: string
+  sport: string
+  league?: string
+  bet_selection: string
+  odds_at_bet: number
+  stake: number
+  status: string          // pending | won | lost | void
+  actual_result?: string
+  home_score?: number
+  away_score?: number
+  notes?: string
+  created_at: string
+}
+
+export interface ApiBetStats {
+  total_bets: number
+  won: number
+  lost: number
+  pending: number
+  void_count: number
+  win_rate: number | null
+  total_staked: number
+  total_profit: number
+  roi: number | null
+}
+
+export async function getBets(params?: {
+  status?: string
+  days?: number
+  limit?: number
+}): Promise<{ bets: ApiBet[]; count: number }> {
+  const sp = new URLSearchParams()
+  if (params?.status) sp.set('status', params.status)
+  if (params?.days) sp.set('days', String(params.days))
+  if (params?.limit) sp.set('limit', String(params.limit))
+  const qs = sp.toString()
+  return fetchApi(`/api/bets${qs ? '?' + qs : ''}`)
+}
+
+export async function createBet(data: {
+  home_team: string
+  away_team: string
+  match_date: string
+  match_time?: string
+  bet_selection: '1' | 'X' | '2'
+  odds_at_bet: number
+  stake?: number
+  sport?: string
+  league?: string
+  notes?: string
+}): Promise<{ success: boolean; bet_id: number; message: string }> {
+  return fetchApi('/api/bets', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+}
+
+export async function settleBet(betId: number, data: {
+  actual_result: string
+  home_score: number
+  away_score: number
+}): Promise<{ success: boolean }> {
+  return fetchApi(`/api/bets/${betId}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  })
+}
+
+export async function deleteBet(betId: number): Promise<{ success: boolean }> {
+  return fetchApi(`/api/bets/${betId}`, { method: 'DELETE' })
+}
+
+export async function getBetStats(): Promise<ApiBetStats> {
+  return fetchApi('/api/bets/stats')
+}
+
+// ---------------------------------------------------------------------------
+// Weather (Open-Meteo via backend proxy with cache)
+// ---------------------------------------------------------------------------
+export async function getWeather(city: string, date?: string): Promise<WeatherData> {
+  const sp = new URLSearchParams()
+  sp.set('city', city)
+  if (date) sp.set('date', date)
+  return fetchApi(`/api/weather?${sp.toString()}`)
 }

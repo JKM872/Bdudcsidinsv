@@ -61,9 +61,10 @@ app = Flask(__name__)
 CORS(app, origins=[
     'http://localhost:3000',
     'http://localhost:5000',
-    'https://*.vercel.app',
+    'https://pickly-dashboard.vercel.app',
+    'https://pickly-dashboard-*.vercel.app',
     'https://pickly-67e87ed00f70.herokuapp.com',
-])  # Enable CORS for frontend (Vercel + local dev)
+])  # Enable CORS for frontend (Vercel production + previews + local dev)
 
 # Directory with scraper results
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), 'results')
@@ -854,6 +855,129 @@ def get_sample_data():
         },
         'sportCounts': {'football': 2, 'basketball': 1}
     })
+
+
+# =============================================================================
+# WEATHER ENDPOINT (Open-Meteo – free, no API key needed)
+# =============================================================================
+
+# Simple in-memory cache for weather data (city → data, keyed with date)
+_weather_cache: dict = {}
+
+# Mapping of popular football cities → lat/lon
+_CITY_COORDS: dict = {
+    'london': (51.50, -0.13), 'manchester': (53.48, -2.24), 'liverpool': (53.41, -2.98),
+    'madrid': (40.42, -3.70), 'barcelona': (41.39, 2.17), 'seville': (37.39, -5.98),
+    'munich': (48.14, 11.58), 'dortmund': (51.51, 7.47), 'berlin': (52.52, 13.40),
+    'paris': (48.86, 2.35), 'lyon': (45.76, 4.84), 'marseille': (43.30, 5.37),
+    'milan': (45.46, 9.19), 'rome': (41.90, 12.50), 'turin': (45.07, 7.69), 'naples': (40.85, 14.27),
+    'amsterdam': (52.37, 4.90), 'lisbon': (38.72, -9.14), 'porto': (41.16, -8.63),
+    'warsaw': (52.23, 21.01), 'krakow': (50.06, 19.94), 'lodz': (51.75, 19.47),
+    'istanbul': (41.01, 28.98), 'athens': (37.98, 23.73), 'moscow': (55.76, 37.62),
+    'buenos aires': (-34.60, -58.38), 'sao paulo': (-23.55, -46.63),
+    'new york': (40.71, -74.01), 'los angeles': (34.05, -118.24),
+}
+
+
+def _guess_city_coords(team_or_city: str) -> tuple | None:
+    """Try to match a team/city name to known coordinates."""
+    lower = team_or_city.lower()
+    for city, coords in _CITY_COORDS.items():
+        if city in lower:
+            return coords
+    return None
+
+
+@app.route('/api/weather', methods=['GET'])
+def get_weather():
+    """
+    Get weather for a match location using Open-Meteo (free, no key).
+    Params: ?city=London or ?lat=51.5&lon=-0.13  &date=2026-02-20
+    Returns: { temp, feelsLike, windSpeed, humidity, precipitation, weatherCode, description }
+    """
+    import time as _time
+    import urllib.request
+    import urllib.error
+
+    city = request.args.get('city', '')
+    lat = request.args.get('lat', type=float)
+    lon = request.args.get('lon', type=float)
+    date = request.args.get('date', datetime.now().strftime('%Y-%m-%d'))
+
+    # Resolve coordinates
+    if lat is None or lon is None:
+        coords = _guess_city_coords(city)
+        if coords:
+            lat, lon = coords
+        else:
+            return jsonify({'error': f'Unknown city: {city}. Provide lat/lon params.'}), 400
+
+    # Cache key
+    cache_key = f"{lat:.2f},{lon:.2f},{date}"
+    now = _time.time()
+    cached = _weather_cache.get(cache_key)
+    if cached and now - cached['ts'] < 3600:  # 1 hour cache
+        return jsonify(cached['data'])
+
+    # Fetch from Open-Meteo
+    url = (
+        f"https://api.open-meteo.com/v1/forecast?"
+        f"latitude={lat}&longitude={lon}"
+        f"&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,"
+        f"precipitation_sum,windspeed_10m_max,weathercode"
+        f"&timezone=auto&start_date={date}&end_date={date}"
+    )
+
+    # Weather code descriptions
+    WMO_DESCRIPTIONS = {
+        0: 'Clear sky', 1: 'Mainly clear', 2: 'Partly cloudy', 3: 'Overcast',
+        45: 'Fog', 48: 'Depositing rime fog',
+        51: 'Light drizzle', 53: 'Moderate drizzle', 55: 'Dense drizzle',
+        61: 'Slight rain', 63: 'Moderate rain', 65: 'Heavy rain',
+        66: 'Light freezing rain', 67: 'Heavy freezing rain',
+        71: 'Slight snow', 73: 'Moderate snow', 75: 'Heavy snow',
+        77: 'Snow grains', 80: 'Slight rain showers', 81: 'Moderate rain showers',
+        82: 'Violent rain showers', 85: 'Slight snow showers', 86: 'Heavy snow showers',
+        95: 'Thunderstorm', 96: 'Thunderstorm with slight hail', 99: 'Thunderstorm with heavy hail',
+    }
+
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'BigOneSportsApp/1.0'})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            raw = json.loads(resp.read().decode())
+
+        daily = raw.get('daily', {})
+        temp_max = daily.get('temperature_2m_max', [None])[0]
+        temp_min = daily.get('temperature_2m_min', [None])[0]
+        feels_like = daily.get('apparent_temperature_max', [None])[0]
+        precip = daily.get('precipitation_sum', [None])[0]
+        wind = daily.get('windspeed_10m_max', [None])[0]
+        code = daily.get('weathercode', [None])[0]
+
+        result = {
+            'city': city or f'{lat},{lon}',
+            'date': date,
+            'tempMax': temp_max,
+            'tempMin': temp_min,
+            'feelsLike': feels_like,
+            'precipitation': precip,
+            'windSpeed': wind,
+            'weatherCode': code,
+            'description': WMO_DESCRIPTIONS.get(code, 'Unknown'),
+            'unit': '°C',
+        }
+
+        _weather_cache[cache_key] = {'data': result, 'ts': now}
+        # Prune old cache entries
+        if len(_weather_cache) > 200:
+            oldest = sorted(_weather_cache.items(), key=lambda x: x[1]['ts'])[:50]
+            for k, _ in oldest:
+                _weather_cache.pop(k, None)
+
+        return jsonify(result)
+
+    except (urllib.error.URLError, Exception) as e:
+        return jsonify({'error': f'Weather fetch failed: {str(e)}'}), 502
 
 
 # ============================================================================

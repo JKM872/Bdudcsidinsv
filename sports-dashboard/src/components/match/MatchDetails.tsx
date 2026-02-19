@@ -10,7 +10,8 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Separator } from '@/components/ui/separator'
 import {
-  Target, BarChart3, TrendingUp, History, Brain, Clock, Zap,
+  Target, BarChart3, TrendingUp, History, Brain, Clock, Zap, CloudSun,
+  Thermometer, Wind, Droplets,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { SPORT_MAP, PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
@@ -20,6 +21,7 @@ import { TeamLogo } from './TeamLogo'
 import { RadialProgress } from '@/components/charts/RadialProgress'
 import { FormTimeline } from '@/components/charts/FormTimeline'
 import { H2HBar } from '@/components/charts/H2HBar'
+import { useWeather } from '@/hooks/useMatches'
 import type { Match } from '@/lib/types'
 
 interface Props {
@@ -35,6 +37,10 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
   const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
   const confTier = getConfidenceTier(conf)
   const SportIcon = sportCfg?.icon
+
+  // Weather – guess city from home team name (last word)
+  const weatherCity = match.homeTeam.split(/\s+/).pop() ?? match.homeTeam
+  const { data: weather } = useWeather(weatherCity, match.date)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -86,11 +92,12 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
         {/* ── Tabs ── */}
         <div className="px-5 pb-5">
           <Tabs defaultValue="predictions" className="mt-3">
-            <TabsList className="grid w-full grid-cols-4 h-9">
+            <TabsList className="grid w-full grid-cols-5 h-9">
               <TabsTrigger value="predictions" className="text-xs gap-1"><Target className="h-3 w-3" /> Predict</TabsTrigger>
               <TabsTrigger value="odds" className="text-xs gap-1"><TrendingUp className="h-3 w-3" /> Odds</TabsTrigger>
               <TabsTrigger value="h2h" className="text-xs gap-1"><History className="h-3 w-3" /> H2H</TabsTrigger>
               <TabsTrigger value="ai" className="text-xs gap-1"><Brain className="h-3 w-3" /> AI</TabsTrigger>
+              <TabsTrigger value="weather" className="text-xs gap-1"><CloudSun className="h-3 w-3" /> Weather</TabsTrigger>
             </TabsList>
 
             {/* ── Predictions tab ── */}
@@ -269,6 +276,68 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
                 </div>
               ) : (
                 <EmptyState text="No AI analysis available for this match." />
+              )}
+            </TabsContent>
+
+            {/* ── Weather tab ── */}
+            <TabsContent value="weather" className="mt-4">
+              {weather ? (
+                <div className="rounded-xl border bg-card p-4 space-y-4">
+                  <div className="flex items-center gap-2 text-sm font-medium">
+                    <CloudSun className="h-4 w-4 text-sky-500" /> Match Day Weather
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {weather.city} &middot; {weather.date} &middot; {weather.description}
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="rounded-lg bg-muted/40 p-3 text-center">
+                      <Thermometer className="h-4 w-4 mx-auto mb-1 text-orange-500" />
+                      <p className="text-lg font-bold tabular-nums">
+                        {weather.tempMax != null ? `${weather.tempMax}°` : '—'}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground">Max temp</p>
+                    </div>
+                    <div className="rounded-lg bg-muted/40 p-3 text-center">
+                      <Thermometer className="h-4 w-4 mx-auto mb-1 text-blue-500" />
+                      <p className="text-lg font-bold tabular-nums">
+                        {weather.tempMin != null ? `${weather.tempMin}°` : '—'}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground">Min temp</p>
+                    </div>
+                    <div className="rounded-lg bg-muted/40 p-3 text-center">
+                      <Wind className="h-4 w-4 mx-auto mb-1 text-teal-500" />
+                      <p className="text-lg font-bold tabular-nums">
+                        {weather.windSpeed != null ? `${weather.windSpeed}` : '—'}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground">Wind km/h</p>
+                    </div>
+                    <div className="rounded-lg bg-muted/40 p-3 text-center">
+                      <Droplets className="h-4 w-4 mx-auto mb-1 text-blue-400" />
+                      <p className="text-lg font-bold tabular-nums">
+                        {weather.precipitation != null ? `${weather.precipitation}mm` : '—'}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground">Rain</p>
+                    </div>
+                  </div>
+                  {weather.precipitation != null && weather.precipitation > 5 && (
+                    <div className="flex items-center gap-2 rounded-lg bg-blue-500/10 border border-blue-500/20 p-2.5">
+                      <Droplets className="h-4 w-4 text-blue-500" />
+                      <span className="text-xs font-medium text-blue-700 dark:text-blue-400">
+                        Significant rain expected — may affect match conditions
+                      </span>
+                    </div>
+                  )}
+                  {weather.windSpeed != null && weather.windSpeed > 40 && (
+                    <div className="flex items-center gap-2 rounded-lg bg-amber-500/10 border border-amber-500/20 p-2.5">
+                      <Wind className="h-4 w-4 text-amber-500" />
+                      <span className="text-xs font-medium text-amber-700 dark:text-amber-400">
+                        Strong winds — may influence long balls and set pieces
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <EmptyState text="Weather data not available for this location." />
               )}
             </TabsContent>
           </Tabs>

@@ -2,7 +2,6 @@
   "name": "BigOne Sports Predictions",
   "description": "Sports predictions dashboard with Flask API and Next.js frontend",
   "buildpacks": [
-    { "url": "heroku/nodejs" },
     { "url": "heroku/python" }
   ],
   "env": {
