@@ -1,0 +1,2598 @@
+{
+  "date": "2026-02-20",
+  "sport": "volleyball",
+  "generatedAt": "2026-02-20T02:31:43.036607",
+  "stats": {
+    "total": 60,
+    "qualifying": 28,
+    "formAdvantage": 17
+  },
+  "matches": [
+    {
+      "id": -8422874772851736038,
+      "homeTeam": "ZAKSA Kędzierzyn-Koźle",
+      "awayTeam": "Indykpol AZS Olsztyn",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.65,
+        "draw": null,
+        "away": 2.05,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 75,
+        "draw": null,
+        "away": 25,
+        "votes": 214
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8440130292221388613,
+      "homeTeam": "SK Tirana",
+      "awayTeam": "Elbasani",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 21
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5971131674665965331,
+      "homeTeam": "Osasco K",
+      "awayTeam": "Boston College Santiago K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 81.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 87,
+        "draw": null,
+        "away": 13,
+        "votes": 208
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8011696589770557119,
+      "homeTeam": "Boston College Santiago K",
+      "awayTeam": "Olympic K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 73,
+        "draw": null,
+        "away": 27,
+        "votes": 30
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8332055504613255173,
+      "homeTeam": "Sesi Bauru K",
+      "awayTeam": "Regatas Lima K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 82,
+        "draw": null,
+        "away": 18,
+        "votes": 77
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8358407085465936724,
+      "homeTeam": "San Isidro Formosa K",
+      "awayTeam": "Velez Sarsfield K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3135416526584240324,
+      "homeTeam": "Barueri K",
+      "awayTeam": "Fluminense K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4716810274277427502,
+      "homeTeam": "Renasce Sorocaba K",
+      "awayTeam": "Tijuca K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8598756697184036548,
+      "homeTeam": "Beroe",
+      "awayTeam": "Pirin Razlog",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.4,
+        "draw": null,
+        "away": 2.55,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 26
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8055992515078784486,
+      "homeTeam": "Cherno More",
+      "awayTeam": "Neftohimic Burgas",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1648769513015938432,
+      "homeTeam": "Slaviya Sofia",
+      "awayTeam": "Dunav",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4168684720182244602,
+      "homeTeam": "Montana",
+      "awayTeam": "Deya Volley",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1030502235024704757,
+      "homeTeam": "CSKA Sofia K",
+      "awayTeam": "Dragoman K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 4,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.07,
+        "draw": null,
+        "away": 6.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 30
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7915154184753626938,
+      "homeTeam": "APOEL",
+      "awayTeam": "Anagennisis",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -440649063769771225,
+      "homeTeam": "Omonia",
+      "awayTeam": "Salamina",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 81.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 25
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8721957450792229696,
+      "homeTeam": "Pafos",
+      "awayTeam": "Anorthosis",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 18
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6303328840815835647,
+      "homeTeam": "Kolin",
+      "awayTeam": "Kometa Brno",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7639300330283472124,
+      "homeTeam": "CZU Prague",
+      "awayTeam": "Kojetin",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8862052297100722407,
+      "homeTeam": "Velke Mezirici",
+      "awayTeam": "Beskydy B",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5486252792473020747,
+      "homeTeam": "VK Brno",
+      "awayTeam": "Hradec Kralove",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 4,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3541156961997866909,
+      "homeTeam": "Czeskie Budziejowice B",
+      "awayTeam": "Bucovice",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7925537190439523357,
+      "homeTeam": "MFF Prague",
+      "awayTeam": "Karlovarsko B",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 4,
+        "winRate": 25
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5910329853482088495,
+      "homeTeam": "Prague B",
+      "awayTeam": "Dobrichovice",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5087440067133831541,
+      "homeTeam": "Hronov K",
+      "awayTeam": "Hradec Kralove K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8961889805732843747,
+      "homeTeam": "Kladno K",
+      "awayTeam": "Czeskie Budziejowice K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -66828372952918236,
+      "homeTeam": "VK Liberec B K",
+      "awayTeam": "Pilzno K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6002553982274710704,
+      "homeTeam": "Orion Prague K",
+      "awayTeam": "Junior Brno K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 83,
+        "draw": null,
+        "away": 17,
+        "votes": 6
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4225194997579894731,
+      "homeTeam": "Nusle K",
+      "awayTeam": "Stresovice K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1037397002072667535,
+      "homeTeam": "Tallinn",
+      "awayTeam": "Tallin University",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -455107633126619858,
+      "homeTeam": "TTU K",
+      "awayTeam": "Duo Olerex Tartu K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8126831240279228086,
+      "homeTeam": "Akaa",
+      "awayTeam": "Hurrikaani",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8458022167922496685,
+      "homeTeam": "Sète",
+      "awayTeam": "Ajaccio",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.2,
+        "draw": null,
+        "away": 3.55,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 47
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7877003474571731841,
+      "homeTeam": "Nice",
+      "awayTeam": "St. Nazaire",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2027755332813704699,
+      "homeTeam": "France Avenir",
+      "awayTeam": "Cambrai",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3594030560400771976,
+      "homeTeam": "OFI",
+      "awayTeam": "Flisvos",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.18,
+        "draw": null,
+        "away": 4.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 46
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -9177360192810213812,
+      "homeTeam": "ZVH",
+      "awayTeam": "Sliedrecht",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2925633395304970414,
+      "homeTeam": "Gresik Petrokimia K",
+      "awayTeam": "Jakarta Elektrik K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.28,
+        "draw": null,
+        "away": 3.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 72,
+        "draw": null,
+        "away": 28,
+        "votes": 29
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7083409826294457357,
+      "homeTeam": "Almaty K",
+      "awayTeam": "Astana K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.03,
+        "draw": null,
+        "away": 8.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 59.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 24
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2276218516137320756,
+      "homeTeam": "Turan K",
+      "awayTeam": "Aktobe K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.2,
+        "draw": null,
+        "away": 3.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 20
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3876954699324066213,
+      "homeTeam": "Zhetysu K",
+      "awayTeam": "Kuanysh K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.48,
+        "draw": null,
+        "away": 2.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 22
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5218958027587363218,
+      "homeTeam": "Berel VKO K",
+      "awayTeam": "Karaganda K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.01,
+        "draw": null,
+        "away": 10.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 82,
+        "draw": null,
+        "away": 18,
+        "votes": 22
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -9132755452127680492,
+      "homeTeam": "Samsung Blue Fangs",
+      "awayTeam": "Kepco",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3483513206287715831,
+      "homeTeam": "Expressway Co K",
+      "awayTeam": "GS Caltex K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.33,
+        "draw": null,
+        "away": 2.9,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 88,
+        "draw": null,
+        "away": 12,
+        "votes": 92
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4431359118607412175,
+      "homeTeam": "Chikka",
+      "awayTeam": "Noujoum Jounieh",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 18,
+        "draw": 15,
+        "away": 67,
+        "votes": 995
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7007538325550539841,
+      "homeTeam": "Hboub",
+      "awayTeam": "Machaal Kosba",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 28,
+        "draw": null,
+        "away": 72,
+        "votes": 25
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8322691479974814191,
+      "homeTeam": "VCO Berlin",
+      "awayTeam": "Dachau",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3872011689480072182,
+      "homeTeam": "Potsdam II K",
+      "awayTeam": "Cottbus K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 50
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8571622158945658413,
+      "homeTeam": "Radomka Radom K",
+      "awayTeam": "Stal Mielec K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.35,
+        "draw": null,
+        "away": 1.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 53,
+        "draw": null,
+        "away": 47,
+        "votes": 57
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2057218185780781022,
+      "homeTeam": "Chemik Police K",
+      "awayTeam": "Pałac Bydgoszcz K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -241016841829616582,
+      "homeTeam": "Kemerovo",
+      "awayTeam": "Belgorod",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7825191145313464134,
+      "homeTeam": "Surgut region",
+      "awayTeam": "MGTU Moscow",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.08,
+        "draw": null,
+        "away": 6.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 97,
+        "draw": null,
+        "away": 3,
+        "votes": 32
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6445873706521286811,
+      "homeTeam": "Dyn. Moskwa",
+      "awayTeam": "Krasnoyarsk",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.07,
+        "draw": null,
+        "away": 6.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 95,
+        "draw": null,
+        "away": 5,
+        "votes": 82
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5747807043328163403,
+      "homeTeam": "Minchanka K",
+      "awayTeam": "Metar Chelyabinsk K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -325375350446085661,
+      "homeTeam": "Takovo",
+      "awayTeam": "Subotica",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -112322342722346518,
+      "homeTeam": "Nis",
+      "awayTeam": "Partizan",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3671488814922680425,
+      "homeTeam": "Epitsentr Podoliani",
+      "awayTeam": "Lokomotiv Kharkiv",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 77,
+        "draw": null,
+        "away": 23,
+        "votes": 13
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 918201629572850221,
+      "homeTeam": "Zhytychi Zhytomyr",
+      "awayTeam": "Ukraina U20",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2206092922191033749,
+      "homeTeam": "Houston K",
+      "awayTeam": "Atlanta K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 81.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 46
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -119565254558422559,
+      "homeTeam": "Atlanta Vibe K",
+      "awayTeam": "Columbus Fury K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.33,
+        "draw": null,
+        "away": 2.9,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 65.0,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 50
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7846438849763701539,
+      "homeTeam": "Dallas Pulse K",
+      "awayTeam": "Indy Ignite K",
+      "time": "",
+      "date": "2026-02-20",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    }
+  ]
+}
