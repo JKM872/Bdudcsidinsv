@@ -415,6 +415,7 @@ class SupabaseManager:
         """
         try:
             bet_record: Dict[str, Any] = {
+                'user_id': bet_data.get('user_id'),
                 'prediction_id': bet_data.get('prediction_id'),
                 'match_date': bet_data.get('match_date'),
                 'match_time': bet_data.get('match_time'),
@@ -448,7 +449,8 @@ class SupabaseManager:
         self,
         status: Optional[str] = None,
         days: Optional[int] = None,
-        limit: int = 100
+        limit: int = 100,
+        user_id: Optional[str] = None
     ) -> List[Dict[str, Any]]:
         """
         Pobiera zakłady użytkownika
@@ -457,12 +459,16 @@ class SupabaseManager:
             status: Filtruj po statusie ('pending', 'won', 'lost', 'void')
             days: Ile dni wstecz (None = wszystkie)
             limit: Maksymalna liczba rekordów
+            user_id: Filtruj po user_id (None = wszystkie)
         
         Returns:
             Lista zakładów
         """
         try:
             query = self.client.table('user_bets').select('*')
+            
+            if user_id and user_id != 'anonymous':
+                query = query.eq('user_id', user_id)
             
             if status:
                 query = query.eq('status', status)

@@ -3,24 +3,31 @@
 ## Step-by-Step Database Configuration
 
 ### 📍 Your Supabase Project
-**URL:** https://atdyvzpjlfexqqjxokgq.supabase.co
-**API Key:** eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... (already configured)
+
+> **Security Note:** Never commit real URLs or API keys to version control.
+> All credentials are loaded from environment variables (see `.env.example`).
 
 ---
 
 ## 🚀 QUICK SETUP (5 minutes)
 
-### Step 1: Open Supabase SQL Editor
-1. Go to: https://atdyvzpjlfexqqjxokgq.supabase.co/project/_/sql
+### Step 1: Create Environment File
+```bash
+cp .env.example .env
+# Edit .env with your Supabase project credentials
+```
+
+### Step 2: Open Supabase SQL Editor
+1. Go to your Supabase project → SQL Editor
 2. Click "New Query"
 
-### Step 2: Run Schema Script
+### Step 3: Run Schema Script
 1. Open file: `supabase_schema.sql`
 2. Copy **ALL** content (Ctrl+A, Ctrl+C)
 3. Paste into Supabase SQL Editor
 4. Click **"RUN"** button (bottom right)
 
-### Step 3: Verify Table Created
+### Step 4: Verify Table Created
 Run this query:
 ```sql
 SELECT * FROM predictions LIMIT 10;
@@ -28,14 +35,14 @@ SELECT * FROM predictions LIMIT 10;
 
 Expected result: Empty table (0 rows) with all columns
 
-### Step 4: Test Connection
+### Step 5: Test Connection
 ```bash
 python supabase_manager.py
 ```
 
 Expected output:
 ```
-✅ Connected to Supabase: https://atdyvzpjlfexqqjxokgq.supabase.co
+✅ Connected to Supabase: https://<your-project>.supabase.co
 ✅ Test save: True
 ```
 
@@ -243,7 +250,7 @@ Supabase Free Tier:
 
 ## ✅ Verification Checklist
 
-- [ ] Supabase project accessible at https://atdyvzpjlfexqqjxokgq.supabase.co
+- [ ] Supabase project accessible at your configured URL
 - [ ] `supabase_schema.sql` executed successfully
 - [ ] Table `predictions` exists with all columns
 - [ ] Views created: `recent_predictions`, `predictions_with_results`, `qualified_predictions`
@@ -258,8 +265,8 @@ Supabase Free Tier:
 ## 📞 Help
 
 If issues persist:
-1. Check Supabase logs: https://atdyvzpjlfexqqjxokgq.supabase.co/project/_/logs
-2. Verify API key in `supabase_manager.py`
+1. Check Supabase logs in your project dashboard under Logs
+2. Verify environment variables in `.env`
 3. Run test: `python supabase_manager.py`
 
 ---

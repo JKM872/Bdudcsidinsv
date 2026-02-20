@@ -18,9 +18,23 @@ import os
 import json
 import glob
 import math
+import logging
 from datetime import datetime, timedelta
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
+
+# ---------------------------------------------------------------------------
+# Structured logging
+# ---------------------------------------------------------------------------
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s [%(name)s] %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    level=logging.DEBUG if os.environ.get('FLASK_ENV') == 'development' else logging.INFO,
+)
+logger = logging.getLogger('api_server')
+
+# Auth middleware
+from auth_middleware import require_auth, optional_auth
 
 
 def safe_value(val, default=None):
@@ -40,7 +54,7 @@ try:
     supabase = SupabaseManager()
     SUPABASE_AVAILABLE = True
 except Exception as e:
-    print(f"[WARNING] Supabase not available: {e}")
+    logger.warning('Supabase not available: %s', e)
     supabase = None
     SUPABASE_AVAILABLE = False
 
@@ -50,7 +64,7 @@ try:
     espn_client = ESPNAPIClient()
     ESPN_AVAILABLE = True
 except Exception as e:
-    print(f"[WARNING] ESPN API not available: {e}")
+    logger.warning('ESPN API not available: %s', e)
     espn_client = None
     ESPN_AVAILABLE = False
 
@@ -65,6 +79,27 @@ CORS(app, origins=[
     'https://pickly-dashboard-*.vercel.app',
     'https://pickly-67e87ed00f70.herokuapp.com',
 ])  # Enable CORS for frontend (Vercel production + previews + local dev)
+
+
+# ---------------------------------------------------------------------------
+# Global error handlers
+# ---------------------------------------------------------------------------
+@app.errorhandler(404)
+def not_found(_e):
+    return jsonify({'error': 'Not found'}), 404
+
+
+@app.errorhandler(500)
+def internal_error(e):
+    logger.exception('Unhandled server error')
+    return jsonify({'error': 'Internal server error'}), 500
+
+
+@app.after_request
+def log_request(response):
+    if request.path.startswith('/api/'):
+        logger.info('%s %s %s', request.method, request.path, response.status_code)
+    return response
 
 # Directory with scraper results
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), 'results')
@@ -118,7 +153,7 @@ def load_matches_from_file(filepath):
                 return [data] if 'homeTeam' in data or 'home_team' in data else []
         return []
     except Exception as e:
-        print(f"Error loading {filepath}: {e}")
+        logger.error('Error loading %s: %s', filepath, e)
         return []
 
 
@@ -310,7 +345,7 @@ def get_matches():
                             continue
                     all_matches.append(normalized)
         except Exception as e:
-            print(f"[WARNING] Supabase fetch failed: {e}")
+            logger.warning('Supabase fetch failed: %s', e)
     
     # ── Fallback to local JSON files ────────────────────────────────
     if not all_matches:
@@ -461,7 +496,7 @@ def get_sports():
         try:
             sport_counts = supabase.get_sport_counts(date_str)
         except Exception as e:
-            print(f"[WARNING] Supabase sport counts failed: {e}")
+            logger.warning('Supabase sport counts failed: %s', e)
     
     # Fallback to files
     if not sport_counts:
@@ -503,7 +538,7 @@ def get_available_dates():
             if sb_dates:
                 dates.update(sb_dates)
         except Exception as e:
-            print(f"[WARNING] Supabase dates failed: {e}")
+            logger.warning('Supabase dates failed: %s', e)
     
     # Also check local files
     files = glob.glob(os.path.join(RESULTS_DIR, '*.json'))
@@ -567,6 +602,7 @@ def health_check():
 # =============================================================================
 
 @app.route('/api/bets', methods=['GET'])
+@optional_auth
 def get_bets():
     """Get user bets with optional filters."""
     if not SUPABASE_AVAILABLE:
@@ -575,8 +611,9 @@ def get_bets():
     status = request.args.get('status')  # pending, won, lost, void
     days = request.args.get('days', type=int)
     limit = request.args.get('limit', 100, type=int)
+    user_id = getattr(request, 'user_id', 'anonymous')
     
-    bets = supabase.get_user_bets(status=status, days=days, limit=limit)
+    bets = supabase.get_user_bets(status=status, days=days, limit=limit, user_id=user_id)
     
     return jsonify({
         'bets': bets,
@@ -590,8 +627,9 @@ def get_bets():
 
 
 @app.route('/api/bets', methods=['POST'])
+@require_auth
 def create_bet():
-    """Create a new user bet."""
+    """Create a new user bet (requires auth)."""
     data = request.get_json()
     
     # Validate required fields
@@ -605,7 +643,9 @@ def create_bet():
         return jsonify({'error': 'bet_selection must be 1, X, or 2'}), 400
     
     # Save bet
+    user_id = getattr(request, 'user_id', 'anonymous')
     bet_data = {
+        'user_id': user_id,
         'prediction_id': data.get('prediction_id'),
         'match_date': data['match_date'],
         'match_time': data.get('match_time'),
@@ -626,7 +666,7 @@ def create_bet():
         try:
             bet_id = supabase.save_user_bet(bet_data)
         except Exception as e:
-            print(f"[WARNING] Supabase error, falling back to local: {e}")
+            logger.warning('Supabase error, falling back to local: %s', e)
     
     # Fallback to local JSON storage
     if not bet_id:
@@ -649,9 +689,9 @@ def create_bet():
             with open(bets_file, 'w', encoding='utf-8') as f:
                 json.dump(bets, f, ensure_ascii=False, indent=2)
             
-            print(f"[OK] Saved bet locally: {bet_data['home_team']} vs {bet_data['away_team']} - {bet_data['bet_selection']} @ {bet_data['odds_at_bet']}")
+            logger.info('Saved bet locally: %s vs %s - %s @ %s', bet_data['home_team'], bet_data['away_team'], bet_data['bet_selection'], bet_data['odds_at_bet'])
         except Exception as e:
-            print(f"[ERROR] Failed to save bet locally: {e}")
+            logger.error('Failed to save bet locally: %s', e)
             return jsonify({'error': f'Failed to create bet: {str(e)}'}), 500
     
     if bet_id:
@@ -665,8 +705,9 @@ def create_bet():
 
 
 @app.route('/api/bets/<int:bet_id>', methods=['PUT'])
+@require_auth
 def update_bet(bet_id):
-    """Update bet result (settle bet)."""
+    """Update bet result (settle bet). Requires auth."""
     if not SUPABASE_AVAILABLE:
         return jsonify({'error': 'Supabase not available'}), 503
     
@@ -695,8 +736,9 @@ def update_bet(bet_id):
 
 
 @app.route('/api/bets/<int:bet_id>', methods=['DELETE'])
+@require_auth
 def delete_bet(bet_id):
-    """Delete a user bet."""
+    """Delete a user bet. Requires auth."""
     if not SUPABASE_AVAILABLE:
         return jsonify({'error': 'Supabase not available'}), 503
     
@@ -712,6 +754,7 @@ def delete_bet(bet_id):
 
 
 @app.route('/api/bets/stats', methods=['GET'])
+@optional_auth
 def get_betting_stats():
     """Get user betting statistics."""
     if not SUPABASE_AVAILABLE:
@@ -980,6 +1023,190 @@ def get_weather():
         return jsonify({'error': f'Weather fetch failed: {str(e)}'}), 502
 
 
+# =============================================================================
+# FOOTBALL-DATA.ORG ENDPOINTS (free tier: 10 req/min, token via env)
+# =============================================================================
+
+_fd_cache: dict = {}  # key → {data, ts}
+_FD_TTL = 600  # 10-minute cache
+
+_FD_COMPETITIONS = {
+    'PL': 'Premier League',
+    'PD': 'La Liga',
+    'BL1': 'Bundesliga',
+    'SA': 'Serie A',
+    'FL1': 'Ligue 1',
+    'CL': 'Champions League',
+    'EL': 'Europa League',
+    'PPL': 'Primeira Liga',
+    'DED': 'Eredivisie',
+}
+
+
+def _fd_fetch(path: str) -> dict | None:
+    """Fetch from football-data.org with caching and rate-limit awareness."""
+    import time as _time
+    import urllib.request, urllib.error
+
+    api_key = os.environ.get('FOOTBALL_DATA_API_KEY', '')
+    if not api_key:
+        return None
+
+    now = _time.time()
+    cached = _fd_cache.get(path)
+    if cached and now - cached['ts'] < _FD_TTL:
+        return cached['data']
+
+    url = f'https://api.football-data.org/v4{path}'
+    req = urllib.request.Request(url, headers={
+        'X-Auth-Token': api_key,
+        'User-Agent': 'BigOneSportsApp/1.0',
+    })
+
+    try:
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            data = json.loads(resp.read().decode())
+        _fd_cache[path] = {'data': data, 'ts': now}
+        return data
+    except Exception as e:
+        logger.warning('football-data.org %s: %s', path, e)
+        return None
+
+
+@app.route('/api/standings', methods=['GET'])
+def get_standings():
+    """Get league standings. ?league=PL (default: Premier League)."""
+    league = request.args.get('league', 'PL').upper()
+    if league not in _FD_COMPETITIONS:
+        return jsonify({'error': f'Unknown league code. Available: {list(_FD_COMPETITIONS.keys())}'}), 400
+
+    data = _fd_fetch(f'/competitions/{league}/standings')
+    if not data:
+        return jsonify({'error': 'Football-Data.org unavailable or API key missing. Set FOOTBALL_DATA_API_KEY env var.'}), 503
+
+    standings = []
+    for table in data.get('standings', []):
+        if table.get('type') != 'TOTAL':
+            continue
+        for row in table.get('table', []):
+            standings.append({
+                'position': row.get('position'),
+                'team': row.get('team', {}).get('name', ''),
+                'teamCrest': row.get('team', {}).get('crest', ''),
+                'played': row.get('playedGames', 0),
+                'won': row.get('won', 0),
+                'draw': row.get('draw', 0),
+                'lost': row.get('lost', 0),
+                'goalsFor': row.get('goalsFor', 0),
+                'goalsAgainst': row.get('goalsAgainst', 0),
+                'goalDifference': row.get('goalDifference', 0),
+                'points': row.get('points', 0),
+                'form': row.get('form', ''),
+            })
+
+    return jsonify({
+        'league': _FD_COMPETITIONS.get(league, league),
+        'leagueCode': league,
+        'season': data.get('season', {}).get('startDate', ''),
+        'standings': standings,
+    })
+
+
+@app.route('/api/standings/leagues', methods=['GET'])
+def get_available_leagues():
+    """Return available league codes for standings."""
+    return jsonify({
+        'leagues': [{'code': k, 'name': v} for k, v in _FD_COMPETITIONS.items()]
+    })
+
+
+# =============================================================================
+# THESPORTSDB ENDPOINTS (free test key = "1", logos & metadata)
+# =============================================================================
+
+_tsdb_cache: dict = {}
+_TSDB_TTL = 3600  # 1-hour cache for metadata
+
+
+def _tsdb_fetch(path: str) -> dict | None:
+    """Fetch from TheSportsDB free API with caching."""
+    import time as _time
+    import urllib.request, urllib.error
+
+    api_key = os.environ.get('THESPORTSDB_API_KEY', '1')  # free test key
+    now = _time.time()
+    cached = _tsdb_cache.get(path)
+    if cached and now - cached['ts'] < _TSDB_TTL:
+        return cached['data']
+
+    url = f'https://www.thesportsdb.com/api/v1/json/{api_key}{path}'
+    req = urllib.request.Request(url, headers={'User-Agent': 'BigOneSportsApp/1.0'})
+
+    try:
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            data = json.loads(resp.read().decode())
+        _tsdb_cache[path] = {'data': data, 'ts': now}
+        return data
+    except Exception as e:
+        logger.warning('TheSportsDB %s: %s', path, e)
+        return None
+
+
+@app.route('/api/team-info', methods=['GET'])
+def get_team_info():
+    """Get team metadata (logo, stadium, description). ?team=Arsenal"""
+    team = request.args.get('team', '').strip()
+    if not team:
+        return jsonify({'error': 'team parameter required'}), 400
+
+    data = _tsdb_fetch(f'/searchteams.php?t={team.replace(" ", "%20")}')
+    if not data or not data.get('teams'):
+        return jsonify({'error': f'Team not found: {team}'}), 404
+
+    t = data['teams'][0]
+    return jsonify({
+        'name': t.get('strTeam', ''),
+        'nameShort': t.get('strTeamShort', ''),
+        'badge': t.get('strBadge', ''),
+        'logo': t.get('strLogo', ''),
+        'jersey': t.get('strEquipment', ''),
+        'stadium': t.get('strStadium', ''),
+        'stadiumCapacity': t.get('intStadiumCapacity', ''),
+        'stadiumThumb': t.get('strStadiumThumb', ''),
+        'country': t.get('strCountry', ''),
+        'league': t.get('strLeague', ''),
+        'description': (t.get('strDescriptionEN') or '')[:500],
+        'formedYear': t.get('intFormedYear', ''),
+        'website': t.get('strWebsite', ''),
+    })
+
+
+@app.route('/api/league-info', methods=['GET'])
+def get_league_info():
+    """Get league metadata. ?league=English Premier League"""
+    league = request.args.get('league', '').strip()
+    if not league:
+        return jsonify({'error': 'league parameter required'}), 400
+
+    data = _tsdb_fetch(f'/search_all_leagues.php?s=Soccer&c={league.replace(" ", "%20")}')
+    if not data or not data.get('countrys'):
+        # Try direct league search
+        data = _tsdb_fetch(f'/search_all_leagues.php?l={league.replace(" ", "%20")}')
+
+    leagues = data.get('countrys') or data.get('leagues') or [] if data else []
+    if not leagues:
+        return jsonify({'error': f'League not found: {league}'}), 404
+
+    lg = leagues[0]
+    return jsonify({
+        'name': lg.get('strLeague', ''),
+        'badge': lg.get('strBadge', ''),
+        'logo': lg.get('strLogo', ''),
+        'country': lg.get('strCountry', ''),
+        'description': (lg.get('strDescriptionEN') or '')[:500],
+    })
+
+
 # ============================================================================
 # Serve Next.js static export (frontend)
 # ============================================================================
@@ -1038,12 +1265,7 @@ if __name__ == '__main__':
     # Get port from environment variable (Heroku) or default to 5000
     port = int(os.environ.get('PORT', 5000))
     
-    print("=" * 60)
-    print("BigOne API Server")
-    print("=" * 60)
-    print(f"Results directory: {RESULTS_DIR}")
-    print(f"Starting server on http://0.0.0.0:{port}")
-    print("=" * 60)
+    logger.info('BigOne API Server — results=%s, port=%d', RESULTS_DIR, port)
     
     # Use debug=False in production (when PORT is set by Heroku)
     app.run(host='0.0.0.0', port=port, debug=('PORT' not in os.environ))

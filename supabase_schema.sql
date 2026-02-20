@@ -1,7 +1,7 @@
 -- ============================================================================
 -- SUPABASE DATABASE SCHEMA
 -- ============================================================================
--- Run this SQL in Supabase SQL Editor: https://atdyvzpjlfexqqjxokgq.supabase.co
+-- Run this SQL in your Supabase project SQL Editor
 -- 
 -- This creates the 'predictions' table for storing match predictions
 -- from multiple sources (LiveSport, Forebet, SofaScore, Gemini AI)

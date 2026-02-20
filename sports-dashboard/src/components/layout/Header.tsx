@@ -1,19 +1,23 @@
 // ============================================================================
-// Header – minimal top bar (logo + theme toggle)
+// Header – top bar with navigation, auth, and theme toggle
 // ============================================================================
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
-  Trophy, BarChart3, Ticket, Users, Sun, Moon, Menu,
+  Trophy, BarChart3, Ticket, Users, Sun, Moon, Menu, LogIn, LogOut, User,
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { AuthDialog } from '@/components/auth/AuthDialog'
+import { useAuthStore } from '@/store/authStore'
 
 const NAV_ITEMS = [
+  { href: '/standings',   label: 'Standings',   icon: Trophy     },
   { href: '/stats',       label: 'Statistics',  icon: BarChart3  },
   { href: '/my-bets',     label: 'My Bets',     icon: Ticket     },
   { href: '/leaderboard', label: 'Leaderboard', icon: Users      },
@@ -49,6 +53,10 @@ function NavLinks({ mobile, onNavigate }: { mobile?: boolean; onNavigate?: () =>
 
 export function Header() {
   const { theme, setTheme } = useTheme()
+  const { user, init, signOut } = useAuthStore()
+  const [authOpen, setAuthOpen] = useState(false)
+
+  useEffect(() => { init() }, [init])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -83,6 +91,23 @@ export function Header() {
         {/* Spacer */}
         <div className="flex-1" />
 
+        {/* Auth controls */}
+        {user ? (
+          <div className="flex items-center gap-2">
+            <span className="hidden sm:inline text-xs text-muted-foreground truncate max-w-[120px]">
+              {user.email}
+            </span>
+            <Button variant="ghost" size="icon" onClick={() => signOut()} title="Sign out">
+              <LogOut className="h-4 w-4" />
+            </Button>
+          </div>
+        ) : (
+          <Button variant="outline" size="sm" onClick={() => setAuthOpen(true)} className="gap-1.5">
+            <LogIn className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Sign In</span>
+          </Button>
+        )}
+
         {/* Theme toggle */}
         <Button
           variant="ghost"
@@ -94,6 +119,9 @@ export function Header() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </div>
+
+      {/* Auth dialog */}
+      <AuthDialog open={authOpen} onOpenChange={setAuthOpen} />
     </header>
   )
 }

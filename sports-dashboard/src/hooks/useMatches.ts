@@ -120,3 +120,38 @@ export function useWeather(city: string, date?: string) {
     retry: 1,                  // Don't hammer on failure
   })
 }
+
+// ---------------------------------------------------------------------------
+// League Standings (Football-Data.org)
+// ---------------------------------------------------------------------------
+
+export function useStandings(league: string = 'PL') {
+  return useQuery({
+    queryKey: ['standings', league],
+    queryFn: () => api.getStandings(league),
+    staleTime: 600_000,   // 10 min
+    retry: 1,
+  })
+}
+
+export function useAvailableLeagues() {
+  return useQuery({
+    queryKey: ['available-leagues'],
+    queryFn: () => api.getAvailableLeagues(),
+    staleTime: 3600_000,
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Team info (TheSportsDB)
+// ---------------------------------------------------------------------------
+
+export function useTeamInfo(team: string) {
+  return useQuery({
+    queryKey: ['team-info', team],
+    queryFn: () => api.getTeamInfo(team),
+    enabled: !!team,
+    staleTime: 86400_000,   // 24h — metadata rarely changes
+    retry: 1,
+  })
+}

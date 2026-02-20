@@ -4,14 +4,34 @@
 import { API_BASE_URL } from './constants'
 import type { Match, StatsData, ApiResponse, LiveScore, UserBet, WeatherData } from './types'
 
-async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
+/** Get auth token from zustand store (lazy import to avoid circular deps) */
+function getAuthToken(): string {
+  try {
+    // Access zustand store outside React
+    const { useAuthStore } = require('@/store/authStore')
+    return useAuthStore.getState().getToken()
+  } catch {
+    return ''
+  }
+}
+
+async function fetchApi<T>(endpoint: string, options?: RequestInit & { auth?: boolean }): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`
-  const res = await fetch(url, {
-    headers: { 'Content-Type': 'application/json', ...options?.headers },
-    ...options,
-  })
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...(options?.headers as Record<string, string> ?? {}),
+  }
+
+  // Attach auth token for mutating requests
+  if (options?.auth !== false && (options?.method === 'POST' || options?.method === 'PUT' || options?.method === 'DELETE')) {
+    const token = getAuthToken()
+    if (token) headers['Authorization'] = token
+  }
+
+  const res = await fetch(url, { ...options, headers })
   if (!res.ok) {
-    throw new Error(`API Error ${res.status}: ${res.statusText}`)
+    const body = await res.text().catch(() => '')
+    throw new Error(`API Error ${res.status}: ${res.statusText}${body ? ` — ${body}` : ''}`)
   }
   return res.json()
 }
@@ -168,4 +188,62 @@ export async function getWeather(city: string, date?: string): Promise<WeatherDa
   sp.set('city', city)
   if (date) sp.set('date', date)
   return fetchApi(`/api/weather?${sp.toString()}`)
+}
+
+// ---------------------------------------------------------------------------
+// League Standings (Football-Data.org via backend proxy)
+// ---------------------------------------------------------------------------
+
+export interface StandingRow {
+  position: number
+  team: string
+  teamCrest: string
+  played: number
+  won: number
+  draw: number
+  lost: number
+  goalsFor: number
+  goalsAgainst: number
+  goalDifference: number
+  points: number
+  form: string
+}
+
+export interface StandingsData {
+  league: string
+  leagueCode: string
+  season: string
+  standings: StandingRow[]
+}
+
+export async function getStandings(league: string = 'PL'): Promise<StandingsData> {
+  return fetchApi(`/api/standings?league=${league}`)
+}
+
+export async function getAvailableLeagues(): Promise<{ leagues: { code: string; name: string }[] }> {
+  return fetchApi('/api/standings/leagues')
+}
+
+// ---------------------------------------------------------------------------
+// Team / League metadata (TheSportsDB via backend proxy)
+// ---------------------------------------------------------------------------
+
+export interface TeamInfo {
+  name: string
+  nameShort: string
+  badge: string
+  logo: string
+  jersey: string
+  stadium: string
+  stadiumCapacity: string
+  stadiumThumb: string
+  country: string
+  league: string
+  description: string
+  formedYear: string
+  website: string
+}
+
+export async function getTeamInfo(team: string): Promise<TeamInfo> {
+  return fetchApi(`/api/team-info?team=${encodeURIComponent(team)}`)
 }
