@@ -1,0 +1,475 @@
+{
+  "date": "2026-02-23",
+  "sport": "handball",
+  "generatedAt": "2026-02-23T02:32:36.140821",
+  "stats": {
+    "total": 11,
+    "qualifying": 5,
+    "formAdvantage": 5
+  },
+  "matches": [
+    {
+      "id": 4193303164274806195,
+      "homeTeam": "Chrobry Głogów",
+      "awayTeam": "Wybrzeże Gdańsk",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7880230721273976030,
+      "homeTeam": "Fukuoka",
+      "awayTeam": "Toyota Boshoku Kyushu",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7441167561634856459,
+      "homeTeam": "Toyoda Gosei",
+      "awayTeam": "Toyama Dreams",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 67
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4414992634017578529,
+      "homeTeam": "Brave Kings Kariya",
+      "awayTeam": "Toyota Motor East Japan",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.13,
+        "draw": 11.0,
+        "away": 6.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 97,
+        "draw": 2,
+        "away": 2,
+        "votes": 63
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5904334519262051386,
+      "homeTeam": "Daido",
+      "awayTeam": "Fukui Eiheiji Blue Thunder",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 26
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 447111978930221589,
+      "homeTeam": "Ryukyu Corazon",
+      "awayTeam": "Osaka",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -9085606138175560386,
+      "homeTeam": "Zeekstar Tokyo",
+      "awayTeam": "Wakunaga",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 61
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5519584034137817898,
+      "homeTeam": "Earth Friends BM",
+      "awayTeam": "Osaki Osol",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6526978179146917669,
+      "homeTeam": "Molde K",
+      "awayTeam": "Haslum K",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 3,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "D",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.01,
+        "draw": 25.0,
+        "away": 15.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 97,
+        "draw": 3,
+        "away": 0,
+        "votes": 70
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2924412254508826858,
+      "homeTeam": "Piotrcovia K",
+      "awayTeam": "Kobierzyce K",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7089272297599889343,
+      "homeTeam": "Metaloplastika",
+      "awayTeam": "Vojvodina",
+      "time": "",
+      "date": "2026-02-23",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    }
+  ]
+}
