@@ -1,0 +1,8501 @@
+{
+  "date": "2026-02-24",
+  "sport": "football",
+  "generatedAt": "2026-02-24T03:04:35.336697",
+  "stats": {
+    "total": 217,
+    "qualifying": 71,
+    "formAdvantage": 46
+  },
+  "matches": [
+    {
+      "id": 3175003248472239471,
+      "homeTeam": "Atl. Madryt",
+      "awayTeam": "Club Brugge",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7626158954721636672,
+      "homeTeam": "Bayer Leverkusen",
+      "awayTeam": "Olympiakos",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 4,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7903678318400411389,
+      "homeTeam": "Inter",
+      "awayTeam": "Bodo/Glimt",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4513937908306429005,
+      "homeTeam": "Newcastle",
+      "awayTeam": "Karabach Agdam",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.15,
+        "draw": 9.0,
+        "away": 16.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 77,
+        "draw": 6,
+        "away": 17,
+        "votes": 43878
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4269534797245420905,
+      "homeTeam": "Zambia K",
+      "awayTeam": "Eswatini K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "D",
+        "W",
+        "W",
+        "D",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.01,
+        "draw": 13.0,
+        "away": 40.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 38,
+        "draw": 16,
+        "away": 46,
+        "votes": 1885
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2635160913871687957,
+      "homeTeam": "Zimbabwe K",
+      "awayTeam": "Botswana K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "D",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.7,
+        "draw": 3.45,
+        "away": 4.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 20,
+        "draw": 16,
+        "away": 64,
+        "votes": 1357
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2951162711820759780,
+      "homeTeam": "Angola K",
+      "awayTeam": "Malawi K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6895439463177061246,
+      "homeTeam": "Republika Południowej Afryki K",
+      "awayTeam": "Lesotho K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 4,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 27,
+        "draw": 18,
+        "away": 55,
+        "votes": 957
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1172922649432366144,
+      "homeTeam": "Huachipato (Chi)",
+      "awayTeam": "Carabobo (Ven)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3922190747016090641,
+      "homeTeam": "Jamajka U20",
+      "awayTeam": "Bonaire U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 80,
+        "draw": 12,
+        "away": 8,
+        "votes": 209
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8486105177777937367,
+      "homeTeam": "El Salvador U20",
+      "awayTeam": "Gujana Francuska U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5104532267715989270,
+      "homeTeam": "Barbados U20",
+      "awayTeam": "Sint Maarten U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2799960922974758194,
+      "homeTeam": "Trinidad i Tobago U20",
+      "awayTeam": "Bermudy U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -408506721989326992,
+      "homeTeam": "Saint Vincent i Grenadyny U20",
+      "awayTeam": "Anguilla U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3982417607097736745,
+      "homeTeam": "Martynika U20",
+      "awayTeam": "Wyspy Dziewicze Stanów Zjednoczonych U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1164599222929246334,
+      "homeTeam": "Blackburn",
+      "awayTeam": "Bristol City",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "D",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "D",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.4,
+        "draw": 3.2,
+        "away": 2.95,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 38,
+        "draw": 21,
+        "away": 41,
+        "votes": 4009
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7378488220954915697,
+      "homeTeam": "Hull",
+      "awayTeam": "Derby",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8907644908798675423,
+      "homeTeam": "Middlesbrough",
+      "awayTeam": "Leicester",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 224509241445721783,
+      "homeTeam": "Swansea",
+      "awayTeam": "Preston",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4235400247390177355,
+      "homeTeam": "Watford",
+      "awayTeam": "Ipswich",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1695588802861695889,
+      "homeTeam": "West Brom",
+      "awayTeam": "Charlton",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -9109099423145177355,
+      "homeTeam": "Wrexham",
+      "awayTeam": "Portsmouth",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3978895918476843337,
+      "homeTeam": "Southampton",
+      "awayTeam": "QPR",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "D",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "D",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.75,
+        "draw": 3.8,
+        "away": 4.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 78,
+        "draw": 15,
+        "away": 7,
+        "votes": 5236
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4799732925570404743,
+      "homeTeam": "Bradford City",
+      "awayTeam": "Rotherham",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7598665045220043161,
+      "homeTeam": "Burton",
+      "awayTeam": "Stockport",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7912753561390174300,
+      "homeTeam": "Northampton",
+      "awayTeam": "Port Vale",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6832937166822218868,
+      "homeTeam": "Accrington",
+      "awayTeam": "Barnet",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "D",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "D",
+        "W",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 3.45,
+        "draw": 3.35,
+        "away": 1.95,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 36,
+        "draw": 23,
+        "away": 40,
+        "votes": 963
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7488505859149841898,
+      "homeTeam": "Salford",
+      "awayTeam": "Shrewsbury",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 4,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8393819697623745744,
+      "homeTeam": "Forest Green",
+      "awayTeam": "Boston Utd",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8670273293152201103,
+      "homeTeam": "Halifax",
+      "awayTeam": "Rochdale",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8885198750736825090,
+      "homeTeam": "Scunthorpe",
+      "awayTeam": "York",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4559144549536421164,
+      "homeTeam": "Southend",
+      "awayTeam": "Boreham Wood",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8873817183071554538,
+      "homeTeam": "Tamworth",
+      "awayTeam": "Altrincham",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "L",
+        "D",
+        "D",
+        "D"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "D",
+        "D",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "D",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.15,
+        "draw": 3.35,
+        "away": 2.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 63,
+        "draw": 23,
+        "away": 14,
+        "votes": 546
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8490495611668043843,
+      "homeTeam": "Wealdstone",
+      "awayTeam": "Brackley Town",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8150349686615634436,
+      "homeTeam": "Alfreton",
+      "awayTeam": "Scarborough",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7702622952941672805,
+      "homeTeam": "Bedford",
+      "awayTeam": "Peterborough Sports",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8383273116911585031,
+      "homeTeam": "Buxton",
+      "awayTeam": "King’s Lynn",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2040513026430666767,
+      "homeTeam": "Curzon Ashton",
+      "awayTeam": "Darlington",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5137184728036345566,
+      "homeTeam": "Hereford",
+      "awayTeam": "Chester",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4496683175276388957,
+      "homeTeam": "Kidderminster",
+      "awayTeam": "Marine",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3055749133232813812,
+      "homeTeam": "Leamington",
+      "awayTeam": "Merthyr Town",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "D",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "D",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "D",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 3.95,
+        "draw": 3.75,
+        "away": 1.68,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 49,
+        "draw": 26,
+        "away": 25,
+        "votes": 526
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7217511412136758183,
+      "homeTeam": "Macclesfield",
+      "awayTeam": "AFC Fylde",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8338829080688421515,
+      "homeTeam": "Oxford City",
+      "awayTeam": "Telford",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -62923436762613326,
+      "homeTeam": "Radcliffe",
+      "awayTeam": "Southport",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2011276293324834268,
+      "homeTeam": "South Shields",
+      "awayTeam": "Worksop",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "D",
+        "D",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.3,
+        "draw": 4.8,
+        "away": 6.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 47,
+        "draw": 20,
+        "away": 33,
+        "votes": 622
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1852160504871694417,
+      "homeTeam": "Spennymoor",
+      "awayTeam": "Chorley",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3984389090854914422,
+      "homeTeam": "AFC Totton",
+      "awayTeam": "Slough",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5815422486431909426,
+      "homeTeam": "Bath",
+      "awayTeam": "Weston-super-Mare",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3813780924086837363,
+      "homeTeam": "Chesham",
+      "awayTeam": "Dagenham & Red.",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8851505777636476174,
+      "homeTeam": "Dover",
+      "awayTeam": "Hornchurch",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "L",
+        "D",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "D",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 3.4,
+        "draw": 3.4,
+        "away": 1.93,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 74,
+        "draw": 19,
+        "away": 8,
+        "votes": 3678
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7495175323660113126,
+      "homeTeam": "Eastbourne Boro",
+      "awayTeam": "Dorking",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6023762263967351735,
+      "homeTeam": "Horsham FC",
+      "awayTeam": "Ebbsfleet",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "D",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "W",
+        "D",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "L",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "D",
+        "L",
+        "D",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.75,
+        "draw": 3.25,
+        "away": 2.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 63.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 46,
+        "draw": 15,
+        "away": 39,
+        "votes": 883
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4506171560656112737,
+      "homeTeam": "Maidenhead",
+      "awayTeam": "Salisbury",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1804580921441304543,
+      "homeTeam": "Maidstone",
+      "awayTeam": "Enfield Town",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "D",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "D",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "D",
+        "D",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.5,
+        "draw": 4.0,
+        "away": 5.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 49,
+        "draw": 26,
+        "away": 25,
+        "votes": 526
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2671683265771616007,
+      "homeTeam": "Tonbridge",
+      "awayTeam": "Hampton & Richmond",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -747590547676536235,
+      "homeTeam": "Worthing",
+      "awayTeam": "Torquay",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7761076295321565162,
+      "homeTeam": "FC United",
+      "awayTeam": "Stockton",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1078116723752998247,
+      "homeTeam": "Gainsborough",
+      "awayTeam": "Leek",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "D",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "D",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "D",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.63,
+        "draw": 3.85,
+        "away": 4.1,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 74,
+        "draw": 11,
+        "away": 15,
+        "votes": 10713
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5810363739937667115,
+      "homeTeam": "Alvechurch",
+      "awayTeam": "Real Bedford",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 3.15,
+        "draw": 3.35,
+        "away": 1.95,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 65,
+        "draw": 11,
+        "away": 24,
+        "votes": 1715
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6216762775784122643,
+      "homeTeam": "Banbury",
+      "awayTeam": "Stratford",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.95,
+        "draw": 3.2,
+        "away": 3.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 70,
+        "draw": 20,
+        "away": 11,
+        "votes": 13727
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4447625362686484089,
+      "homeTeam": "Kettering",
+      "awayTeam": "Sudbury",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 4,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.35,
+        "draw": 4.4,
+        "away": 6.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 88,
+        "draw": 6,
+        "away": 6,
+        "votes": 18291
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6343020683056459782,
+      "homeTeam": "Hanwell Town",
+      "awayTeam": "Plymouth Parkway",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "D",
+        "D",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.83,
+        "draw": 3.45,
+        "away": 3.55,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": null,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 56,
+        "draw": 16,
+        "away": 28,
+        "votes": 1282
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6284474753001139290,
+      "homeTeam": "Hungerford",
+      "awayTeam": "Bracknell",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8410548602366151065,
+      "homeTeam": "Tiverton",
+      "awayTeam": "Dorchester",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -689702136262723548,
+      "homeTeam": "Cheshunt",
+      "awayTeam": "Aveley",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7598454257450797744,
+      "homeTeam": "Dulwich Hamlet",
+      "awayTeam": "Chatham",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1534137093199017115,
+      "homeTeam": "Welling",
+      "awayTeam": "Carshalton",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "D",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "D",
+        "D",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.5,
+        "draw": 3.35,
+        "away": 2.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 49,
+        "draw": 26,
+        "away": 25,
+        "votes": 526
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6980094732340660644,
+      "homeTeam": "Whitehawk",
+      "awayTeam": "Lewes",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 303828467065111947,
+      "homeTeam": "Wingate & Finchley",
+      "awayTeam": "Canvey Island",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "W",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "D",
+        "L",
+        "D",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.8,
+        "draw": 3.65,
+        "away": 3.45,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 57,
+        "draw": 26,
+        "away": 17,
+        "votes": 1817
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8386867419480490115,
+      "homeTeam": "Luton",
+      "awayTeam": "Plymouth",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5759190106391724819,
+      "homeTeam": "Bristol City U21",
+      "awayTeam": "QPR U21",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "D"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "D",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "D"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.2,
+        "draw": 3.85,
+        "away": 2.55,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 63,
+        "draw": 15,
+        "away": 22,
+        "votes": 109
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 2075276468300938104,
+      "homeTeam": "Coventry U21",
+      "awayTeam": "Sheffield Utd U21",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2710588304892219174,
+      "homeTeam": "Watford U21",
+      "awayTeam": "Brentford U21",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5102103506178462877,
+      "homeTeam": "Wigan U21",
+      "awayTeam": "Fleetwood U21",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4963837963804514718,
+      "homeTeam": "Charlton U21",
+      "awayTeam": "Swansea U21",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4825937692966244564,
+      "homeTeam": "Cardiff U21",
+      "awayTeam": "Colchester U21",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7352974808664236284,
+      "homeTeam": "Everton U18",
+      "awayTeam": "Leeds U18",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 11,
+        "draw": 12,
+        "away": 77,
+        "votes": 109267
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6593327909780166741,
+      "homeTeam": "Aston Villa U18",
+      "awayTeam": "Wrexham U18",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 411960815943757589,
+      "homeTeam": "Sunderland U18",
+      "awayTeam": "Brighton U18",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3212032504414468233,
+      "homeTeam": "Hull K",
+      "awayTeam": "Loughborough Lightning K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1787287087272970102,
+      "homeTeam": "Al Hazem",
+      "awayTeam": "Al-Ittihad FC",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4766435048922528113,
+      "homeTeam": "Al Khaleej",
+      "awayTeam": "Al Kholood",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -59433808654129969,
+      "homeTeam": "Al-Taawon",
+      "awayTeam": "Al-Hilal",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2306567813776295840,
+      "homeTeam": "Abha",
+      "awayTeam": "Al Anwar",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.43,
+        "draw": 4.3,
+        "away": 6.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 84,
+        "draw": 12,
+        "away": 4,
+        "votes": 1010
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4169212375403551184,
+      "homeTeam": "Al Batin",
+      "awayTeam": "Al Wehda",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4689297865470205017,
+      "homeTeam": "Al Bukiryah",
+      "awayTeam": "Al Jandal",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "D"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.95,
+        "draw": 3.25,
+        "away": 3.6,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 78,
+        "draw": 16,
+        "away": 6,
+        "votes": 487
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7474832811859068897,
+      "homeTeam": "Al Orubah",
+      "awayTeam": "Al Jabalain",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "D",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.8,
+        "draw": 3.35,
+        "away": 2.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 38,
+        "draw": 23,
+        "away": 39,
+        "votes": 514
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -8181862680006055586,
+      "homeTeam": "Al-Raed",
+      "awayTeam": "Al Jubail",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "D",
+        "D",
+        "D"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.25,
+        "draw": 5.25,
+        "away": 8.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 83,
+        "draw": 13,
+        "away": 3,
+        "votes": 731
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5854561022022891434,
+      "homeTeam": "Platense",
+      "awayTeam": "Defensa y Justicia",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6380249663113740273,
+      "homeTeam": "San Lorenzo",
+      "awayTeam": "Instituto",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "D",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.25,
+        "draw": 2.8,
+        "away": 3.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 67.0,
+        "exactScore": null,
+        "overUnder": "Under 2.5",
+        "btts": "No"
+      },
+      "sofascore": {
+        "home": 83,
+        "draw": 11,
+        "away": 6,
+        "votes": 1532
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4689128780022650719,
+      "homeTeam": "Central Cordoba",
+      "awayTeam": "Talleres Cordoba",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4601005017461988157,
+      "homeTeam": "South Island United",
+      "awayTeam": "Auckland FC 2",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6133502736111000682,
+      "homeTeam": "South Melbourne",
+      "awayTeam": "Tahiti United",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "D",
+        "L",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayForm": [
+        "D",
+        "W",
+        "L",
+        "D",
+        "D"
+      ],
+      "homeFormHome": [
+        "D",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "D",
+        "L",
+        "W",
+        "D",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.3,
+        "draw": 5.0,
+        "away": 6.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 78,
+        "draw": 15,
+        "away": 7,
+        "votes": 5239
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 682285391085594771,
+      "homeTeam": "Admira",
+      "awayTeam": "Austria (Am)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5639571091310518317,
+      "homeTeam": "Favoritner",
+      "awayTeam": "Sportunion Mauer",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2086379381716227065,
+      "homeTeam": "Gabala",
+      "awayTeam": "Turan",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7135488287003757868,
+      "homeTeam": "Shimal",
+      "awayTeam": "Cebrayil",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8453570913951136742,
+      "homeTeam": "Sabail",
+      "awayTeam": "Baku Sporting",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 2883408193212938916,
+      "homeTeam": "St Andrew Lions",
+      "awayTeam": "Ellerton FC",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4775542532438683750,
+      "homeTeam": "Gent U23",
+      "awayTeam": "OC Charleroi",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "D",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.73,
+        "draw": 3.6,
+        "away": 4.1,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 78,
+        "draw": 17,
+        "away": 6,
+        "votes": 3636
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6135626582440963192,
+      "homeTeam": "Humaita",
+      "awayTeam": "Sao Francisco FC",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "L",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.25,
+        "draw": 5.5,
+        "away": 7.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 48.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 38,
+        "draw": 16,
+        "away": 46,
+        "votes": 1887
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7321503568179951689,
+      "homeTeam": "GAS",
+      "awayTeam": "Bare",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 4,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "D",
+        "D",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "D",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 36,
+        "draw": 23,
+        "away": 40,
+        "votes": 966
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7076499108745700919,
+      "homeTeam": "Boavista",
+      "awayTeam": "Maringa FC",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6926297062942368475,
+      "homeTeam": "Joinville",
+      "awayTeam": "CSA",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3889103638104042112,
+      "homeTeam": "Atletico-MG U17",
+      "awayTeam": "Porto Vitoria U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7212016169770491290,
+      "homeTeam": "Coritiba U17",
+      "awayTeam": "Avai U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1849017360692867568,
+      "homeTeam": "Cruzeiro U17",
+      "awayTeam": "Cuiaba U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1803554355338540907,
+      "homeTeam": "CSA U17",
+      "awayTeam": "Santa Cruz de Natal U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8018697769085227560,
+      "homeTeam": "Flamengo U17",
+      "awayTeam": "Penharol U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 9181770241390975160,
+      "homeTeam": "Interporto U17",
+      "awayTeam": "Iape U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7664818433946878735,
+      "homeTeam": "Oratorio U17",
+      "awayTeam": "Galvez U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3323584839193791528,
+      "homeTeam": "Tuna Luso U17",
+      "awayTeam": "Monte Roraima U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 26095767051580563,
+      "homeTeam": "Retro U17",
+      "awayTeam": "Sergipe U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6196345820223542717,
+      "homeTeam": "Nacional-AM U17",
+      "awayTeam": "Vilhena EC U17",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6465949276285749312,
+      "homeTeam": "Palmeiras U20",
+      "awayTeam": "Sao Paulo U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "D",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.83,
+        "draw": 3.45,
+        "away": 3.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 48.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 78,
+        "draw": 15,
+        "away": 7,
+        "votes": 18983
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 7000905001805873237,
+      "homeTeam": "Athletico-PR U20",
+      "awayTeam": "Cuiaba U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5694423984386285876,
+      "homeTeam": "Juventude U20",
+      "awayTeam": "RB Bragantino U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8915290088717522575,
+      "homeTeam": "Fortaleza U20",
+      "awayTeam": "Vitoria U20",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5761276397733341393,
+      "homeTeam": "Sao Paulo K",
+      "awayTeam": "Bahia K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 4,
+        "winRate": 75
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "D",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.3,
+        "draw": 4.4,
+        "away": 7.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 8,
+        "draw": 9,
+        "away": 83,
+        "votes": 15140
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6246679064852829803,
+      "homeTeam": "Yantra Gabrovo",
+      "awayTeam": "Etar",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4039940606222861541,
+      "homeTeam": "Lucko",
+      "awayTeam": "Trnje",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 9078465417135804207,
+      "homeTeam": "Radnik Krizevci",
+      "awayTeam": "Croatia Dakovo",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 4841111406894618154,
+      "homeTeam": "Saint-Luc",
+      "awayTeam": "Tshikas",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "D",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "D",
+        "L",
+        "D",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 86,
+        "draw": 8,
+        "away": 6,
+        "votes": 71
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -1674574048976924425,
+      "homeTeam": "St Eloi Lupopo",
+      "awayTeam": "Lubumbashi Sport",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "D",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "D",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "D",
+        "L",
+        "D",
+        "L",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 9,
+        "draw": 13,
+        "away": 78,
+        "votes": 9460
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5712918135262264681,
+      "homeTeam": "US Panda",
+      "awayTeam": "Manika",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3972662314314973418,
+      "homeTeam": "Ceramica Cleopatra",
+      "awayTeam": "Ismaily",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.48,
+        "draw": 3.7,
+        "away": 7.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "X",
+        "probability": 39.0,
+        "exactScore": null,
+        "overUnder": "Under 2.5",
+        "btts": "No"
+      },
+      "sofascore": {
+        "home": 83,
+        "draw": 12,
+        "away": 5,
+        "votes": 2066
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5312369955629109648,
+      "homeTeam": "Ghazl El Mahallah",
+      "awayTeam": "Pyramids",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1228811485520799338,
+      "homeTeam": "Haras El Hodood",
+      "awayTeam": "Enppi",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6908861593788195184,
+      "homeTeam": "ZED",
+      "awayTeam": "Zamalek",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3588401066485006582,
+      "homeTeam": "Libertad",
+      "awayTeam": "Manta",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8883472989962438148,
+      "homeTeam": "Inter U19",
+      "awayTeam": "Betis U19",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -584602146857704463,
+      "homeTeam": "Eintracht Frankfurt U19",
+      "awayTeam": "Sporting U19",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5489862303356951717,
+      "homeTeam": "Coban Imperial",
+      "awayTeam": "Malacateco",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 6036653162717270737,
+      "homeTeam": "Cambuur",
+      "awayTeam": "Eindhoven",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -237307527871241739,
+      "homeTeam": "Willem II",
+      "awayTeam": "ADO Den Haag",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "D"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 3.35,
+        "draw": 3.7,
+        "away": 1.88,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 17,
+        "draw": 16,
+        "away": 67,
+        "votes": 2159
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5034545723365700358,
+      "homeTeam": "Odisha FC",
+      "awayTeam": "Inter Kashi",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "D",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "D",
+        "W",
+        "D",
+        "D"
+      ],
+      "awayFormAway": [
+        "D",
+        "W",
+        "L",
+        "D",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 4.1,
+        "draw": 3.75,
+        "away": 1.68,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 46,
+        "draw": 15,
+        "away": 39,
+        "votes": 883
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -574972183268851745,
+      "homeTeam": "Malut United",
+      "awayTeam": "Persija Jakarta",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 9033127833456622256,
+      "homeTeam": "FC Bhayangkara",
+      "awayTeam": "Padang",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "D"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "W",
+        "D",
+        "D"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "D",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "D",
+        "L",
+        "L",
+        "D",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.75,
+        "draw": 3.3,
+        "away": 4.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 77,
+        "draw": 15,
+        "away": 8,
+        "votes": 1279
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 417321823762931914,
+      "homeTeam": "Ballymena",
+      "awayTeam": "Glenavon",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3957441029218229900,
+      "homeTeam": "Cliftonville",
+      "awayTeam": "Glentoran",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 3.45,
+        "draw": 3.2,
+        "away": 2.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 18,
+        "draw": 21,
+        "away": 61,
+        "votes": 482
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5766428135472585719,
+      "homeTeam": "Larne",
+      "awayTeam": "Linfield",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3517799751619573613,
+      "homeTeam": "Loughgall",
+      "awayTeam": "Newington",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 69,
+        "draw": 11,
+        "away": 20,
+        "votes": 10730
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2905887883193592367,
+      "homeTeam": "Warrenpoint",
+      "awayTeam": "Ballinamallard",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "D",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.95,
+        "draw": 3.4,
+        "away": 3.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 43,
+        "draw": 14,
+        "away": 43,
+        "votes": 325
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5952515091841937063,
+      "homeTeam": "Arnett Gardens",
+      "awayTeam": "Spanish Town Police",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7299674550950306795,
+      "homeTeam": "Al Ahli",
+      "awayTeam": "Shabab Al Ordon",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "D",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "D",
+        "L",
+        "D",
+        "W"
+      ],
+      "homeFormHome": [
+        "D",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "D",
+        "D",
+        "L",
+        "D",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.55,
+        "draw": 2.5,
+        "away": 2.95,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 48.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 38,
+        "draw": 23,
+        "away": 39,
+        "votes": 515
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6554061816871240903,
+      "homeTeam": "Posta Rangers",
+      "awayTeam": "Gor Mahia",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -2348511492250561342,
+      "homeTeam": "Ind. Yumbo",
+      "awayTeam": "Real Santander",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -926964668262254376,
+      "homeTeam": "Envigado",
+      "awayTeam": "Quindio",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "D",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.8,
+        "draw": 3.3,
+        "away": 4.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 52,
+        "draw": 18,
+        "away": 29,
+        "votes": 607
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6439905856794457102,
+      "homeTeam": "U. Magdalena",
+      "awayTeam": "Tigres",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8695396293921085869,
+      "homeTeam": "Inter San Carlos",
+      "awayTeam": "Cofutpa",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "D",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "D",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.45,
+        "draw": 4.1,
+        "away": 5.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 67.0,
+        "exactScore": null,
+        "overUnder": "Under 2.5",
+        "btts": "No"
+      },
+      "sofascore": {
+        "home": 71,
+        "draw": 9,
+        "away": 20,
+        "votes": 55286
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5727847686983454289,
+      "homeTeam": "Al Tadamon",
+      "awayTeam": "Al Jahra",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.2,
+        "draw": 3.3,
+        "away": 2.9,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 83,
+        "draw": 13,
+        "away": 3,
+        "votes": 732
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5416426848109386726,
+      "homeTeam": "Shkendija Haracine",
+      "awayTeam": "Rabotnicki",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.55,
+        "draw": 3.35,
+        "away": 2.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 62,
+        "draw": 12,
+        "away": 26,
+        "votes": 234
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6455817195075732831,
+      "homeTeam": "Vardar",
+      "awayTeam": "Ohrid",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.08,
+        "draw": 7.25,
+        "away": 20.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 88,
+        "draw": 7,
+        "away": 5,
+        "votes": 422
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7774778172916491540,
+      "homeTeam": "Kochani K",
+      "awayTeam": "Kamenica Sasa K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -786530122853585125,
+      "homeTeam": "Tiverija K",
+      "awayTeam": "Ljuboten K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7506145781316878618,
+      "homeTeam": "ZFK Top Gol K",
+      "awayTeam": "ZFK Istatov K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 4,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1438619097528224688,
+      "homeTeam": "Recica K",
+      "awayTeam": "ASS United K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 4,
+        "winRate": 25
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3101849824102233768,
+      "homeTeam": "ZFK Skopje 2014 K",
+      "awayTeam": "ZFK Vardar K",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 17,
+        "draw": 14,
+        "away": 69,
+        "votes": 1144
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -5483130410466831087,
+      "homeTeam": "Poza Rica",
+      "awayTeam": "Uruapan",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 3,
+        "total": 3,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -1443312862355621778,
+      "homeTeam": "Dagon",
+      "awayTeam": "Rakhine United",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "W",
+        "D",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "D",
+        "L",
+        "D",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.25,
+        "draw": 5.5,
+        "away": 7.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 87,
+        "draw": 6,
+        "away": 7,
+        "votes": 96509
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1934659855740563304,
+      "homeTeam": "Hantharwady Utd",
+      "awayTeam": "Yadanarbon",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "D",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "D",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 51.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 74,
+        "draw": 17,
+        "away": 8,
+        "votes": 413
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8540513773762381408,
+      "homeTeam": "Siegen",
+      "awayTeam": "Paderborn II",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7063663307479757519,
+      "homeTeam": "Bayern Monachium II",
+      "awayTeam": "Unterhaching",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "L",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "D",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "D",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.95,
+        "draw": 3.55,
+        "away": 1.95,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 47.0,
+        "exactScore": null,
+        "overUnder": "Under 2.5",
+        "btts": "No"
+      },
+      "sofascore": {
+        "home": 41,
+        "draw": 14,
+        "away": 45,
+        "votes": 250
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6249355952032644327,
+      "homeTeam": "Giessen",
+      "awayTeam": "Friedberg",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "D",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "D",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 79,
+        "draw": 15,
+        "away": 6,
+        "votes": 5479
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8580443289803372840,
+      "homeTeam": "Rancho Santana",
+      "awayTeam": "Real Madriz",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 751284405959007206,
+      "homeTeam": "Independiente",
+      "awayTeam": "Tauro",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -335445469904304289,
+      "homeTeam": "Zagłębie Sosnowiec",
+      "awayTeam": "Sandecja Nowy Sącz",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6258621892835581713,
+      "homeTeam": "Gil Vicente U23",
+      "awayTeam": "Portimonense U23",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.78,
+        "draw": 3.65,
+        "away": 3.65,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 80,
+        "draw": 16,
+        "away": 4,
+        "votes": 497
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -4620563358026294954,
+      "homeTeam": "Estrela U23",
+      "awayTeam": "Estoril U23",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -6743108757371194693,
+      "homeTeam": "Farense U23",
+      "awayTeam": "Leiria U23",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3395202283230372383,
+      "homeTeam": "Rio Ave U23",
+      "awayTeam": "Vizela U23",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.05,
+        "draw": 3.4,
+        "away": 3.05,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 68.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 80,
+        "draw": 14,
+        "away": 6,
+        "votes": 351
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1229604965593351533,
+      "homeTeam": "AmaZulu",
+      "awayTeam": "Mamelodi",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5483898654410038198,
+      "homeTeam": "Kaizer Chiefs",
+      "awayTeam": "Stellenbosch",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "D",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "D",
+        "D",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.65,
+        "draw": 3.2,
+        "away": 5.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 76,
+        "draw": 14,
+        "away": 11,
+        "votes": 1695
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 6577163341697941037,
+      "homeTeam": "Concordia",
+      "awayTeam": "Corvinul",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -534694950691291688,
+      "homeTeam": "Kiyovu",
+      "awayTeam": "Marines",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3362420018164613390,
+      "homeTeam": "Batanecos",
+      "awayTeam": "Alianza FC",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5769269322248367418,
+      "homeTeam": "Izalco",
+      "awayTeam": "FAS",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7059147721021898775,
+      "homeTeam": "Once Municipal",
+      "awayTeam": "Talleres Jr",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5750581538654083184,
+      "homeTeam": "El Roble",
+      "awayTeam": "Cabanas",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 9196083846500058375,
+      "homeTeam": "Luawa",
+      "awayTeam": "Wilberforce Strikers",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 883184735929049582,
+      "homeTeam": "Balestier Khalsa II",
+      "awayTeam": "Hougang II",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 3.65,
+        "draw": 3.8,
+        "away": 1.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 54,
+        "draw": 28,
+        "away": 18,
+        "votes": 2575
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 4366567438986513905,
+      "homeTeam": "Geylang II",
+      "awayTeam": "Lion City II",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5179794581374147485,
+      "homeTeam": "Tanjong P. II",
+      "awayTeam": "Albirex Niigata II",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 5068011298155988963,
+      "homeTeam": "Young Lions II",
+      "awayTeam": "Tampines II",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "D",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "D",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 74,
+        "draw": 17,
+        "away": 9,
+        "votes": 498
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -2138824068633339897,
+      "homeTeam": "Al Jaish",
+      "awayTeam": "Hottin",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5890664939536408099,
+      "homeTeam": "Al Taliya",
+      "awayTeam": "Al Shorta",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "D",
+        "D",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "D",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 17,
+        "draw": 17,
+        "away": 65,
+        "votes": 514
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6308889889781753623,
+      "homeTeam": "Al-Ittihad Aleppo",
+      "awayTeam": "Al-Shouleh",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 63.0,
+        "exactScore": null,
+        "overUnder": "Over 2.5",
+        "btts": "Yes"
+      },
+      "sofascore": {
+        "home": 76,
+        "draw": 15,
+        "away": 9,
+        "votes": 3581
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -6063414965988370148,
+      "homeTeam": "Damascus Al-Ahli",
+      "awayTeam": "Umayya",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -9096521351363664971,
+      "homeTeam": "Foutoua",
+      "awayTeam": "Jableh",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7933535380141846738,
+      "homeTeam": "Khan Shaykhun",
+      "awayTeam": "Horriya",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 3894907459022179983,
+      "homeTeam": "Tishreen",
+      "awayTeam": "Al Karamah",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7144981582516642938,
+      "homeTeam": "Dundee Utd",
+      "awayTeam": "Aberdeen",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.1,
+        "draw": 3.4,
+        "away": 3.35,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 61,
+        "draw": 24,
+        "away": 15,
+        "votes": 1911
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7432475233380282735,
+      "homeTeam": "Dunfermline",
+      "awayTeam": "Partick Thistle",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3482254379074341718,
+      "homeTeam": "Queen's Park",
+      "awayTeam": "St. Johnstone",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 4,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3694582318843078126,
+      "homeTeam": "Dumbarton",
+      "awayTeam": "Clyde",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -905788116757963782,
+      "homeTeam": "Elgin",
+      "awayTeam": "Edinburgh City",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -130708458215892512,
+      "homeTeam": "Stirling",
+      "awayTeam": "Annan",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7136939002510688477,
+      "homeTeam": "Ayr",
+      "awayTeam": "Inverness",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "D",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayFormAway": [
+        "D",
+        "W",
+        "L",
+        "D",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.5,
+        "draw": 3.35,
+        "away": 2.35,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 44,
+        "draw": 24,
+        "away": 32,
+        "votes": 348
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 9146669037077417196,
+      "homeTeam": "Bryne (Nor)",
+      "awayTeam": "Lyn (Nor)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3898067274761080462,
+      "homeTeam": "Västerås SK (Swe)",
+      "awayTeam": "Enkoping (Swe)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 14,
+        "draw": 28,
+        "away": 57,
+        "votes": 819
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -3891878630732302891,
+      "homeTeam": "Weindorf St. Anna (Aut)",
+      "awayTeam": "SV Wildon (Aut)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 30,
+        "draw": 22,
+        "away": 48,
+        "votes": 50864
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 1035369775053149519,
+      "homeTeam": "Flora (Est)",
+      "awayTeam": "Ryga FC (Lat)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -137260516201053593,
+      "homeTeam": "Lilleström (Nor)",
+      "awayTeam": "Kongsvinger (Nor)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "L",
+        "D",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "D"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 11,
+        "draw": 12,
+        "away": 77,
+        "votes": 109267
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 8161946803324815330,
+      "homeTeam": "Brabrand (Den)",
+      "awayTeam": "VSK Aarhus (Den)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -8555522496133536723,
+      "homeTeam": "Ljungskile (Swe)",
+      "awayTeam": "Göteborg (Swe)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7845743349458163519,
+      "homeTeam": "Rosenborg (Nor)",
+      "awayTeam": "Start (Nor)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "D",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 12,
+        "draw": 14,
+        "away": 74,
+        "votes": 1668
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": -7297901495247855655,
+      "homeTeam": "Usti n. L. B (Cze)",
+      "awayTeam": "Libouchec (Cze)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "D",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "W",
+        "D",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "D",
+        "L",
+        "D",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 20,
+        "draw": 23,
+        "away": 58,
+        "votes": 9496
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5575157840922425780,
+      "homeTeam": "Vorwarts-Wacker (Ger)",
+      "awayTeam": "Altona (Ger)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 4,
+        "total": 4,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 7548552267200023222,
+      "homeTeam": "Atletico Pantoja (Dom)",
+      "awayTeam": "Las Vegas Lights (Usa)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -4448476211209704290,
+      "homeTeam": "Koge K (Den)",
+      "awayTeam": "Naestved K (Den)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 4,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 75,
+        "draw": 17,
+        "away": 8,
+        "votes": 42159
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 5146672114842789390,
+      "homeTeam": "Racing Louisville K (Usa)",
+      "awayTeam": "Gotham K (Usa)",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -3833754566194568909,
+      "homeTeam": "Ammanford",
+      "awayTeam": "Aberystwyth",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 2,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 1583459542978144591,
+      "homeTeam": "Trefelin",
+      "awayTeam": "Cambrian United",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.65,
+        "draw": 3.65,
+        "away": 2.15,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 74,
+        "draw": 17,
+        "away": 9,
+        "votes": 955
+      },
+      "focusTeam": "home"
+    },
+    {
+      "id": 152503164994507406,
+      "homeTeam": "Ynyshir Albions",
+      "awayTeam": "Llantwit Major",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 2,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": 8983101263943266089,
+      "homeTeam": "Flint Mountain",
+      "awayTeam": "Llandudno",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 4,
+        "winRate": 25
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -5143328744168572815,
+      "homeTeam": "Thanh Hoa",
+      "awayTeam": "Cong An Ha Noi",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home"
+    },
+    {
+      "id": -7521655198206326468,
+      "homeTeam": "Viettel",
+      "awayTeam": "Nam Dinh",
+      "time": "",
+      "date": "2026-02-24",
+      "league": null,
+      "country": "",
+      "sport": "football",
+      "matchUrl": "",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "D",
+        "D",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "D",
+        "D",
+        "D",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.25,
+        "draw": 3.2,
+        "away": 2.65,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 58,
+        "draw": 16,
+        "away": 25,
+        "votes": 720
+      },
+      "focusTeam": "home"
+    }
+  ]
+}
