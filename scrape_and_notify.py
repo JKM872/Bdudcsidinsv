@@ -587,6 +587,50 @@ def scrape_and_send_email(
                 print(f"\n⚠️ Forebet/SofaScore/Gemini wyłączone - pomijam FAZĘ 2")
         
         # Zapisz finalne wyniki (plik już istnieje jeśli były checkpointy)
+        # ========================================================================
+        # FAZA 2.5: SCORING ENGINE (tylko piłka nożna)
+        # ========================================================================
+        football_qualifying = [
+            r for r in rows
+            if r.get('qualifies')
+            and not ('/tenis/' in str(r.get('match_url', '')).lower()
+                     or 'tennis' in str(r.get('match_url', '')).lower()
+                     or r.get('sport') == 'tennis')
+        ]
+        if football_qualifying:
+            try:
+                from football_scoring_engine import FootballScoringEngine
+                engine = FootballScoringEngine()
+                scored = engine.score_matches(football_qualifying)
+                # Map back scored data to original rows by (home_team, away_team)
+                score_map = {(s.home_team, s.away_team): s for s in scored}
+                _scored_count = 0
+                for row in rows:
+                    key = (row.get('home_team', ''), row.get('away_team', ''))
+                    sm = score_map.get(key)
+                    if sm:
+                        row['scoring_pick'] = sm.best_pick
+                        row['scoring_prob'] = round(sm.best_prob * 100, 1)
+                        row['scoring_ev'] = round(sm.ev, 3)
+                        row['scoring_edge'] = round(sm.edge, 1)
+                        row['scoring_kelly'] = round(sm.kelly, 1)
+                        row['scoring_confidence'] = round(sm.confidence, 0)
+                        row['scoring_data_quality'] = round(sm.data_quality, 2)
+                        row['scoring_prob_home'] = round(sm.cal_home * 100, 1)
+                        row['scoring_prob_draw'] = round(sm.cal_draw * 100, 1)
+                        row['scoring_prob_away'] = round(sm.cal_away * 100, 1)
+                        _scored_count += 1
+                print(f"\n🧠 SCORING ENGINE: {_scored_count} meczów piłkarskich ocenionych")
+                value_bets = [s for s in scored if s.ev > 0]
+                print(f"   Value bets: {len(value_bets)}/{_scored_count}")
+                if scored:
+                    avg_conf = sum(s.confidence for s in scored) / len(scored)
+                    print(f"   Śr. confidence: {avg_conf:.0f}/100")
+            except Exception as e:
+                print(f"\n⚠️ Scoring engine error: {e}")
+        else:
+            print(f"\n⚠️ Brak kwalifikujących się meczów piłkarskich — scoring pominięty")
+
         print("\n💾 Zapisywanie finalnych wyników...")
         
         # 🔧 Upewnij się, że odds_source jest ustawiony (dla emaila)

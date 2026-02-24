@@ -903,6 +903,26 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
         fb_prob = safe_float(fb_prob_raw) if not is_nan_or_none(fb_prob_raw) else None
         fb_exact = safe_value(match.get('forebet_exact_score'), None)
         
+        # SCORING ENGINE - bezpieczne pobieranie
+        sc_pick = safe_value(match.get('scoring_pick'), None)
+        sc_prob_raw = match.get('scoring_prob')
+        sc_prob = safe_float(sc_prob_raw) if not is_nan_or_none(sc_prob_raw) else None
+        sc_ev_raw = match.get('scoring_ev')
+        sc_ev = safe_float(sc_ev_raw) if not is_nan_or_none(sc_ev_raw) else None
+        sc_edge_raw = match.get('scoring_edge')
+        sc_edge = safe_float(sc_edge_raw) if not is_nan_or_none(sc_edge_raw) else None
+        sc_kelly_raw = match.get('scoring_kelly')
+        sc_kelly = safe_float(sc_kelly_raw) if not is_nan_or_none(sc_kelly_raw) else None
+        sc_conf_raw = match.get('scoring_confidence')
+        sc_conf = safe_float(sc_conf_raw) if not is_nan_or_none(sc_conf_raw) else None
+        sc_ph_raw = match.get('scoring_prob_home')
+        sc_ph = safe_float(sc_ph_raw) if not is_nan_or_none(sc_ph_raw) else None
+        sc_pd_raw = match.get('scoring_prob_draw')
+        sc_pd = safe_float(sc_pd_raw) if not is_nan_or_none(sc_pd_raw) else None
+        sc_pa_raw = match.get('scoring_prob_away')
+        sc_pa = safe_float(sc_pa_raw) if not is_nan_or_none(sc_pa_raw) else None
+        has_scoring = sc_pick is not None and sc_prob is not None
+        
         # Kolory podświetlenia
         advantage_icon = '🔥' if form_advantage else ''
         
@@ -985,7 +1005,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
                             <div style="font-size: 14px; font-weight: bold; color: #333;">
                                 {(home if favorite == 'player_a' else (away if favorite == 'player_b' else 'Równi')) if is_tennis else (f'{last_meeting_date} — {last_h2h_score}' if last_h2h_score else (last_meeting_date if last_meeting_date else '—'))}
                             </div>
-                            {f'<div style="font-size: 10px; color: #888; margin-top: 2px;">{last_h2h_home} vs {last_h2h_away}</div>' if last_h2h_score and last_h2h_home and not is_tennis else ''}
+                            {f'<div style="font-size: 10px; color: #888; margin-top: 2px;">🏠 {last_h2h_home} vs {last_h2h_away} ✈️</div>' if last_h2h_score and last_h2h_home and not is_tennis else ''}
                         </div>
                     </div>
                     
@@ -1012,6 +1032,40 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
                     
                     <!-- FOREBET PREDICTION -->
                     {_render_forebet_section(fb_pred, fb_prob, fb_exact) if fb_pred and fb_prob is not None and fb_prob > 0 else ''}
+                    
+                    <!-- SCORING ENGINE -->
+                    {f'''
+                    <div style="margin-bottom: 12px; padding: 12px; background: linear-gradient(135deg, #1a237e 0%, #283593 100%); border-radius: 8px; color: white;">
+                        <div style="font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 8px;">🧠 Scoring Engine (7-source model)</div>
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                            <div style="text-align: center; min-width: 60px;">
+                                <div style="font-size: 20px; font-weight: bold; color: #ffd740;">{sc_pick}</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.6);">TYP</div>
+                            </div>
+                            <div style="text-align: center; min-width: 60px;">
+                                <div style="font-size: 20px; font-weight: bold;">{sc_prob:.0f}%</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.6);">PROB</div>
+                            </div>
+                            <div style="text-align: center; min-width: 60px;">
+                                <div style="font-size: 20px; font-weight: bold; color: {"#69f0ae" if sc_ev and sc_ev > 0 else "#ff5252"};">{f"+{sc_ev:.3f}" if sc_ev and sc_ev > 0 else f"{sc_ev:.3f}" if sc_ev else "—"}</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.6);">EV</div>
+                            </div>
+                            <div style="text-align: center; min-width: 60px;">
+                                <div style="font-size: 20px; font-weight: bold; color: {"#69f0ae" if sc_edge and sc_edge > 0 else "#ff5252"};">{f"+{sc_edge:.1f}" if sc_edge and sc_edge > 0 else f"{sc_edge:.1f}" if sc_edge else "—"}%</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.6);">EDGE</div>
+                            </div>
+                            <div style="text-align: center; min-width: 60px;">
+                                <div style="font-size: 20px; font-weight: bold;">{sc_conf:.0f}</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.6);">CONF</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 8px; text-align: center; font-size: 10px; color: rgba(255,255,255,0.5);">
+                            1: {sc_ph:.0f}% | X: {sc_pd:.0f}% | 2: {sc_pa:.0f}%
+                            {f" | Kelly: {sc_kelly:.1f}%" if sc_kelly and sc_kelly > 0 else ""}
+                        </div>
+                        {f'<div style="margin-top: 6px; text-align: center;"><span style="background: #69f0ae; color: #1a237e; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: bold;">✅ VALUE BET</span></div>' if sc_ev and sc_ev > 0 else ""}
+                    </div>
+                    ''' if has_scoring else ''}
                     
                 </div>
                 

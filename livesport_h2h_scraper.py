@@ -588,6 +588,52 @@ def parse_h2h_from_soup(soup: BeautifulSoup, home_team: str) -> List[Dict]:
     return results
 
 
+# ---------------------------------------------------------------------------
+# H2H helper utilities (module-level so they can be imported & tested)
+# ---------------------------------------------------------------------------
+
+def _parse_h2h_date(d):
+    """Parse DD.MM.YYYY or DD.MM.YY → datetime for sorting."""
+    if not d:
+        return datetime(1900, 1, 1)
+    m = re.search(r'(\d{2})\.(\d{2})\.(\d{2,4})', str(d))
+    if not m:
+        return datetime(1900, 1, 1)
+    day, month, year = m.groups()
+    year_int = int(year)
+    if year_int < 100:
+        year_int = 2000 + year_int if year_int <= 50 else 1900 + year_int
+    try:
+        return datetime(year_int, int(month), int(day))
+    except ValueError:
+        return datetime(1900, 1, 1)
+
+
+def _team_key(name):
+    """Normalize team name for safe comparison."""
+    if not name:
+        return ''
+    k = str(name).lower().strip()
+    k = re.sub(r'\b(fc|cf|ac|as|sk|fk|nk|ks|mks|sc|rc|cd|ud|rcd|ssc|bsc|bv)\b', '', k)
+    k = re.sub(r'[^\w\s]', '', k)
+    k = re.sub(r'\s+', ' ', k).strip()
+    return k
+
+
+def _teams_match(name_a, name_b):
+    """Return True when two names refer to the same team."""
+    if not name_a or not name_b:
+        return False
+    ka, kb = _team_key(name_a), _team_key(name_b)
+    if ka == kb:
+        return True
+    ta, tb = set(ka.split()), set(kb.split())
+    if not ta or not tb:
+        return False
+    overlap = len(ta & tb) / min(len(ta), len(tb))
+    return overlap >= 0.8
+
+
 def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = False, use_forebet: bool = False, use_gemini: bool = False, use_sofascore: bool = False, use_flashscore: bool = False, sport: str = 'football') -> Dict:
     """Odwiedza stronę meczu, otwiera H2H i zwraca informację we właściwym formacie.
     
@@ -823,75 +869,83 @@ def process_match(url: str, driver: webdriver.Chrome, away_team_focus: bool = Fa
 
     # parse H2H
     h2h = parse_h2h_from_soup(soup, out['home_team'] or '')
-    out['h2h_last5'] = h2h
-    
-    # Wyciągnij datę i wynik ostatniego meczu H2H (pierwszy element)
-    if h2h and len(h2h) > 0:
-        out['last_h2h_date'] = h2h[0].get('date', None)
-        out['last_h2h_score'] = h2h[0].get('score', None)
-        out['last_h2h_home'] = h2h[0].get('home', None)
-        out['last_h2h_away'] = h2h[0].get('away', None)
 
-    # count home AND away wins in H2H list
-    # WAŻNE: W zależności od trybu (away_team_focus), liczymy zwycięstwa gospodarzy lub gości
-    cnt_home = 0
-    cnt_away = 0
+    # ------------------------------------------------------------------
+    # SORT H2H BY DATE (descending) so h2h[0] is always the most recent
+    # Uses module-level _parse_h2h_date, _team_key, _teams_match helpers
+    # ------------------------------------------------------------------
+
+    h2h.sort(key=lambda x: _parse_h2h_date(x.get('date', '')), reverse=True)
+    out['h2h_last5'] = h2h
+
+    # ------------------------------------------------------------------
+    # VALIDATE & PICK LAST H2H — only if both H2H teams match today's teams
+    # ------------------------------------------------------------------
     current_home = out['home_team']
     current_away = out['away_team']
-    
+
+    if h2h and len(h2h) > 0:
+        last = h2h[0]
+        lh, la = last.get('home', ''), last.get('away', '')
+        pair_valid = (
+            (_teams_match(lh, current_home) and _teams_match(la, current_away)) or
+            (_teams_match(lh, current_away) and _teams_match(la, current_home))
+        )
+        if pair_valid:
+            # Store ORIGINAL orientation (how the match was actually played)
+            out['last_h2h_date'] = last.get('date', None)
+            out['last_h2h_score'] = last.get('score', None)
+            out['last_h2h_home'] = lh   # actual home team in that past match
+            out['last_h2h_away'] = la   # actual away team in that past match
+        else:
+            logger.warning(
+                'H2H last-match team mismatch: h2h=%s vs %s, today=%s vs %s — skipping',
+                lh, la, current_home, current_away,
+            )
+            out['last_h2h_date'] = None
+            out['last_h2h_score'] = None
+            out['last_h2h_home'] = None
+            out['last_h2h_away'] = None
+    # else: defaults from initialize block stay None
+
+    # ------------------------------------------------------------------
+    # COUNT WINS using canonical matching
+    # ------------------------------------------------------------------
+    cnt_home = 0
+    cnt_away = 0
+
     for item in h2h:
         try:
-            # Pobierz nazwy drużyn i wynik z H2H meczu
             h2h_home = item.get('home', '').strip()
             h2h_away = item.get('away', '').strip()
             score = item.get('score', '')
-            
-            # Parsuj wynik
+
             score_match = re.search(r"(\d+)\s*[:\-]\s*(\d+)", score)
             if not score_match:
                 continue
-            
+
             goals_home_side = int(score_match.group(1))
             goals_away_side = int(score_match.group(2))
-            
-            # Sprawdź który zespół wygrał w tamtym meczu H2H
+
             if goals_home_side > goals_away_side:
                 winner_team = h2h_home
             elif goals_away_side > goals_home_side:
                 winner_team = h2h_away
             else:
-                winner_team = None  # remis
-            
-            # Teraz sprawdź czy zwycięzcą był AKTUALNY GOSPODARZ
-            if winner_team and current_home:
-                winner_normalized = winner_team.lower().strip()
-                current_home_normalized = current_home.lower().strip()
-                
-                if (winner_normalized == current_home_normalized or 
-                    winner_normalized in current_home_normalized or 
-                    current_home_normalized in winner_normalized):
+                winner_team = None  # draw
+
+            if winner_team:
+                if _teams_match(winner_team, current_home):
                     cnt_home += 1
-            
-            # Teraz sprawdź czy zwycięzcą byli AKTUALNI GOŚCIE
-            if winner_team and current_away:
-                winner_normalized = winner_team.lower().strip()
-                current_away_normalized = current_away.lower().strip()
-                
-                if (winner_normalized == current_away_normalized or 
-                    winner_normalized in current_away_normalized or 
-                    current_away_normalized in winner_normalized):
+                elif _teams_match(winner_team, current_away):
                     cnt_away += 1
-                    
+
         except Exception as e:
-            # Fallback: użyj starej heurystyki
-            if item.get('winner') == 'home' and current_home:
-                h2h_home = item.get('home', '').lower().strip()
-                if current_home.lower().strip() in h2h_home or h2h_home in current_home.lower().strip():
-                    cnt_home += 1
-            if item.get('winner') == 'away' and current_away:
-                h2h_away = item.get('away', '').lower().strip()
-                if current_away.lower().strip() in h2h_away or h2h_away in current_away.lower().strip():
-                    cnt_away += 1
+            logger.debug('H2H win-count error: %s', e)
+            if item.get('winner') == 'home' and _teams_match(item.get('home', ''), current_home):
+                cnt_home += 1
+            elif item.get('winner') == 'away' and _teams_match(item.get('away', ''), current_away):
+                cnt_away += 1
 
     out['home_wins_in_h2h_last5'] = cnt_home
     out['away_wins_in_h2h_last5'] = cnt_away
