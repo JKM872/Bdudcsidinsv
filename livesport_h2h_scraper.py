@@ -2341,47 +2341,88 @@ def calculate_surface_stats_from_h2h(
 
 def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
     """
-    Przetwarzanie meczu tenisowego z ZAAWANSOWANĄ logiką multi-factor.
-    
-    LOGIKA ADVANCED (4 czynniki):
-    - H2H (50%): Historia bezpośrednich pojedynków
-    - Ranking (25%): Pozycja ATP/WTA
-    - Forma (15%): Ostatnie 5 meczów
-    - Powierzchnia (10%): Typ kortu (clay/grass/hard)
-    
-    Próg kwalifikacji: ≥50/100 punktów
+    Przetwarzanie meczu tenisowego – silnik v4 (Player A / Player B).
+
+    FAKTORY (wagi z TennisScoringEngine):
+      H2H recency-weighted   0.30
+      Current form            0.25
+      Surface form            0.20
+      Ranking gap             0.15
+      Odds-implied            0.10
+
+    Próg kwalifikacji: ≥45/100 advanced_score.
+    NIE generuje syntetycznych danych – brak danych = neutralne 0.5.
     """
-    out = {
+    out: Dict = {
         'match_url': url,
-        'home_team': None,  # W tenisie: "Zawodnik A" lub "Player 1"
-        'away_team': None,  # W tenisie: "Zawodnik B" lub "Player 2"
+        'home_team': None,          # Player A
+        'away_team': None,          # Player B
         'match_time': None,
         'h2h_last5': [],
-        'home_wins_in_h2h_last5': 0,  # Wygrane zawodnika A
-        'away_wins_in_h2h': 0,         # Wygrane zawodnika B
-        'ranking_a': None,             # Ranking zawodnika A
-        'ranking_b': None,             # Ranking zawodnika B
-        'form_a': [],                  # Forma A: ['W', 'W', 'L', ...]
-        'form_b': [],                  # Forma B: ['W', 'L', 'W', ...]
-        'surface': None,               # Powierzchnia: clay/grass/hard
-        'advanced_score': 0.0,         # Wynik z advanced analyzera
+        'home_wins_in_h2h_last5': 0,   # Player A H2H wins
+        'away_wins_in_h2h_last5': 0,   # Player B H2H wins  ← FIXED field name
+        'ranking_a': None,
+        'ranking_b': None,
+        'form_a': [],
+        'form_b': [],
+        'surface': None,
+        'advanced_score': 0.0,
         'qualifies': False,
-        'home_odds': None,             # Kurs bukmacherski na zawodnika A
-        'away_odds': None,             # Kurs bukmacherski na zawodnika B
+        'home_odds': None,
+        'away_odds': None,
+        # Compatibility fields (always present)
+        'home_form': [],
+        'away_form': [],
+        'home_form_overall': [],
+        'away_form_overall': [],
+        'home_form_home': [],
+        'away_form_away': [],
+        'h2h_count': 0,
+        'win_rate': 0.0,
+        'form_advantage': False,
+        'sport': 'tennis',
+        'focus_team': 'home',
+        'ranking_info': None,
+        'favorite': 'unknown',
     }
 
-    # TENIS: Nawigacja dwuetapowa - najpierw strona meczu, potem find H2H link
-    # Tennis URLs mają parametry ?mid=... które łamią proste dodawanie ścieżki
+    # --- Helper: apply compatibility mapping (runs on EVERY exit path) ---
+    def _finalise(o: Dict) -> Dict:
+        """Set all email-compat fields before returning."""
+        o['home_form'] = o.get('form_a', [])
+        o['away_form'] = o.get('form_b', [])
+        o['home_form_overall'] = o.get('form_a', [])
+        o['away_form_overall'] = o.get('form_b', [])
+        o['home_form_home'] = []
+        o['away_form_away'] = []
+        o['h2h_count'] = len(o.get('h2h_last5', []))
+        o['sport'] = 'tennis'
+        total_h2h = o.get('home_wins_in_h2h_last5', 0) + o.get('away_wins_in_h2h_last5', 0)
+        fav = o.get('favorite', 'unknown')
+        if total_h2h > 0:
+            if fav == 'player_a':
+                o['win_rate'] = o['home_wins_in_h2h_last5'] / total_h2h
+            elif fav == 'player_b':
+                o['win_rate'] = o['away_wins_in_h2h_last5'] / total_h2h
+            else:
+                o['win_rate'] = 0.5
+        else:
+            o['win_rate'] = 0.0
+        o['form_advantage'] = False
+        o['focus_team'] = 'home' if fav == 'player_a' else 'away'
+        if o.get('ranking_a') and o.get('ranking_b'):
+            o['ranking_info'] = f"ATP/WTA: #{o['ranking_a']} vs #{o['ranking_b']}"
+        return o
+
     try:
-        # 🔥 WALIDACJA URL: Zapobiegaj "invalid argument" błędom
         if not url or not isinstance(url, str):
             print(f"   ⚠️ Tennis: Brak URL (None/empty)")
-            return out
+            return _finalise(out)
         
         url = url.strip()
         if not url.startswith('http'):
             print(f"   ⚠️ Tennis: Nieprawidłowy URL: {url[:50]}...")
-            return out
+            return _finalise(out)
         
         # KROK 1: Przejdź do strony meczu
         driver.get(url)
@@ -2412,7 +2453,7 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
             
     except WebDriverException as e:
         print(f"   ⚠️ Błąd nawigacji dla tenisa: {e}")
-        return out
+        return _finalise(out)
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
@@ -2469,7 +2510,7 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
     h2h = parse_h2h_from_soup(soup, out['home_team'] or '')
     out['h2h_last5'] = h2h
 
-    # LOGIKA KWALIFIKACJI DLA TENISA
+    # LOGIKA KWALIFIKACJI DLA TENISA (robust name matching – Phase 4/5)
     player_a = out['home_team']  # Zawodnik A (pierwszy)
     player_b = out['away_team']  # Zawodnik B (drugi)
     
@@ -2482,7 +2523,6 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
             h2h_player2 = item.get('away', '').strip()
             score = item.get('score', '')
             
-            # Parsuj wynik (w tenisie może być np. "6-4, 7-5" lub "2-1" dla setów)
             score_match = re.search(r"(\d+)\s*[:\-]\s*(\d+)", score)
             if not score_match:
                 continue
@@ -2490,218 +2530,124 @@ def process_match_tennis(url: str, driver: webdriver.Chrome) -> Dict:
             sets1 = int(score_match.group(1))
             sets2 = int(score_match.group(2))
             
-            # Kto wygrał ten mecz?
             if sets1 > sets2:
                 winner = h2h_player1
             elif sets2 > sets1:
                 winner = h2h_player2
             else:
-                continue  # remis (nie powinno być w tenisie)
+                continue  # no draws in tennis
             
-            # Normalizacja nazw
-            winner_normalized = winner.lower().strip()
-            player_a_normalized = player_a.lower().strip() if player_a else ''
-            player_b_normalized = player_b.lower().strip() if player_b else ''
-            
-            # Sprawdź kto wygrał (A czy B)
-            if player_a and (winner_normalized == player_a_normalized or 
-                            winner_normalized in player_a_normalized or 
-                            player_a_normalized in winner_normalized):
+            # Robust name matching (same _teams_match as Phase 4 football fix)
+            if player_a and _teams_match(winner, player_a):
                 player_a_wins += 1
-            elif player_b and (winner_normalized == player_b_normalized or 
-                              winner_normalized in player_b_normalized or 
-                              player_b_normalized in winner_normalized):
+            elif player_b and _teams_match(winner, player_b):
                 player_b_wins += 1
                     
-        except Exception as e:
+        except Exception:
             continue
 
     out['home_wins_in_h2h_last5'] = player_a_wins  # Zawodnik A
-    out['away_wins_in_h2h'] = player_b_wins        # Zawodnik B
+    out['away_wins_in_h2h_last5'] = player_b_wins  # Zawodnik B  ← FIXED field name
     out['h2h_count'] = len(h2h)
     
     # ===================================================================
-    # ADVANCED ANALYSIS: Scraping dodatkowych danych
+    # ADDITIONAL DATA EXTRACTION (real data only, NO synthetics)
     # ===================================================================
     
-    # 1. RANKING - wydobądź z tekstu strony
+    # 1. RANKING
     out['ranking_a'] = extract_player_ranking(soup, player_a)
     out['ranking_b'] = extract_player_ranking(soup, player_b)
     
-    # 2. POWIERZCHNIA - wykryj z nazwy turnieju/URL
+    # 2. SURFACE
     out['surface'] = detect_tennis_surface(soup, url)
     
-    # 3. FORMA - wydobądź ostatnie wyniki (jeśli dostępne)
-    # Note: To wymaga dodatkowych requestów, więc na razie używamy uproszczonej wersji
-    out['form_a'] = extract_player_form_simple(soup, player_a, h2h)
-    out['form_b'] = extract_player_form_simple(soup, player_b, h2h)
+    # 3. FORM — REAL form badges only (no fake defaults)
+    out['form_a'] = _extract_real_form_badges(soup, player_a)
+    out['form_b'] = _extract_real_form_badges(soup, player_b)
     
-    # 4. KURSY BUKMACHERSKIE - dodatkowa informacja (NIE wpływa na scoring!)
+    # 4. ODDS
     odds = extract_betting_odds(soup)
     out['home_odds'] = odds['home_odds']
     out['away_odds'] = odds['away_odds']
     
     # ===================================================================
-    # ADVANCED SCORING: Multi-factor analysis
+    # SCORING: Tennis Scoring Engine v4
     # ===================================================================
     
-    # WALIDACJA: Sprawdź czy mamy wymagane dane
     if not player_a or not player_b:
         print(f"   ⚠️ Tennis: Brak nazw zawodników (A: {player_a}, B: {player_b})")
-        out['qualifies'] = False
-        out['advanced_score'] = 0.0
-        return out
-    
-    # Walidacja H2H - jeśli brak, użyj fallback opartego na rankingu
-    if len(h2h) == 0:
-        print(f"   ⚠️ Tennis: Brak danych H2H - używam fallback logic (tylko ranking)")
-        # Fallback: użyj tylko ranking jeśli dostępny
-        if out['ranking_a'] and out['ranking_b']:
-            ranking_diff = abs(out['ranking_a'] - out['ranking_b'])
-            # Jeśli duża różnica w rankingu (≥20 miejsc), kwalifikuj
-            out['qualifies'] = ranking_diff >= 20
-            out['advanced_score'] = ranking_diff * 0.5  # Przybliżony score
-            if out['ranking_a'] < out['ranking_b']:
-                out['favorite'] = 'player_a'
-            else:
-                out['favorite'] = 'player_b'
-            print(f"   📊 Ranking fallback: diff={ranking_diff}, score={out['advanced_score']:.1f}, qualifies={out['qualifies']}")
-        else:
-            out['qualifies'] = False
-            out['advanced_score'] = 0.0
-            print(f"   ❌ Brak H2H i rankingu - nie można ocenić meczu")
-        return out
+        return _finalise(out)
     
     try:
-        from tennis_advanced import TennisMatchAnalyzer
-        
-        analyzer = TennisMatchAnalyzer()
-        
-        # Przygotuj dane H2H
-        h2h_data = {
-            'player_a_wins': player_a_wins,
-            'player_b_wins': player_b_wins,
-            'total': len(h2h)
-        }
-        
-        # Surface stats - uproszczona wersja (obliczamy z dostępnych H2H + ranking)
-        surface_stats_a = calculate_surface_stats_from_h2h(h2h, player_a, out['surface'], out['ranking_a'])
-        surface_stats_b = calculate_surface_stats_from_h2h(h2h, player_b, out['surface'], out['ranking_b'])
-        
-        # Analiza
-        analysis = analyzer.analyze_match(
-            player_a=player_a or 'Player A',
-            player_b=player_b or 'Player B',
-            h2h_data=h2h_data,
-            ranking_a=out['ranking_a'],
-            ranking_b=out['ranking_b'],
-            form_a=out['form_a'] if out['form_a'] else None,
-            form_b=out['form_b'] if out['form_b'] else None,
-            surface=out['surface'],
-            surface_stats_a=surface_stats_a if out['surface'] else None,
-            surface_stats_b=surface_stats_b if out['surface'] else None
-        )
-        
-        # Zapisz wyniki
-        out['advanced_score'] = abs(analysis['total_score'])  # Zawsze wartość bezwzględna
-        out['raw_score'] = analysis['total_score']  # Zachowaj oryginalny znak dla debugowania
-        out['qualifies'] = analysis['qualifies']
-        out['score_breakdown'] = analysis['breakdown']
-        out['favorite'] = analysis['details'].get('favorite', 'unknown')  # Kto jest faworytem
-        
-        # Szczegółowe logowanie scoringu
-        breakdown = analysis.get('breakdown', {})
-        if analysis.get('qualifies'):
-            print(f"   ✅ Tennis QUALIFIES! Score: {out['advanced_score']:.1f}/100")
-            print(f"      Breakdown: H2H={breakdown.get('h2h_score', 0):.1f}, "
-                  f"Ranking={breakdown.get('ranking_score', 0):.1f}, "
-                  f"Form={breakdown.get('form_score', 0):.1f}, "
-                  f"Surface={breakdown.get('surface_score', 0):.1f}")
-            print(f"      Favorite: {out.get('favorite', 'unknown')}")
+        from tennis_scoring_engine import TennisScoringEngine
+
+        engine = TennisScoringEngine()
+        scored = engine.score_match(out)
+
+        out['advanced_score'] = scored.advanced_score
+        out['qualifies'] = scored.advanced_score >= engine.threshold
+        out['favorite'] = scored.favorite
+        out['prob_a'] = scored.prob_a
+        out['prob_b'] = scored.prob_b
+        out['cal_a'] = scored.cal_a
+        out['cal_b'] = scored.cal_b
+        out['best_pick'] = scored.best_pick
+        out['best_prob'] = scored.best_prob
+        out['best_odds'] = scored.best_odds
+        out['ev'] = scored.ev
+        out['edge'] = scored.edge
+        out['kelly'] = scored.kelly
+        out['confidence'] = scored.confidence
+        out['data_quality'] = scored.data_quality
+        out['score_breakdown'] = scored.breakdown
+
+        if out['qualifies']:
+            print(f"   ✅ Tennis QUALIFIES! Score: {scored.advanced_score:.1f}/100  "
+                  f"pick={scored.best_pick}  P={scored.best_prob:.0%}  "
+                  f"EV={scored.ev:+.3f}  edge={scored.edge:+.1f}%  "
+                  f"dq={scored.data_quality:.0%}")
         else:
-            print(f"   ❌ Tennis NIE kwalifikuje: Score: {out['advanced_score']:.1f}/100 "
-                  f"(threshold: {analyzer.config['threshold']})")
-            print(f"      Breakdown: H2H={breakdown.get('h2h_score', 0):.1f}, "
-                  f"Ranking={breakdown.get('ranking_score', 0):.1f}, "
-                  f"Form={breakdown.get('form_score', 0):.1f}, "
-                  f"Surface={breakdown.get('surface_score', 0):.1f}")
-        
+            print(f"   ❌ Tennis nie kwalifikuje: Score: {scored.advanced_score:.1f}/100 "
+                  f"(threshold: {engine.threshold})  dq={scored.data_quality:.0%}")
+
     except Exception as e:
-        # Fallback do prostej logiki jeśli advanced analysis nie działa
-        print(f"   ⚠️ Advanced analysis error: {e}, using basic logic")
-        
-        # Ulepszona fallback logic: H2H + ranking
+        print(f"   ⚠️ Tennis scoring engine error: {e}, using basic logic")
+
+        # Minimal fallback – no synthetic data, just H2H + ranking
         fallback_score = 0.0
-        
-        # 1. H2H (50% wagi) - 10 pkt za każdą wygraną różnicy
         if player_a_wins > 0 or player_b_wins > 0:
-            h2h_advantage = player_a_wins - player_b_wins
-            fallback_score += h2h_advantage * 10.0
-        
-        # 2. Ranking (25% wagi) - 0.5 pkt za każde miejsce różnicy
+            fallback_score += (player_a_wins - player_b_wins) * 10.0
         if out['ranking_a'] and out['ranking_b']:
-            ranking_diff = abs(out['ranking_a'] - out['ranking_b'])
-            if out['ranking_a'] < out['ranking_b']:  # A lepszy (niższy numer = lepszy)
-                fallback_score += ranking_diff * 0.5
-            else:  # B lepszy
-                fallback_score -= ranking_diff * 0.5
-        
-        # Kwalifikacja: abs(score) >= 50 (zgodnie z threshold)
-        out['qualifies'] = abs(fallback_score) >= 50.0
+            rdiff = out['ranking_b'] - out['ranking_a']  # >0 = A better
+            fallback_score += rdiff * 0.5
+
         out['advanced_score'] = abs(fallback_score)
-        out['raw_score'] = fallback_score
-        
-        # Ustal faworyta
+        out['qualifies'] = abs(fallback_score) >= 45.0
         if fallback_score > 0:
             out['favorite'] = 'player_a'
         elif fallback_score < 0:
             out['favorite'] = 'player_b'
         else:
-            out['favorite'] = 'even'
-        
-        print(f"   📊 Fallback score: {fallback_score:.1f} -> abs={out['advanced_score']:.1f} (qualifies: {out['qualifies']})")
+            out['favorite'] = 'unknown'
+        print(f"   📊 Fallback score: {abs(fallback_score):.1f} (qualifies: {out['qualifies']})")
 
-    # ===================================================================
-    # MAPOWANIE PÓL DLA KOMPATYBILNOŚCI Z EMAIL_NOTIFIER
-    # Tennis używa form_a/form_b, ale email_notifier oczekuje home_form/away_form
-    # ===================================================================
-    
-    # Mapowanie formy
-    out['home_form'] = out.get('form_a', [])
-    out['away_form'] = out.get('form_b', [])
-    out['home_form_overall'] = out.get('form_a', [])
-    out['away_form_overall'] = out.get('form_b', [])
-    out['home_form_home'] = []  # Tenis nie ma rozróżnienia na u siebie/na wyjeździe
-    out['away_form_away'] = []
-    
-    # Mapowanie H2H - email używa tych pól
-    out['h2h_count'] = len(out.get('h2h_last5', []))
-    
-    # win_rate dla email (kalkulacja)
-    total_h2h = out.get('home_wins_in_h2h_last5', 0) + out.get('away_wins_in_h2h', 0)
-    if total_h2h > 0:
-        # Dla tenisa: win_rate = faworyt / total
-        favorite = out.get('favorite', 'unknown')
-        if favorite == 'player_a':
-            out['win_rate'] = out['home_wins_in_h2h_last5'] / total_h2h
-        elif favorite == 'player_b':
-            out['win_rate'] = out['away_wins_in_h2h'] / total_h2h
-        else:
-            out['win_rate'] = 0.5
-    else:
-        out['win_rate'] = 0.0
-    
-    # Dodatkowe pola dla email
-    out['form_advantage'] = False  # Tenis nie używa tego samego systemu
-    out['sport'] = 'tennis'  # Oznacz sport
-    out['focus_team'] = 'home' if out.get('favorite') == 'player_a' else 'away'
-    
-    # Ranking info dla wyświetlania w mailu
-    out['ranking_info'] = None
-    if out.get('ranking_a') and out.get('ranking_b'):
-        out['ranking_info'] = f"ATP/WTA: #{out['ranking_a']} vs #{out['ranking_b']}"
+    return _finalise(out)
 
-    return out
+
+def _extract_real_form_badges(soup: BeautifulSoup, player_name: str) -> List[str]:
+    """Extract REAL form W/L badges from Livesport HTML.  Returns empty list if unavailable."""
+    if not player_name:
+        return []
+    try:
+        form_indicators = soup.select('div.form, span.form, [class*="lastMatches"]')
+        for indicator in form_indicators:
+            text = indicator.get_text(strip=True).upper()
+            form_chars = [c for c in text if c in ('W', 'L')]
+            if len(form_chars) >= 3:
+                return form_chars[:5]
+    except Exception:
+        pass
+    return []
 
 
 def _accept_cookies_on_page(driver: webdriver.Chrome):

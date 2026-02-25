@@ -260,7 +260,7 @@ def scrape_and_send_email(
                             qualifying_count += 1
                             qualifying_indices.append(len(rows) - 1)
                             player_a_wins = info['home_wins_in_h2h_last5']
-                            player_b_wins = info.get('away_wins_in_h2h', 0)
+                            player_b_wins = info.get('away_wins_in_h2h_last5', 0)
                             advanced_score = info.get('advanced_score', 0)
                             favorite = info.get('favorite', 'unknown')
                             
@@ -276,7 +276,7 @@ def scrape_and_send_email(
                             print(f"      Faworytem: {fav_name} (Score: {advanced_score:.1f}/100)")
                         else:
                             player_a_wins = info['home_wins_in_h2h_last5']
-                            player_b_wins = info.get('away_wins_in_h2h', 0)
+                            player_b_wins = info.get('away_wins_in_h2h_last5', 0)
                             advanced_score = info.get('advanced_score', 0)
                             print(f"   ❌ Nie kwalifikuje (Score: {advanced_score:.1f}/100, H2H: {player_a_wins}-{player_b_wins})")
                         
@@ -401,7 +401,7 @@ def scrape_and_send_email(
                 print(f"         Advanced score: {sample.get('advanced_score', 'N/A')}")
                 print(f"         Ranking A: {sample.get('ranking_a', 'N/A')}, B: {sample.get('ranking_b', 'N/A')}")
                 print(f"         Form A: {sample.get('form_a', sample.get('home_form', 'N/A'))}")
-                print(f"         H2H: {sample.get('home_wins_in_h2h_last5', 0)}-{sample.get('away_wins_in_h2h', 0)}")
+                print(f"         H2H: {sample.get('home_wins_in_h2h_last5', 0)}-{sample.get('away_wins_in_h2h_last5', 0)}")
         
         # 🏐 VOLLEYBALL SUMMARY
         if 'volleyball' in sports:
@@ -631,6 +631,40 @@ def scrape_and_send_email(
         else:
             print(f"\n⚠️ Brak kwalifikujących się meczów piłkarskich — scoring pominięty")
 
+        # ========================================================================
+        # FAZA 2.5b: TENNIS SCORING ENGINE
+        # ========================================================================
+        tennis_rows = [
+            r for r in rows
+            if r.get('sport') == 'tennis'
+            or '/tenis/' in str(r.get('match_url', '')).lower()
+            or 'tennis' in str(r.get('match_url', '')).lower()
+        ]
+        if tennis_rows:
+            try:
+                from tennis_scoring_engine import TennisScoringEngine
+                tengine = TennisScoringEngine()
+                _tscored = 0
+                for row in tennis_rows:
+                    sm = tengine.score_match(row)
+                    row['scoring_pick'] = sm.best_pick
+                    row['scoring_prob'] = round(sm.best_prob * 100, 1)
+                    row['scoring_ev'] = round(sm.ev, 3)
+                    row['scoring_edge'] = round(sm.edge, 1)
+                    row['scoring_kelly'] = round(sm.kelly, 1)
+                    row['scoring_confidence'] = round(sm.confidence, 0)
+                    row['scoring_data_quality'] = round(sm.data_quality, 2)
+                    row['scoring_prob_a'] = round(sm.cal_a * 100, 1)
+                    row['scoring_prob_b'] = round(sm.cal_b * 100, 1)
+                    _tscored += 1
+                print(f"\n🎾 TENNIS SCORING: {_tscored} meczów tenisowych ocenionych")
+                t_value = sum(1 for r in tennis_rows if r.get('scoring_ev', 0) > 0)
+                print(f"   Value bets: {t_value}/{_tscored}")
+            except Exception as e:
+                print(f"\n⚠️ Tennis scoring engine error: {e}")
+        else:
+            print(f"\n⚠️ Brak meczów tenisowych — tennis scoring pominięty")
+
         print("\n💾 Zapisywanie finalnych wyników...")
         
         # 🔧 Upewnij się, że odds_source jest ustawiony (dla emaila)
@@ -696,15 +730,15 @@ def scrape_and_send_email(
         frontend_matches = []
         for row in rows:
             match_data = {
-                'id': hash(f"{row.get('home_team', '')}_{row.get('away_team', '')}_{row.get('time', '')}"),
+                'id': hash(f"{row.get('home_team', '')}_{row.get('away_team', '')}_{row.get('match_time', row.get('time', ''))}"),
                 'homeTeam': row.get('home_team', ''),
                 'awayTeam': row.get('away_team', ''),
-                'time': row.get('time', ''),
+                'time': row.get('match_time', row.get('time', '')),
                 'date': date,
                 'league': row.get('league', row.get('tournament', '')),
                 'country': row.get('country', ''),
                 'sport': sport_suffix if len(sports) == 1 else row.get('sport', 'football'),
-                'matchUrl': row.get('url', ''),
+                'matchUrl': row.get('match_url', row.get('url', '')),
                 'qualifies': row.get('qualifies', False),
                 # H2H
                 'h2h': {
@@ -731,7 +765,7 @@ def scrape_and_send_email(
                 'forebet': {
                     'prediction': clean_for_json(row.get('forebet_prediction')),
                     'probability': clean_for_json(row.get('forebet_probability')),
-                    'exactScore': clean_for_json(row.get('forebet_score')),
+                    'exactScore': clean_for_json(row.get('forebet_exact_score', row.get('forebet_score'))),
                     'overUnder': clean_for_json(row.get('forebet_over_under')),
                     'btts': clean_for_json(row.get('forebet_btts'))
                 } if clean_for_json(row.get('forebet_prediction')) else None,
@@ -743,7 +777,25 @@ def scrape_and_send_email(
                     'votes': clean_for_json(row.get('sofascore_total_votes', 0))
                 } if clean_for_json(row.get('sofascore_home_win_prob')) else None,
                 # Focus
-                'focusTeam': 'away' if away_team_focus else 'home'
+                'focusTeam': row.get('focus_team', 'away' if away_team_focus else 'home'),
+                # Scoring engine output (both football and tennis)
+                'scoring': {
+                    'pick': row.get('scoring_pick', ''),
+                    'prob': row.get('scoring_prob', 0),
+                    'ev': row.get('scoring_ev', 0),
+                    'edge': row.get('scoring_edge', 0),
+                    'kelly': row.get('scoring_kelly', 0),
+                    'confidence': row.get('scoring_confidence', 0),
+                    'dataQuality': row.get('scoring_data_quality', 0),
+                } if row.get('scoring_pick') else None,
+                # Tennis-specific metadata
+                'tennis': {
+                    'surface': row.get('surface', ''),
+                    'rankingA': row.get('ranking_a'),
+                    'rankingB': row.get('ranking_b'),
+                    'probA': row.get('scoring_prob_a', 0),
+                    'probB': row.get('scoring_prob_b', 0),
+                } if row.get('sport') == 'tennis' else None,
             }
             frontend_matches.append(match_data)
         

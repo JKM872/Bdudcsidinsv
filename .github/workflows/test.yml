@@ -67,6 +67,14 @@ jobs:
       run: |
         python -m pytest test_scoring_engine.py -v
     
+    - name: Test Tennis Scoring Engine (regression tests)
+      run: |
+        python -m pytest test_tennis_scoring_engine.py -v
+    
+    - name: Test Tennis Fixes (field names, no synthetics)
+      run: |
+        python -m pytest test_tennis_fixes.py -v
+    
     - name: Test FlashScore Odds Scraper (unit tests)
       run: |
         python test_flashscore.py

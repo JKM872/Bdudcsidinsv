@@ -1,0 +1,597 @@
+"""
+🎾 TENNIS SCORING ENGINE v4
+============================
+Unified probability model for tennis — Player A / Player B semantics.
+NO home/away bias.  Two-outcome only (no draw in tennis).
+
+Factors (weights sum to 1.0):
+  H2H recency-weighted   0.30
+  Current form            0.25
+  Surface form            0.20
+  Ranking gap             0.15
+  Odds-implied            0.10
+
+Qualification threshold: 45/100 advanced_score  (configurable)
+
+Outputs per match:
+  prob_a, prob_b          calibrated win probabilities (sum ≈ 1)
+  best_pick               'A' or 'B'
+  ev, edge, kelly         value metrics (when odds available)
+  confidence              0-100 composite
+  data_quality            0-1
+  breakdown               per-factor detail dict
+"""
+
+from __future__ import annotations
+import math
+import re
+import json
+import os
+from dataclasses import dataclass, field
+from datetime import datetime, timedelta
+from typing import Dict, List, Optional, Tuple
+
+# ---------------------------------------------------------------------------
+# Output dataclass
+# ---------------------------------------------------------------------------
+
+@dataclass
+class ScoredTennisMatch:
+    """Full output of the tennis scoring engine for a single match."""
+    player_a: str
+    player_b: str
+
+    # Raw probability estimates (sum to 1.0)
+    prob_a: float = 0.5
+    prob_b: float = 0.5
+
+    # Calibrated probabilities
+    cal_a: float = 0.5
+    cal_b: float = 0.5
+
+    # Best pick
+    best_pick: str = ''        # 'A' or 'B'
+    best_prob: float = 0.5
+    best_odds: float = 0.0
+    favorite: str = ''         # 'player_a' or 'player_b'
+
+    # Value metrics
+    ev: float = 0.0
+    edge: float = 0.0
+    kelly: float = 0.0
+
+    # Confidence / quality
+    advanced_score: float = 0.0   # 0-100 (replaces old advanced_score)
+    confidence: float = 0.0       # 0-100
+    data_quality: float = 0.0     # 0-1
+
+    # Factor breakdown
+    breakdown: Dict = field(default_factory=dict)
+    features: Dict = field(default_factory=dict)
+
+    # Surface / ranking metadata (for display)
+    surface: str = ''
+    ranking_a: Optional[int] = None
+    ranking_b: Optional[int] = None
+
+
+# ---------------------------------------------------------------------------
+# Utility helpers
+# ---------------------------------------------------------------------------
+
+def _sf(val, default: float = 0.0) -> float:
+    """Safe float."""
+    if val is None:
+        return default
+    if isinstance(val, float) and (math.isnan(val) or math.isinf(val)):
+        return default
+    try:
+        v = float(val)
+        return default if (math.isnan(v) or math.isinf(v)) else v
+    except (ValueError, TypeError):
+        return default
+
+
+def _parse_form_list(raw) -> List[str]:
+    """Normalise form data to list of 'W'/'L' (no draws in tennis)."""
+    if isinstance(raw, list):
+        out = []
+        for x in raw:
+            c = str(x).upper()[:1]
+            if c in ('W', 'L'):
+                out.append(c)
+            elif c == 'D':
+                out.append('L')   # no draws in tennis
+        return out
+    if isinstance(raw, str):
+        raw = raw.replace('[', '').replace(']', '').replace("'", '').replace('"', '')
+        tokens = re.split(r'[,\s]+', raw)
+        return [t.strip().upper()[:1] for t in tokens if t.strip().upper()[:1] in ('W', 'L')]
+    return []
+
+
+def _form_score(form: List[str], decay: float = 0.85) -> float:
+    """Time-weighted form score, newest first.  Returns 0-1."""
+    if not form:
+        return 0.5
+    pts_map = {'W': 1.0, 'L': 0.0}
+    total_w, total_pts = 0.0, 0.0
+    for i, r in enumerate(form[:10]):
+        w = decay ** i
+        total_w += w
+        total_pts += w * pts_map.get(r, 0.5)
+    return total_pts / total_w if total_w > 0 else 0.5
+
+
+def _streak_len(form: List[str], char: str = 'W') -> int:
+    """Length of leading streak of `char` in form."""
+    n = 0
+    for r in form:
+        if r == char:
+            n += 1
+        else:
+            break
+    return n
+
+
+def _recency_h2h(h2h_list: List[Dict], player_a: str, player_b: str) -> Tuple[float, int]:
+    """
+    Recency-weighted H2H win-rate for player A.
+    Returns (win_rate_a, count).
+    """
+    if not h2h_list or not player_a:
+        return 0.5, 0
+
+    pa = player_a.lower().strip()
+    pb = (player_b or '').lower().strip()
+    now = datetime.now()
+    wins_a, total_w = 0.0, 0.0
+
+    for entry in h2h_list[:10]:
+        # determine weight by recency
+        date_str = entry.get('date', '')
+        w = 1.0
+        if date_str:
+            m = re.search(r'(\d{2})\.(\d{2})\.(\d{2,4})', str(date_str))
+            if m:
+                d, mo, y = m.groups()
+                yr = int(y)
+                if yr < 100:
+                    yr = 2000 + yr if yr <= 50 else 1900 + yr
+                try:
+                    dt = datetime(yr, int(mo), int(d))
+                    age_days = (now - dt).days
+                    if age_days < 180:
+                        w = 2.0
+                    elif age_days < 365:
+                        w = 1.5
+                    else:
+                        w = max(0.5, 1.0 - age_days / 3650)
+                except ValueError:
+                    pass
+
+        # determine who won
+        home = (entry.get('home', '') or '').lower().strip()
+        away = (entry.get('away', '') or '').lower().strip()
+        score = entry.get('score', '')
+        sm = re.search(r'(\d+)\s*[:\-]\s*(\d+)', str(score))
+        if not sm:
+            continue
+        s1, s2 = int(sm.group(1)), int(sm.group(2))
+        if s1 == s2:
+            continue
+
+        winner_is_home = s1 > s2
+
+        a_is_home = (pa in home or home in pa) if pa and home else False
+        a_is_away = (pa in away or away in pa) if pa and away else False
+
+        if not a_is_home and not a_is_away:
+            continue
+
+        total_w += w
+        if (a_is_home and winner_is_home) or (a_is_away and not winner_is_home):
+            wins_a += w
+
+    if total_w == 0:
+        return 0.5, 0
+    return wins_a / total_w, len(h2h_list)
+
+
+# ---------------------------------------------------------------------------
+# Feature Extractor
+# ---------------------------------------------------------------------------
+
+class TennisFeatureExtractor:
+    """Extract normalised features from a single tennis match dict."""
+
+    def extract(self, m: Dict) -> Dict[str, float]:
+        f: Dict[str, float] = {}
+        available = 0
+        total_features = 5   # h2h, form, surface_form, ranking, odds
+
+        player_a = m.get('home_team', '') or ''
+        player_b = m.get('away_team', '') or ''
+
+        # 1. H2H recency-weighted
+        h2h_list = m.get('h2h_last5', [])
+        if isinstance(h2h_list, list) and h2h_list:
+            wr, cnt = _recency_h2h(h2h_list, player_a, player_b)
+            f['h2h_win_rate_a'] = wr
+            f['h2h_count'] = min(cnt / 5.0, 1.0)
+            available += 1
+        else:
+            # fallback to simple counts
+            a_wins = _sf(m.get('home_wins_in_h2h_last5', m.get('home_wins_in_h2h', 0)))
+            b_wins = _sf(m.get('away_wins_in_h2h_last5', m.get('away_wins_in_h2h', 0)))
+            total = a_wins + b_wins
+            f['h2h_win_rate_a'] = a_wins / total if total > 0 else 0.5
+            f['h2h_count'] = min(total / 5.0, 1.0)
+            if total > 0:
+                available += 1
+
+        # 2. Current form
+        form_a = _parse_form_list(m.get('form_a', m.get('home_form', [])))
+        form_b = _parse_form_list(m.get('form_b', m.get('away_form', [])))
+        f['form_a'] = _form_score(form_a)
+        f['form_b'] = _form_score(form_b)
+        f['form_advantage'] = f['form_a'] - f['form_b']  # >0 = A better
+        f['streak_a'] = _streak_len(form_a, 'W') / 5.0
+        f['streak_b'] = _streak_len(form_b, 'W') / 5.0
+        if form_a or form_b:
+            available += 1
+
+        # 3. Surface form (approximate from available data)
+        surface = m.get('surface', '')
+        surface_stats_a = m.get('surface_stats_a')
+        surface_stats_b = m.get('surface_stats_b')
+        if surface and surface_stats_a and surface_stats_b:
+            sa = _sf(surface_stats_a.get(surface, 0.5))
+            sb = _sf(surface_stats_b.get(surface, 0.5))
+            f['surface_wr_a'] = sa
+            f['surface_wr_b'] = sb
+            f['surface_advantage'] = sa - sb
+            available += 1
+        else:
+            f['surface_wr_a'] = 0.5
+            f['surface_wr_b'] = 0.5
+            f['surface_advantage'] = 0.0
+
+        # 4. Ranking gap
+        rank_a = m.get('ranking_a')
+        rank_b = m.get('ranking_b')
+        if rank_a and rank_b:
+            ra, rb = int(rank_a), int(rank_b)
+            # normalise: negative gap = A has lower (better) ranking
+            gap = rb - ra   # positive = A better
+            # sigmoid-like mapping to [0, 1]
+            f['ranking_advantage'] = gap / (abs(gap) + 20)  # smooth, bounded ±1
+            f['ranking_a_norm'] = max(0, 1 - ra / 200)
+            f['ranking_b_norm'] = max(0, 1 - rb / 200)
+            available += 1
+        else:
+            f['ranking_advantage'] = 0.0
+            f['ranking_a_norm'] = 0.5
+            f['ranking_b_norm'] = 0.5
+
+        # 5. Odds-implied probability
+        odds_a = _sf(m.get('home_odds', 0))
+        odds_b = _sf(m.get('away_odds', 0))
+        if odds_a > 1 and odds_b > 1:
+            raw_a = 1 / odds_a
+            raw_b = 1 / odds_b
+            total = raw_a + raw_b
+            f['odds_prob_a'] = raw_a / total
+            f['odds_prob_b'] = raw_b / total
+            f['odds_a'] = odds_a
+            f['odds_b'] = odds_b
+            available += 1
+        else:
+            f['odds_prob_a'] = 0.5
+            f['odds_prob_b'] = 0.5
+            f['odds_a'] = 0.0
+            f['odds_b'] = 0.0
+
+        f['_data_quality'] = available / total_features
+        return f
+
+
+# ---------------------------------------------------------------------------
+# Engine
+# ---------------------------------------------------------------------------
+
+DEFAULT_WEIGHTS = {
+    'h2h':          0.30,
+    'form':         0.25,
+    'surface_form': 0.20,
+    'ranking':      0.15,
+    'odds':         0.10,
+}
+
+
+class TennisScoringEngine:
+    """
+    Multi-factor probability model for tennis.
+    Two-outcome only (A wins / B wins).
+    Threshold for qualification: advanced_score ≥ 45.
+    """
+
+    CALIBRATION_FILE = 'outputs/tennis_calibration.json'
+    THRESHOLD = 45.0
+
+    def __init__(self, weights: Dict[str, float] = None, threshold: float = None):
+        self.weights = weights or dict(DEFAULT_WEIGHTS)
+        self.threshold = threshold or self.THRESHOLD
+        self.extractor = TennisFeatureExtractor()
+        self._load_calibration()
+
+    def _load_calibration(self):
+        self.calibration = {}
+        try:
+            if os.path.exists(self.CALIBRATION_FILE):
+                with open(self.CALIBRATION_FILE) as fh:
+                    self.calibration = json.load(fh)
+                    if 'weights' in self.calibration:
+                        self.weights = self.calibration['weights']
+        except Exception:
+            pass
+
+    # ------------------------------------------------------------------
+    def score_match(self, match: Dict) -> ScoredTennisMatch:
+        feats = self.extractor.extract(match)
+        w = self.weights
+
+        # --- Per-source probability estimate for A winning ---
+        estimates: Dict[str, float] = {}
+
+        # H2H
+        wr = feats['h2h_win_rate_a']
+        estimates['h2h'] = wr
+
+        # Form
+        fa, fb = feats['form_a'], feats['form_b']
+        if fa + fb > 0:
+            form_p = fa / (fa + fb)
+        else:
+            form_p = 0.5
+        # add streak bonus ± 0.05
+        form_p += (feats['streak_a'] - feats['streak_b']) * 0.05
+        form_p = max(0.05, min(0.95, form_p))
+        estimates['form'] = form_p
+
+        # Surface form
+        sa = feats['surface_wr_a']
+        sb = feats['surface_wr_b']
+        if sa + sb > 0:
+            surf_p = sa / (sa + sb)
+        else:
+            surf_p = 0.5
+        estimates['surface_form'] = max(0.05, min(0.95, surf_p))
+
+        # Ranking
+        rank_adv = feats['ranking_advantage']  # [-1,+1], >0 = A better
+        rank_p = 0.5 + rank_adv * 0.35         # maps roughly to [0.15, 0.85]
+        estimates['ranking'] = max(0.05, min(0.95, rank_p))
+
+        # Odds
+        estimates['odds'] = feats['odds_prob_a']
+
+        # --- Weighted average ---
+        prob_a = sum(estimates[k] * w[k] for k in w)
+        prob_a = max(0.02, min(0.98, prob_a))
+        prob_b = 1.0 - prob_a
+
+        # --- Temperature-scaled softmax calibration ---
+        temp = self.calibration.get('temperature', 1.10)
+        cal_a, cal_b = self._calibrate(prob_a, prob_b, temp)
+
+        # --- Best pick ---
+        if cal_a >= cal_b:
+            best_pick = 'A'
+            best_prob = cal_a
+            best_odds = feats['odds_a']
+            favorite = 'player_a'
+        else:
+            best_pick = 'B'
+            best_prob = cal_b
+            best_odds = feats['odds_b']
+            favorite = 'player_b'
+
+        # --- EV / edge / Kelly ---
+        ev, edge, kelly = 0.0, 0.0, 0.0
+        if best_odds > 1:
+            implied = 1.0 / best_odds
+            ev = best_prob * best_odds - 1.0
+            edge = (best_prob - implied) * 100
+            if best_prob > implied and best_odds > 1:
+                kelly = max(0, (best_prob * best_odds - 1) / (best_odds - 1)) * 100
+                kelly = min(kelly, 25.0)  # cap
+
+        # --- Advanced score (0-100) ---
+        # Based on how dominant the prediction is
+        dominance = abs(cal_a - cal_b)  # 0 to ~0.96
+        advanced_score = dominance * 100  # scale to 0-100
+        # Boost for data richness
+        dq = feats['_data_quality']
+        advanced_score = advanced_score * (0.5 + 0.5 * dq)
+        advanced_score = min(100, max(0, advanced_score))
+
+        qualifies = advanced_score >= self.threshold
+
+        # --- Confidence ---
+        conf = (
+            best_prob * 40
+            + dq * 30
+            + min(max(edge, 0), 20) / 20 * 20
+            + (10 if ev > 0 else 0)
+        )
+        conf = min(100, max(0, conf))
+
+        # --- Build breakdown ---
+        breakdown = {}
+        for k in w:
+            breakdown[f'{k}_estimate'] = round(estimates[k], 3)
+            breakdown[f'{k}_weight'] = w[k]
+            breakdown[f'{k}_contribution'] = round(estimates[k] * w[k], 3)
+
+        return ScoredTennisMatch(
+            player_a=match.get('home_team', ''),
+            player_b=match.get('away_team', ''),
+            prob_a=round(prob_a, 4),
+            prob_b=round(prob_b, 4),
+            cal_a=round(cal_a, 4),
+            cal_b=round(cal_b, 4),
+            best_pick=best_pick,
+            best_prob=round(best_prob, 4),
+            best_odds=round(best_odds, 2) if best_odds else 0.0,
+            favorite=favorite,
+            ev=round(ev, 4),
+            edge=round(edge, 2),
+            kelly=round(kelly, 2),
+            advanced_score=round(advanced_score, 1),
+            confidence=round(conf, 1),
+            data_quality=round(dq, 2),
+            breakdown=breakdown,
+            features=feats,
+            surface=match.get('surface', ''),
+            ranking_a=match.get('ranking_a'),
+            ranking_b=match.get('ranking_b'),
+        )
+
+    # ------------------------------------------------------------------
+    def score_matches(self, matches: List[Dict]) -> List[ScoredTennisMatch]:
+        results = [self.score_match(m) for m in matches]
+        results.sort(key=lambda x: x.ev, reverse=True)
+        return results
+
+    # ------------------------------------------------------------------
+    @staticmethod
+    def _calibrate(p_a: float, p_b: float, temp: float) -> Tuple[float, float]:
+        """Temperature-scaled softmax on two logits."""
+        logit_a = math.log(max(p_a, 1e-9) / max(1 - p_a, 1e-9))
+        logit_b = math.log(max(p_b, 1e-9) / max(1 - p_b, 1e-9))
+        scaled = [logit_a / temp, logit_b / temp]
+        max_s = max(scaled)
+        exps = [math.exp(s - max_s) for s in scaled]
+        total = sum(exps)
+        return exps[0] / total, exps[1] / total
+
+    # ------------------------------------------------------------------
+    def print_report(self, matches: List[Dict]):
+        scored = self.score_matches(matches)
+        print(f'\n{"="*80}')
+        print(f'  TENNIS SCORING ENGINE – {len(scored)} matches')
+        print(f'{"="*80}')
+        value_bets = [s for s in scored if s.ev > 0]
+        print(f'  Value bets:      {len(value_bets)}/{len(scored)}')
+        if scored:
+            print(f'  Avg confidence:  {sum(s.confidence for s in scored)/len(scored):.1f}/100')
+            print(f'  Avg data qual:   {sum(s.data_quality for s in scored)/len(scored):.0%}')
+        print()
+        for s in scored[:20]:
+            ev_marker = '✅' if s.ev > 0 else '  '
+            qs = '🎾' if s.advanced_score >= self.threshold else '  '
+            print(f'  {ev_marker}{qs} {s.player_a:>25} vs {s.player_b:<25}'
+                  f'  pick={s.best_pick}  P={s.best_prob:.0%}'
+                  f'  odds={s.best_odds:.2f}  EV={s.ev:+.3f}'
+                  f'  edge={s.edge:+.1f}%  K={s.kelly:.1f}%'
+                  f'  adv={s.advanced_score:.0f}  conf={s.confidence:.0f}'
+                  f'  dq={s.data_quality:.0%}')
+        print(f'\n{"="*80}\n')
+        return scored
+
+
+# ---------------------------------------------------------------------------
+# Calibration runner (backtest)
+# ---------------------------------------------------------------------------
+
+class TennisCalibrationRunner:
+    """Evaluate engine on historical matches with known results."""
+
+    def __init__(self, engine: TennisScoringEngine):
+        self.engine = engine
+
+    def evaluate(self, matches: List[Dict]) -> Dict:
+        if not matches:
+            return {'count': 0}
+
+        correct, total, brier_sum = 0, 0, 0.0
+        profit = 0.0
+
+        for m in matches:
+            result = m.get('result')  # 'A' or 'B'
+            if result not in ('A', 'B'):
+                continue
+            sm = self.engine.score_match(m)
+            total += 1
+
+            actual = 1 if result == 'A' else 0
+            brier_sum += (sm.cal_a - actual) ** 2
+
+            if sm.best_pick == result:
+                correct += 1
+
+            if sm.ev > 0 and sm.best_odds > 1:
+                if sm.best_pick == result:
+                    profit += sm.best_odds - 1
+                else:
+                    profit -= 1
+
+        metrics = {
+            'count': total,
+            'accuracy': correct / total if total else 0,
+            'brier': brier_sum / total if total else 1.0,
+            'roi': profit / total if total else 0,
+            'net_pl': round(profit, 2),
+        }
+        return metrics
+
+    def save_calibration(self, weights: Dict, metrics: Dict):
+        os.makedirs('outputs', exist_ok=True)
+        data = {
+            'weights': weights,
+            'metrics': metrics,
+            'updated': datetime.now().isoformat(),
+        }
+        with open(TennisScoringEngine.CALIBRATION_FILE, 'w') as fh:
+            json.dump(data, fh, indent=2)
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+if __name__ == '__main__':
+    import argparse, glob
+
+    ap = argparse.ArgumentParser(description='Tennis Scoring Engine')
+    ap.add_argument('--file', help='JSON file with matches to score')
+    ap.add_argument('--backtest', action='store_true', help='Run backtest on historical data')
+    ap.add_argument('--days', type=int, default=30, help='Backtest window (days)')
+    args = ap.parse_args()
+
+    engine = TennisScoringEngine()
+
+    if args.file:
+        with open(args.file) as fh:
+            data = json.load(fh)
+        matches = data if isinstance(data, list) else data.get('matches', [])
+        engine.print_report(matches)
+
+    elif args.backtest:
+        files = sorted(glob.glob('outputs/*tennis*_predictions.json'))
+        all_m: List[Dict] = []
+        for fn in files[-args.days:]:
+            with open(fn) as fh:
+                data = json.load(fh)
+            if isinstance(data, list):
+                all_m.extend(data)
+            elif 'matches' in data:
+                all_m.extend(data['matches'])
+        print(f'Loaded {len(all_m)} matches from {len(files)} files')
+        runner = TennisCalibrationRunner(engine)
+        metrics = runner.evaluate(all_m)
+        print(f'Accuracy: {metrics["accuracy"]:.1%}  Brier: {metrics["brier"]:.3f}  '
+              f'ROI: {metrics["roi"]:.1%}  Net P/L: {metrics["net_pl"]:.2f}u')
+    else:
+        print('Usage: --file <json> or --backtest [--days N]')

@@ -709,7 +709,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
     <body>
         <div class="header">
             <h1>🏆 Kwalifikujące się mecze - {date}</h1>
-            <p>🎾 Tennis: Advanced scoring (≥50/100) | ⚽ Drużynowe: Gospodarze wygrali ≥60% H2H</p>
+            <p>🎾 Tennis: Advanced scoring (≥45/100) | ⚽ Drużynowe: Gospodarze wygrali ≥60% H2H</p>
             <p style="font-size: 14px; margin-top: 10px;">🤖 <strong>Gemini AI Analysis</strong> | ⏰ Posortowane chronologicznie</p>
         </div>
         
@@ -921,6 +921,11 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
         sc_pd = safe_float(sc_pd_raw) if not is_nan_or_none(sc_pd_raw) else None
         sc_pa_raw = match.get('scoring_prob_away')
         sc_pa = safe_float(sc_pa_raw) if not is_nan_or_none(sc_pa_raw) else None
+        # Tennis scoring: prob_a / prob_b (no draw)
+        sc_tpa_raw = match.get('scoring_prob_a')
+        sc_tpa = safe_float(sc_tpa_raw) if not is_nan_or_none(sc_tpa_raw) else None
+        sc_tpb_raw = match.get('scoring_prob_b')
+        sc_tpb = safe_float(sc_tpb_raw) if not is_nan_or_none(sc_tpb_raw) else None
         has_scoring = sc_pick is not None and sc_prob is not None
         
         # Kolory podświetlenia
@@ -1036,7 +1041,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
                     <!-- SCORING ENGINE -->
                     {f'''
                     <div style="margin-bottom: 12px; padding: 12px; background: linear-gradient(135deg, #1a237e 0%, #283593 100%); border-radius: 8px; color: white;">
-                        <div style="font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 8px;">🧠 Scoring Engine (7-source model)</div>
+                        <div style="font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 8px;">{"🎾 Tennis Engine (5-factor)" if is_tennis else "🧠 Scoring Engine (7-source model)"}</div>
                         <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
                             <div style="text-align: center; min-width: 60px;">
                                 <div style="font-size: 20px; font-weight: bold; color: #ffd740;">{sc_pick}</div>
@@ -1060,7 +1065,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
                             </div>
                         </div>
                         <div style="margin-top: 8px; text-align: center; font-size: 10px; color: rgba(255,255,255,0.5);">
-                            1: {sc_ph:.0f}% | X: {sc_pd:.0f}% | 2: {sc_pa:.0f}%
+                            {f"A: {sc_tpa:.0f}% | B: {sc_tpb:.0f}%" if is_tennis and sc_tpa is not None and sc_tpb is not None else f"1: {sc_ph:.0f}% | X: {sc_pd:.0f}% | 2: {sc_pa:.0f}%" if sc_ph is not None and sc_pd is not None and sc_pa is not None else ""}
                             {f" | Kelly: {sc_kelly:.1f}%" if sc_kelly and sc_kelly > 0 else ""}
                         </div>
                         {f'<div style="margin-top: 6px; text-align: center;"><span style="background: #69f0ae; color: #1a237e; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: bold;">✅ VALUE BET</span></div>' if sc_ev and sc_ev > 0 else ""}
@@ -1082,7 +1087,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
         <div class="footer">
             <p>📧 Wygenerowano automatycznie przez Livesport H2H Scraper v6.1</p>
             <p>🔔 <strong>Kryteria kwalifikacji:</strong></p>
-            <p>🎾 <strong>Tennis:</strong> Multi-factor scoring (H2H + ranking + forma + powierzchnia) ≥ 50/100</p>
+            <p>🎾 <strong>Tennis:</strong> Multi-factor scoring (H2H + ranking + forma + powierzchnia + kursy) ≥ 45/100</p>
             <p>⚽ <strong>Sporty drużynowe:</strong></p>
             <p style="margin-left: 20px;">
                 1️⃣ Gospodarze wygrali ≥60% H2H<br>
