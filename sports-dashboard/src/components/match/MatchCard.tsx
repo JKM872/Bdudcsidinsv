@@ -7,7 +7,7 @@ import { Clock, TrendingUp, ChevronRight } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { SPORT_MAP, PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
+import { SPORT_MAP, PREDICTION_COLORS } from '@/lib/constants'
 import { formatMatchTime, formatOdds } from '@/lib/format'
 import { RecommendationBadge } from './RecommendationBadge'
 import { LiveScoreBadge } from './LiveScoreBadge'
@@ -25,7 +25,6 @@ interface Props {
 export function MatchCard({ match, liveScore, onSelect }: Props) {
   const sportCfg = SPORT_MAP[match.sport]
   const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
-  const confTier = getConfidenceTier(conf)
   const SportIcon = sportCfg?.icon
   const recommendation = match.gemini?.recommendation
   const isHighPick = recommendation === 'HIGH'

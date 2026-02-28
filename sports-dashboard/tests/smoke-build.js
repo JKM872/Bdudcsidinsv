@@ -7,6 +7,7 @@
  *  3. JS bundles do NOT contain old sidebar/card UI patterns
  *  4. All expected route pages generated
  */
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs')
 const path = require('path')
 

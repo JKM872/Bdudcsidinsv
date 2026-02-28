@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
-  Trophy, BarChart3, Ticket, Users, Sun, Moon, Menu, LogIn, LogOut, User,
+  Trophy, BarChart3, Ticket, Users, Sun, Moon, Menu, LogIn, LogOut,
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'

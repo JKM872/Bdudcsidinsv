@@ -33,6 +33,8 @@ class SupabaseManager:
     
     def __init__(self):
         """Inicjalizuje połączenie z Supabase"""
+        if SUPABASE_KEY is None:
+            raise RuntimeError('SUPABASE_KEY not configured – set SUPABASE_SERVICE_ROLE_KEY, SUPABASE_KEY, or SUPABASE_ANON_KEY env var')
         self.client: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
         print(f"[OK] Connected to Supabase: {SUPABASE_URL}")
     

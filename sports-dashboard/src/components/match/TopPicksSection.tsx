@@ -3,7 +3,7 @@
 // ============================================================================
 'use client'
 
-import { Flame, ChevronRight, Sparkles, Zap } from 'lucide-react'
+import { Flame, Sparkles, Zap } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'

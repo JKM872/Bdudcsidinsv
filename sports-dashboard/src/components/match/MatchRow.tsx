@@ -6,7 +6,7 @@
 import { Clock, ChevronRight, Gem, BarChart3 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
+import { PREDICTION_COLORS } from '@/lib/constants'
 import { formatMatchTime, formatOdds } from '@/lib/format'
 import { LiveScoreBadge } from './LiveScoreBadge'
 import { RecommendationBadge } from './RecommendationBadge'
@@ -24,7 +24,7 @@ interface Props {
 /** Calculate data completeness as % (0-100) */
 function calcCompleteness(m: Match): number {
   let filled = 0
-  let total = 7
+  const total = 7
   if (m.time) filled++
   if (m.forebet?.prediction) filled++
   if (m.sofascore?.home != null) filled++

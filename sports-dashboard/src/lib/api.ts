@@ -2,12 +2,13 @@
 // SPORTS DASHBOARD - API Client
 // ============================================================================
 import { API_BASE_URL } from './constants'
-import type { Match, StatsData, ApiResponse, LiveScore, UserBet, WeatherData } from './types'
+import type { Match, StatsData, ApiResponse, LiveScore, WeatherData } from './types'
 
 /** Get auth token from zustand store (lazy import to avoid circular deps) */
 function getAuthToken(): string {
   try {
     // Access zustand store outside React
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { useAuthStore } = require('@/store/authStore')
     return useAuthStore.getState().getToken()
   } catch {

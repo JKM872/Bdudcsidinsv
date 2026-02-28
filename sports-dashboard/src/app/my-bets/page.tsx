@@ -6,9 +6,9 @@
 import { useState } from 'react'
 import {
   Plus, Trash2, TrendingUp, TrendingDown, Minus, Loader2, AlertCircle,
-  LogIn, Calendar, DollarSign, Target, Trophy,
+  LogIn, Target,
 } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'

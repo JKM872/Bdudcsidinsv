@@ -2,8 +2,6 @@
 Tests for tennis pipeline fixes  –  Phase 5 regression suite.
 Validates field names, no synthetic data, and compatibility mapping.
 """
-import pytest
-import json
 
 
 # ---------------------------------------------------------------------------

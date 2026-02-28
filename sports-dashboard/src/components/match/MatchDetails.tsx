@@ -14,7 +14,7 @@ import {
   Thermometer, Wind, Droplets,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { SPORT_MAP, PREDICTION_COLORS, getConfidenceTier } from '@/lib/constants'
+import { SPORT_MAP, PREDICTION_COLORS } from '@/lib/constants'
 import { formatMatchTime, formatOdds, formatVotes } from '@/lib/format'
 import { RecommendationBadge } from './RecommendationBadge'
 import { TeamLogo } from './TeamLogo'
@@ -31,16 +31,16 @@ interface Props {
 }
 
 export function MatchDetails({ match, open, onOpenChange }: Props) {
+  // Weather – guess city from home team name (last word)
+  // Hooks must be called unconditionally (rules-of-hooks)
+  const weatherCity = match?.homeTeam?.split(/\s+/).pop() ?? match?.homeTeam ?? ''
+  const { data: weather } = useWeather(weatherCity, match?.date)
+
   if (!match) return null
 
   const sportCfg = SPORT_MAP[match.sport]
   const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
-  const confTier = getConfidenceTier(conf)
   const SportIcon = sportCfg?.icon
-
-  // Weather – guess city from home team name (last word)
-  const weatherCity = match.homeTeam.split(/\s+/).pop() ?? match.homeTeam
-  const { data: weather } = useWeather(weatherCity, match.date)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

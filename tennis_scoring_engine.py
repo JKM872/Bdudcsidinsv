@@ -28,8 +28,8 @@ import re
 import json
 import os
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Tuple
+from datetime import datetime
+from typing import Any, Dict, List, Optional, Tuple
 
 # ---------------------------------------------------------------------------
 # Output dataclass
@@ -66,8 +66,8 @@ class ScoredTennisMatch:
     data_quality: float = 0.0     # 0-1
 
     # Factor breakdown
-    breakdown: Dict = field(default_factory=dict)
-    features: Dict = field(default_factory=dict)
+    breakdown: Dict[str, Any] = field(default_factory=dict)
+    features: Dict[str, Any] = field(default_factory=dict)
 
     # Surface / ranking metadata (for display)
     surface: str = ''
@@ -79,7 +79,7 @@ class ScoredTennisMatch:
 # Utility helpers
 # ---------------------------------------------------------------------------
 
-def _sf(val, default: float = 0.0) -> float:
+def _sf(val: Any, default: float = 0.0) -> float:
     """Safe float."""
     if val is None:
         return default
@@ -92,7 +92,7 @@ def _sf(val, default: float = 0.0) -> float:
         return default
 
 
-def _parse_form_list(raw) -> List[str]:
+def _parse_form_list(raw: Any) -> List[str]:
     """Normalise form data to list of 'W'/'L' (no draws in tennis)."""
     if isinstance(raw, list):
         out = []
@@ -134,7 +134,7 @@ def _streak_len(form: List[str], char: str = 'W') -> int:
     return n
 
 
-def _recency_h2h(h2h_list: List[Dict], player_a: str, player_b: str) -> Tuple[float, int]:
+def _recency_h2h(h2h_list: List[Dict[str, Any]], player_a: str, player_b: str) -> Tuple[float, int]:
     """
     Recency-weighted H2H win-rate for player A.
     Returns (win_rate_a, count).
@@ -143,7 +143,7 @@ def _recency_h2h(h2h_list: List[Dict], player_a: str, player_b: str) -> Tuple[fl
         return 0.5, 0
 
     pa = player_a.lower().strip()
-    pb = (player_b or '').lower().strip()
+    _pb = (player_b or '').lower().strip()
     now = datetime.now()
     wins_a, total_w = 0.0, 0.0
 
@@ -205,7 +205,7 @@ def _recency_h2h(h2h_list: List[Dict], player_a: str, player_b: str) -> Tuple[fl
 class TennisFeatureExtractor:
     """Extract normalised features from a single tennis match dict."""
 
-    def extract(self, m: Dict) -> Dict[str, float]:
+    def extract(self, m: Dict[str, Any]) -> Dict[str, float]:
         f: Dict[str, float] = {}
         available = 0
         total_features = 5   # h2h, form, surface_form, ranking, odds
@@ -319,14 +319,14 @@ class TennisScoringEngine:
     CALIBRATION_FILE = 'outputs/tennis_calibration.json'
     THRESHOLD = 45.0
 
-    def __init__(self, weights: Dict[str, float] = None, threshold: float = None):
-        self.weights = weights or dict(DEFAULT_WEIGHTS)
-        self.threshold = threshold or self.THRESHOLD
+    def __init__(self, weights: Optional[Dict[str, float]] = None, threshold: Optional[float] = None):
+        self.weights: Dict[str, float] = weights or dict(DEFAULT_WEIGHTS)
+        self.threshold: float = threshold or self.THRESHOLD
         self.extractor = TennisFeatureExtractor()
         self._load_calibration()
 
-    def _load_calibration(self):
-        self.calibration = {}
+    def _load_calibration(self) -> None:
+        self.calibration: Dict[str, Any] = {}
         try:
             if os.path.exists(self.CALIBRATION_FILE):
                 with open(self.CALIBRATION_FILE) as fh:
@@ -337,13 +337,12 @@ class TennisScoringEngine:
             pass
 
     # ------------------------------------------------------------------
-    def score_match(self, match: Dict) -> ScoredTennisMatch:
+    def score_match(self, match: Dict[str, Any]) -> ScoredTennisMatch:
         feats = self.extractor.extract(match)
         w = self.weights
 
         # --- Per-source probability estimate for A winning ---
         estimates: Dict[str, float] = {}
-
         # H2H
         wr = feats['h2h_win_rate_a']
         estimates['h2h'] = wr
@@ -416,7 +415,7 @@ class TennisScoringEngine:
         advanced_score = advanced_score * (0.5 + 0.5 * dq)
         advanced_score = min(100, max(0, advanced_score))
 
-        qualifies = advanced_score >= self.threshold
+        _qualifies = advanced_score >= self.threshold
 
         # --- Confidence ---
         conf = (
@@ -459,7 +458,7 @@ class TennisScoringEngine:
         )
 
     # ------------------------------------------------------------------
-    def score_matches(self, matches: List[Dict]) -> List[ScoredTennisMatch]:
+    def score_matches(self, matches: List[Dict[str, Any]]) -> List[ScoredTennisMatch]:
         results = [self.score_match(m) for m in matches]
         results.sort(key=lambda x: x.ev, reverse=True)
         return results
@@ -477,7 +476,7 @@ class TennisScoringEngine:
         return exps[0] / total, exps[1] / total
 
     # ------------------------------------------------------------------
-    def print_report(self, matches: List[Dict]):
+    def print_report(self, matches: List[Dict[str, Any]]):
         scored = self.score_matches(matches)
         print(f'\n{"="*80}')
         print(f'  TENNIS SCORING ENGINE – {len(scored)} matches')
@@ -511,7 +510,7 @@ class TennisCalibrationRunner:
     def __init__(self, engine: TennisScoringEngine):
         self.engine = engine
 
-    def evaluate(self, matches: List[Dict]) -> Dict:
+    def evaluate(self, matches: List[Dict[str, Any]]) -> Dict[str, Any]:
         if not matches:
             return {'count': 0}
 
@@ -546,7 +545,7 @@ class TennisCalibrationRunner:
         }
         return metrics
 
-    def save_calibration(self, weights: Dict, metrics: Dict):
+    def save_calibration(self, weights: Dict[str, float], metrics: Dict[str, Any]) -> None:
         os.makedirs('outputs', exist_ok=True)
         data = {
             'weights': weights,

@@ -1,7 +1,6 @@
 """
 Tests for tennis_scoring_engine.py  –  Phase 5 regression suite.
 """
-import math
 import pytest
 from tennis_scoring_engine import (
     TennisScoringEngine,
