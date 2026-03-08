@@ -39,7 +39,7 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
   if (!match) return null
 
   const sportCfg = SPORT_MAP[match.sport]
-  const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
+  const conf = match.gemini?.confidence ?? match.scoring?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
   const SportIcon = sportCfg?.icon
 
   return (
@@ -181,7 +181,52 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
                 </div>
               )}
 
-              {!match.forebet && !match.sofascore?.home && (
+              {/* Scoring Engine */}
+              {match.scoring && (
+                <div className="rounded-xl border bg-card p-4 space-y-3">
+                  <div className="flex items-center gap-2 text-sm font-medium">
+                    <TrendingUp className="h-4 w-4 text-violet-500" /> Scoring Engine
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <StatBox label="Pick" value={
+                      <Badge className="bg-violet-500 text-white mt-0.5">{match.scoring.pick}</Badge>
+                    } />
+                    <StatBox label="Probability" value={
+                      <span className="font-bold">{Math.round(match.scoring.prob * 100)}%</span>
+                    } />
+                    <StatBox label="Expected Value" value={
+                      <span className={cn('font-bold', match.scoring.ev > 0 ? 'text-emerald-600' : 'text-rose-600')}>
+                        {match.scoring.ev > 0 ? '+' : ''}{match.scoring.ev.toFixed(3)}
+                      </span>
+                    } />
+                    <StatBox label="Edge" value={
+                      <span className={cn('font-bold', match.scoring.edge > 0 ? 'text-emerald-600' : 'text-muted-foreground')}>
+                        {match.scoring.edge > 0 ? '+' : ''}{match.scoring.edge.toFixed(1)}%
+                      </span>
+                    } />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <StatBox label="Kelly %" value={
+                      <span className="font-bold">{match.scoring.kelly.toFixed(1)}%</span>
+                    } />
+                    <StatBox label="Data Quality" value={
+                      <RadialProgress value={match.scoring.dataQuality * 100} size={36} strokeWidth={3} color="#8b5cf6" />
+                    } />
+                  </div>
+                  {/* Tennis-specific info */}
+                  {match.tennis && (
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground bg-muted/40 rounded-lg p-2.5">
+                      {match.tennis.surface && <span>Surface: <strong>{match.tennis.surface}</strong></span>}
+                      {match.tennis.rankingA != null && <span>#{match.tennis.rankingA} vs #{match.tennis.rankingB}</span>}
+                      <span className="ml-auto font-mono tabular-nums">
+                        A: {Math.round(match.tennis.probA * 100)}% · B: {Math.round(match.tennis.probB * 100)}%
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {!match.forebet && !match.sofascore?.home && !match.scoring && (
                 <EmptyState text="No predictions available for this match." />
               )}
             </TabsContent>
@@ -273,6 +318,33 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
                       </div>
                     </div>
                   )}
+                </div>
+              ) : match.scoring ? (
+                <div className="rounded-xl border bg-card p-4 space-y-4">
+                  <div className="flex items-center gap-2 text-sm font-medium">
+                    <Brain className="h-4 w-4 text-violet-500" /> Scoring Engine Analysis
+                  </div>
+                  <div className="flex items-center gap-3 rounded-lg bg-violet-500/5 border border-violet-500/10 p-3">
+                    <span className="text-sm text-muted-foreground">Pick:</span>
+                    <Badge className="bg-violet-500 text-white">{match.scoring.pick}</Badge>
+                    <RadialProgress value={match.scoring.confidence} size={36} strokeWidth={3} color="#8b5cf6" />
+                  </div>
+                  <div className="grid grid-cols-3 gap-3 text-center">
+                    <div className="rounded-lg bg-muted/40 p-2.5">
+                      <p className="text-[10px] text-muted-foreground mb-1">EV</p>
+                      <p className={cn('text-lg font-bold tabular-nums', match.scoring.ev > 0 ? 'text-emerald-600' : 'text-rose-600')}>
+                        {match.scoring.ev > 0 ? '+' : ''}{match.scoring.ev.toFixed(3)}
+                      </p>
+                    </div>
+                    <div className="rounded-lg bg-muted/40 p-2.5">
+                      <p className="text-[10px] text-muted-foreground mb-1">Edge</p>
+                      <p className="text-lg font-bold tabular-nums">{match.scoring.edge > 0 ? '+' : ''}{match.scoring.edge.toFixed(1)}%</p>
+                    </div>
+                    <div className="rounded-lg bg-muted/40 p-2.5">
+                      <p className="text-[10px] text-muted-foreground mb-1">Kelly</p>
+                      <p className="text-lg font-bold tabular-nums">{match.scoring.kelly.toFixed(1)}%</p>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <EmptyState text="No AI analysis available for this match." />

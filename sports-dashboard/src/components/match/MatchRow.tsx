@@ -36,7 +36,7 @@ function calcCompleteness(m: Match): number {
 }
 
 export function MatchRow({ match, liveScore, onSelect }: Props) {
-  const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
+  const conf = match.gemini?.confidence ?? match.scoring?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
   const isLive = liveScore?.status === 'live' || liveScore?.status === 'halftime'
   const isFinished = liveScore?.status === 'finished'
   const recommendation = match.gemini?.recommendation
@@ -215,6 +215,26 @@ export function MatchRow({ match, liveScore, onSelect }: Props) {
                 </span>
               )}
               <span className="text-[9px] text-muted-foreground/60">SS</span>
+            </div>
+          )}
+
+          {/* Scoring engine pick (when no forebet/sofascore) */}
+          {!forebetPred && !sofaPred && match.scoring && (
+            <div className="flex items-center gap-1">
+              <Badge variant="outline" className="text-[9px] px-1.5 py-0 font-bold border-violet-400/50 text-violet-600 dark:text-violet-400">
+                {match.scoring.pick}
+              </Badge>
+              {match.scoring.prob > 0 && (
+                <span className="text-[10px] text-violet-500/80 tabular-nums">
+                  {Math.round(match.scoring.prob * 100)}%
+                </span>
+              )}
+              {match.scoring.ev > 0 && (
+                <span className="text-[9px] text-emerald-600 dark:text-emerald-400 tabular-nums">
+                  EV+{match.scoring.ev.toFixed(2)}
+                </span>
+              )}
+              <span className="text-[9px] text-muted-foreground/60">SE</span>
             </div>
           )}
 

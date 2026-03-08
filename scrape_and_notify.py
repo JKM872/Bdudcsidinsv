@@ -761,13 +761,16 @@ def scrape_and_send_email(
                     'away': clean_odds_value(row.get('away_odds')),
                     'bookmaker': clean_for_json(row.get('odds_source', row.get('odds_bookmaker', 'Pinnacle')))
                 } if clean_odds_value(row.get('home_odds')) or clean_odds_value(row.get('away_odds')) else None,
-                # Forebet - czyść NaN przed eksportem
+                # Forebet - czyść NaN przed eksportem (w tym 3-way probs)
                 'forebet': {
                     'prediction': clean_for_json(row.get('forebet_prediction')),
                     'probability': clean_for_json(row.get('forebet_probability')),
                     'exactScore': clean_for_json(row.get('forebet_exact_score', row.get('forebet_score'))),
                     'overUnder': clean_for_json(row.get('forebet_over_under')),
-                    'btts': clean_for_json(row.get('forebet_btts'))
+                    'btts': clean_for_json(row.get('forebet_btts')),
+                    'homeProb': clean_for_json(row.get('forebet_home_prob')),
+                    'drawProb': clean_for_json(row.get('forebet_draw_prob')),
+                    'awayProb': clean_for_json(row.get('forebet_away_prob')),
                 } if clean_for_json(row.get('forebet_prediction')) else None,
                 # SofaScore - czyść NaN przed eksportem
                 'sofascore': {
@@ -796,6 +799,15 @@ def scrape_and_send_email(
                     'probA': row.get('scoring_prob_a', 0),
                     'probB': row.get('scoring_prob_b', 0),
                 } if row.get('sport') == 'tennis' else None,
+                # Top-level confidence: gemini > scoring > forebet fallback
+                'confidence': (
+                    clean_for_json(row.get('gemini_confidence'))
+                    or clean_for_json(row.get('scoring_confidence'))
+                    or clean_for_json(row.get('forebet_probability'))
+                    or 0
+                ),
+                # Value bet: scoring engine EV > 0
+                'value_bet': (clean_for_json(row.get('scoring_ev')) or 0) > 0,
             }
             frontend_matches.append(match_data)
         

@@ -60,6 +60,26 @@ export interface LiveScore {
   sport: string
 }
 
+/** Scoring engine output (football + tennis) */
+export interface ScoringData {
+  pick: string
+  prob: number
+  ev: number
+  edge: number
+  kelly: number
+  confidence: number
+  dataQuality: number
+}
+
+/** Tennis-specific metadata */
+export interface TennisData {
+  surface: string
+  rankingA: number | null
+  rankingB: number | null
+  probA: number
+  probB: number
+}
+
 export interface Match {
   id: string | number
   homeTeam: string
@@ -80,6 +100,8 @@ export interface Match {
   formAdvantage: boolean
   focusTeam: string
   gemini?: GeminiAnalysis | null
+  scoring?: ScoringData | null
+  tennis?: TennisData | null
   confidence?: number
   value_bet?: boolean
 }

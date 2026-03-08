@@ -24,7 +24,7 @@ interface Props {
 
 export function MatchCard({ match, liveScore, onSelect }: Props) {
   const sportCfg = SPORT_MAP[match.sport]
-  const conf = match.gemini?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
+  const conf = match.gemini?.confidence ?? match.scoring?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
   const SportIcon = sportCfg?.icon
   const recommendation = match.gemini?.recommendation
   const isHighPick = recommendation === 'HIGH'
@@ -149,14 +149,32 @@ export function MatchCard({ match, liveScore, onSelect }: Props) {
           </div>
         ) : (
           <div className="flex items-center gap-1 text-[10px] text-muted-foreground/50">
-            {match.forebet?.prediction && (
-              <Badge className={cn('text-[9px] px-1 py-0', PREDICTION_COLORS[match.forebet.prediction] ?? 'bg-zinc-500 text-white')}>
-                {match.forebet.prediction}
-              </Badge>
-            )}
-            {match.forebet?.probability != null && (
-              <span className="font-medium">{match.forebet.probability}%</span>
-            )}
+            {match.forebet?.prediction ? (
+              <>
+                <Badge className={cn('text-[9px] px-1 py-0', PREDICTION_COLORS[match.forebet.prediction] ?? 'bg-zinc-500 text-white')}>
+                  {match.forebet.prediction}
+                </Badge>
+                {match.forebet?.probability != null && (
+                  <span className="font-medium">{match.forebet.probability}%</span>
+                )}
+              </>
+            ) : match.scoring ? (
+              <>
+                <Badge variant="outline" className="text-[9px] px-1 py-0 font-bold border-violet-400/50 text-violet-600 dark:text-violet-400">
+                  {match.scoring.pick}
+                </Badge>
+                {match.scoring.prob > 0 && (
+                  <span className="font-medium text-violet-500/80">
+                    {Math.round(match.scoring.prob * 100)}%
+                  </span>
+                )}
+                {match.scoring.ev > 0 && (
+                  <span className="text-emerald-600 dark:text-emerald-400">
+                    EV+{match.scoring.ev.toFixed(2)}
+                  </span>
+                )}
+              </>
+            ) : null}
           </div>
         )}
 

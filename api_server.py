@@ -213,6 +213,31 @@ def normalize_supabase_match(row):
             'recommendation': row.get('gemini_recommendation'),
             'reasoning': row.get('gemini_reasoning'),
         } if row.get('gemini_prediction') else None,
+        # Scoring engine output
+        'scoring': {
+            'pick': row.get('scoring_pick', ''),
+            'prob': safe_value(row.get('scoring_prob')),
+            'ev': safe_value(row.get('scoring_ev')),
+            'edge': safe_value(row.get('scoring_edge')),
+            'kelly': safe_value(row.get('scoring_kelly')),
+            'confidence': safe_value(row.get('scoring_confidence')),
+            'dataQuality': safe_value(row.get('scoring_data_quality')),
+        } if row.get('scoring_pick') else None,
+        # Tennis metadata
+        'tennis': {
+            'surface': row.get('surface', ''),
+            'rankingA': row.get('ranking_a'),
+            'rankingB': row.get('ranking_b'),
+            'probA': safe_value(row.get('scoring_prob_a')),
+            'probB': safe_value(row.get('scoring_prob_b')),
+        } if row.get('sport') == 'tennis' else None,
+        # Top-level confidence: gemini > scoring > forebet
+        'confidence': safe_value(row.get('gemini_confidence'))
+                      or safe_value(row.get('scoring_confidence'))
+                      or safe_value(row.get('forebet_probability'))
+                      or 0,
+        # Value bet: EV > 0 from scoring engine
+        'value_bet': safe_value(row.get('scoring_ev'), 0) > 0,
         # Focus team
         'focusTeam': 'home',
     }
@@ -298,6 +323,38 @@ def normalize_match(match):
         } if safe_value(match.get('sofascore_home_win_prob')) or match.get('sofascore') else None,
         # Gemini AI - v4: now included for JSON files too!
         'gemini': gemini_data,
+        # Scoring engine output (passed through from JSON export)
+        'scoring': match.get('scoring') or ({
+            'pick': match.get('scoring_pick', ''),
+            'prob': safe_value(match.get('scoring_prob')),
+            'ev': safe_value(match.get('scoring_ev')),
+            'edge': safe_value(match.get('scoring_edge')),
+            'kelly': safe_value(match.get('scoring_kelly')),
+            'confidence': safe_value(match.get('scoring_confidence')),
+            'dataQuality': safe_value(match.get('scoring_data_quality')),
+        } if match.get('scoring_pick') else None),
+        # Tennis metadata (passed through from JSON export)
+        'tennis': match.get('tennis') or ({
+            'surface': match.get('surface', ''),
+            'rankingA': match.get('ranking_a'),
+            'rankingB': match.get('ranking_b'),
+            'probA': safe_value(match.get('scoring_prob_a')),
+            'probB': safe_value(match.get('scoring_prob_b')),
+        } if match.get('sport') == 'tennis' else None),
+        # Top-level confidence: gemini > scoring > forebet
+        'confidence': (
+            safe_value((gemini_data or {}).get('confidence'))
+            or safe_value((match.get('scoring') or {}).get('confidence'))
+            or safe_value(match.get('scoring_confidence'))
+            or safe_value((forebet_data or {}).get('probability'))
+            or 0
+        ),
+        # Value bet: scoring EV > 0
+        'value_bet': (
+            safe_value((match.get('scoring') or {}).get('ev'))
+            or safe_value(match.get('scoring_ev'))
+            or 0
+        ) > 0,
         # Focus team
         'focusTeam': match.get('focus_team') or match.get('focusTeam', 'home'),
     }
