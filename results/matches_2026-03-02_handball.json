@@ -1,7 +1,7 @@
 {
   "date": "2026-03-02",
   "sport": "handball",
-  "generatedAt": "2026-03-02T02:27:37.106061",
+  "generatedAt": "2026-03-02T02:55:16.359887",
   "stats": {
     "total": 9,
     "qualifying": 3,
@@ -9,7 +9,7 @@
   },
   "matches": [
     {
-      "id": -6684620190791585566,
+      "id": 7747996037614064208,
       "homeTeam": "Gwardia Opole",
       "awayTeam": "Wybrzeże Gdańsk",
       "time": "02.03.2026 17:00",
@@ -39,7 +39,7 @@
       "tennis": null
     },
     {
-      "id": -8766182501698020330,
+      "id": -4256961441869985151,
       "homeTeam": "Sangmu",
       "awayTeam": "Incheon City",
       "time": "02.03.2026 05:00",
@@ -69,7 +69,7 @@
       "tennis": null
     },
     {
-      "id": -1622148838255420958,
+      "id": -2493625948178444873,
       "homeTeam": "Daegu City K",
       "awayTeam": "Incheon City K",
       "time": "02.03.2026 07:00",
@@ -147,7 +147,7 @@
       "tennis": null
     },
     {
-      "id": 2684330916383798957,
+      "id": 2653329008382268532,
       "homeTeam": "Seoul City K",
       "awayTeam": "Gwangju City K",
       "time": "02.03.2026 09:00",
@@ -177,7 +177,7 @@
       "tennis": null
     },
     {
-      "id": -3954883426990538417,
+      "id": -4060314840402678341,
       "homeTeam": "Lubeck-Schwartau",
       "awayTeam": "Elbflorenz",
       "time": "02.03.2026 18:30",
@@ -207,7 +207,7 @@
       "tennis": null
     },
     {
-      "id": -5050307149335208315,
+      "id": 1699232573829413179,
       "homeTeam": "Saratów",
       "awayTeam": "CSKA Moscow",
       "time": "02.03.2026 14:30",
@@ -237,7 +237,7 @@
       "tennis": null
     },
     {
-      "id": 804578015051008780,
+      "id": -7968837868811678221,
       "homeTeam": "Stavropol",
       "awayTeam": "UOR No.2 Moscow",
       "time": "02.03.2026 16:00",
@@ -315,7 +315,7 @@
       "tennis": null
     },
     {
-      "id": -7933795277075984640,
+      "id": 8272964865625579430,
       "homeTeam": "St. Petersburg",
       "awayTeam": "Chekhovskiye Medvedi",
       "time": "02.03.2026 16:30",
@@ -387,7 +387,7 @@
       "tennis": null
     },
     {
-      "id": 8805116018846982481,
+      "id": 407464545142093111,
       "homeTeam": "Hallby",
       "awayTeam": "Onnered",
       "time": "02.03.2026 18:00",

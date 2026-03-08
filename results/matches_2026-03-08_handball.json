@@ -1,7 +1,7 @@
 {
   "date": "2026-03-08",
   "sport": "handball",
-  "generatedAt": "2026-03-08T02:46:53.373398",
+  "generatedAt": "2026-03-08T03:16:39.967951",
   "stats": {
     "total": 85,
     "qualifying": 43,
@@ -9,7 +9,7 @@
   },
   "matches": [
     {
-      "id": -7973850923089000899,
+      "id": 4368081765083692161,
       "homeTeam": "Barcelona",
       "awayTeam": "Granollers",
       "time": "08.03.2026 11:15",
@@ -72,7 +72,7 @@
         "home": 96,
         "draw": 1,
         "away": 3,
-        "votes": 303
+        "votes": 312
       },
       "focusTeam": "home",
       "scoring": {
@@ -87,7 +87,7 @@
       "tennis": null
     },
     {
-      "id": 7737664962814060082,
+      "id": -2300960463077896326,
       "homeTeam": "Torrelavega",
       "awayTeam": "Villa de Aranda",
       "time": "08.03.2026 17:30",
@@ -150,7 +150,7 @@
         "home": 92,
         "draw": 2,
         "away": 6,
-        "votes": 50
+        "votes": 52
       },
       "focusTeam": "home",
       "scoring": {
@@ -165,7 +165,7 @@
       "tennis": null
     },
     {
-      "id": -201780842355593839,
+      "id": -4431541071286333800,
       "homeTeam": "SC Magdeburg",
       "awayTeam": "Hannover-Burgdorf",
       "time": "08.03.2026 14:00",
@@ -220,24 +220,24 @@
       "forebet": null,
       "sofascore": {
         "home": 95,
-        "draw": 2,
+        "draw": 1,
         "away": 4,
-        "votes": 328
+        "votes": 337
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "X",
-        "prob": 9.9,
-        "ev": 0.29,
-        "edge": 2.2,
-        "kelly": 2.4,
+        "prob": 9.8,
+        "ev": 0.275,
+        "edge": 2.1,
+        "kelly": 2.3,
         "confidence": 38.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": -8231021150724523711,
+      "id": 8951162413593803988,
       "homeTeam": "Erlangen",
       "awayTeam": "Minden",
       "time": "08.03.2026 15:30",
@@ -297,16 +297,16 @@
         "btts": null
       },
       "sofascore": {
-        "home": 67,
+        "home": 68,
         "draw": 4,
         "away": 28,
-        "votes": 137
+        "votes": 142
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "X",
-        "prob": 12.2,
-        "ev": 0.094,
+        "prob": 12.1,
+        "ev": 0.093,
         "edge": 1.0,
         "kelly": 1.2,
         "confidence": 40.0,
@@ -315,7 +315,7 @@
       "tennis": null
     },
     {
-      "id": 2506611037344028674,
+      "id": 6490506065587336394,
       "homeTeam": "HSG Wetzlar",
       "awayTeam": "MT Melsungen",
       "time": "08.03.2026 15:30",
@@ -345,7 +345,7 @@
       "tennis": null
     },
     {
-      "id": 2807978257618287177,
+      "id": 8332818189577380116,
       "homeTeam": "Rhein-Neckar",
       "awayTeam": "Bergischer",
       "time": "08.03.2026 17:00",
@@ -408,7 +408,7 @@
         "home": 91,
         "draw": 3,
         "away": 6,
-        "votes": 192
+        "votes": 196
       },
       "focusTeam": "home",
       "scoring": {
@@ -423,7 +423,7 @@
       "tennis": null
     },
     {
-      "id": -418423306094949920,
+      "id": -8184227145507347680,
       "homeTeam": "Industria Kielce",
       "awayTeam": "Ostrovia",
       "time": "08.03.2026 11:30",
@@ -501,7 +501,7 @@
       "tennis": null
     },
     {
-      "id": 6689764743838079620,
+      "id": 4000094047243897388,
       "homeTeam": "MKS Kalisz",
       "awayTeam": "Piotrkowianin",
       "time": "08.03.2026 17:00",
@@ -579,7 +579,7 @@
       "tennis": null
     },
     {
-      "id": 8119511247978924063,
+      "id": -7887137316808212860,
       "homeTeam": "Voslauer",
       "awayTeam": "Fuechse",
       "time": "08.03.2026 17:00",
@@ -609,7 +609,7 @@
       "tennis": null
     },
     {
-      "id": 4096096959128233854,
+      "id": -5118126842206542868,
       "homeTeam": "BGUFK-SKA",
       "awayTeam": "Gomel",
       "time": "08.03.2026 10:00",
@@ -639,7 +639,7 @@
       "tennis": null
     },
     {
-      "id": -3401670926654896169,
+      "id": 1866203852662846245,
       "homeTeam": "Leotar",
       "awayTeam": "Maglaj",
       "time": "08.03.2026 16:00",
@@ -669,7 +669,7 @@
       "tennis": null
     },
     {
-      "id": -7799309228070425106,
+      "id": 8031008206045679044,
       "homeTeam": "Sloboda Tuzla",
       "awayTeam": "Konjuh",
       "time": "08.03.2026 18:00",
@@ -699,7 +699,7 @@
       "tennis": null
     },
     {
-      "id": -4000605735439706750,
+      "id": -7390326193384560311,
       "homeTeam": "Buducnost",
       "awayTeam": "HC Rudar",
       "time": "08.03.2026 12:00",
@@ -772,7 +772,7 @@
       "tennis": null
     },
     {
-      "id": 6665331457728566959,
+      "id": 913974958256994116,
       "homeTeam": "Lovcen",
       "awayTeam": "Berane",
       "time": "08.03.2026 17:00",
@@ -827,25 +827,25 @@
         "btts": null
       },
       "sofascore": {
-        "home": 22,
-        "draw": 11,
-        "away": 67,
-        "votes": 9
+        "home": 30,
+        "draw": 10,
+        "away": 60,
+        "votes": 10
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 68.2,
+        "prob": 69.4,
         "ev": -999.0,
         "edge": 0.0,
         "kelly": 0.0,
-        "confidence": 48.0,
+        "confidence": 49.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": -1985514602702297604,
+      "id": 5119872075723995859,
       "homeTeam": "Sutjeska Niksic",
       "awayTeam": "Zabjelo",
       "time": "08.03.2026 17:30",
@@ -875,7 +875,7 @@
       "tennis": null
     },
     {
-      "id": -7587005926516328795,
+      "id": -2664502828847583215,
       "homeTeam": "Ringsted",
       "awayTeam": "GOG",
       "time": "08.03.2026 14:00",
@@ -905,7 +905,7 @@
       "tennis": null
     },
     {
-      "id": -797598216965517694,
+      "id": 7183960848639047520,
       "homeTeam": "HOJ",
       "awayTeam": "Grindsted",
       "time": "08.03.2026 15:00",
@@ -935,7 +935,7 @@
       "tennis": null
     },
     {
-      "id": 2123026426694328821,
+      "id": 6921700684376453814,
       "homeTeam": "Kolding",
       "awayTeam": "HC Kobenhavn",
       "time": "08.03.2026 14:00",
@@ -1007,7 +1007,7 @@
       "tennis": null
     },
     {
-      "id": 1589678600927443236,
+      "id": -7775631831410367103,
       "homeTeam": "Aarhus Handbold",
       "awayTeam": "Tønder",
       "time": "08.03.2026 16:00",
@@ -1054,7 +1054,7 @@
       ],
       "formAdvantage": false,
       "odds": {
-        "home": 1.45,
+        "home": 1.43,
         "draw": 8.0,
         "away": 3.25,
         "bookmaker": "Pinnacle"
@@ -1069,17 +1069,17 @@
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 69.5,
-        "ev": 0.008,
-        "edge": 0.6,
-        "kelly": 1.9,
-        "confidence": 60.0,
+        "prob": 69.7,
+        "ev": -0.004,
+        "edge": -0.3,
+        "kelly": 0.0,
+        "confidence": 49.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": -2582915553152111798,
+      "id": -9131368562657430762,
       "homeTeam": "Grecja K",
       "awayTeam": "Izrael K",
       "time": "08.03.2026 11:00",
@@ -1152,7 +1152,7 @@
       "tennis": null
     },
     {
-      "id": 5529210990867100667,
+      "id": -8498242751960315489,
       "homeTeam": "Litwa K",
       "awayTeam": "Ukraina K",
       "time": "08.03.2026 13:10",
@@ -1182,7 +1182,7 @@
       "tennis": null
     },
     {
-      "id": 6113881224741020132,
+      "id": 4751776936149150235,
       "homeTeam": "Holandia K",
       "awayTeam": "Szwajcaria K",
       "time": "08.03.2026 14:00",
@@ -1229,8 +1229,8 @@
       ],
       "formAdvantage": true,
       "odds": {
-        "home": 1.03,
-        "draw": 16.0,
+        "home": 1.02,
+        "draw": 17.0,
         "away": 15.0,
         "bookmaker": "Pinnacle"
       },
@@ -1251,16 +1251,16 @@
       "scoring": {
         "pick": "2",
         "prob": 9.5,
-        "ev": 0.429,
-        "edge": 2.9,
-        "kelly": 3.1,
+        "ev": 0.425,
+        "edge": 2.8,
+        "kelly": 3.0,
         "confidence": 42.0,
         "dataQuality": 0.8
       },
       "tennis": null
     },
     {
-      "id": 1724933932740637196,
+      "id": 903438234552751372,
       "homeTeam": "Niemcy K",
       "awayTeam": "Słowenia K",
       "time": "08.03.2026 14:30",
@@ -1322,15 +1322,15 @@
       "sofascore": {
         "home": 86,
         "draw": 3,
-        "away": 12,
-        "votes": 147
+        "away": 11,
+        "votes": 150
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "2",
-        "prob": 5.8,
-        "ev": -0.07,
-        "edge": -0.4,
+        "prob": 5.7,
+        "ev": -0.081,
+        "edge": -0.5,
         "kelly": 0.0,
         "confidence": 26.0,
         "dataQuality": 0.8
@@ -1338,7 +1338,7 @@
       "tennis": null
     },
     {
-      "id": 2777187552511450665,
+      "id": 4718232140888137478,
       "homeTeam": "Francja K",
       "awayTeam": "Chorwacja K",
       "time": "08.03.2026 15:30",
@@ -1398,25 +1398,25 @@
         "btts": null
       },
       "sofascore": {
-        "home": 80,
+        "home": 81,
         "draw": 1,
-        "away": 19,
-        "votes": 337
+        "away": 18,
+        "votes": 345
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "2",
-        "prob": 16.2,
-        "ev": 2.249,
-        "edge": 11.2,
-        "kelly": 11.8,
+        "prob": 16.1,
+        "ev": 2.225,
+        "edge": 11.1,
+        "kelly": 11.7,
         "confidence": 52.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": -1023797483812911717,
+      "id": 9064231848618655216,
       "homeTeam": "Kosowo K",
       "awayTeam": "Finlandia K",
       "time": "08.03.2026 16:15",
@@ -1446,7 +1446,7 @@
       "tennis": null
     },
     {
-      "id": 6867213990511559576,
+      "id": 7258779030103147344,
       "homeTeam": "Czarnogóra K",
       "awayTeam": "Islandia K",
       "time": "08.03.2026 17:00",
@@ -1506,25 +1506,25 @@
         "btts": null
       },
       "sofascore": {
-        "home": 41,
+        "home": 42,
         "draw": 5,
-        "away": 54,
-        "votes": 85
+        "away": 53,
+        "votes": 86
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "2",
-        "prob": 22.2,
-        "ev": 1.11,
-        "edge": 11.7,
-        "kelly": 13.1,
+        "prob": 22.1,
+        "ev": 1.097,
+        "edge": 11.5,
+        "kelly": 12.9,
         "confidence": 58.0,
         "dataQuality": 0.8
       },
       "tennis": null
     },
     {
-      "id": 824265861021866192,
+      "id": 7711751966683074598,
       "homeTeam": "Portugalia K",
       "awayTeam": "Wyspy Owcze K",
       "time": "08.03.2026 17:00",
@@ -1554,7 +1554,7 @@
       "tennis": null
     },
     {
-      "id": -6710937676255346704,
+      "id": 2834960242740151372,
       "homeTeam": "Włochy K",
       "awayTeam": "Bośnia i Hercegowina K",
       "time": "08.03.2026 17:00",
@@ -1584,7 +1584,7 @@
       "tennis": null
     },
     {
-      "id": -8495684083092270128,
+      "id": 1059649494224903625,
       "homeTeam": "Dania K",
       "awayTeam": "Węgry K",
       "time": "08.03.2026 15:00",
@@ -1656,7 +1656,7 @@
       "tennis": null
     },
     {
-      "id": -600321459666101918,
+      "id": -6907467895859384723,
       "homeTeam": "Rumunia K",
       "awayTeam": "Słowacja K",
       "time": "08.03.2026 17:00",
@@ -1719,7 +1719,7 @@
         "home": 92,
         "draw": 4,
         "away": 5,
-        "votes": 130
+        "votes": 132
       },
       "focusTeam": "home",
       "scoring": {
@@ -1734,7 +1734,7 @@
       "tennis": null
     },
     {
-      "id": -944923695315362833,
+      "id": 73641344955901396,
       "homeTeam": "Nimes",
       "awayTeam": "Limoges",
       "time": "08.03.2026 17:30",
@@ -1791,7 +1791,7 @@
         "home": 72,
         "draw": 7,
         "away": 20,
-        "votes": 108
+        "votes": 109
       },
       "focusTeam": "home",
       "scoring": {
@@ -1806,7 +1806,7 @@
       "tennis": null
     },
     {
-      "id": 8374322738986766311,
+      "id": 9177402151082462167,
       "homeTeam": "Saran",
       "awayTeam": "Ivry",
       "time": "08.03.2026 14:00",
@@ -1836,7 +1836,7 @@
       "tennis": null
     },
     {
-      "id": -7297207567080606839,
+      "id": 6517782814228699439,
       "homeTeam": "Creteil",
       "awayTeam": "Besancon",
       "time": "08.03.2026 15:00",
@@ -1866,7 +1866,7 @@
       "tennis": null
     },
     {
-      "id": 6214628919997182040,
+      "id": -6971618848807396906,
       "homeTeam": "Zafeirakis",
       "awayTeam": "Ionikos",
       "time": "08.03.2026 15:00",
@@ -1896,7 +1896,7 @@
       "tennis": null
     },
     {
-      "id": -6976013386172353909,
+      "id": -6240493075122399582,
       "homeTeam": "Diomidis Argous",
       "awayTeam": "Drama",
       "time": "08.03.2026 16:00",
@@ -1926,7 +1926,7 @@
       "tennis": null
     },
     {
-      "id": -6143982678503399517,
+      "id": 3655704828439313797,
       "homeTeam": "Burgos",
       "awayTeam": "Cisne",
       "time": "08.03.2026 11:00",
@@ -1980,25 +1980,25 @@
       },
       "forebet": null,
       "sofascore": {
-        "home": 90,
+        "home": 91,
         "draw": null,
-        "away": 10,
-        "votes": 10
+        "away": 9,
+        "votes": 11
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 84.0,
-        "ev": 0.05,
-        "edge": 4.0,
-        "kelly": 20.2,
+        "prob": 84.2,
+        "ev": 0.052,
+        "edge": 4.2,
+        "kelly": 20.9,
         "confidence": 70.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": 3309965322316859657,
+      "id": -2983924887347736833,
       "homeTeam": "BM Sinfin",
       "awayTeam": "OAR Coruna",
       "time": "08.03.2026 11:30",
@@ -2052,25 +2052,25 @@
       },
       "forebet": null,
       "sofascore": {
-        "home": 62,
+        "home": 67,
         "draw": null,
-        "away": 38,
-        "votes": 8
+        "away": 33,
+        "votes": 9
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 69.6,
-        "ev": 0.099,
-        "edge": 6.3,
-        "kelly": 17.1,
-        "confidence": 67.0,
+        "prob": 70.6,
+        "ev": 0.116,
+        "edge": 7.3,
+        "kelly": 20.0,
+        "confidence": 69.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": -7223609402111054062,
+      "id": 1866469758916203221,
       "homeTeam": "Bevo HC 2",
       "awayTeam": "PSV Handbal",
       "time": "08.03.2026 11:45",
@@ -2100,7 +2100,7 @@
       "tennis": null
     },
     {
-      "id": 6339032504335469779,
+      "id": 6303129699371230616,
       "homeTeam": "Ryukyu Corazon",
       "awayTeam": "Brave Kings Kariya",
       "time": "08.03.2026 06:00",
@@ -2130,7 +2130,7 @@
       "tennis": null
     },
     {
-      "id": 3171421180506269050,
+      "id": 482142617274600570,
       "homeTeam": "SK Hawks",
       "awayTeam": "Sangmu",
       "time": "08.03.2026 07:10",
@@ -2193,7 +2193,7 @@
         "home": 100,
         "draw": null,
         "away": 0,
-        "votes": 20
+        "votes": 21
       },
       "focusTeam": "home",
       "scoring": {
@@ -2208,7 +2208,7 @@
       "tennis": null
     },
     {
-      "id": -6481929305163557607,
+      "id": 1004638463899287339,
       "homeTeam": "Doosan",
       "awayTeam": "Chungnam Athletic",
       "time": "08.03.2026 09:00",
@@ -2238,7 +2238,7 @@
       "tennis": null
     },
     {
-      "id": 3646798098504502196,
+      "id": 1650945557331448008,
       "homeTeam": "Incheon City",
       "awayTeam": "Hanam",
       "time": "08.03.2026 11:00",
@@ -2298,25 +2298,25 @@
         "btts": null
       },
       "sofascore": {
-        "home": 77,
+        "home": 79,
         "draw": null,
-        "away": 23,
-        "votes": 13
+        "away": 21,
+        "votes": 14
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 79.2,
-        "ev": 0.069,
-        "edge": 5.1,
-        "kelly": 19.6,
-        "confidence": 72.0,
+        "prob": 79.4,
+        "ev": 0.072,
+        "edge": 5.4,
+        "kelly": 20.7,
+        "confidence": 73.0,
         "dataQuality": 0.8
       },
       "tennis": null
     },
     {
-      "id": 1601380419435452107,
+      "id": -4426342058498934214,
       "homeTeam": "Ludwigshafen",
       "awayTeam": "Bietigheim-Metterzimmern",
       "time": "08.03.2026 16:00",
@@ -2346,7 +2346,7 @@
       "tennis": null
     },
     {
-      "id": -2226015072479009465,
+      "id": -5778787476826048118,
       "homeTeam": "Nordhorn-Lingen",
       "awayTeam": "HBW Balingen-Weilstetten",
       "time": "08.03.2026 16:00",
@@ -2376,7 +2376,7 @@
       "tennis": null
     },
     {
-      "id": 6687991859881343902,
+      "id": -1813336120419213290,
       "homeTeam": "Oppenweiler/Backnang",
       "awayTeam": "Dormagen",
       "time": "08.03.2026 16:00",
@@ -2406,7 +2406,7 @@
       "tennis": null
     },
     {
-      "id": -5962075920982647440,
+      "id": 8082923451612677800,
       "homeTeam": "Arendal",
       "awayTeam": "Follo",
       "time": "08.03.2026 16:00",
@@ -2478,7 +2478,7 @@
       "tennis": null
     },
     {
-      "id": 6473200620018259721,
+      "id": -5923853746873122144,
       "homeTeam": "Naerbo",
       "awayTeam": "Halden",
       "time": "08.03.2026 16:00",
@@ -2508,7 +2508,7 @@
       "tennis": null
     },
     {
-      "id": 1804060587979409652,
+      "id": 4975033098609725407,
       "homeTeam": "Fjellhammer",
       "awayTeam": "Sandefjord TIF",
       "time": "08.03.2026 17:00",
@@ -2538,7 +2538,7 @@
       "tennis": null
     },
     {
-      "id": 8930418611225510133,
+      "id": -2874368237723404306,
       "homeTeam": "Kristiansand",
       "awayTeam": "Baekkelaget",
       "time": "08.03.2026 17:00",
@@ -2592,25 +2592,25 @@
       },
       "forebet": null,
       "sofascore": {
-        "home": 90,
-        "draw": 10,
+        "home": 91,
+        "draw": 9,
         "away": 0,
-        "votes": 41
+        "votes": 43
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 75.1,
-        "ev": 0.187,
-        "edge": 11.8,
-        "kelly": 32.3,
+        "prob": 75.3,
+        "ev": 0.19,
+        "edge": 12.0,
+        "kelly": 32.7,
         "confidence": 77.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": -5928612470446296939,
+      "id": 5178962896780046491,
       "homeTeam": "Sandnes",
       "awayTeam": "Kolstad",
       "time": "08.03.2026 17:00",
@@ -2640,7 +2640,7 @@
       "tennis": null
     },
     {
-      "id": -6852034129983193139,
+      "id": -4300025252932560947,
       "homeTeam": "Bergsoy",
       "awayTeam": "Bjornar",
       "time": "08.03.2026 13:00",
@@ -2718,7 +2718,7 @@
       "tennis": null
     },
     {
-      "id": -2159595628036797704,
+      "id": -7071611728198532778,
       "homeTeam": "Charlottenlund",
       "awayTeam": "Lillestrøm",
       "time": "08.03.2026 15:00",
@@ -2790,7 +2790,7 @@
       "tennis": null
     },
     {
-      "id": 2228463178867285822,
+      "id": 5716746176969075638,
       "homeTeam": "Melhus",
       "awayTeam": "Tiller",
       "time": "08.03.2026 15:00",
@@ -2868,7 +2868,7 @@
       "tennis": null
     },
     {
-      "id": 1137229393385356378,
+      "id": -7100269661630692464,
       "homeTeam": "Kragero IF",
       "awayTeam": "Viking TIF",
       "time": "08.03.2026 15:30",
@@ -2898,7 +2898,7 @@
       "tennis": null
     },
     {
-      "id": -8229951092840058290,
+      "id": 1336541994532583212,
       "homeTeam": "Bodo",
       "awayTeam": "Åsane",
       "time": "08.03.2026 16:00",
@@ -2970,7 +2970,7 @@
       "tennis": null
     },
     {
-      "id": 6424892632540604503,
+      "id": 2100362662591264642,
       "homeTeam": "Nordstrand",
       "awayTeam": "Ryger Stavanger",
       "time": "08.03.2026 16:00",
@@ -3048,7 +3048,7 @@
       "tennis": null
     },
     {
-      "id": -4898374062649530477,
+      "id": 1019020776663424628,
       "homeTeam": "Nielba Wągrowiec",
       "awayTeam": "AZS AGH Kraków",
       "time": "08.03.2026 14:00",
@@ -3078,7 +3078,7 @@
       "tennis": null
     },
     {
-      "id": 3508525256104349513,
+      "id": 5898137216947987706,
       "homeTeam": "Stal Gorzow",
       "awayTeam": "Padwa Zamość",
       "time": "08.03.2026 14:00",
@@ -3108,7 +3108,7 @@
       "tennis": null
     },
     {
-      "id": -4223211307591415549,
+      "id": -4799711024995753074,
       "homeTeam": "Tytani Wejherowo",
       "awayTeam": "MKS Grudziądz",
       "time": "08.03.2026 15:00",
@@ -3175,7 +3175,7 @@
       "tennis": null
     },
     {
-      "id": -8741290667874300801,
+      "id": -4181461708577629791,
       "homeTeam": "ZPRP Kielce II",
       "awayTeam": "MTS Chrzanów",
       "time": "08.03.2026 15:30",
@@ -3205,7 +3205,7 @@
       "tennis": null
     },
     {
-      "id": -1820308061601932145,
+      "id": -8878205387583188625,
       "homeTeam": "Viret Zawiercie",
       "awayTeam": "Zagłębie Sosnowiec",
       "time": "08.03.2026 16:00",
@@ -3278,7 +3278,7 @@
       "tennis": null
     },
     {
-      "id": -1060716917552069454,
+      "id": -5616203239283513139,
       "homeTeam": "KPR Gryfino",
       "awayTeam": "Kąty Wrocławskie",
       "time": "08.03.2026 17:00",
@@ -3308,7 +3308,7 @@
       "tennis": null
     },
     {
-      "id": 7521460491699742396,
+      "id": -2056651523432179186,
       "homeTeam": "Grunwald Ruda Śląska",
       "awayTeam": "Olimpia Piekary",
       "time": "08.03.2026 18:15",
@@ -3338,7 +3338,7 @@
       "tennis": null
     },
     {
-      "id": -2418248036691000031,
+      "id": -123268531586773852,
       "homeTeam": "Szczypiorniak Olsztyn",
       "awayTeam": "SMS Kwidzyn",
       "time": "08.03.2026 18:30",
@@ -3368,7 +3368,7 @@
       "tennis": null
     },
     {
-      "id": 5569876058560315132,
+      "id": -2183101624875293169,
       "homeTeam": "Kwidzyn K",
       "awayTeam": "MKS Gniezno II K",
       "time": "08.03.2026 12:00",
@@ -3398,7 +3398,7 @@
       "tennis": null
     },
     {
-      "id": -4582189134977063378,
+      "id": 1261155433456192875,
       "homeTeam": "ZPRP Kalisz K",
       "awayTeam": "Jelenia Góra K",
       "time": "08.03.2026 15:00",
@@ -3428,7 +3428,7 @@
       "tennis": null
     },
     {
-      "id": -7911061041029172477,
+      "id": 244048051276548381,
       "homeTeam": "Grunwald Ruda Slaska K",
       "awayTeam": "MOS Wroclaw K",
       "time": "08.03.2026 15:45",
@@ -3501,7 +3501,7 @@
       "tennis": null
     },
     {
-      "id": -2837646970976029526,
+      "id": 8304715908426390330,
       "homeTeam": "Uniwersytet Warszawski K",
       "awayTeam": "Radom II K",
       "time": "08.03.2026 16:30",
@@ -3531,7 +3531,7 @@
       "tennis": null
     },
     {
-      "id": 7223346322528613157,
+      "id": -5026458862551477746,
       "homeTeam": "Gaia",
       "awayTeam": "Sporting",
       "time": "08.03.2026 15:00",
@@ -3561,7 +3561,7 @@
       "tennis": null
     },
     {
-      "id": 7389260202463146936,
+      "id": 1788634605274601239,
       "homeTeam": "CSKA Moscow",
       "awayTeam": "Krasnodar",
       "time": "08.03.2026 11:00",
@@ -3634,7 +3634,7 @@
       "tennis": null
     },
     {
-      "id": 821914222040362932,
+      "id": 7967861847150773561,
       "homeTeam": "Dinamo Bukareszt",
       "awayTeam": "Potaissa Turda",
       "time": "08.03.2026 15:30",
@@ -3706,7 +3706,7 @@
       "tennis": null
     },
     {
-      "id": -1450722437871548949,
+      "id": 6999918973578958821,
       "homeTeam": "Gradec",
       "awayTeam": "Trebnje",
       "time": "08.03.2026 18:30",
@@ -3736,7 +3736,7 @@
       "tennis": null
     },
     {
-      "id": -5502228315155316736,
+      "id": -7426612007226630422,
       "homeTeam": "St. Gallen",
       "awayTeam": "Bern",
       "time": "08.03.2026 16:00",
@@ -3766,7 +3766,7 @@
       "tennis": null
     },
     {
-      "id": -3905026212708395734,
+      "id": 1793149776914122860,
       "homeTeam": "Skövde",
       "awayTeam": "Hallby",
       "time": "08.03.2026 15:00",
@@ -3820,25 +3820,25 @@
       },
       "forebet": null,
       "sofascore": {
-        "home": 87,
+        "home": 88,
         "draw": 4,
-        "away": 9,
-        "votes": 46
+        "away": 8,
+        "votes": 48
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 85.4,
-        "ev": 0.153,
-        "edge": 11.3,
-        "kelly": 43.7,
+        "prob": 85.5,
+        "ev": 0.155,
+        "edge": 11.5,
+        "kelly": 44.2,
         "confidence": 80.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": -5656540127938323169,
+      "id": 8714815837525595929,
       "homeTeam": "Malmo",
       "awayTeam": "Alingsås",
       "time": "08.03.2026 15:30",
@@ -3892,17 +3892,17 @@
       },
       "forebet": null,
       "sofascore": {
-        "home": 75,
+        "home": 76,
         "draw": 9,
-        "away": 16,
-        "votes": 32
+        "away": 15,
+        "votes": 33
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "X",
         "prob": 13.7,
-        "ev": 0.027,
-        "edge": 0.4,
+        "ev": 0.025,
+        "edge": 0.3,
         "kelly": 0.4,
         "confidence": 37.0,
         "dataQuality": 0.7
@@ -3910,7 +3910,7 @@
       "tennis": null
     },
     {
-      "id": 4154381556616746572,
+      "id": 8782572111954868023,
       "homeTeam": "Tumba",
       "awayTeam": "Vinslovs",
       "time": "08.03.2026 16:00",
@@ -3970,25 +3970,25 @@
         "btts": null
       },
       "sofascore": {
-        "home": 82,
-        "draw": 9,
-        "away": 9,
-        "votes": 11
+        "home": 83,
+        "draw": 8,
+        "away": 8,
+        "votes": 12
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "X",
-        "prob": 10.7,
-        "ev": 0.013,
-        "edge": 0.1,
-        "kelly": 0.2,
+        "prob": 10.5,
+        "ev": 0.002,
+        "edge": 0.0,
+        "kelly": 0.0,
         "confidence": 38.0,
         "dataQuality": 0.8
       },
       "tennis": null
     },
     {
-      "id": -3359844860866589401,
+      "id": -4883662217581215638,
       "homeTeam": "Helsingborg K",
       "awayTeam": "Tyresö K",
       "time": "08.03.2026 13:00",
@@ -4055,7 +4055,7 @@
       "tennis": null
     },
     {
-      "id": 1398074741843797618,
+      "id": 1654742419649740947,
       "homeTeam": "Lugi K",
       "awayTeam": "AIK K",
       "time": "08.03.2026 14:00",
@@ -4122,7 +4122,7 @@
       "tennis": null
     },
     {
-      "id": -7951926076144264278,
+      "id": -7044776317015458239,
       "homeTeam": "Skanela K",
       "awayTeam": "Drott Halmstad K",
       "time": "08.03.2026 14:00",
@@ -4195,7 +4195,7 @@
       "tennis": null
     },
     {
-      "id": -2501839011191668948,
+      "id": 3842458361767003355,
       "homeTeam": "Giresunspor",
       "awayTeam": "Spor Toto",
       "time": "08.03.2026 11:00",
@@ -4225,7 +4225,7 @@
       "tennis": null
     },
     {
-      "id": -7398074116310478113,
+      "id": -3940583449961180708,
       "homeTeam": "Istanbul Genclik Spor Kulubu",
       "awayTeam": "Rize Genclik",
       "time": "08.03.2026 11:00",
@@ -4292,7 +4292,7 @@
       "tennis": null
     },
     {
-      "id": -1977513884094141740,
+      "id": 2681557170444642361,
       "homeTeam": "Koycegiz Belediye",
       "awayTeam": "Guneysu",
       "time": "08.03.2026 11:00",
@@ -4322,7 +4322,7 @@
       "tennis": null
     },
     {
-      "id": -1797598869085633211,
+      "id": -4251405732866270496,
       "homeTeam": "Trabzon",
       "awayTeam": "Ankara Hentbol",
       "time": "08.03.2026 12:00",
@@ -4395,7 +4395,7 @@
       "tennis": null
     },
     {
-      "id": -3453194067655045619,
+      "id": 4280727769165416862,
       "homeTeam": "Mihaliccik",
       "awayTeam": "Beykoz Bld.",
       "time": "08.03.2026 14:00",
@@ -4425,7 +4425,7 @@
       "tennis": null
     },
     {
-      "id": -8393372295393601054,
+      "id": 4867699542555874190,
       "homeTeam": "Gyongyosi",
       "awayTeam": "Veszprem",
       "time": "08.03.2026 17:00",

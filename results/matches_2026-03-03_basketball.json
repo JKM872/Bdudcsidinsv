@@ -1,15 +1,15 @@
 {
   "date": "2026-03-03",
   "sport": "basketball",
-  "generatedAt": "2026-03-03T02:47:04.503566",
+  "generatedAt": "2026-03-03T03:15:20.902116",
   "stats": {
     "total": 84,
-    "qualifying": 35,
-    "formAdvantage": 23
+    "qualifying": 36,
+    "formAdvantage": 24
   },
   "matches": [
     {
-      "id": 8926110069690763852,
+      "id": -840517265688637421,
       "homeTeam": "Hapoel Tel-Aviv",
       "awayTeam": "Paris",
       "time": "03.03.2026 17:00",
@@ -81,7 +81,7 @@
       "tennis": null
     },
     {
-      "id": -7804023980514875376,
+      "id": -6306068899752391994,
       "homeTeam": "Washington Wizards",
       "awayTeam": "Houston Rockets",
       "time": "03.03.2026 00:00",
@@ -111,7 +111,7 @@
       "tennis": null
     },
     {
-      "id": 2216226737306172503,
+      "id": 6304591812374569449,
       "homeTeam": "Milwaukee Bucks",
       "awayTeam": "Boston Celtics",
       "time": "03.03.2026 00:30",
@@ -141,7 +141,7 @@
       "tennis": null
     },
     {
-      "id": 6563658407133309090,
+      "id": 993525619960766564,
       "homeTeam": "Utah Jazz",
       "awayTeam": "Denver Nuggets",
       "time": "03.03.2026 02:00",
@@ -171,7 +171,7 @@
       "tennis": null
     },
     {
-      "id": 157551462170473679,
+      "id": -8310777892906915490,
       "homeTeam": "Golden State Warriors",
       "awayTeam": "Los Angeles Clippers",
       "time": "03.03.2026 03:00",
@@ -201,7 +201,7 @@
       "tennis": null
     },
     {
-      "id": -2555736377419310230,
+      "id": 4887467252785638663,
       "homeTeam": "Kuba",
       "awayTeam": "Urugwaj",
       "time": "03.03.2026 00:00",
@@ -231,7 +231,7 @@
       "tennis": null
     },
     {
-      "id": -1545552902153712545,
+      "id": 9147216149956423069,
       "homeTeam": "Deportivo Chanares K",
       "awayTeam": "Quimsa K",
       "time": "03.03.2026 00:00",
@@ -309,7 +309,7 @@
       "tennis": null
     },
     {
-      "id": -5205421578966639634,
+      "id": -9161269911192852471,
       "homeTeam": "San Jose K",
       "awayTeam": "Bochas K",
       "time": "03.03.2026 00:00",
@@ -381,7 +381,7 @@
       "tennis": null
     },
     {
-      "id": 3771546380032323412,
+      "id": -5206634609415538400,
       "homeTeam": "Avellaneda K",
       "awayTeam": "Quimsa K",
       "time": "03.03.2026 23:00",
@@ -411,7 +411,7 @@
       "tennis": null
     },
     {
-      "id": 8186423408761442952,
+      "id": -9130335995317440178,
       "homeTeam": "Grodno",
       "awayTeam": "Minsk",
       "time": "03.03.2026 14:30",
@@ -460,15 +460,15 @@
       "odds": null,
       "forebet": null,
       "sofascore": {
-        "home": 62,
+        "home": 60,
         "draw": null,
-        "away": 38,
-        "votes": 39
+        "away": 40,
+        "votes": 42
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 57.2,
+        "prob": 56.8,
         "ev": -999.0,
         "edge": 0.0,
         "kelly": 0.0,
@@ -478,7 +478,7 @@
       "tennis": null
     },
     {
-      "id": -4485307876928138939,
+      "id": -1169129080832900736,
       "homeTeam": "Split",
       "awayTeam": "Perspektiva Ilirija",
       "time": "03.03.2026 18:00",
@@ -508,7 +508,7 @@
       "tennis": null
     },
     {
-      "id": 7556050910663820331,
+      "id": -189945359851091825,
       "homeTeam": "Podgorica",
       "awayTeam": "Helios Domzale",
       "time": "03.03.2026 17:00",
@@ -538,7 +538,7 @@
       "tennis": null
     },
     {
-      "id": 6717241380242272907,
+      "id": 9113236783483616878,
       "homeTeam": "Student Igokea",
       "awayTeam": "Primorje",
       "time": "03.03.2026 19:00",
@@ -568,7 +568,7 @@
       "tennis": null
     },
     {
-      "id": -2703030048655654160,
+      "id": -2397854897377985120,
       "homeTeam": "Keila KK",
       "awayTeam": "BC Kalev/Cramo",
       "time": "03.03.2026 17:30",
@@ -598,7 +598,7 @@
       "tennis": null
     },
     {
-      "id": 3073565669588313817,
+      "id": -5267260163662671167,
       "homeTeam": "Galatasaray K",
       "awayTeam": "Landes K",
       "time": "03.03.2026 17:30",
@@ -652,25 +652,25 @@
       },
       "forebet": null,
       "sofascore": {
-        "home": 86,
+        "home": 87,
         "draw": null,
-        "away": 14,
-        "votes": 287
+        "away": 13,
+        "votes": 291
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 65.0,
-        "ev": 0.027,
-        "edge": 1.7,
-        "kelly": 4.7,
-        "confidence": 59.0,
+        "prob": 65.2,
+        "ev": 0.03,
+        "edge": 1.9,
+        "kelly": 5.2,
+        "confidence": 60.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": 5925142850660999470,
+      "id": 2176458708705547343,
       "homeTeam": "Venezia K",
       "awayTeam": "Schio K",
       "time": "03.03.2026 18:30",
@@ -700,7 +700,7 @@
       "tennis": null
     },
     {
-      "id": 8488568058432965625,
+      "id": 8004343232677552619,
       "homeTeam": "Bashkimi K",
       "awayTeam": "Flamurtari K",
       "time": "03.03.2026 17:30",
@@ -749,15 +749,15 @@
       "odds": null,
       "forebet": null,
       "sofascore": {
-        "home": 97,
+        "home": 94,
         "draw": null,
-        "away": 3,
-        "votes": 34
+        "away": 6,
+        "votes": 35
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 69.7,
+        "prob": 69.2,
         "ev": -999.0,
         "edge": 0.0,
         "kelly": 0.0,
@@ -767,7 +767,7 @@
       "tennis": null
     },
     {
-      "id": 949867133820741702,
+      "id": 666579093278160376,
       "homeTeam": "Peja K",
       "awayTeam": "Tirana K",
       "time": "03.03.2026 18:00",
@@ -819,7 +819,7 @@
         "home": 100,
         "draw": null,
         "away": 0,
-        "votes": 37
+        "votes": 38
       },
       "focusTeam": "home",
       "scoring": {
@@ -834,7 +834,7 @@
       "tennis": null
     },
     {
-      "id": -6848093222910322872,
+      "id": 8646782728984465504,
       "homeTeam": "Cinkarna Celje K",
       "awayTeam": "Rilski Sportist K",
       "time": "03.03.2026 16:00",
@@ -889,15 +889,15 @@
         "btts": null
       },
       "sofascore": {
-        "home": 94,
+        "home": 93,
         "draw": null,
-        "away": 6,
-        "votes": 71
+        "away": 7,
+        "votes": 73
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 81.9,
+        "prob": 81.7,
         "ev": -999.0,
         "edge": 0.0,
         "kelly": 0.0,
@@ -907,7 +907,7 @@
       "tennis": null
     },
     {
-      "id": 8159358936778895544,
+      "id": -5009002074927715125,
       "homeTeam": "Triple Threat K",
       "awayTeam": "Binnenland K",
       "time": "03.03.2026 19:30",
@@ -979,7 +979,7 @@
       "tennis": null
     },
     {
-      "id": -1587645341657731229,
+      "id": -4510324591055632711,
       "homeTeam": "Kaspiy Aktau",
       "awayTeam": "Astana",
       "time": "03.03.2026 14:00",
@@ -1009,7 +1009,7 @@
       "tennis": null
     },
     {
-      "id": -7441631513309636613,
+      "id": -528480050641152158,
       "homeTeam": "ChelSU Kostanay",
       "awayTeam": "BC Almaty 2",
       "time": "03.03.2026 08:00",
@@ -1039,7 +1039,7 @@
       "tennis": null
     },
     {
-      "id": -3505106653590516279,
+      "id": -7147464335696075771,
       "homeTeam": "Tobol Kostanay 2",
       "awayTeam": "CHAMP1ON",
       "time": "03.03.2026 10:30",
@@ -1069,7 +1069,7 @@
       "tennis": null
     },
     {
-      "id": -5335831193634818338,
+      "id": 4491264531449172200,
       "homeTeam": "Zhetysu K",
       "awayTeam": "Aktau K",
       "time": "03.03.2026 08:00",
@@ -1099,7 +1099,7 @@
       "tennis": null
     },
     {
-      "id": 7010134350228396791,
+      "id": 1399835445894355379,
       "homeTeam": "Tadamon Hrajel",
       "awayTeam": "Antranik Beirut",
       "time": "03.03.2026 18:30",
@@ -1129,7 +1129,7 @@
       "tennis": null
     },
     {
-      "id": -8807666916575117179,
+      "id": -6199408446214188650,
       "homeTeam": "Ukmerges Stekas",
       "awayTeam": "Jurbarkas",
       "time": "03.03.2026 17:00",
@@ -1159,7 +1159,7 @@
       "tennis": null
     },
     {
-      "id": -594552356983455077,
+      "id": -563608949598100600,
       "homeTeam": "Basket Kam K",
       "awayTeam": "Sport Tim K",
       "time": "03.03.2026 19:00",
@@ -1206,33 +1206,27 @@
       ],
       "formAdvantage": true,
       "odds": null,
-      "forebet": {
-        "prediction": "1",
-        "probability": 69.0,
-        "exactScore": "78-75",
-        "overUnder": null,
-        "btts": null
-      },
+      "forebet": null,
       "sofascore": {
         "home": 100,
         "draw": null,
         "away": 0,
-        "votes": 39
+        "votes": 40
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 83.4,
+        "prob": 83.8,
         "ev": -999.0,
         "edge": 0.0,
         "kelly": 0.0,
-        "confidence": 54.0,
-        "dataQuality": 0.7
+        "confidence": 52.0,
+        "dataQuality": 0.6
       },
       "tennis": null
     },
     {
-      "id": -4459219048472333002,
+      "id": 7182920207488112463,
       "homeTeam": "Astros",
       "awayTeam": "Ostioneros de Guaymas",
       "time": "03.03.2026 02:15",
@@ -1310,7 +1304,7 @@
       "tennis": null
     },
     {
-      "id": -355233799449260066,
+      "id": -2047123816513148542,
       "homeTeam": "Dynamo Vladivostok",
       "awayTeam": "Ufa",
       "time": "03.03.2026 09:15",
@@ -1359,15 +1353,15 @@
       "odds": null,
       "forebet": null,
       "sofascore": {
-        "home": 90,
+        "home": 91,
         "draw": null,
-        "away": 10,
-        "votes": 62
+        "away": 9,
+        "votes": 65
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 75.6,
+        "prob": 75.8,
         "ev": -999.0,
         "edge": 0.0,
         "kelly": 0.0,
@@ -1377,7 +1371,7 @@
       "tennis": null
     },
     {
-      "id": -3431313779505500729,
+      "id": -1220417061871185802,
       "homeTeam": "Piestanske Cajky K",
       "awayTeam": "Slavia Banska Bystrica K",
       "time": "03.03.2026 17:00",
@@ -1440,7 +1434,7 @@
         "home": 94,
         "draw": null,
         "away": 6,
-        "votes": 47
+        "votes": 49
       },
       "focusTeam": "home",
       "scoring": {
@@ -1455,7 +1449,7 @@
       "tennis": null
     },
     {
-      "id": -6808071164086284599,
+      "id": -4622478919453342876,
       "homeTeam": "Samorin K",
       "awayTeam": "MBK Ruzomberok K",
       "time": "03.03.2026 17:00",
@@ -1485,7 +1479,7 @@
       "tennis": null
     },
     {
-      "id": -8786739751806785642,
+      "id": -8090676341742864557,
       "homeTeam": "Young Angels Kosice K",
       "awayTeam": "Slovan Bratislava K",
       "time": "03.03.2026 18:00",
@@ -1539,25 +1533,25 @@
       },
       "forebet": null,
       "sofascore": {
-        "home": 79,
+        "home": 78,
         "draw": null,
-        "away": 21,
-        "votes": 43
+        "away": 22,
+        "votes": 45
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 56.1,
-        "ev": -0.046,
-        "edge": -2.7,
+        "prob": 55.9,
+        "ev": -0.05,
+        "edge": -2.9,
         "kelly": 0.0,
-        "confidence": 40.0,
+        "confidence": 39.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": 370269535917243082,
+      "id": 8757256590013163086,
       "homeTeam": "Ilirija K",
       "awayTeam": "Maribor K",
       "time": "03.03.2026 20:00",
@@ -1629,7 +1623,7 @@
       "tennis": null
     },
     {
-      "id": -7263291539540919475,
+      "id": 2293426073852519669,
       "homeTeam": "Melikgazi Kayseri K",
       "awayTeam": "Fenerbahce K",
       "time": "03.03.2026 10:00",
@@ -1659,7 +1653,7 @@
       "tennis": null
     },
     {
-      "id": -1906364359087394522,
+      "id": 4594187131063155556,
       "homeTeam": "Valley Suns",
       "awayTeam": "Salt Lake City Stars",
       "time": "03.03.2026 01:30",
@@ -1689,7 +1683,7 @@
       "tennis": null
     },
     {
-      "id": -6917401259849176486,
+      "id": -4231418818201721513,
       "homeTeam": "Rip City Remix",
       "awayTeam": "Iowa Wolves",
       "time": "03.03.2026 02:00",
@@ -1762,7 +1756,7 @@
       "tennis": null
     },
     {
-      "id": 2755502526908580227,
+      "id": -8855930334302618185,
       "homeTeam": "Stockton Kings",
       "awayTeam": "Santa Cruz Warriors",
       "time": "03.03.2026 03:30",
@@ -1820,7 +1814,7 @@
         "home": 91,
         "draw": null,
         "away": 9,
-        "votes": 109
+        "votes": 116
       },
       "focusTeam": "home",
       "scoring": {
@@ -1835,7 +1829,7 @@
       "tennis": null
     },
     {
-      "id": -4346855669743013542,
+      "id": -1007726781263992312,
       "homeTeam": "Cleveland Charge",
       "awayTeam": "Windy City Bulls",
       "time": "03.03.2026 16:00",
@@ -1887,7 +1881,7 @@
         "home": 95,
         "draw": null,
         "away": 5,
-        "votes": 59
+        "votes": 62
       },
       "focusTeam": "home",
       "scoring": {
@@ -1902,7 +1896,7 @@
       "tennis": null
     },
     {
-      "id": -6583468965641287812,
+      "id": -7274647993961005914,
       "homeTeam": "Grand Rapids Gold",
       "awayTeam": "Capital City Go-Go",
       "time": "03.03.2026 16:00",
@@ -1932,7 +1926,7 @@
       "tennis": null
     },
     {
-      "id": 7781764798583044679,
+      "id": 2592127491857741891,
       "homeTeam": "Cleveland State",
       "awayTeam": "IU Indy",
       "time": "03.03.2026 00:00",
@@ -1995,7 +1989,7 @@
         "home": 95,
         "draw": null,
         "away": 5,
-        "votes": 59
+        "votes": 62
       },
       "focusTeam": "home",
       "scoring": {
@@ -2010,7 +2004,7 @@
       "tennis": null
     },
     {
-      "id": -2576449916504904733,
+      "id": 1732535144318008183,
       "homeTeam": "Delaware State",
       "awayTeam": "South Carolina St",
       "time": "03.03.2026 00:00",
@@ -2040,7 +2034,7 @@
       "tennis": null
     },
     {
-      "id": -5188203485299453144,
+      "id": -2598855101078591712,
       "homeTeam": "Howard",
       "awayTeam": "Coppin State",
       "time": "03.03.2026 00:00",
@@ -2118,7 +2112,7 @@
       "tennis": null
     },
     {
-      "id": -5751607656302544377,
+      "id": 6003460463810392661,
       "homeTeam": "Md.-East. Shore",
       "awayTeam": "N.Carolina Central",
       "time": "03.03.2026 00:00",
@@ -2148,7 +2142,7 @@
       "tennis": null
     },
     {
-      "id": -6107252343770813008,
+      "id": -7159610124143535778,
       "homeTeam": "N.C. State",
       "awayTeam": "Duke",
       "time": "03.03.2026 00:00",
@@ -2178,7 +2172,7 @@
       "tennis": null
     },
     {
-      "id": -4702683738766782129,
+      "id": -6946353271133139248,
       "homeTeam": "Incarnate Word",
       "awayTeam": "Stephen F. Austin",
       "time": "03.03.2026 00:30",
@@ -2208,7 +2202,7 @@
       "tennis": null
     },
     {
-      "id": -1892515979264918230,
+      "id": -5279641629470433096,
       "homeTeam": "Nicholls State",
       "awayTeam": "Mcneese State",
       "time": "03.03.2026 00:30",
@@ -2238,7 +2232,7 @@
       "tennis": null
     },
     {
-      "id": 9028516761886883019,
+      "id": 7494739204309895241,
       "homeTeam": "UTRGV",
       "awayTeam": "Northwestern St.",
       "time": "03.03.2026 00:30",
@@ -2249,11 +2243,11 @@
       "matchUrl": "https://www.livesport.com/pl/mecz/koszykowka/northwestern-st-OEHIn5ys/utrgv-dxCOYueG/?mid=xITv5xMc",
       "qualifies": false,
       "h2h": {
-        "home": 0,
+        "home": 1,
         "draw": 0,
         "away": 2,
-        "total": 2,
-        "winRate": 0
+        "total": 3,
+        "winRate": 33
       },
       "homeForm": [],
       "awayForm": [],
@@ -2268,7 +2262,7 @@
       "tennis": null
     },
     {
-      "id": 4109986356393276404,
+      "id": -339931024865559287,
       "homeTeam": "New Orleans",
       "awayTeam": "SE Louisiana",
       "time": "03.03.2026 01:00",
@@ -2298,7 +2292,7 @@
       "tennis": null
     },
     {
-      "id": -7403210956259962962,
+      "id": -233353153124180760,
       "homeTeam": "Northern Arizona",
       "awayTeam": "Montana State",
       "time": "03.03.2026 01:00",
@@ -2328,7 +2322,7 @@
       "tennis": null
     },
     {
-      "id": 221098660240835473,
+      "id": -6710403693201848366,
       "homeTeam": "Northern Colorado",
       "awayTeam": "Montana",
       "time": "03.03.2026 01:00",
@@ -2358,7 +2352,7 @@
       "tennis": null
     },
     {
-      "id": -1001834288565970162,
+      "id": 2866485307046869218,
       "homeTeam": "Texas A&M-CC",
       "awayTeam": "East Texas A&M",
       "time": "03.03.2026 01:00",
@@ -2412,8 +2406,8 @@
       },
       "forebet": {
         "prediction": "1",
-        "probability": 69.0,
-        "exactScore": "78-75",
+        "probability": 65.0,
+        "exactScore": "69-56",
         "overUnder": null,
         "btts": null
       },
@@ -2426,17 +2420,17 @@
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 85.0,
-        "ev": 0.062,
-        "edge": 5.0,
-        "kelly": 24.9,
-        "confidence": 75.0,
+        "prob": 84.3,
+        "ev": 0.054,
+        "edge": 4.3,
+        "kelly": 21.4,
+        "confidence": 73.0,
         "dataQuality": 0.8
       },
       "tennis": null
     },
     {
-      "id": -8608785516251515105,
+      "id": 4279523755692494423,
       "homeTeam": "Houston Christian",
       "awayTeam": "Lamar",
       "time": "03.03.2026 01:30",
@@ -2466,7 +2460,7 @@
       "tennis": null
     },
     {
-      "id": -6753918713133704984,
+      "id": 8112189863097094159,
       "homeTeam": "Arizona",
       "awayTeam": "Iowa State",
       "time": "03.03.2026 02:00",
@@ -2544,7 +2538,7 @@
       "tennis": null
     },
     {
-      "id": 27250796696310642,
+      "id": 1178127694562500765,
       "homeTeam": "East. Washington",
       "awayTeam": "Idaho",
       "time": "03.03.2026 02:00",
@@ -2622,7 +2616,7 @@
       "tennis": null
     },
     {
-      "id": 3125459849722881227,
+      "id": 5962032380775506483,
       "homeTeam": "Portland State",
       "awayTeam": "Weber State",
       "time": "03.03.2026 03:00",
@@ -2685,7 +2679,7 @@
         "home": 78,
         "draw": null,
         "away": 22,
-        "votes": 413
+        "votes": 434
       },
       "focusTeam": "home",
       "scoring": {
@@ -2700,7 +2694,7 @@
       "tennis": null
     },
     {
-      "id": -4286423048563420222,
+      "id": -1505494802410961297,
       "homeTeam": "Sacramento State",
       "awayTeam": "Idaho State",
       "time": "03.03.2026 03:00",
@@ -2730,7 +2724,7 @@
       "tennis": null
     },
     {
-      "id": -6777659301296833202,
+      "id": 2650085713897627596,
       "homeTeam": "La Lafayette",
       "awayTeam": "Georgia State",
       "time": "03.03.2026 23:00",
@@ -2760,7 +2754,7 @@
       "tennis": null
     },
     {
-      "id": -195917934961168847,
+      "id": -7452904488373214366,
       "homeTeam": "Maine",
       "awayTeam": "UMass Lowell",
       "time": "03.03.2026 23:00",
@@ -2813,32 +2807,32 @@
         "bookmaker": "Pinnacle"
       },
       "forebet": {
-        "prediction": "2",
-        "probability": 56.0,
-        "exactScore": "76-80",
+        "prediction": "1",
+        "probability": 59.0,
+        "exactScore": "119-115",
         "overUnder": null,
         "btts": null
       },
       "sofascore": {
-        "home": 74,
+        "home": 75,
         "draw": null,
-        "away": 26,
-        "votes": 31
+        "away": 25,
+        "votes": 32
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 55.2,
-        "ev": 0.133,
-        "edge": 6.5,
-        "kelly": 12.6,
-        "confidence": 65.0,
+        "prob": 63.5,
+        "ev": 0.302,
+        "edge": 14.7,
+        "kelly": 28.8,
+        "confidence": 79.0,
         "dataQuality": 0.8
       },
       "tennis": null
     },
     {
-      "id": 5901833315421990097,
+      "id": -7786992351833743646,
       "homeTeam": "New Hampshire Wildcats",
       "awayTeam": "Bryant University",
       "time": "03.03.2026 23:00",
@@ -2868,7 +2862,7 @@
       "tennis": null
     },
     {
-      "id": -4284880013371975222,
+      "id": 7896304053838208554,
       "homeTeam": "NJIT",
       "awayTeam": "UMBC Retrievers",
       "time": "03.03.2026 23:00",
@@ -2898,7 +2892,7 @@
       "tennis": null
     },
     {
-      "id": 3618252315453483074,
+      "id": 8504785067453230667,
       "homeTeam": "South Carolina",
       "awayTeam": "Tennessee",
       "time": "03.03.2026 23:00",
@@ -2928,7 +2922,7 @@
       "tennis": null
     },
     {
-      "id": -6041054213694328760,
+      "id": 6280967416388637485,
       "homeTeam": "Buffalo",
       "awayTeam": "Eastern Michigan",
       "time": "03.03.2026 23:30",
@@ -2977,30 +2971,30 @@
       "odds": {
         "home": 1.6,
         "draw": null,
-        "away": 2.4,
+        "away": 2.5,
         "bookmaker": "Pinnacle"
       },
       "forebet": null,
       "sofascore": {
-        "home": 88,
+        "home": 89,
         "draw": null,
-        "away": 12,
-        "votes": 33
+        "away": 11,
+        "votes": 37
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 60.4,
-        "ev": -0.034,
-        "edge": -2.1,
+        "prob": 60.8,
+        "ev": -0.027,
+        "edge": -1.7,
         "kelly": 0.0,
-        "confidence": 42.0,
+        "confidence": 43.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": -5247751657926949229,
+      "id": 9203172671137472676,
       "homeTeam": "Gruzja",
       "awayTeam": "Alabama",
       "time": "03.03.2026 23:30",
@@ -3030,7 +3024,7 @@
       "tennis": null
     },
     {
-      "id": -1814783329164988725,
+      "id": -7924237759096331792,
       "homeTeam": "Stony Brook",
       "awayTeam": "Towson",
       "time": "03.03.2026 23:30",
@@ -3060,7 +3054,7 @@
       "tennis": null
     },
     {
-      "id": -3853266811443957856,
+      "id": 6606296197742157499,
       "homeTeam": "Belmont Bruins K",
       "awayTeam": "Southern Illinois K",
       "time": "03.03.2026 00:30",
@@ -3071,17 +3065,17 @@
       "matchUrl": "https://www.livesport.com/pl/mecz/koszykowka/belmont-bruins-CnPm17fT/southern-illinois-jsGMGG9O/?mid=KpgyIPGc",
       "qualifies": true,
       "h2h": {
-        "home": 3,
+        "home": 4,
         "draw": 0,
         "away": 0,
-        "total": 3,
+        "total": 4,
         "winRate": 100
       },
       "homeForm": [
         "W",
+        "W",
         "L",
         "D",
-        "W",
         "W"
       ],
       "awayForm": [
@@ -3095,14 +3089,14 @@
         "W",
         "W",
         "W",
-        "L",
-        "W"
+        "W",
+        "L"
       ],
       "awayFormAway": [
+        "L",
         "W",
         "L",
         "L",
-        "W",
         "W"
       ],
       "formAdvantage": true,
@@ -3123,7 +3117,80 @@
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 72.6,
+        "prob": 74.1,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 51.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null
+    },
+    {
+      "id": -5308167997090888535,
+      "homeTeam": "Lamar K",
+      "awayTeam": "SE Louisiana K",
+      "time": "03.03.2026 00:30",
+      "date": "2026-03-03",
+      "league": null,
+      "country": "",
+      "sport": "basketball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/koszykowka/lamar-cardinals-fgRFGiRI/se-louisiana-jmssZZuh/?mid=phlkN5xq",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 59.0,
+        "exactScore": "119-115",
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 94,
+        "draw": null,
+        "away": 6,
+        "votes": 77
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 73.1,
         "ev": -999.0,
         "edge": 0.0,
         "kelly": 0.0,
@@ -3133,21 +3200,21 @@
       "tennis": null
     },
     {
-      "id": -5459539207700038685,
-      "homeTeam": "Lamar K",
-      "awayTeam": "SE Louisiana K",
+      "id": 2412794960016022379,
+      "homeTeam": "Mcneese State K",
+      "awayTeam": "Stephen F. Austin K",
       "time": "03.03.2026 00:30",
       "date": "2026-03-03",
       "league": null,
       "country": "",
       "sport": "basketball",
-      "matchUrl": "https://www.livesport.com/pl/mecz/koszykowka/lamar-cardinals-fgRFGiRI/se-louisiana-jmssZZuh/?mid=phlkN5xq",
+      "matchUrl": "https://www.livesport.com/pl/mecz/koszykowka/mcneese-state-8x7a7pbm/stephen-f-austin-h6dWanNh/?mid=IP2xPuV9",
       "qualifies": false,
       "h2h": {
-        "home": 1,
+        "home": 2,
         "draw": 0,
-        "away": 1,
-        "total": 2,
+        "away": 2,
+        "total": 4,
         "winRate": 50
       },
       "homeForm": [],
@@ -3163,37 +3230,7 @@
       "tennis": null
     },
     {
-      "id": -9182326518843066578,
-      "homeTeam": "Mcneese State K",
-      "awayTeam": "Stephen F. Austin K",
-      "time": "03.03.2026 00:30",
-      "date": "2026-03-03",
-      "league": null,
-      "country": "",
-      "sport": "basketball",
-      "matchUrl": "https://www.livesport.com/pl/mecz/koszykowka/mcneese-state-8x7a7pbm/stephen-f-austin-h6dWanNh/?mid=IP2xPuV9",
-      "qualifies": false,
-      "h2h": {
-        "home": 1,
-        "draw": 0,
-        "away": 2,
-        "total": 3,
-        "winRate": 33
-      },
-      "homeForm": [],
-      "awayForm": [],
-      "homeFormHome": [],
-      "awayFormAway": [],
-      "formAdvantage": false,
-      "odds": null,
-      "forebet": null,
-      "sofascore": null,
-      "focusTeam": "home",
-      "scoring": null,
-      "tennis": null
-    },
-    {
-      "id": -4839639181033806273,
+      "id": 4449624817634336170,
       "homeTeam": "Milwaukee Panthers K",
       "awayTeam": "Detroit Titans K",
       "time": "03.03.2026 01:00",
@@ -3223,7 +3260,7 @@
       "tennis": null
     },
     {
-      "id": -8193290362154147185,
+      "id": 4003046047233808465,
       "homeTeam": "Weber State K",
       "awayTeam": "Portland State K",
       "time": "03.03.2026 01:00",
@@ -3272,8 +3309,8 @@
       "odds": null,
       "forebet": {
         "prediction": "1",
-        "probability": 69.0,
-        "exactScore": "67-57",
+        "probability": 56.0,
+        "exactScore": "77-72",
         "overUnder": null,
         "btts": null
       },
@@ -3286,17 +3323,17 @@
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 68.2,
+        "prob": 65.2,
         "ev": -999.0,
         "edge": 0.0,
         "kelly": 0.0,
-        "confidence": 48.0,
+        "confidence": 47.0,
         "dataQuality": 0.7
       },
       "tennis": null
     },
     {
-      "id": -7110382776444616866,
+      "id": 4779120313148166246,
       "homeTeam": "Idaho State K",
       "awayTeam": "Sacramento State K",
       "time": "03.03.2026 02:00",
@@ -3369,7 +3406,7 @@
       "tennis": null
     },
     {
-      "id": -1189415887236463146,
+      "id": 8775483808012645884,
       "homeTeam": "Idaho Vandals K",
       "awayTeam": "East. Washington K",
       "time": "03.03.2026 02:00",
@@ -3442,7 +3479,7 @@
       "tennis": null
     },
     {
-      "id": -1950452309135311129,
+      "id": -9046024038562067876,
       "homeTeam": "Montana Griz K",
       "awayTeam": "Northern Colorado K",
       "time": "03.03.2026 02:00",
@@ -3472,7 +3509,7 @@
       "tennis": null
     },
     {
-      "id": -6964577847241786102,
+      "id": 8785334014197382720,
       "homeTeam": "Montana State K",
       "awayTeam": "Northern Arizona K",
       "time": "03.03.2026 02:00",
@@ -3545,7 +3582,7 @@
       "tennis": null
     },
     {
-      "id": -8907159071311651009,
+      "id": -6963225491206168979,
       "homeTeam": "Austin Peay K",
       "awayTeam": "Lipscomb Bisons K",
       "time": "03.03.2026 17:00",
@@ -3575,7 +3612,7 @@
       "tennis": null
     },
     {
-      "id": 496396182563712191,
+      "id": -7092877483969540712,
       "homeTeam": "Nicholls State Colonels K",
       "awayTeam": "East Texas A&M Lions K",
       "time": "03.03.2026 17:00",
@@ -3605,7 +3642,7 @@
       "tennis": null
     },
     {
-      "id": -8272911719600154526,
+      "id": 3925952001160595288,
       "homeTeam": "South Alabama K",
       "awayTeam": "Appalachian State K",
       "time": "03.03.2026 17:30",
@@ -3635,7 +3672,7 @@
       "tennis": null
     },
     {
-      "id": -4634021925556202179,
+      "id": -7161509278149040373,
       "homeTeam": "Florida Gulf Coast K",
       "awayTeam": "Bellarmine K",
       "time": "03.03.2026 19:30",
@@ -3693,7 +3730,7 @@
         "home": 100,
         "draw": null,
         "away": 0,
-        "votes": 32
+        "votes": 34
       },
       "focusTeam": "home",
       "scoring": {
@@ -3708,7 +3745,7 @@
       "tennis": null
     },
     {
-      "id": -3340231629369947110,
+      "id": -9060335974622456736,
       "homeTeam": "Georgia State K",
       "awayTeam": "Louisiana's Ragin' Cajuns K",
       "time": "03.03.2026 20:00",
@@ -3738,7 +3775,7 @@
       "tennis": null
     },
     {
-      "id": 7446778680936981552,
+      "id": 4230031272963414947,
       "homeTeam": "West Georgia K",
       "awayTeam": "North Florida K",
       "time": "03.03.2026 22:00",
@@ -3796,7 +3833,7 @@
         "home": 100,
         "draw": null,
         "away": 0,
-        "votes": 25
+        "votes": 26
       },
       "focusTeam": "home",
       "scoring": {
@@ -3811,7 +3848,7 @@
       "tennis": null
     },
     {
-      "id": -1545654685802221246,
+      "id": -8983278134578956022,
       "homeTeam": "Air Force K",
       "awayTeam": "San Diego State K",
       "time": "03.03.2026 23:00",
@@ -3841,7 +3878,7 @@
       "tennis": null
     },
     {
-      "id": 7336031178463042481,
+      "id": -8820214254051634894,
       "homeTeam": "Alabama State K",
       "awayTeam": "Southern Jaguars K",
       "time": "03.03.2026 23:00",
@@ -3871,7 +3908,7 @@
       "tennis": null
     },
     {
-      "id": -1975428832926154909,
+      "id": -5600750227652546067,
       "homeTeam": "Jackson State K",
       "awayTeam": "Ark Pine Bluff K",
       "time": "03.03.2026 23:00",
@@ -3944,7 +3981,7 @@
       "tennis": null
     },
     {
-      "id": 3475967083547663113,
+      "id": 2533744784422572453,
       "homeTeam": "Alabama A&M K",
       "awayTeam": "Grambling St. K",
       "time": "03.03.2026 23:30",
@@ -3991,33 +4028,27 @@
       ],
       "formAdvantage": true,
       "odds": null,
-      "forebet": {
-        "prediction": "1",
-        "probability": 69.0,
-        "exactScore": "78-75",
-        "overUnder": null,
-        "btts": null
-      },
+      "forebet": null,
       "sofascore": {
-        "home": 33,
+        "home": 32,
         "draw": null,
-        "away": 67,
-        "votes": 21
+        "away": 68,
+        "votes": 22
       },
       "focusTeam": "home",
       "scoring": {
         "pick": "1",
-        "prob": 61.9,
+        "prob": 57.4,
         "ev": -999.0,
         "edge": 0.0,
         "kelly": 0.0,
-        "confidence": 46.0,
-        "dataQuality": 0.7
+        "confidence": 41.0,
+        "dataQuality": 0.6
       },
       "tennis": null
     },
     {
-      "id": -5428875933825349701,
+      "id": 6627228927511422956,
       "homeTeam": "Charlotte 49ers K",
       "awayTeam": "Rice K",
       "time": "03.03.2026 23:30",

@@ -1,15 +1,15 @@
 {
   "date": "2026-03-08",
   "sport": "tennis",
-  "generatedAt": "2026-03-08T02:43:49.129277",
+  "generatedAt": "2026-03-08T03:11:55.887881",
   "stats": {
     "total": 121,
-    "qualifying": 4,
+    "qualifying": 5,
     "formAdvantage": 0
   },
   "matches": [
     {
-      "id": -7001276695316448200,
+      "id": 599084230934748963,
       "homeTeam": "Norrie C.",
       "awayTeam": "McDonald M.",
       "time": "08.03.2026 00:25",
@@ -53,7 +53,7 @@
       }
     },
     {
-      "id": 8390710685498177586,
+      "id": -4951114576123912738,
       "homeTeam": "Alcaraz C.",
       "awayTeam": "Dimitrow G.",
       "time": "08.03.2026 00:30",
@@ -97,7 +97,7 @@
       }
     },
     {
-      "id": -2727364541351897733,
+      "id": -715931285336269536,
       "homeTeam": "Fearnley J.",
       "awayTeam": "Fritz T.",
       "time": "08.03.2026 02:10",
@@ -141,7 +141,7 @@
       }
     },
     {
-      "id": -6312232428290932494,
+      "id": -5705657147033106785,
       "homeTeam": "Bublik A.",
       "awayTeam": "Kopriva V.",
       "time": "08.03.2026 03:15",
@@ -185,7 +185,7 @@
       }
     },
     {
-      "id": 1158014729544909151,
+      "id": 4310949780080026535,
       "homeTeam": "Baez S.",
       "awayTeam": "Lehecka J.",
       "time": "08.03.2026 03:35",
@@ -229,7 +229,7 @@
       }
     },
     {
-      "id": 2041670144511791020,
+      "id": -5043598942492484924,
       "homeTeam": "Miedwiediew D.",
       "awayTeam": "Tabilo A.",
       "time": "08.03.2026 03:40",
@@ -273,7 +273,7 @@
       }
     },
     {
-      "id": 4505920472495929477,
+      "id": -5472089021398983924,
       "homeTeam": "Humbert U.",
       "awayTeam": "Michelsen A.",
       "time": "08.03.2026 04:45",
@@ -317,7 +317,7 @@
       }
     },
     {
-      "id": 7415158779131861234,
+      "id": 8701221755239926016,
       "homeTeam": "Nakashima B.",
       "awayTeam": "Zverev A.",
       "time": "08.03.2026 18:00",
@@ -361,7 +361,7 @@
       }
     },
     {
-      "id": -7913579432443542480,
+      "id": 1868975595489737095,
       "homeTeam": "Davidovich Fokina A.",
       "awayTeam": "Mensik J.",
       "time": "08.03.2026 20:00",
@@ -405,7 +405,7 @@
       }
     },
     {
-      "id": 397067752026275517,
+      "id": 7077764010813782828,
       "homeTeam": "Shelton B.",
       "awayTeam": "Tien L.",
       "time": "08.03.2026 20:00",
@@ -449,7 +449,7 @@
       }
     },
     {
-      "id": 1793719018471720028,
+      "id": -3847569261679912890,
       "homeTeam": "Fucsovics M.",
       "awayTeam": "Fils A.",
       "time": "08.03.2026 21:00",
@@ -493,7 +493,7 @@
       }
     },
     {
-      "id": -1787464879429219199,
+      "id": -2782837173904321663,
       "homeTeam": "Shapovalov D.",
       "awayTeam": "Sinner J.",
       "time": "08.03.2026 21:30",
@@ -537,7 +537,7 @@
       }
     },
     {
-      "id": 316861333237655334,
+      "id": 4689428656035720800,
       "homeTeam": "Diallo G.",
       "awayTeam": "Auger-Aliassime F.",
       "time": "08.03.2026 23:00",
@@ -581,7 +581,7 @@
       }
     },
     {
-      "id": -2631660996095994339,
+      "id": -2451324096099537114,
       "homeTeam": "Siniakova K.",
       "awayTeam": "Fernandez L.",
       "time": "07.03.2026 23:50",
@@ -625,7 +625,7 @@
       }
     },
     {
-      "id": -4492551256465400282,
+      "id": -8862584241571032941,
       "homeTeam": "Ruzic A.",
       "awayTeam": "Zheng Q.",
       "time": "08.03.2026 00:00",
@@ -669,7 +669,7 @@
       }
     },
     {
-      "id": 4319623315590701787,
+      "id": 3179988123827206173,
       "homeTeam": "Mertens E.",
       "awayTeam": "Bucsa C.",
       "time": "08.03.2026 00:40",
@@ -713,7 +713,7 @@
       }
     },
     {
-      "id": -6035883386484405859,
+      "id": -5111259598902032210,
       "homeTeam": "Pegula J.",
       "awayTeam": "Vekic D.",
       "time": "08.03.2026 02:15",
@@ -757,7 +757,7 @@
       }
     },
     {
-      "id": -8953042868448305791,
+      "id": 2686531585717201236,
       "homeTeam": "Keys M.",
       "awayTeam": "Parry D.",
       "time": "08.03.2026 02:30",
@@ -801,7 +801,7 @@
       }
     },
     {
-      "id": 8537311101165816251,
+      "id": -706486575957073028,
       "homeTeam": "Kostjuk M.",
       "awayTeam": "Townsend T.",
       "time": "08.03.2026 04:00",
@@ -845,7 +845,7 @@
       }
     },
     {
-      "id": -4611683462570766721,
+      "id": 7735080967524185538,
       "homeTeam": "Siegemund L.",
       "awayTeam": "Switolina E.",
       "time": "08.03.2026 04:00",
@@ -889,7 +889,7 @@
       }
     },
     {
-      "id": -8750652998354597507,
+      "id": 6009622416073268160,
       "homeTeam": "Cirstea S.",
       "awayTeam": "Noskova L.",
       "time": "08.03.2026 18:00",
@@ -933,7 +933,7 @@
       }
     },
     {
-      "id": -7286817927369270347,
+      "id": -5938161645464083088,
       "homeTeam": "Gibson T.",
       "awayTeam": "Tauson C.",
       "time": "08.03.2026 18:00",
@@ -977,7 +977,7 @@
       }
     },
     {
-      "id": -536801042491875645,
+      "id": -182556057791041536,
       "homeTeam": "Sabalenka A.",
       "awayTeam": "Cristian J.",
       "time": "08.03.2026 18:00",
@@ -1021,7 +1021,7 @@
       }
     },
     {
-      "id": 7289108801156015891,
+      "id": 2974026263856727842,
       "homeTeam": "Tomljanovic A.",
       "awayTeam": "Paolini J.",
       "time": "08.03.2026 19:30",
@@ -1065,7 +1065,7 @@
       }
     },
     {
-      "id": -6063526494102165062,
+      "id": 3667774426290777780,
       "homeTeam": "Osorio C.",
       "awayTeam": "Osaka N.",
       "time": "08.03.2026 20:00",
@@ -1109,7 +1109,7 @@
       }
     },
     {
-      "id": -3227256760431091942,
+      "id": -915906444782490581,
       "homeTeam": "Raducanu E.",
       "awayTeam": "Anisimowa A.",
       "time": "08.03.2026 21:30",
@@ -1153,7 +1153,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1197,7 +1197,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1241,7 +1241,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1285,7 +1285,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1329,7 +1329,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1373,7 +1373,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1417,7 +1417,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1461,7 +1461,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1505,7 +1505,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1549,7 +1549,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1593,7 +1593,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1637,7 +1637,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1681,7 +1681,7 @@
       }
     },
     {
-      "id": -2208904590716082707,
+      "id": -8472016906037776,
       "homeTeam": null,
       "awayTeam": null,
       "time": null,
@@ -1725,7 +1725,7 @@
       }
     },
     {
-      "id": 6282384407011953621,
+      "id": 4567923611158963515,
       "homeTeam": "Vallejo D.",
       "awayTeam": "Rocha H.",
       "time": "08.03.2026 14:00",
@@ -1769,7 +1769,7 @@
       }
     },
     {
-      "id": -8425660781999087278,
+      "id": 4771286597376949673,
       "homeTeam": "Wendelken H.",
       "awayTeam": "Samuel T.",
       "time": "08.03.2026 09:00",
@@ -1813,7 +1813,7 @@
       }
     },
     {
-      "id": 3358673120783060512,
+      "id": -7551479843729601108,
       "homeTeam": "Schwaerzler J. J.",
       "awayTeam": "Napolitano S.",
       "time": "08.03.2026 09:30",
@@ -1857,7 +1857,7 @@
       }
     },
     {
-      "id": -8855119242707047691,
+      "id": -4970053094851204505,
       "homeTeam": "Ofner S.",
       "awayTeam": "Budkov Kjaer N.",
       "time": "08.03.2026 14:00",
@@ -1901,7 +1901,7 @@
       }
     },
     {
-      "id": 2803215174068264952,
+      "id": 8036382566141108354,
       "homeTeam": "Fomba L.",
       "awayTeam": "Knaff A.",
       "time": "08.03.2026 09:00",
@@ -1945,7 +1945,7 @@
       }
     },
     {
-      "id": 9217853030413337981,
+      "id": -7782877929498373749,
       "homeTeam": "Poullain L.",
       "awayTeam": "Gautier A.",
       "time": "08.03.2026 09:00",
@@ -1989,7 +1989,7 @@
       }
     },
     {
-      "id": -2173598392717638385,
+      "id": 6911794110646394699,
       "homeTeam": "Ghibaudo A.",
       "awayTeam": "Reco A.",
       "time": "08.03.2026 10:30",
@@ -2033,7 +2033,7 @@
       }
     },
     {
-      "id": -8996128988751421886,
+      "id": 42917367324613929,
       "homeTeam": "Ponchet M.",
       "awayTeam": "Bobichon M.",
       "time": "08.03.2026 10:30",
@@ -2077,7 +2077,7 @@
       }
     },
     {
-      "id": 7595997477696646110,
+      "id": 5055192784336365233,
       "homeTeam": "Jans J.",
       "awayTeam": "Jones B.",
       "time": "08.03.2026 12:00",
@@ -2121,7 +2121,7 @@
       }
     },
     {
-      "id": -3779718058180527483,
+      "id": -1377722486803218146,
       "homeTeam": "Romano F.",
       "awayTeam": "Faut P. A.",
       "time": "08.03.2026 12:00",
@@ -2165,7 +2165,7 @@
       }
     },
     {
-      "id": -6103680542426687333,
+      "id": -7369673089479874854,
       "homeTeam": "Janvier M.",
       "awayTeam": "Parizzia N.",
       "time": "08.03.2026 13:30",
@@ -2199,7 +2199,7 @@
         "home": 89,
         "draw": null,
         "away": 11,
-        "votes": 53
+        "votes": 54
       },
       "focusTeam": "home",
       "scoring": {
@@ -2220,7 +2220,7 @@
       }
     },
     {
-      "id": -6262146991067515002,
+      "id": 7925293859844912479,
       "homeTeam": "Poljak D.",
       "awayTeam": "De Schepper K.",
       "time": "08.03.2026 13:30",
@@ -2264,7 +2264,7 @@
       }
     },
     {
-      "id": 3479349316651196668,
+      "id": 8084864490240257092,
       "homeTeam": "Rottoli L.",
       "awayTeam": "Ghazouani Durand Y.",
       "time": "08.03.2026 15:00",
@@ -2308,7 +2308,7 @@
       }
     },
     {
-      "id": -9199370654031168058,
+      "id": -1610074429342655851,
       "homeTeam": "Vandermeersch C.",
       "awayTeam": "Brady P.",
       "time": "08.03.2026 15:00",
@@ -2352,7 +2352,7 @@
       }
     },
     {
-      "id": -7113278299630927144,
+      "id": -4856432759687079960,
       "homeTeam": "Harper C.",
       "awayTeam": "Beauge M.",
       "time": "08.03.2026 16:30",
@@ -2396,7 +2396,7 @@
       }
     },
     {
-      "id": 4697504007987410054,
+      "id": 1208346847187857244,
       "homeTeam": "Visker N.",
       "awayTeam": "Ifi N.",
       "time": "08.03.2026 16:30",
@@ -2440,7 +2440,7 @@
       }
     },
     {
-      "id": 8163139421200051452,
+      "id": -4055861389824401779,
       "homeTeam": "Potenza L.",
       "awayTeam": "Makk P.",
       "time": "08.03.2026 08:00",
@@ -2484,7 +2484,7 @@
       }
     },
     {
-      "id": -3582642173925869807,
+      "id": 4591525304033231667,
       "homeTeam": "Siniakov D.",
       "awayTeam": "Loge J.",
       "time": "08.03.2026 08:00",
@@ -2528,7 +2528,7 @@
       }
     },
     {
-      "id": 897192462799853071,
+      "id": 1666383449858670002,
       "homeTeam": "Azoidis D.",
       "awayTeam": "Story J.",
       "time": "08.03.2026 09:30",
@@ -2572,7 +2572,7 @@
       }
     },
     {
-      "id": -5829240237590088820,
+      "id": 9218460942783417423,
       "homeTeam": "Iannaccone F.",
       "awayTeam": "Fellin P. O.",
       "time": "08.03.2026 09:30",
@@ -2616,7 +2616,7 @@
       }
     },
     {
-      "id": 327202884929182440,
+      "id": -8813929596345872481,
       "homeTeam": "Langmo C.",
       "awayTeam": "Sakellaridis D.",
       "time": "08.03.2026 10:30",
@@ -2660,7 +2660,7 @@
       }
     },
     {
-      "id": 6163239939484112100,
+      "id": -4492326813961361620,
       "homeTeam": "Barranco Cosano J.",
       "awayTeam": "Staeheli L.",
       "time": "08.03.2026 11:00",
@@ -2704,7 +2704,7 @@
       }
     },
     {
-      "id": 8106713224409091386,
+      "id": 7667340143944788582,
       "homeTeam": "Hassan B.",
       "awayTeam": "Castagnola L.",
       "time": "08.03.2026 11:00",
@@ -2748,7 +2748,7 @@
       }
     },
     {
-      "id": 4309129887062848175,
+      "id": 5322524434855104151,
       "homeTeam": "Tsitsipas Pe.",
       "awayTeam": "Wiskandt M.",
       "time": "08.03.2026 12:00",
@@ -2792,7 +2792,7 @@
       }
     },
     {
-      "id": 4681814125827907166,
+      "id": -492775577111926348,
       "homeTeam": "Bittoun C.",
       "awayTeam": "Nesterov P.",
       "time": "08.03.2026 12:30",
@@ -2836,7 +2836,7 @@
       }
     },
     {
-      "id": -5946166649806480512,
+      "id": 7856712904727778890,
       "homeTeam": "Maxted L.",
       "awayTeam": "Sakellaridis M.",
       "time": "08.03.2026 12:30",
@@ -2880,7 +2880,7 @@
       }
     },
     {
-      "id": 3154085915067080798,
+      "id": 3709341965275767108,
       "homeTeam": "Kountourakis I.",
       "awayTeam": "Ovcharenko O.",
       "time": "08.03.2026 13:30",
@@ -2924,7 +2924,7 @@
       }
     },
     {
-      "id": -1859333610597935041,
+      "id": -3788172811832205225,
       "homeTeam": "Gadamauri B.",
       "awayTeam": "Paldanius O.",
       "time": "08.03.2026 15:00",
@@ -2968,7 +2968,7 @@
       }
     },
     {
-      "id": -2892157490339605819,
+      "id": 1365989876017503370,
       "homeTeam": "Dev S D P.",
       "awayTeam": "Iradukunda G.",
       "time": "08.03.2026 08:00",
@@ -3012,7 +3012,7 @@
       }
     },
     {
-      "id": -2024436024010044431,
+      "id": -1524682198448840027,
       "homeTeam": "Latinovic S.",
       "awayTeam": "De Krom M.",
       "time": "08.03.2026 08:00",
@@ -3056,7 +3056,7 @@
       }
     },
     {
-      "id": -4189381519627206121,
+      "id": 1893874120714710439,
       "homeTeam": "Marrero Curbelo I.",
       "awayTeam": "Niyigena E.",
       "time": "08.03.2026 08:00",
@@ -3100,7 +3100,7 @@
       }
     },
     {
-      "id": -8578405602374302115,
+      "id": -3284661980804998486,
       "homeTeam": "Voelzke G.",
       "awayTeam": "Steiner M.",
       "time": "08.03.2026 08:00",
@@ -3144,7 +3144,7 @@
       }
     },
     {
-      "id": -9166495065007798062,
+      "id": 4595923464997286816,
       "homeTeam": "Beckles D.",
       "awayTeam": "Klok D.",
       "time": "08.03.2026 09:30",
@@ -3188,7 +3188,7 @@
       }
     },
     {
-      "id": -1285092212240598795,
+      "id": 8064758666699041113,
       "homeTeam": "Nijboer R.",
       "awayTeam": "Sinha N. K.",
       "time": "08.03.2026 09:30",
@@ -3232,7 +3232,7 @@
       }
     },
     {
-      "id": -7114207188336310904,
+      "id": 889470607256340100,
       "homeTeam": "Vasa E.",
       "awayTeam": "Banthia S.",
       "time": "08.03.2026 09:30",
@@ -3276,7 +3276,7 @@
       }
     },
     {
-      "id": 4183705209865980495,
+      "id": -51026891241077029,
       "homeTeam": "Ishimwe C.",
       "awayTeam": "Covato M.",
       "time": "08.03.2026 10:00",
@@ -3320,7 +3320,7 @@
       }
     },
     {
-      "id": -8508704361570195636,
+      "id": 4232951815200434887,
       "homeTeam": "Beckley A.",
       "awayTeam": "Pennaforti G.",
       "time": "08.03.2026 11:00",
@@ -3364,7 +3364,7 @@
       }
     },
     {
-      "id": 7857931256231049635,
+      "id": -6736050692437563597,
       "homeTeam": "Dalla Valle E.",
       "awayTeam": "Alvarado P.",
       "time": "08.03.2026 11:00",
@@ -3408,7 +3408,7 @@
       }
     },
     {
-      "id": 8749113888722467207,
+      "id": 1199336440850873193,
       "homeTeam": "Pieri S.",
       "awayTeam": "Donski A.",
       "time": "08.03.2026 11:00",
@@ -3452,7 +3452,7 @@
       }
     },
     {
-      "id": 2929381671020282580,
+      "id": 3853177210072987572,
       "homeTeam": "Gatoto A.",
       "awayTeam": "Ionel N. D.",
       "time": "08.03.2026 11:30",
@@ -3496,7 +3496,7 @@
       }
     },
     {
-      "id": -6827244921692948430,
+      "id": -6431782862086666805,
       "homeTeam": "Justo G. I.",
       "awayTeam": "Matta A.",
       "time": "08.03.2026 13:00",
@@ -3540,7 +3540,7 @@
       }
     },
     {
-      "id": 598512767103240888,
+      "id": -2706345315624373283,
       "homeTeam": "Sakamoto P.",
       "awayTeam": "Jan-Henrik P.",
       "time": "08.03.2026 13:00",
@@ -3584,7 +3584,7 @@
       }
     },
     {
-      "id": 5966207382068248956,
+      "id": 4895820346727530781,
       "homeTeam": "Torrealba B.",
       "awayTeam": "Huertas Del Pino C.",
       "time": "08.03.2026 13:00",
@@ -3628,7 +3628,7 @@
       }
     },
     {
-      "id": -8002467649410660165,
+      "id": 6930425289428448861,
       "homeTeam": "Huertas Del Pino Cordova A.",
       "awayTeam": "Saraiva Dos Santos P. A.",
       "time": "08.03.2026 14:30",
@@ -3672,7 +3672,7 @@
       }
     },
     {
-      "id": -7206891109564631203,
+      "id": 904730056168587663,
       "homeTeam": "Villalon N.",
       "awayTeam": "Dickerson R.",
       "time": "08.03.2026 14:30",
@@ -3703,10 +3703,10 @@
         "btts": null
       },
       "sofascore": {
-        "home": 27,
+        "home": 37,
         "draw": null,
-        "away": 73,
-        "votes": 26
+        "away": 63,
+        "votes": 30
       },
       "focusTeam": "away",
       "scoring": {
@@ -3727,7 +3727,7 @@
       }
     },
     {
-      "id": -6120319416512263909,
+      "id": -2963455854555285923,
       "homeTeam": "Villanueva G.",
       "awayTeam": "De La Pena B.",
       "time": "08.03.2026 14:30",
@@ -3771,7 +3771,7 @@
       }
     },
     {
-      "id": 6406273594767457698,
+      "id": -324156454525733141,
       "homeTeam": "Ribero F.",
       "awayTeam": "Moreno De Alboran N.",
       "time": "08.03.2026 16:00",
@@ -3815,7 +3815,7 @@
       }
     },
     {
-      "id": -4377384356813524876,
+      "id": -3831550099258996939,
       "homeTeam": "Serdarusic N.",
       "awayTeam": "Nunez D. A.",
       "time": "08.03.2026 16:00",
@@ -3859,7 +3859,7 @@
       }
     },
     {
-      "id": 9186527135719537290,
+      "id": -7587073258074752537,
       "homeTeam": "Zeballos F.",
       "awayTeam": "Kingsley C.",
       "time": "08.03.2026 16:00",
@@ -3903,7 +3903,7 @@
       }
     },
     {
-      "id": -8421191341427494143,
+      "id": 8498167294199595593,
       "homeTeam": "Marcondes I.",
       "awayTeam": "Cossu M.",
       "time": "08.03.2026 19:00",
@@ -3947,7 +3947,7 @@
       }
     },
     {
-      "id": 7665427914471657590,
+      "id": -2836739783291335286,
       "homeTeam": "Roncadelli F.",
       "awayTeam": "Basel V.",
       "time": "08.03.2026 19:00",
@@ -3991,7 +3991,7 @@
       }
     },
     {
-      "id": 5839452594849342878,
+      "id": -4500773911024296396,
       "homeTeam": "Torres J. B.",
       "awayTeam": "Scramin do Lago J. V.",
       "time": "08.03.2026 19:00",
@@ -4035,7 +4035,7 @@
       }
     },
     {
-      "id": -997247110530891108,
+      "id": -3237819508580009209,
       "homeTeam": "Oliynykova O.",
       "awayTeam": "Kalinina A.",
       "time": "08.03.2026 09:30",
@@ -4079,7 +4079,7 @@
       }
     },
     {
-      "id": 6450932221243005600,
+      "id": 2118525443349672916,
       "homeTeam": "Karatancheva L.",
       "awayTeam": "Paquet C.",
       "time": "08.03.2026 07:30",
@@ -4123,7 +4123,7 @@
       }
     },
     {
-      "id": 3852427953204525403,
+      "id": 1194431562581462066,
       "homeTeam": "Monnet C.",
       "awayTeam": "Atay S.",
       "time": "08.03.2026 07:30",
@@ -4167,7 +4167,7 @@
       }
     },
     {
-      "id": 8126461766819477140,
+      "id": 1670925103134757271,
       "homeTeam": "Riera J.",
       "awayTeam": "Zawacka K.",
       "time": "08.03.2026 07:30",
@@ -4211,7 +4211,7 @@
       }
     },
     {
-      "id": -665079519290810271,
+      "id": -4168446346027534347,
       "homeTeam": "Gasanowa A.",
       "awayTeam": "Werner C.",
       "time": "08.03.2026 09:00",
@@ -4255,7 +4255,7 @@
       }
     },
     {
-      "id": -7570648458318936733,
+      "id": -1299778585964769851,
       "homeTeam": "Kurt I.",
       "awayTeam": "Hontama M.",
       "time": "08.03.2026 09:00",
@@ -4299,7 +4299,7 @@
       }
     },
     {
-      "id": -7555667767833258368,
+      "id": -2021908066876623842,
       "homeTeam": "Reyngold E.",
       "awayTeam": "Pridankina E.",
       "time": "08.03.2026 09:00",
@@ -4343,7 +4343,7 @@
       }
     },
     {
-      "id": -5787014038359442196,
+      "id": -1553621085678242932,
       "homeTeam": "Kostovic T.",
       "awayTeam": "Parrizas-Diaz N.",
       "time": "08.03.2026 10:30",
@@ -4387,7 +4387,7 @@
       }
     },
     {
-      "id": 1594744777400920688,
+      "id": 1884270218085378422,
       "homeTeam": "Ristic M.",
       "awayTeam": "Pigato L.",
       "time": "08.03.2026 10:30",
@@ -4431,7 +4431,7 @@
       }
     },
     {
-      "id": -1108980270807013200,
+      "id": -715365792666425441,
       "homeTeam": "Berkieta T.",
       "awayTeam": "Angelini L.",
       "time": "08.03.2026 08:00",
@@ -4462,10 +4462,10 @@
         "btts": null
       },
       "sofascore": {
-        "home": 77,
+        "home": 78,
         "draw": null,
-        "away": 23,
-        "votes": 83
+        "away": 22,
+        "votes": 89
       },
       "focusTeam": "home",
       "scoring": {
@@ -4486,7 +4486,7 @@
       }
     },
     {
-      "id": -5730666385543806168,
+      "id": -5469223310478127380,
       "homeTeam": "Matsuda K.",
       "awayTeam": "Ilagan A.",
       "time": "08.03.2026 04:30",
@@ -4541,7 +4541,7 @@
       }
     },
     {
-      "id": -1209374556390446258,
+      "id": -2379126868695178960,
       "homeTeam": "Karol M.",
       "awayTeam": "Raquillet L.",
       "time": "08.03.2026 09:00",
@@ -4585,7 +4585,7 @@
       }
     },
     {
-      "id": -3301654750230366481,
+      "id": -7304140144550696718,
       "homeTeam": "Matusevich A.",
       "awayTeam": "Rossi L.",
       "time": "08.03.2026 14:00",
@@ -4629,7 +4629,7 @@
       }
     },
     {
-      "id": 958164007690438566,
+      "id": 2461158134433878240,
       "homeTeam": "Young G.",
       "awayTeam": "De Jonge D.",
       "time": "08.03.2026 16:00",
@@ -4673,7 +4673,7 @@
       }
     },
     {
-      "id": -4059185251655350193,
+      "id": -6091423649856476498,
       "homeTeam": "Hudd E.",
       "awayTeam": "Sheyngezikht L.",
       "time": "08.03.2026 09:00",
@@ -4717,7 +4717,7 @@
       }
     },
     {
-      "id": -5348678553832317595,
+      "id": 3486802145095728362,
       "homeTeam": "Hurrion M.",
       "awayTeam": "Echeverria J.",
       "time": "08.03.2026 09:00",
@@ -4761,7 +4761,7 @@
       }
     },
     {
-      "id": 6618006101450805700,
+      "id": -6747882673264415414,
       "homeTeam": "Boulais J.",
       "awayTeam": "Domingues J.",
       "time": "08.03.2026 11:00",
@@ -4805,10 +4805,10 @@
       }
     },
     {
-      "id": -6722769292783157148,
+      "id": 858419843590114585,
       "homeTeam": "Hsu Y. H.",
       "awayTeam": "Moriya H.",
-      "time": "08.03.2026 02:45",
+      "time": "08.03.2026 03:15",
       "date": "2026-03-08",
       "league": "",
       "country": "",
@@ -4849,7 +4849,7 @@
       }
     },
     {
-      "id": 5131680634493930397,
+      "id": 1189460637595692600,
       "homeTeam": "Masur D.",
       "awayTeam": "Stricker D.",
       "time": "08.03.2026 11:00",
@@ -4893,7 +4893,7 @@
       }
     },
     {
-      "id": 3553336031749668069,
+      "id": -8109437820808026031,
       "homeTeam": "Ambrogi L. E.",
       "awayTeam": "Dedura D.",
       "time": "08.03.2026 14:00",
@@ -4937,7 +4937,7 @@
       }
     },
     {
-      "id": 9017302672096002838,
+      "id": -6827582339671857697,
       "homeTeam": "Feistel G.",
       "awayTeam": "Tona M.",
       "time": "08.03.2026 16:00",
@@ -4981,7 +4981,7 @@
       }
     },
     {
-      "id": -5728942613178599434,
+      "id": 632435168567012887,
       "homeTeam": "Wang J.",
       "awayTeam": "Jeong B.",
       "time": "08.03.2026 03:00",
@@ -5025,7 +5025,7 @@
       }
     },
     {
-      "id": -7529368315460747686,
+      "id": 6154566820081009034,
       "homeTeam": "Zanolini C.",
       "awayTeam": "Hatouka Y.",
       "time": "08.03.2026 08:00",
@@ -5069,7 +5069,7 @@
       }
     },
     {
-      "id": -5884670297008747466,
+      "id": -6950137769721192582,
       "homeTeam": "Arseneault A.",
       "awayTeam": "Ivanova D.",
       "time": "08.03.2026 18:00",
@@ -5113,7 +5113,7 @@
       }
     },
     {
-      "id": 4925246170697322093,
+      "id": -6189400764243761781,
       "homeTeam": "Astakhova D.",
       "awayTeam": "Mintegi Del Olmo A.",
       "time": "08.03.2026 08:00",
@@ -5157,7 +5157,7 @@
       }
     },
     {
-      "id": -8769846440359551182,
+      "id": 5952155388500330329,
       "homeTeam": "Adkar V.",
       "awayTeam": "Raina A.",
       "time": "08.03.2026 03:00",
@@ -5201,7 +5201,7 @@
       }
     },
     {
-      "id": -8674385730919995683,
+      "id": 4372268118258356283,
       "homeTeam": "Cabrera L.",
       "awayTeam": "Yuan C.",
       "time": "08.03.2026 00:10",
@@ -5210,13 +5210,13 @@
       "country": "",
       "sport": "tennis",
       "matchUrl": "https://www.livesport.com/pl/mecz/tenis/cabrera-lizette-GjjqIe5A/yuan-chengyiyi-rkpSzNfa/?mid=lWxozlmS",
-      "qualifies": false,
+      "qualifies": true,
       "h2h": {
-        "home": 0,
+        "home": 1,
         "draw": 0,
         "away": 0,
-        "total": 0,
-        "winRate": 0
+        "total": 1,
+        "winRate": 100
       },
       "homeForm": [],
       "awayForm": [],
@@ -5224,28 +5224,39 @@
       "awayFormAway": [],
       "formAdvantage": false,
       "odds": null,
-      "forebet": null,
-      "sofascore": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 59.0,
+        "exactScore": "2-0",
+        "overUnder": null,
+        "btts": null
+      },
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 91
+      },
       "focusTeam": "home",
       "scoring": {
         "pick": "A",
-        "prob": 59.1,
+        "prob": 82.4,
         "ev": 0.0,
         "edge": 0.0,
         "kelly": 0.0,
-        "confidence": 30.0,
-        "dataQuality": 0.2
+        "confidence": 45.0,
+        "dataQuality": 0.4
       },
       "tennis": {
         "surface": "hard",
         "rankingA": 273,
         "rankingB": 806,
-        "probA": 59.1,
-        "probB": 40.9
+        "probA": 82.4,
+        "probB": 17.6
       }
     },
     {
-      "id": -273337652095949633,
+      "id": -8256858641396557199,
       "homeTeam": "Falei A.",
       "awayTeam": "Guerrero Alvarez E.",
       "time": "08.03.2026 09:00",
@@ -5289,7 +5300,7 @@
       }
     },
     {
-      "id": -681259461975729060,
+      "id": -8726684611909752922,
       "homeTeam": "Gao X.",
       "awayTeam": "Noha Akugue N.",
       "time": "08.03.2026 08:00",
@@ -5333,7 +5344,7 @@
       }
     },
     {
-      "id": 5981434684051216070,
+      "id": -121958892356380558,
       "homeTeam": "Vandewinkel H.",
       "awayTeam": "Snigur D.",
       "time": "08.03.2026 10:00",
