@@ -46,6 +46,8 @@ export interface GeminiAnalysis {
   confidence: number | null
   reasoning: string | null
   recommendation?: GeminiRecommendation | null
+  keyFactors?: string[]
+  riskFactors?: string[]
 }
 
 export interface LiveScore {
@@ -80,6 +82,58 @@ export interface TennisData {
   probB: number
 }
 
+/** AI Prediction consensus block */
+export interface AIConsensus {
+  sources: number
+  total: number
+  strength: 'STRONG' | 'MODERATE' | 'WEAK' | 'DIVIDED' | 'UNKNOWN'
+  predictions: Record<string, string>
+}
+
+/** AI Prediction risk block */
+export interface AIRisk {
+  score: number
+  level: 'LOW' | 'MEDIUM' | 'HIGH'
+  flags: string[]
+}
+
+/** Factor breakdown item */
+export interface AIFactor {
+  name: string
+  value: number
+  weight: number
+  impact: 'positive' | 'neutral' | 'negative'
+  quality: number
+  description: string
+  details?: Record<string, unknown>
+}
+
+/** Ultra PRO AI Prediction — full match analysis */
+export interface AIPrediction {
+  pick: string
+  pickLabel: string
+  compositeConfidence: number
+  confidenceTier: 'VERY HIGH' | 'HIGH' | 'MEDIUM' | 'LOW' | 'VERY LOW'
+  probHome: number
+  probDraw: number
+  probAway: number
+  consensus: AIConsensus
+  ev: number
+  edge: number
+  valueRating: 'EXCELLENT' | 'GOOD' | 'FAIR' | 'NONE'
+  risk: AIRisk
+  factors: AIFactor[]
+  dataQuality: number
+  dataQualityLabel: 'EXCELLENT' | 'GOOD' | 'FAIR' | 'POOR'
+  availableSources: string[]
+  missingSources: string[]
+  keyArgumentsFor: string[]
+  keyArgumentsAgainst: string[]
+  verdict: string
+  shortVerdict: string
+  doNotBetReasons: string[]
+}
+
 export interface Match {
   id: string | number
   homeTeam: string
@@ -104,6 +158,7 @@ export interface Match {
   gemini?: GeminiAnalysis | null
   scoring?: ScoringData | null
   tennis?: TennisData | null
+  aiPrediction?: AIPrediction | null
   confidence?: number
   value_bet?: boolean
 }

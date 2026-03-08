@@ -744,7 +744,19 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
     # ========================================================================
     # TOP PICKS SECTION - Mecze z HIGH recommendation i wysokim confidence
     # ========================================================================
-    top_picks = [m for m in sorted_matches if m.get('gemini_recommendation') == 'HIGH' and m.get('gemini_confidence', 0) >= 85]
+    top_picks = [m for m in sorted_matches
+                 if (m.get('gemini_recommendation') == 'HIGH' and m.get('gemini_confidence', 0) >= 85)
+                 or ((m.get('ai_prediction') or {}).get('confidenceTier') in ('VERY HIGH', 'HIGH')
+                     and (m.get('ai_prediction') or {}).get('compositeConfidence', 0) >= 75)]
+    # Deduplicate (a match might qualify via both gemini and ai_prediction)
+    seen_tp = set()
+    unique_top_picks = []
+    for _tp in top_picks:
+        _tp_key = (_tp.get('home_team', ''), _tp.get('away_team', ''), _tp.get('match_time', ''))
+        if _tp_key not in seen_tp:
+            seen_tp.add(_tp_key)
+            unique_top_picks.append(_tp)
+    top_picks = unique_top_picks
     
     if top_picks:
         html += f"""
@@ -759,6 +771,7 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
             away = pick.get('away_team', 'N/A')
             confidence = pick.get('gemini_confidence', 0)
             prediction = pick.get('gemini_prediction', 'N/A')
+            tp_ai = pick.get('ai_prediction') or {}
             # Bezpieczne pobieranie reasoning (może być NaN/float z pandas)
             raw_reasoning = pick.get('gemini_reasoning', '')
             if raw_reasoning is None or (isinstance(raw_reasoning, float) and str(raw_reasoning) == 'nan'):
@@ -828,6 +841,30 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
                 <div class="top-pick-reasoning">
                     <strong>🤖 Analiza AI:</strong><br>{reasoning}...
                 </div>
+                {f'''
+                <div style="margin-top: 12px; background: linear-gradient(135deg, #0d1117 0%, #161b22 100%); border-radius: 10px; padding: 14px; border: 1px solid {{"VERY HIGH": "#00e676", "HIGH": "#69f0ae", "MEDIUM": "#ffd740"}.get(tp_ai.get("confidenceTier", ""), "#555")}33;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 10px; font-weight: 700; color: {{"VERY HIGH": "#00e676", "HIGH": "#69f0ae", "MEDIUM": "#ffd740"}.get(tp_ai.get("confidenceTier", ""), "#999")}; letter-spacing: 1px;">🤖 AI PRO VERDICT</span>
+                        <span style="background: {{"VERY HIGH": "#00e676", "HIGH": "#69f0ae", "MEDIUM": "#ffd740"}.get(tp_ai.get("confidenceTier", ""), "#999")}; color: #000; padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 700;">{tp_ai.get("confidenceTier","")}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 10px;">
+                        <div>
+                            <div style="font-size: 22px; font-weight: 800; color: white;">{tp_ai.get("pick","")}</div>
+                            <div style="font-size: 8px; color: #aaa;">{tp_ai.get("pickLabel","")}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 22px; font-weight: 800; color: white;">{tp_ai.get("compositeConfidence",0):.0f}%</div>
+                            <div style="font-size: 8px; color: #aaa;">AI CONF</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 22px; font-weight: 800; color: {{"LOW": "#69f0ae", "MEDIUM": "#ffd740", "HIGH": "#ff5252"}.get((tp_ai.get("risk") or {{}}).get("level",""), "#999")};">{(tp_ai.get("risk") or {{}}).get("score","?")}/10</div>
+                            <div style="font-size: 8px; color: #aaa;">RISK</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.4; padding: 8px; background: rgba(255,255,255,0.04); border-radius: 6px;">{tp_ai.get("shortVerdict","")}</div>
+                    {f"""<div style="margin-top: 8px;">{"".join(f'<span style="display:inline-block;font-size:10px;color:#69f0ae;margin-right:8px;">✅ {a}</span>' for a in (tp_ai.get("keyArgumentsFor") or [])[:2])}</div>""" if tp_ai.get("keyArgumentsFor") else ""}
+                </div>
+                ''' if tp_ai.get("pick") else ''}
             </div>
     """
         
@@ -958,6 +995,37 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
         sc_tpb_raw = match.get('scoring_prob_b')
         sc_tpb = safe_float(sc_tpb_raw) if not is_nan_or_none(sc_tpb_raw) else None
         has_scoring = sc_pick is not None and sc_prob is not None
+        
+        # AI PREDICTION PRO - bezpieczne pobieranie
+        ai_pred = match.get('ai_prediction') or {}
+        ai_pick = ai_pred.get('pick')
+        ai_pick_label = ai_pred.get('pickLabel', '')
+        ai_conf = ai_pred.get('compositeConfidence')
+        ai_tier = ai_pred.get('confidenceTier', '')
+        ai_verdict = ai_pred.get('shortVerdict', '')
+        ai_full_verdict = ai_pred.get('verdict', '')
+        ai_consensus = ai_pred.get('consensus', {})
+        ai_risk = ai_pred.get('risk', {})
+        ai_value = ai_pred.get('valueRating', '')
+        ai_ev = ai_pred.get('ev')
+        ai_edge = ai_pred.get('edge')
+        ai_args_for = ai_pred.get('keyArgumentsFor', [])
+        ai_args_against = ai_pred.get('keyArgumentsAgainst', [])
+        ai_dnb = ai_pred.get('doNotBetReasons', [])
+        ai_dq = ai_pred.get('dataQualityLabel', '')
+        has_ai_pred = ai_pick is not None and ai_conf is not None
+        
+        # AI Prediction tier color mapping
+        _ai_tier_colors = {
+            'VERY HIGH': ('#00e676', '#1b5e20'),
+            'HIGH': ('#69f0ae', '#1b5e20'),
+            'MEDIUM': ('#ffd740', '#4e3800'),
+            'LOW': ('#ff9100', '#4e2600'),
+            'VERY LOW': ('#ff5252', '#4a0000'),
+        }
+        _ai_risk_colors = {'LOW': '#69f0ae', 'MEDIUM': '#ffd740', 'HIGH': '#ff5252'}
+        _ai_value_colors = {'EXCELLENT': '#00e676', 'GOOD': '#69f0ae', 'FAIR': '#ffd740', 'NONE': '#ff5252'}
+        _ai_tc = _ai_tier_colors.get(ai_tier, ('#9e9e9e', '#333'))
         
         # Kolory podświetlenia
         advantage_icon = '🔥' if form_advantage else ''
@@ -1103,6 +1171,62 @@ def create_html_email(matches: List[Dict], date: str, sort_by: str = 'time',
                         {f'<div style="margin-top: 6px; text-align: center;"><span style="background: #69f0ae; color: #1a237e; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: bold;">✅ VALUE BET</span></div>' if sc_ev and sc_ev > 0 else ""}
                     </div>
                     ''' if has_scoring else ''}
+                    
+                    {f'''
+                    <!-- AI PREDICTION PRO -->
+                    <div style="margin-top: 10px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 12px; padding: 16px; border: 1px solid {_ai_tc[0]}33;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <div style="font-size: 11px; font-weight: 700; color: {_ai_tc[0]}; letter-spacing: 1px;">🤖 AI PREDICTION PRO</div>
+                            <span style="background: {_ai_tc[0]}; color: {_ai_tc[1]}; padding: 2px 10px; border-radius: 10px; font-size: 10px; font-weight: 700;">{ai_tier}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 12px;">
+                            <div>
+                                <div style="font-size: 28px; font-weight: 800; color: {_ai_tc[0]};">{ai_pick}</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.5);">{ai_pick_label}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 28px; font-weight: 800; color: white;">{ai_conf:.0f}%</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.5);">CONFIDENCE</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 28px; font-weight: 800; color: {_ai_risk_colors.get(ai_risk.get("level",""), "#999")};">{ai_risk.get("score", "?")}/10</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.5);">RISK</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 10px; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <div>
+                                <div style="font-size: 14px; font-weight: 700; color: white;">{ai_consensus.get("sources",0)}/{ai_consensus.get("total",0)}</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.5);">CONSENSUS</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 14px; font-weight: 700; color: {_ai_value_colors.get(ai_value, "#999")};">{ai_value}</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.5);">VALUE</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 14px; font-weight: 700; color: {"#69f0ae" if ai_ev and ai_ev > 0 else "#ff5252"};">{f"+{ai_ev:.2f}" if ai_ev and ai_ev > 0 else f"{ai_ev:.2f}" if ai_ev else "—"}</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.5);">EV</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 14px; font-weight: 700; color: {"#69f0ae" if ai_edge and ai_edge > 0 else "#ff5252"};">{f"+{ai_edge:.1f}%" if ai_edge and ai_edge > 0 else f"{ai_edge:.1f}%" if ai_edge else "—"}</div>
+                                <div style="font-size: 9px; color: rgba(255,255,255,0.5);">EDGE</div>
+                            </div>
+                        </div>
+                        {f"""<div style="margin-bottom: 8px; padding: 10px; background: rgba(255,255,255,0.04); border-radius: 8px; font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.5;">{ai_full_verdict}</div>""" if ai_full_verdict else ""}
+                        {f"""<div style="margin-bottom: 6px;">
+                            <div style="font-size: 9px; color: #69f0ae; font-weight: 600; margin-bottom: 4px;">✅ KEY ARGUMENTS</div>
+                            {"".join(f'<div style="font-size: 11px; color: rgba(255,255,255,0.7); padding: 2px 0;">• {a}</div>' for a in ai_args_for[:3])}
+                        </div>""" if ai_args_for else ""}
+                        {f"""<div style="margin-bottom: 6px;">
+                            <div style="font-size: 9px; color: #ff5252; font-weight: 600; margin-bottom: 4px;">⚠️ COUNTER ARGUMENTS</div>
+                            {"".join(f'<div style="font-size: 11px; color: rgba(255,255,255,0.7); padding: 2px 0;">• {a}</div>' for a in ai_args_against[:2])}
+                        </div>""" if ai_args_against else ""}
+                        {f"""<div style="margin-top: 8px; padding: 8px; background: rgba(255,82,82,0.15); border: 1px solid rgba(255,82,82,0.3); border-radius: 8px;">
+                            <div style="font-size: 9px; color: #ff5252; font-weight: 700; margin-bottom: 4px;">🚫 DO NOT BET</div>
+                            {"".join(f'<div style="font-size: 11px; color: #ff8a80; padding: 1px 0;">• {r}</div>' for r in ai_dnb)}
+                        </div>""" if ai_dnb else ""}
+                        <div style="margin-top: 6px; text-align: right; font-size: 9px; color: rgba(255,255,255,0.3);">Data Quality: {ai_dq} | {ai_consensus.get("strength", "")}</div>
+                    </div>
+                    ''' if has_ai_pred else ''}
                     
                 </div>
                 

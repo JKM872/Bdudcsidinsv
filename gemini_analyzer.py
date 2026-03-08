@@ -204,129 +204,148 @@ def _build_analysis_prompt(
     draw_odds: Optional[float],
     additional_info: Optional[str]
 ) -> str:
-    """Buduje prompt dla Gemini API"""
-    
-    prompt = f"""Jesteś ekspertem analitykiem sportowym specjalizującym się w {sport}. 
-Przeanalizuj nadchodzący mecz i podaj swoją predykcję.
+    """Build an Ultra PRO analysis prompt for Gemini API (English output)."""
 
-**MECZ:**
-{home_team} (gospodarze) vs {away_team} (goście)
+    prompt = f"""You are a professional sports analyst with deep expertise in {sport}.
+Provide a comprehensive, data-driven analysis of the upcoming match.
+
+## MATCH
+{home_team} (home) vs {away_team} (away)
 Sport: {sport}
 
-**DANE:**
+## DATA
 """
-    
+
     # H2H
     if h2h_data:
-        prompt += f"\n**Head-to-Head (ostatnie {h2h_data.get('total', 5)} spotkań):**\n"
-        prompt += f"- Wygrane gospodarzy: {h2h_data.get('home_wins', 0)}\n"
-        prompt += f"- Wygrane gości: {h2h_data.get('away_wins', 0)}\n"
-        if 'draws' in h2h_data:
-            prompt += f"- Remisy: {h2h_data.get('draws', 0)}\n"
-    
-    # Forma
+        total_h2h = h2h_data.get('total', 5)
+        hw = h2h_data.get('home_wins', 0)
+        aw = h2h_data.get('away_wins', 0)
+        dr = h2h_data.get('draws', 0)
+        prompt += f"\n### Head-to-Head (last {total_h2h} meetings)\n"
+        prompt += f"- {home_team} wins: {hw}\n"
+        prompt += f"- {away_team} wins: {aw}\n"
+        if dr:
+            prompt += f"- Draws: {dr}\n"
+        if total_h2h > 0:
+            wr = hw / total_h2h * 100
+            prompt += f"- Home H2H win rate: {wr:.0f}%\n"
+
+    # Overall form
     if home_form or away_form:
-        prompt += "\n**Forma ogólna:**\n"
+        prompt += "\n### Recent Form (overall)\n"
         if home_form:
             prompt += f"- {home_team}: {home_form}\n"
         if away_form:
             prompt += f"- {away_team}: {away_form}\n"
-    
+
+    # Venue-specific form
     if home_form_away or away_form_away:
-        prompt += "\n**Forma (miejsce meczu):**\n"
+        prompt += "\n### Venue-Specific Form\n"
         if home_form_away:
-            prompt += f"- {home_team} (u siebie): {home_form_away}\n"
+            prompt += f"- {home_team} at HOME: {home_form_away}\n"
         if away_form_away:
-            prompt += f"- {away_team} (na wyjeździe): {away_form_away}\n"
-    
+            prompt += f"- {away_team} AWAY: {away_form_away}\n"
+
     # Forebet
     if forebet_prediction:
-        prompt += f"\n**Forebet prediction:** {forebet_prediction}\n"
-    
+        prompt += f"\n### Forebet Prediction\n{forebet_prediction}\n"
+
     # Odds
     if home_odds or away_odds:
-        prompt += "\n**Kursy bukmacherskie:**\n"
+        prompt += "\n### Bookmaker Odds\n"
         if home_odds:
             prompt += f"- {home_team}: {home_odds}\n"
         if away_odds:
             prompt += f"- {away_team}: {away_odds}\n"
         if draw_odds:
-            prompt += f"- Remis: {draw_odds}\n"
-    
-    # Dodatkowe info
+            prompt += f"- Draw: {draw_odds}\n"
+
+    # Additional info
     if additional_info:
-        prompt += f"\n**Dodatkowe informacje:** {additional_info}\n"
-    
-    # Instrukcje dla AI
+        prompt += f"\n### Additional Context\n{additional_info}\n"
+
+    # Instructions
     prompt += """
 
-**ZADANIE:**
-Na podstawie powyższych danych podaj:
+## TASK
+Analyze ALL available data above and respond **in English** using EXACTLY this format:
 
-1. **PREDICTION** (1-2 zdania): Zwięzła predykcja wyniku z kluczowymi argumentami
-2. **CONFIDENCE** (0-100): Twoja pewność predykcji (liczba)
-3. **REASONING** (3-5 zdań): Szczegółowe uzasadnienie z analizą wszystkich czynników
-4. **RECOMMENDATION** (HIGH/MEDIUM/LOW/SKIP): Rekomendacja czy warto stawiać
-
-**FORMAT ODPOWIEDZI:**
-PREDICTION: [twoja predykcja]
-CONFIDENCE: [0-100]
-REASONING: [szczegółowe uzasadnienie]
+PREDICTION: [1-2 sentence prediction with key reasoning]
+CONFIDENCE: [0-100 integer]
+REASONING: [4-6 sentences covering: H2H patterns, form trends, home/away advantage, odds analysis, and overall risk assessment. Mention specific numbers.]
+KEY_FACTORS: [Comma-separated list of 3-5 main factors driving your prediction, e.g. "Strong H2H record (4/5 wins), Excellent home form, Favorable odds value"]
+RISK_FACTORS: [Comma-separated list of 1-3 risks or counter-arguments, e.g. "Away team improving form, Close odds suggest uncertainty"]
 RECOMMENDATION: [HIGH/MEDIUM/LOW/SKIP]
 
-Bądź konkretny i merytoryczny. Uwzględnij wszystkie dostępne dane.
+RULES:
+- Be specific and data-driven. Reference actual numbers from the data.
+- CONFIDENCE reflects prediction certainty: 85+ only when multiple strong signals align.
+- HIGH recommendation: strong data support, confidence ≥ 75, clear edge visible.
+- MEDIUM: decent signals but some uncertainty, confidence 55-74.
+- LOW: weak signals or conflicting data, confidence 35-54.
+- SKIP: insufficient data or high risk, confidence < 35.
 """
-    
+
     return prompt
 
 
 def _parse_gemini_response(response_text: str) -> Dict[str, Any]:
-    """Parsuje odpowiedź z Gemini API"""
-    
-    result = {
+    """Parse structured Gemini response including new KEY_FACTORS / RISK_FACTORS."""
+
+    result: Dict[str, Any] = {
         'prediction': '',
         'confidence': 0,
         'reasoning': '',
         'recommendation': 'SKIP',
+        'key_factors': [],
+        'risk_factors': [],
         'error': None
     }
-    
+
     try:
         lines = response_text.strip().split('\n')
-        
+
         for line in lines:
             line = line.strip()
-            
+
             if line.startswith('PREDICTION:'):
                 result['prediction'] = line.replace('PREDICTION:', '').strip()
-            
+
             elif line.startswith('CONFIDENCE:'):
                 conf_str = line.replace('CONFIDENCE:', '').strip()
-                # Wyciągnij liczbę (może być "85" lub "85%")
                 import re
                 match = re.search(r'(\d+)', conf_str)
                 if match:
                     result['confidence'] = int(match.group(1))
-            
+
             elif line.startswith('REASONING:'):
                 result['reasoning'] = line.replace('REASONING:', '').strip()
-            
+
+            elif line.startswith('KEY_FACTORS:'):
+                raw = line.replace('KEY_FACTORS:', '').strip()
+                result['key_factors'] = [f.strip() for f in raw.split(',') if f.strip()]
+
+            elif line.startswith('RISK_FACTORS:'):
+                raw = line.replace('RISK_FACTORS:', '').strip()
+                result['risk_factors'] = [f.strip() for f in raw.split(',') if f.strip()]
+
             elif line.startswith('RECOMMENDATION:'):
                 rec = line.replace('RECOMMENDATION:', '').strip().upper()
                 if rec in ['HIGH', 'MEDIUM', 'LOW', 'SKIP']:
                     result['recommendation'] = rec
-        
-        # Fallback: jeśli nie znaleziono struktury, użyj całego tekstu jako prediction
+
+        # Fallback: if parsing failed, use raw text
         if not result['prediction'] and response_text:
-            result['prediction'] = response_text[:200]  # Pierwsze 200 znaków
-            result['confidence'] = 50  # Neutralna pewność
+            result['prediction'] = response_text[:200]
+            result['confidence'] = 50
             result['reasoning'] = response_text
             result['recommendation'] = 'MEDIUM'
-    
+
     except Exception as e:
         result['error'] = f'Parse error: {e}'
-        result['prediction'] = 'Błąd parsowania odpowiedzi'
-    
+        result['prediction'] = 'Response parsing error'
+
     return result
 
 

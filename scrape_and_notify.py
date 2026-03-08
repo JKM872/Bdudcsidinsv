@@ -565,6 +565,8 @@ def scrape_and_send_email(
                             row['gemini_confidence'] = gemini_result.get('confidence')
                             row['gemini_reasoning'] = gemini_result.get('reasoning')
                             row['gemini_recommendation'] = gemini_result.get('recommendation')
+                            row['gemini_key_factors'] = gemini_result.get('key_factors', [])
+                            row['gemini_risk_factors'] = gemini_result.get('risk_factors', [])
                             print(f"   ✅ Gemini: {row['gemini_recommendation']} ({row['gemini_confidence']}%)")
                     except Exception as e:
                         print(f"   ❌ Gemini błąd: {str(e)[:50]}")
@@ -670,6 +672,25 @@ def scrape_and_send_email(
                 print(f"\n⚠️ Tennis scoring engine error: {e}")
         else:
             print(f"\n⚠️ Brak meczów tenisowych — tennis scoring pominięty")
+
+        # ========================================================================
+        # FAZA 2.6: AI PREDICTION ENGINE (Ultra PRO analysis per match)
+        # ========================================================================
+        qualifying_rows = [r for r in rows if r.get('qualifies')]
+        if qualifying_rows:
+            try:
+                from ai_prediction_engine import generate_ai_prediction
+                _ai_count = 0
+                for row in qualifying_rows:
+                    ai_pred = generate_ai_prediction(row)
+                    row['ai_prediction'] = ai_pred.to_dict()
+                    _ai_count += 1
+                print(f"\n🤖 AI PREDICTION ENGINE: {_ai_count} professional analyses generated")
+                high_conf = sum(1 for r in qualifying_rows
+                                if (r.get('ai_prediction') or {}).get('confidenceTier') in ('VERY HIGH', 'HIGH'))
+                print(f"   High confidence picks: {high_conf}/{_ai_count}")
+            except Exception as e:
+                print(f"\n⚠️ AI prediction engine error: {e}")
 
         print("\n💾 Zapisywanie finalnych wyników...")
         

@@ -243,6 +243,20 @@ def normalize_supabase_match(row):
     }
 
 
+def _resolve_ai_prediction(match):
+    """Return AI prediction dict — use pre-computed or generate on the fly."""
+    # Pre-computed in pipeline (preferred)
+    ai = match.get('ai_prediction')
+    if ai and isinstance(ai, dict) and ai.get('pick'):
+        return ai
+    # Generate on the fly for API-only requests
+    try:
+        from ai_prediction_engine import generate_ai_prediction
+        return generate_ai_prediction(match).to_dict()
+    except Exception:
+        return None
+
+
 def normalize_match(match):
     """Normalize match data to frontend format."""
     # Handle different key naming conventions
@@ -374,6 +388,8 @@ def normalize_match(match):
         ) > 0,
         # Focus team
         'focusTeam': match.get('focus_team') or match.get('focusTeam', 'home'),
+        # AI Prediction (Ultra PRO analysis)
+        'aiPrediction': _resolve_ai_prediction(match),
     }
 
 

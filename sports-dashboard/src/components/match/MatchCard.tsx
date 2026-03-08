@@ -12,6 +12,7 @@ import { formatMatchTime, formatOdds } from '@/lib/format'
 import { RecommendationBadge } from './RecommendationBadge'
 import { LiveScoreBadge } from './LiveScoreBadge'
 import { TeamLogo } from './TeamLogo'
+import { AIPredictionBadge } from './AIPredictionPanel'
 import { RadialProgress } from '@/components/charts/RadialProgress'
 import { FormTimeline } from '@/components/charts/FormTimeline'
 import type { Match, LiveScore } from '@/lib/types'
@@ -24,7 +25,7 @@ interface Props {
 
 export function MatchCard({ match, liveScore, onSelect }: Props) {
   const sportCfg = SPORT_MAP[match.sport]
-  const conf = match.gemini?.confidence ?? match.scoring?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
+  const conf = match.aiPrediction?.compositeConfidence ?? match.gemini?.confidence ?? match.scoring?.confidence ?? match.confidence ?? match.forebet?.probability ?? 0
   const SportIcon = sportCfg?.icon
   const recommendation = match.gemini?.recommendation
   const isHighPick = recommendation === 'HIGH'
@@ -56,6 +57,7 @@ export function MatchCard({ match, liveScore, onSelect }: Props) {
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
           <LiveScoreBadge liveScore={liveScore} />
+          {match.aiPrediction && <AIPredictionBadge prediction={match.aiPrediction} />}
           <RecommendationBadge recommendation={recommendation} />
           {!liveScore && (
             <span className="flex items-center gap-0.5 text-[11px] text-muted-foreground tabular-nums">

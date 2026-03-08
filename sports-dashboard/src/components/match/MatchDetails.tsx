@@ -18,6 +18,7 @@ import { SPORT_MAP, PREDICTION_COLORS } from '@/lib/constants'
 import { formatMatchTime, formatOdds, formatVotes } from '@/lib/format'
 import { RecommendationBadge } from './RecommendationBadge'
 import { TeamLogo } from './TeamLogo'
+import { AIPredictionPanel } from './AIPredictionPanel'
 import { RadialProgress } from '@/components/charts/RadialProgress'
 import { FormTimeline } from '@/components/charts/FormTimeline'
 import { H2HBar } from '@/components/charts/H2HBar'
@@ -291,7 +292,13 @@ export function MatchDetails({ match, open, onOpenChange }: Props) {
 
             {/* ── AI Analysis tab ── */}
             <TabsContent value="ai" className="mt-4">
-              {match.gemini ? (
+              {match.aiPrediction ? (
+                <AIPredictionPanel
+                  prediction={match.aiPrediction}
+                  homeTeam={match.homeTeam}
+                  awayTeam={match.awayTeam}
+                />
+              ) : match.gemini ? (
                 <div className="rounded-xl border bg-card p-4 space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-sm font-medium">
