@@ -17,7 +17,7 @@ import math
 import re
 from datetime import datetime
 from livesport_h2h_scraper import start_driver, get_match_links_from_day, process_match, process_match_tennis, detect_sport_from_url
-from email_notifier import send_email_notification
+from email_notifier import send_email_notification, send_split_emails_by_sport
 from app_integrator import AppIntegrator, create_integrator_from_config
 import pandas as pd
 import numpy as np
@@ -120,7 +120,9 @@ def scrape_and_send_email(
     use_odds: bool = False,
     use_gemini: bool = False,
     include_sorted_odds: bool = True,
-    odds_limit: int = 15
+    odds_limit: int = 15,
+    split_emails: bool = False,
+    min_odds_threshold: float = 0.0,
 ):
     """
     Scrapuje mecze i automatycznie wysyła email z wynikami
@@ -178,6 +180,10 @@ def scrape_and_send_email(
         print(f"🔥 TRYB: Tylko mecze z PRZEWAGĄ FORMY {'gości' if away_team_focus else 'gospodarzy'}")
     if skip_no_odds:
         print(f"💰 TRYB: Pomijam mecze BEZ KURSÓW bukmacherskich")
+    if split_emails:
+        print(f"📧 TRYB: 2 maile na każdy sport (forma vs zwykłe)")
+        if min_odds_threshold > 0:
+            print(f"📉 TRYB: Minimalny kurs {min_odds_threshold}")
     if use_odds:
         print(f"💰 TRYB: Pobieranie kursów z FlashScore")
     if use_forebet:
@@ -856,31 +862,47 @@ def scrape_and_send_email(
             print(f"\n📧 KROK 3/4: Wysyłanie powiadomienia email...")
             print("="*70)
             
-            # Buduj tytuł emaila dynamicznie
-            subject_parts = []
-            if only_form_advantage:
-                subject_parts.append("🔥 PRZEWAGA FORMY")
-            if skip_no_odds:
-                subject_parts.append("💰 Z KURSAMI")
-            
-            if subject_parts:
-                subject = f"Mecze ({' + '.join(subject_parts)}) - {date}"
+            if split_emails:
+                # --- TRYB SPLIT: 2 maile na każdy sport ---
+                threshold = min_odds_threshold if min_odds_threshold > 0 else 1.19
+                send_split_emails_by_sport(
+                    csv_file=outfn,
+                    to_email=to_email,
+                    from_email=from_email,
+                    password=password,
+                    provider=provider,
+                    sort_by=sort_by,
+                    include_sorted_odds=include_sorted_odds,
+                    odds_limit=odds_limit,
+                    min_odds_threshold=threshold,
+                )
             else:
-                subject = f"🏆 {qualifying_count} kwalifikujących się meczów - {date}"
-            
-            send_email_notification(
-                csv_file=outfn,
-                to_email=to_email,
-                from_email=from_email,
-                password=password,
-                provider=provider,
-                subject=subject,
-                sort_by=sort_by,
-                only_form_advantage=only_form_advantage,
-                skip_no_odds=skip_no_odds,
-                include_sorted_odds=include_sorted_odds,
-                odds_limit=odds_limit
-            )
+                # --- TRYB KLASYCZNY: 1 email ---
+                subject_parts = []
+                if only_form_advantage:
+                    subject_parts.append("🔥 PRZEWAGA FORMY")
+                if skip_no_odds:
+                    subject_parts.append("💰 Z KURSAMI")
+                
+                if subject_parts:
+                    subject = f"Mecze ({' + '.join(subject_parts)}) - {date}"
+                else:
+                    subject = f"🏆 {qualifying_count} kwalifikujących się meczów - {date}"
+                
+                send_email_notification(
+                    csv_file=outfn,
+                    to_email=to_email,
+                    from_email=from_email,
+                    password=password,
+                    provider=provider,
+                    subject=subject,
+                    sort_by=sort_by,
+                    only_form_advantage=only_form_advantage,
+                    skip_no_odds=skip_no_odds,
+                    include_sorted_odds=include_sorted_odds,
+                    odds_limit=odds_limit,
+                    min_odds_threshold=min_odds_threshold,
+                )
             
             print("\n✅ SUKCES! Email wysłany.")
         else:
@@ -1027,6 +1049,10 @@ WAŻNE dla Gmail:
                        help='💰📊 Wyłącz sekcje z posortowanymi kursami')
     parser.add_argument('--odds-limit', type=int, default=15,
                        help='Max liczba meczów w każdej sekcji kursów (domyślnie 15)')
+    parser.add_argument('--split-emails', action='store_true',
+                       help='📧 Wyślij 2 osobne maile na każdy sport (forma vs zwykłe)')
+    parser.add_argument('--min-odds', type=float, default=0.0,
+                       help='📉 Minimalny kurs — mecze z kursem poniżej są pomijane (np. 1.19)')
     
     args = parser.parse_args()
     
@@ -1055,7 +1081,9 @@ WAŻNE dla Gmail:
         use_odds=args.use_odds,
         use_gemini=args.use_gemini,
         include_sorted_odds=include_sorted_odds,
-        odds_limit=args.odds_limit
+        odds_limit=args.odds_limit,
+        split_emails=args.split_emails,
+        min_odds_threshold=args.min_odds,
     )
     
     print("\n✨ ZAKOŃCZONO!")

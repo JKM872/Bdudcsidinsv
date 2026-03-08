@@ -1116,7 +1116,8 @@ def send_email_notification(
     only_form_advantage: bool = False,
     skip_no_odds: bool = False,
     include_sorted_odds: bool = True,
-    odds_limit: int = 15
+    odds_limit: int = 15,
+    min_odds_threshold: float = 0.0
 ):
     """
     Wysyła email z powiadomieniem o kwalifikujących się meczach
@@ -1133,6 +1134,7 @@ def send_email_notification(
         skip_no_odds: Pomijaj mecze bez kursów bukmacherskich
         include_sorted_odds: Dodaj sekcje z kursami posortowanymi od najwyższych (domyślnie True)
         odds_limit: Max liczba meczów w każdej sekcji kursów (domyślnie 15)
+        min_odds_threshold: Minimalny kurs (np. 1.19) — mecze z jakimkolwiek kursem poniżej są pomijane
     """
     
     # Wczytaj dane
@@ -1184,7 +1186,25 @@ def send_email_notification(
             print(f"   Pominięto {skipped} meczów bez kursów")
         else:
             print("   ⚠️ Brak kolumn z kursami w danych - pokazuję wszystkie mecze")
-    
+
+    # OPCJA 3: Pomijaj mecze z kursem poniżej progu (np. 1.19)
+    if min_odds_threshold > 0:
+        print(f"📉 TRYB: Pomijam mecze z kursem < {min_odds_threshold}")
+        before_count = len(qualified)
+        if 'home_odds' in qualified.columns and 'away_odds' in qualified.columns:
+            def _odds_above_threshold(row):
+                ho = row.get('home_odds')
+                ao = row.get('away_odds')
+                if pd.isna(ho) or pd.isna(ao):
+                    return False  # brak kursów = nie przechodzi
+                try:
+                    return float(ho) >= min_odds_threshold and float(ao) >= min_odds_threshold
+                except (ValueError, TypeError):
+                    return False
+            qualified = qualified[qualified.apply(_odds_above_threshold, axis=1)]
+            skipped = before_count - len(qualified)
+            print(f"   Pominięto {skipped} meczów z kursem < {min_odds_threshold}")
+
     if len(qualified) == 0:
         messages = []
         if only_form_advantage:
@@ -1277,6 +1297,154 @@ def send_email_notification(
         print("   - Sprawdz dane logowania")
 
 
+# ---------------------------------------------------------------------------
+# Split emails: 2 maile na każdy sport (form_advantage vs zwykłe)
+# ---------------------------------------------------------------------------
+
+SPORT_EMOJI = {
+    'football': '⚽', 'basketball': '🏀', 'handball': '🤾',
+    'volleyball': '🏐', 'tennis': '🎾', 'hockey': '🏒', 'rugby': '🏉',
+}
+
+SPORT_LABEL = {
+    'football': 'Piłka nożna', 'basketball': 'Koszykówka', 'handball': 'Piłka ręczna',
+    'volleyball': 'Siatkówka', 'tennis': 'Tenis', 'hockey': 'Hokej', 'rugby': 'Rugby',
+}
+
+
+def send_split_emails_by_sport(
+    csv_file: str,
+    to_email: str,
+    from_email: str,
+    password: str,
+    provider: str = 'gmail',
+    sort_by: str = 'time',
+    include_sorted_odds: bool = True,
+    odds_limit: int = 15,
+    min_odds_threshold: float = 1.19,
+):
+    """
+    Wysyła 2 osobne maile dla każdego sportu:
+      Mail 1 — 🔥 mecze z przewagą formy + dane
+      Mail 2 — 📋 mecze zwykłe (bez przewagi formy)
+
+    Filtry:
+      - brak kursów → pominięty
+      - jakikolwiek kurs < min_odds_threshold → pominięty
+    """
+    print("=" * 70)
+    print("📧 TRYB SPLIT: 2 maile na każdy sport")
+    print(f"   Próg kursów: {min_odds_threshold}")
+    print("=" * 70)
+
+    # --- wczytaj i wyczyść ---
+    df = pd.read_csv(csv_file, encoding='utf-8')
+    df = df.replace({'nan': None, 'NaN': None, 'None': None})
+    numeric_cols = ['home_odds', 'draw_odds', 'away_odds',
+                    'forebet_probability', 'sofascore_home_win_prob',
+                    'sofascore_draw_prob', 'sofascore_away_win_prob',
+                    'sofascore_total_votes', 'gemini_confidence']
+    for col in numeric_cols:
+        if col in df.columns:
+            df[col] = df[col].apply(
+                lambda x: None if pd.isna(x) or (isinstance(x, str) and x.lower() == 'nan') else x
+            )
+
+    # --- filtruj kwalifikujące ---
+    qualified = df[df['qualifies'] == True].copy()
+    print(f"   Kwalifikujące się: {len(qualified)}")
+
+    # --- filtr: brak kursów ---
+    if 'home_odds' in qualified.columns and 'away_odds' in qualified.columns:
+        before = len(qualified)
+        qualified = qualified[(qualified['home_odds'].notna()) & (qualified['away_odds'].notna())]
+        print(f"   Pominięto {before - len(qualified)} meczów bez kursów")
+
+    # --- filtr: próg kursów ---
+    if min_odds_threshold > 0 and 'home_odds' in qualified.columns:
+        before = len(qualified)
+
+        def _above(row):
+            try:
+                return float(row['home_odds']) >= min_odds_threshold and float(row['away_odds']) >= min_odds_threshold
+            except (ValueError, TypeError):
+                return False
+
+        qualified = qualified[qualified.apply(_above, axis=1)]
+        print(f"   Pominięto {before - len(qualified)} meczów z kursem < {min_odds_threshold}")
+
+    if len(qualified) == 0:
+        print("   ⚠️ Brak meczów po filtrach — żaden email nie zostanie wysłany")
+        return 0
+
+    # --- podział po sporcie ---
+    if 'sport' not in qualified.columns:
+        qualified['sport'] = 'football'  # fallback
+
+    sports = qualified['sport'].unique()
+    date = datetime.now().strftime('%Y-%m-%d')
+    sent_count = 0
+
+    smtp_config = SMTP_CONFIG[provider]
+
+    try:
+        with smtplib.SMTP(smtp_config['server'], smtp_config['port']) as server:
+            if smtp_config['use_tls']:
+                server.starttls()
+            server.login(from_email, password)
+
+            for sport in sorted(sports):
+                sport_df = qualified[qualified['sport'] == sport]
+                emoji = SPORT_EMOJI.get(sport, '🏆')
+                label = SPORT_LABEL.get(sport, sport.capitalize())
+
+                # grupa A: przewaga formy
+                if 'form_advantage' in sport_df.columns:
+                    group_form = sport_df[sport_df['form_advantage'] == True]
+                    group_normal = sport_df[sport_df['form_advantage'] != True]
+                else:
+                    group_form = sport_df.iloc[0:0]  # pusty
+                    group_normal = sport_df
+
+                # --- Mail 1: forma ---
+                if len(group_form) > 0:
+                    matches_form = group_form.to_dict('records')
+                    subj = f"🔥 {emoji} {label}: {len(group_form)} meczów z PRZEWAGĄ FORMY — {date}"
+                    html = create_html_email(matches_form, date, sort_by=sort_by,
+                                             include_sorted_odds=include_sorted_odds,
+                                             odds_limit=odds_limit)
+                    msg = MIMEMultipart('alternative')
+                    msg['Subject'] = subj
+                    msg['From'] = from_email
+                    msg['To'] = to_email
+                    msg.attach(MIMEText(html, 'html'))
+                    server.send_message(msg)
+                    sent_count += 1
+                    print(f"   ✅ Wysłano: {subj}")
+
+                # --- Mail 2: zwykłe ---
+                if len(group_normal) > 0:
+                    matches_normal = group_normal.to_dict('records')
+                    subj = f"📋 {emoji} {label}: {len(group_normal)} meczów zwykłych — {date}"
+                    html = create_html_email(matches_normal, date, sort_by=sort_by,
+                                             include_sorted_odds=include_sorted_odds,
+                                             odds_limit=odds_limit)
+                    msg = MIMEMultipart('alternative')
+                    msg['Subject'] = subj
+                    msg['From'] = from_email
+                    msg['To'] = to_email
+                    msg.attach(MIMEText(html, 'html'))
+                    server.send_message(msg)
+                    sent_count += 1
+                    print(f"   ✅ Wysłano: {subj}")
+
+    except Exception as e:
+        print(f"   ❌ Błąd wysyłania: {e}")
+
+    print(f"\n📧 Wysłano łącznie {sent_count} maili")
+    return sent_count
+
+
 def main():
     """Przykład użycia"""
     import argparse
@@ -1295,20 +1463,36 @@ def main():
                        help='🔥 Wyślij tylko mecze z PRZEWAGĄ FORMY gospodarzy')
     parser.add_argument('--skip-no-odds', action='store_true',
                        help='💰 Pomijaj mecze BEZ KURSÓW bukmacherskich')
+    parser.add_argument('--min-odds', type=float, default=0.0,
+                       help='📉 Minimalny kurs — mecze z kursem poniżej są pomijane (np. 1.19)')
+    parser.add_argument('--split-emails', action='store_true',
+                       help='📧 Wyślij 2 osobne maile na każdy sport (forma vs zwykłe)')
     
     args = parser.parse_args()
     
-    send_email_notification(
-        csv_file=args.csv,
-        to_email=args.to,
-        from_email=args.from_email,
-        password=args.password,
-        provider=args.provider,
-        subject=args.subject,
-        sort_by=args.sort,
-        only_form_advantage=args.only_form_advantage,
-        skip_no_odds=args.skip_no_odds
-    )
+    if args.split_emails:
+        send_split_emails_by_sport(
+            csv_file=args.csv,
+            to_email=args.to,
+            from_email=args.from_email,
+            password=args.password,
+            provider=args.provider,
+            sort_by=args.sort,
+            min_odds_threshold=args.min_odds if args.min_odds > 0 else 1.19,
+        )
+    else:
+        send_email_notification(
+            csv_file=args.csv,
+            to_email=args.to,
+            from_email=args.from_email,
+            password=args.password,
+            provider=args.provider,
+            subject=args.subject,
+            sort_by=args.sort,
+            only_form_advantage=args.only_form_advantage,
+            skip_no_odds=args.skip_no_odds,
+            min_odds_threshold=args.min_odds,
+        )
 
 
 if __name__ == '__main__':

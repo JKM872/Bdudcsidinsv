@@ -3,7 +3,7 @@ PROSTY SKRYPT: Wysyła email z istniejącego pliku CSV (bez ponownego scrapowani
 """
 
 import argparse
-from email_notifier import send_email_notification
+from email_notifier import send_email_notification, send_split_emails_by_sport
 
 
 def main():
@@ -42,6 +42,10 @@ Przykłady użycia:
                        help='🔥 Tylko mecze z PRZEWAGĄ FORMY gospodarzy')
     parser.add_argument('--skip-no-odds', action='store_true',
                        help='💰 Pomijaj mecze BEZ KURSÓW bukmacherskich')
+    parser.add_argument('--min-odds', type=float, default=0.0,
+                       help='📉 Minimalny kurs — mecze z kursem poniżej są pomijane (np. 1.19)')
+    parser.add_argument('--split-emails', action='store_true',
+                       help='📧 Wyślij 2 osobne maile na każdy sport (forma vs zwykłe)')
     
     args = parser.parse_args()
     
@@ -57,20 +61,36 @@ Przykłady użycia:
         print("🔥 Filtr: Tylko PRZEWAGA FORMY")
     if args.skip_no_odds:
         print("💰 Filtr: Tylko mecze Z KURSAMI")
+    if args.min_odds > 0:
+        print(f"📉 Filtr: Minimalny kurs {args.min_odds}")
+    if args.split_emails:
+        print("📧 Tryb: 2 maile na każdy sport")
     print("="*70)
     
     # Wyślij email
-    send_email_notification(
-        csv_file=args.csv,
-        to_email=args.to,
-        from_email=args.from_email,
-        password=args.password,
-        provider=args.provider,
-        subject=args.subject,
-        sort_by=args.sort,
-        only_form_advantage=args.only_form_advantage,
-        skip_no_odds=args.skip_no_odds
-    )
+    if args.split_emails:
+        send_split_emails_by_sport(
+            csv_file=args.csv,
+            to_email=args.to,
+            from_email=args.from_email,
+            password=args.password,
+            provider=args.provider,
+            sort_by=args.sort,
+            min_odds_threshold=args.min_odds if args.min_odds > 0 else 1.19,
+        )
+    else:
+        send_email_notification(
+            csv_file=args.csv,
+            to_email=args.to,
+            from_email=args.from_email,
+            password=args.password,
+            provider=args.provider,
+            subject=args.subject,
+            sort_by=args.sort,
+            only_form_advantage=args.only_form_advantage,
+            skip_no_odds=args.skip_no_odds,
+            min_odds_threshold=args.min_odds,
+        )
     
     print("\n✅ Email wysłany pomyślnie!")
 
