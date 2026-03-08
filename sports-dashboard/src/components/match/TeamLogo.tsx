@@ -3,7 +3,7 @@
 // ============================================================================
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { getTeamLogoUrl, getTeamInitials, getTeamColor } from '@/lib/team-logos'
 
@@ -25,14 +25,13 @@ export function TeamLogo({ name, size = 'md', className }: Props) {
   const [logoUrl, setLogoUrl] = useState<string | null>(null)
   const [failed, setFailed] = useState(false)
 
-  const loadLogo = useCallback(async () => {
-    const url = await getTeamLogoUrl(name)
-    if (url) setLogoUrl(url)
-  }, [name])
-
   useEffect(() => {
-    loadLogo()
-  }, [loadLogo])
+    let cancelled = false
+    getTeamLogoUrl(name).then(url => {
+      if (!cancelled && url) setLogoUrl(url)
+    })
+    return () => { cancelled = true }
+  }, [name])
 
   const initials = getTeamInitials(name)
   const color = getTeamColor(name)

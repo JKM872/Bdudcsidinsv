@@ -7,15 +7,14 @@ Tests for:
 
 import os
 import pandas as pd
-import pytest
-from unittest.mock import patch, MagicMock, call
-from datetime import datetime
+from typing import Any
+from unittest.mock import patch, MagicMock
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
-SAMPLE_MATCHES = [
+SAMPLE_MATCHES: list[dict[str, Any]] = [
     # football, form_advantage=True, good odds
     dict(sport='football', home_team='Barcelona', away_team='Real Madrid',
          qualifies=True, form_advantage=True,
@@ -51,7 +50,7 @@ SAMPLE_MATCHES = [
 ]
 
 
-def _write_csv(tmp_path, matches=None):
+def _write_csv(tmp_path: Any, matches: list[dict[str, Any]] | None = None) -> str:
     """Write sample matches to a temp CSV and return path."""
     df = pd.DataFrame(matches or SAMPLE_MATCHES)
     csv_path = os.path.join(str(tmp_path), 'test_matches.csv')
@@ -67,7 +66,7 @@ class TestMinOddsThreshold:
     """send_email_notification should drop matches with any key odds < threshold."""
 
     @patch('email_notifier.smtplib.SMTP')
-    def test_filters_low_odds(self, mock_smtp, tmp_path):
+    def test_filters_low_odds(self, mock_smtp: Any, tmp_path: Any) -> None:
         from email_notifier import send_email_notification
         csv = _write_csv(tmp_path)
 
@@ -86,7 +85,7 @@ class TestMinOddsThreshold:
             assert 'Djokovic' in teams, "Djokovic (odds exactly 1.19) should pass"
 
     @patch('email_notifier.smtplib.SMTP')
-    def test_threshold_zero_means_no_filter(self, mock_smtp, tmp_path):
+    def test_threshold_zero_means_no_filter(self, mock_smtp: Any, tmp_path: Any) -> None:
         from email_notifier import send_email_notification
         csv = _write_csv(tmp_path)
 
@@ -102,7 +101,7 @@ class TestMinOddsThreshold:
             assert 'Dortmund' in teams
 
     @patch('email_notifier.smtplib.SMTP')
-    def test_no_matches_after_filter(self, mock_smtp, tmp_path):
+    def test_no_matches_after_filter(self, mock_smtp: Any, tmp_path: Any) -> None:
         """If all matches are below threshold, no email should be sent."""
         from email_notifier import send_email_notification
         low = [dict(sport='football', home_team='A', away_team='B',
@@ -126,7 +125,7 @@ class TestSplitEmailsBySport:
     """send_split_emails_by_sport should group by sport, then form_advantage."""
 
     @patch('email_notifier.smtplib.SMTP')
-    def test_sends_correct_number_of_emails(self, mock_smtp, tmp_path):
+    def test_sends_correct_number_of_emails(self, mock_smtp: Any, tmp_path: Any) -> None:
         from email_notifier import send_split_emails_by_sport
         csv = _write_csv(tmp_path)
 
@@ -148,7 +147,7 @@ class TestSplitEmailsBySport:
         assert mock_server.send_message.call_count == 5
 
     @patch('email_notifier.smtplib.SMTP')
-    def test_subjects_contain_sport_and_type(self, mock_smtp, tmp_path):
+    def test_subjects_contain_sport_and_type(self, mock_smtp: Any, tmp_path: Any) -> None:
         from email_notifier import send_split_emails_by_sport
         csv = _write_csv(tmp_path)
 
@@ -161,10 +160,10 @@ class TestSplitEmailsBySport:
             password='x', min_odds_threshold=1.19,
         )
 
-        subjects = []
+        subjects: list[str] = []
         for c in mock_server.send_message.call_args_list:
             msg = c[0][0]
-            subjects.append(msg['Subject'])
+            subjects.append(str(msg['Subject']))
 
         # Check basketball form email exists
         bball_form = [s for s in subjects if 'Koszykówka' in s and 'PRZEWAGĄ FORMY' in s]
@@ -174,7 +173,7 @@ class TestSplitEmailsBySport:
         assert len(tennis_normal) == 1
 
     @patch('email_notifier.smtplib.SMTP')
-    def test_empty_group_not_sent(self, mock_smtp, tmp_path):
+    def test_empty_group_not_sent(self, mock_smtp: Any, tmp_path: Any) -> None:
         """If a sport has no form_advantage matches, only 1 email for that sport."""
         from email_notifier import send_split_emails_by_sport
         only_normal = [
@@ -195,7 +194,7 @@ class TestSplitEmailsBySport:
         assert count == 1  # only normal group
 
     @patch('email_notifier.smtplib.SMTP')
-    def test_all_filtered_returns_zero(self, mock_smtp, tmp_path):
+    def test_all_filtered_returns_zero(self, mock_smtp: Any, tmp_path: Any) -> None:
         from email_notifier import send_split_emails_by_sport
         low = [dict(sport='football', home_team='X', away_team='Y',
                     qualifies=True, form_advantage=True,
@@ -209,7 +208,7 @@ class TestSplitEmailsBySport:
         assert count == 0
 
     @patch('email_notifier.smtplib.SMTP')
-    def test_odds_exactly_threshold_passes(self, mock_smtp, tmp_path):
+    def test_odds_exactly_threshold_passes(self, mock_smtp: Any, tmp_path: Any) -> None:
         """Odds == 1.19 should pass the filter."""
         from email_notifier import send_split_emails_by_sport
         edge = [dict(sport='tennis', home_team='Player1', away_team='Player2',
@@ -228,7 +227,7 @@ class TestSplitEmailsBySport:
         assert count == 1
 
     @patch('email_notifier.smtplib.SMTP')
-    def test_nan_string_odds_filtered(self, mock_smtp, tmp_path):
+    def test_nan_string_odds_filtered(self, mock_smtp: Any, tmp_path: Any) -> None:
         """String 'NaN' odds should be treated as missing."""
         from email_notifier import send_split_emails_by_sport
         nans = [dict(sport='football', home_team='TeamA', away_team='TeamB',

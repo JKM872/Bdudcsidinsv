@@ -29,7 +29,7 @@ import json
 import os
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, cast
 
 # ---------------------------------------------------------------------------
 # Output dataclass
@@ -66,8 +66,8 @@ class ScoredTennisMatch:
     data_quality: float = 0.0     # 0-1
 
     # Factor breakdown
-    breakdown: Dict[str, Any] = field(default_factory=dict)
-    features: Dict[str, Any] = field(default_factory=dict)
+    breakdown: Dict[str, Any] = field(default_factory=dict)  # pyright: ignore[reportUnknownVariableType]
+    features: Dict[str, Any] = field(default_factory=dict)  # pyright: ignore[reportUnknownVariableType]
 
     # Surface / ranking metadata (for display)
     surface: str = ''
@@ -95,8 +95,9 @@ def _sf(val: Any, default: float = 0.0) -> float:
 def _parse_form_list(raw: Any) -> List[str]:
     """Normalise form data to list of 'W'/'L' (no draws in tennis)."""
     if isinstance(raw, list):
-        out = []
-        for x in raw:
+        raw_items: List[Any] = cast(List[Any], raw)
+        out: List[str] = []
+        for x in raw_items:
             c = str(x).upper()[:1]
             if c in ('W', 'L'):
                 out.append(c)
@@ -214,8 +215,8 @@ class TennisFeatureExtractor:
         player_b = m.get('away_team', '') or ''
 
         # 1. H2H recency-weighted
-        h2h_list = m.get('h2h_last5', [])
-        if isinstance(h2h_list, list) and h2h_list:
+        h2h_list: List[Dict[str, Any]] = m.get('h2h_last5', [])
+        if h2h_list:
             wr, cnt = _recency_h2h(h2h_list, player_a, player_b)
             f['h2h_win_rate_a'] = wr
             f['h2h_count'] = min(cnt / 5.0, 1.0)
@@ -427,7 +428,7 @@ class TennisScoringEngine:
         conf = min(100, max(0, conf))
 
         # --- Build breakdown ---
-        breakdown = {}
+        breakdown: Dict[str, Any] = {}
         for k in w:
             breakdown[f'{k}_estimate'] = round(estimates[k], 3)
             breakdown[f'{k}_weight'] = w[k]
@@ -536,7 +537,7 @@ class TennisCalibrationRunner:
                 else:
                     profit -= 1
 
-        metrics = {
+        metrics: Dict[str, Any] = {
             'count': total,
             'accuracy': correct / total if total else 0,
             'brier': brier_sum / total if total else 1.0,
@@ -547,7 +548,7 @@ class TennisCalibrationRunner:
 
     def save_calibration(self, weights: Dict[str, float], metrics: Dict[str, Any]) -> None:
         os.makedirs('outputs', exist_ok=True)
-        data = {
+        data: Dict[str, Any] = {
             'weights': weights,
             'metrics': metrics,
             'updated': datetime.now().isoformat(),
@@ -574,17 +575,17 @@ if __name__ == '__main__':
     if args.file:
         with open(args.file) as fh:
             data = json.load(fh)
-        matches = data if isinstance(data, list) else data.get('matches', [])
+        matches: List[Dict[str, Any]] = data if isinstance(data, list) else data.get('matches', [])  # pyright: ignore[reportUnknownVariableType]
         engine.print_report(matches)
 
     elif args.backtest:
         files = sorted(glob.glob('outputs/*tennis*_predictions.json'))
-        all_m: List[Dict] = []
+        all_m: List[Dict[str, Any]] = []
         for fn in files[-args.days:]:
             with open(fn) as fh:
                 data = json.load(fh)
             if isinstance(data, list):
-                all_m.extend(data)
+                all_m.extend(data)  # pyright: ignore[reportUnknownArgumentType]
             elif 'matches' in data:
                 all_m.extend(data['matches'])
         print(f'Loaded {len(all_m)} matches from {len(files)} files')

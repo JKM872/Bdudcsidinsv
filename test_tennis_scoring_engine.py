@@ -2,14 +2,15 @@
 Tests for tennis_scoring_engine.py  –  Phase 5 regression suite.
 """
 import pytest
+from typing import Any, Dict
 from tennis_scoring_engine import (
     TennisScoringEngine,
     TennisFeatureExtractor,
     ScoredTennisMatch,
-    _form_score,
-    _parse_form_list,
-    _streak_len,
-    _recency_h2h,
+    _form_score,       # pyright: ignore[reportPrivateUsage]
+    _parse_form_list,  # pyright: ignore[reportPrivateUsage]
+    _streak_len,       # pyright: ignore[reportPrivateUsage]
+    _recency_h2h,      # pyright: ignore[reportPrivateUsage]
 )
 
 
@@ -17,8 +18,8 @@ from tennis_scoring_engine import (
 # Fixtures
 # ---------------------------------------------------------------------------
 
-def _base_match(**overrides):
-    m = {
+def _base_match(**overrides: Any) -> Dict[str, Any]:
+    m: Dict[str, Any] = {
         'home_team': 'Djokovic N.',
         'away_team': 'Nadal R.',
         'match_time': '15:00',
@@ -40,12 +41,12 @@ def _base_match(**overrides):
 
 
 @pytest.fixture
-def engine():
+def engine() -> TennisScoringEngine:
     return TennisScoringEngine()
 
 
 @pytest.fixture
-def extractor():
+def extractor() -> TennisFeatureExtractor:
     return TennisFeatureExtractor()
 
 
@@ -123,14 +124,14 @@ class TestStreakLen:
 # ---------------------------------------------------------------------------
 
 class TestFeatureExtractor:
-    def test_full_data_quality(self, extractor):
+    def test_full_data_quality(self, extractor: TennisFeatureExtractor) -> None:
         m = _base_match()
         f = extractor.extract(m)
         # all 5 sources present → data_quality should be 1.0
         # (h2h counts from simple fields, form, not surface_stats though, ranking, odds)
         assert f['_data_quality'] >= 0.6   # at least 3/5
 
-    def test_minimal_data(self, extractor):
+    def test_minimal_data(self, extractor: TennisFeatureExtractor) -> None:
         m = _base_match(
             home_wins_in_h2h_last5=0,
             away_wins_in_h2h_last5=0,
@@ -144,27 +145,27 @@ class TestFeatureExtractor:
         f = extractor.extract(m)
         assert f['_data_quality'] == 0.0
 
-    def test_h2h_win_rate(self, extractor):
+    def test_h2h_win_rate(self, extractor: TennisFeatureExtractor) -> None:
         m = _base_match(home_wins_in_h2h_last5=4, away_wins_in_h2h_last5=1)
         f = extractor.extract(m)
-        assert f['h2h_win_rate_a'] == pytest.approx(0.8, abs=0.01)
+        assert f['h2h_win_rate_a'] == pytest.approx(0.8, abs=0.01)  # pyright: ignore[reportUnknownMemberType]
 
-    def test_ranking_advantage_positive_for_better_a(self, extractor):
+    def test_ranking_advantage_positive_for_better_a(self, extractor: TennisFeatureExtractor) -> None:
         m = _base_match(ranking_a=1, ranking_b=50)
         f = extractor.extract(m)
         assert f['ranking_advantage'] > 0   # A has better ranking
 
-    def test_ranking_advantage_negative_for_worse_a(self, extractor):
+    def test_ranking_advantage_negative_for_worse_a(self, extractor: TennisFeatureExtractor) -> None:
         m = _base_match(ranking_a=100, ranking_b=5)
         f = extractor.extract(m)
         assert f['ranking_advantage'] < 0
 
-    def test_odds_implied(self, extractor):
+    def test_odds_implied(self, extractor: TennisFeatureExtractor) -> None:
         m = _base_match(home_odds=1.50, away_odds=2.80)
         f = extractor.extract(m)
         assert f['odds_prob_a'] > f['odds_prob_b']
 
-    def test_missing_odds(self, extractor):
+    def test_missing_odds(self, extractor: TennisFeatureExtractor) -> None:
         m = _base_match(home_odds=0, away_odds=0)
         f = extractor.extract(m)
         assert f['odds_prob_a'] == 0.5
@@ -176,23 +177,23 @@ class TestFeatureExtractor:
 # ---------------------------------------------------------------------------
 
 class TestEngine:
-    def test_probabilities_sum_to_one(self, engine):
+    def test_probabilities_sum_to_one(self, engine: TennisScoringEngine) -> None:
         m = _base_match()
         s = engine.score_match(m)
-        assert s.prob_a + s.prob_b == pytest.approx(1.0, abs=0.001)
-        assert s.cal_a + s.cal_b == pytest.approx(1.0, abs=0.001)
+        assert s.prob_a + s.prob_b == pytest.approx(1.0, abs=0.001)  # pyright: ignore[reportUnknownMemberType]
+        assert s.cal_a + s.cal_b == pytest.approx(1.0, abs=0.001)  # pyright: ignore[reportUnknownMemberType]
 
-    def test_best_pick_A_or_B(self, engine):
+    def test_best_pick_A_or_B(self, engine: TennisScoringEngine) -> None:
         m = _base_match()
         s = engine.score_match(m)
         assert s.best_pick in ('A', 'B')
 
-    def test_favorite_set(self, engine):
+    def test_favorite_set(self, engine: TennisScoringEngine) -> None:
         m = _base_match()
         s = engine.score_match(m)
         assert s.favorite in ('player_a', 'player_b')
 
-    def test_strong_favorite(self, engine):
+    def test_strong_favorite(self, engine: TennisScoringEngine) -> None:
         """Djokovic #1 with 4-1 H2H and great form at 1.30 odds should pick A."""
         m = _base_match(
             home_wins_in_h2h_last5=4,
@@ -208,7 +209,7 @@ class TestEngine:
         assert s.best_pick == 'A'
         assert s.prob_a > 0.65
 
-    def test_underdog_scenario(self, engine):
+    def test_underdog_scenario(self, engine: TennisScoringEngine) -> None:
         """When B dominates all factors, engine should pick B."""
         m = _base_match(
             home_wins_in_h2h_last5=0,
@@ -224,7 +225,7 @@ class TestEngine:
         assert s.best_pick == 'B'
         assert s.prob_b > 0.65
 
-    def test_ev_positive_when_odds_generous(self, engine):
+    def test_ev_positive_when_odds_generous(self, engine: TennisScoringEngine) -> None:
         """If our model says 70% for A but odds imply 50%, EV should be positive."""
         m = _base_match(
             home_wins_in_h2h_last5=5,
@@ -239,37 +240,37 @@ class TestEngine:
         s = engine.score_match(m)
         assert s.ev > 0
 
-    def test_advanced_score_range(self, engine):
+    def test_advanced_score_range(self, engine: TennisScoringEngine) -> None:
         m = _base_match()
         s = engine.score_match(m)
         assert 0 <= s.advanced_score <= 100
 
-    def test_confidence_range(self, engine):
+    def test_confidence_range(self, engine: TennisScoringEngine) -> None:
         m = _base_match()
         s = engine.score_match(m)
         assert 0 <= s.confidence <= 100
 
-    def test_data_quality_range(self, engine):
+    def test_data_quality_range(self, engine: TennisScoringEngine) -> None:
         m = _base_match()
         s = engine.score_match(m)
         assert 0 <= s.data_quality <= 1
 
-    def test_kelly_capped(self, engine):
+    def test_kelly_capped(self, engine: TennisScoringEngine) -> None:
         m = _base_match()
         s = engine.score_match(m)
         assert s.kelly <= 25.0
 
-    def test_edge_is_percentage(self, engine):
+    def test_edge_is_percentage(self, engine: TennisScoringEngine) -> None:
         m = _base_match()
         s = engine.score_match(m)
         assert -100 <= s.edge <= 100
 
-    def test_no_crash_on_empty_match(self, engine):
+    def test_no_crash_on_empty_match(self, engine: TennisScoringEngine) -> None:
         """Engine should not crash on minimal/empty data."""
         s = engine.score_match({})
-        assert s.prob_a + s.prob_b == pytest.approx(1.0, abs=0.001)
+        assert s.prob_a + s.prob_b == pytest.approx(1.0, abs=0.001)  # pyright: ignore[reportUnknownMemberType]
 
-    def test_score_matches_sorted_by_ev(self, engine):
+    def test_score_matches_sorted_by_ev(self, engine: TennisScoringEngine) -> None:
         matches = [
             _base_match(home_wins_in_h2h_last5=1, away_wins_in_h2h_last5=4, home_odds=3.00, away_odds=1.30),
             _base_match(home_wins_in_h2h_last5=5, away_wins_in_h2h_last5=0, home_odds=2.00, away_odds=1.80),
@@ -278,7 +279,7 @@ class TestEngine:
         assert len(scored) == 2
         assert scored[0].ev >= scored[1].ev   # sorted descending
 
-    def test_threshold_is_45(self, engine):
+    def test_threshold_is_45(self, engine: TennisScoringEngine) -> None:
         assert engine.threshold == 45.0
 
 
@@ -287,14 +288,14 @@ class TestEngine:
 # ---------------------------------------------------------------------------
 
 class TestFieldNameConsistency:
-    def test_away_field_name(self):
+    def test_away_field_name(self) -> None:
         """The match dict should use away_wins_in_h2h_last5, not away_wins_in_h2h."""
         m = _base_match()
         assert 'away_wins_in_h2h_last5' in m
         # The engine should read properly
         engine = TennisScoringEngine()
         s = engine.score_match(m)
-        assert s.prob_a + s.prob_b == pytest.approx(1.0, abs=0.001)
+        assert s.prob_a + s.prob_b == pytest.approx(1.0, abs=0.001)  # pyright: ignore[reportUnknownMemberType]
 
 
 # ---------------------------------------------------------------------------
@@ -302,16 +303,16 @@ class TestFieldNameConsistency:
 # ---------------------------------------------------------------------------
 
 class TestCalibration:
-    def test_calibrate_sums_to_one(self):
-        cal_a, cal_b = TennisScoringEngine._calibrate(0.7, 0.3, 1.1)
-        assert cal_a + cal_b == pytest.approx(1.0, abs=0.001)
+    def test_calibrate_sums_to_one(self) -> None:
+        cal_a, cal_b = TennisScoringEngine._calibrate(0.7, 0.3, 1.1)  # pyright: ignore[reportPrivateUsage]
+        assert cal_a + cal_b == pytest.approx(1.0, abs=0.001)  # pyright: ignore[reportUnknownMemberType]
 
-    def test_calibrate_preserves_direction(self):
-        cal_a, cal_b = TennisScoringEngine._calibrate(0.8, 0.2, 1.1)
+    def test_calibrate_preserves_direction(self) -> None:
+        cal_a, cal_b = TennisScoringEngine._calibrate(0.8, 0.2, 1.1)  # pyright: ignore[reportPrivateUsage]
         assert cal_a > cal_b
 
-    def test_calibrate_extreme(self):
-        cal_a, cal_b = TennisScoringEngine._calibrate(0.99, 0.01, 1.1)
+    def test_calibrate_extreme(self) -> None:
+        cal_a, cal_b = TennisScoringEngine._calibrate(0.99, 0.01, 1.1)  # pyright: ignore[reportPrivateUsage]
         assert cal_a > 0.9
         assert cal_b < 0.1
 
@@ -321,7 +322,7 @@ class TestCalibration:
 # ---------------------------------------------------------------------------
 
 class TestRecencyH2H:
-    def test_basic_h2h(self):
+    def test_basic_h2h(self) -> None:
         h2h = [
             {'home': 'Djokovic N.', 'away': 'Nadal R.', 'score': '2:1', 'date': ''},
             {'home': 'Nadal R.', 'away': 'Djokovic N.', 'score': '2:0', 'date': ''},
@@ -330,11 +331,11 @@ class TestRecencyH2H:
         assert cnt == 2
         assert 0.0 <= wr <= 1.0
 
-    def test_empty_h2h(self):
+    def test_empty_h2h(self) -> None:
         wr, cnt = _recency_h2h([], 'A', 'B')
         assert wr == 0.5
         assert cnt == 0
 
-    def test_no_player(self):
-        wr, cnt = _recency_h2h([{'home': 'X', 'away': 'Y', 'score': '2:1'}], '', '')
+    def test_no_player(self) -> None:
+        wr, _cnt = _recency_h2h([{'home': 'X', 'away': 'Y', 'score': '2:1'}], '', '')
         assert wr == 0.5

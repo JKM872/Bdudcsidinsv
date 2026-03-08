@@ -14,8 +14,8 @@ class TestTennisFieldNames:
     def test_scraper_writes_away_wins_in_h2h_last5(self):
         """process_match_tennis must write 'away_wins_in_h2h_last5' (not 'away_wins_in_h2h')."""
         import inspect
-        from livesport_h2h_scraper import process_match_tennis
-        source = inspect.getsource(process_match_tennis)
+        from livesport_h2h_scraper import process_match_tennis  # pyright: ignore[reportUnknownVariableType]
+        source = inspect.getsource(process_match_tennis)  # pyright: ignore[reportUnknownArgumentType]
         # The new field name should be used
         assert "away_wins_in_h2h_last5" in source
         # The old broken field name should NOT appear as an assignment target
@@ -24,35 +24,35 @@ class TestTennisFieldNames:
     def test_scraper_uses_teams_match(self):
         """Tennis H2H counting must use _teams_match (robust matching)."""
         import inspect
-        from livesport_h2h_scraper import process_match_tennis
-        source = inspect.getsource(process_match_tennis)
+        from livesport_h2h_scraper import process_match_tennis  # pyright: ignore[reportUnknownVariableType]
+        source = inspect.getsource(process_match_tennis)  # pyright: ignore[reportUnknownArgumentType]
         assert "_teams_match(" in source
 
     def test_no_synthetic_form_function_called(self):
         """process_match_tennis must NOT call extract_player_form_simple."""
         import inspect
-        from livesport_h2h_scraper import process_match_tennis
-        source = inspect.getsource(process_match_tennis)
+        from livesport_h2h_scraper import process_match_tennis  # pyright: ignore[reportUnknownVariableType]
+        source = inspect.getsource(process_match_tennis)  # pyright: ignore[reportUnknownArgumentType]
         assert "extract_player_form_simple" not in source
 
     def test_no_synthetic_surface_function_called(self):
         """process_match_tennis must NOT call calculate_surface_stats_from_h2h."""
         import inspect
-        from livesport_h2h_scraper import process_match_tennis
-        source = inspect.getsource(process_match_tennis)
+        from livesport_h2h_scraper import process_match_tennis  # pyright: ignore[reportUnknownVariableType]
+        source = inspect.getsource(process_match_tennis)  # pyright: ignore[reportUnknownArgumentType]
         assert "calculate_surface_stats_from_h2h" not in source
 
     def test_uses_new_scoring_engine(self):
         """process_match_tennis must import TennisScoringEngine (not TennisMatchAnalyzer)."""
         import inspect
-        from livesport_h2h_scraper import process_match_tennis
-        source = inspect.getsource(process_match_tennis)
+        from livesport_h2h_scraper import process_match_tennis  # pyright: ignore[reportUnknownVariableType]
+        source = inspect.getsource(process_match_tennis)  # pyright: ignore[reportUnknownArgumentType]
         assert "TennisScoringEngine" in source
         assert "TennisMatchAnalyzer" not in source
 
     def test_extract_real_form_badges_exists(self):
         """The new _extract_real_form_badges function should exist."""
-        from livesport_h2h_scraper import _extract_real_form_badges
+        from livesport_h2h_scraper import _extract_real_form_badges  # pyright: ignore[reportPrivateUsage]
         assert callable(_extract_real_form_badges)
 
 
@@ -130,8 +130,8 @@ class TestCompatibilityMapping:
     def test_init_dict_has_compat_fields(self):
         """The init dict should have sport, focus_team, home_form, etc."""
         import inspect
-        from livesport_h2h_scraper import process_match_tennis
-        source = inspect.getsource(process_match_tennis)
+        from livesport_h2h_scraper import process_match_tennis  # pyright: ignore[reportUnknownVariableType]
+        source = inspect.getsource(process_match_tennis)  # pyright: ignore[reportUnknownArgumentType]
         # Check that _finalise is called on all exit paths
         assert "_finalise" in source
         # Check that sport is set
@@ -140,6 +140,6 @@ class TestCompatibilityMapping:
     def test_finalise_function_exists(self):
         """_finalise is defined inside process_match_tennis."""
         import inspect
-        from livesport_h2h_scraper import process_match_tennis
-        source = inspect.getsource(process_match_tennis)
+        from livesport_h2h_scraper import process_match_tennis  # pyright: ignore[reportUnknownVariableType]
+        source = inspect.getsource(process_match_tennis)  # pyright: ignore[reportUnknownArgumentType]
         assert "def _finalise" in source
