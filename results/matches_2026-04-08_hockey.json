@@ -1,0 +1,3431 @@
+{
+  "date": "2026-04-08",
+  "sport": "hockey",
+  "generatedAt": "2026-04-08T03:45:27.821166",
+  "stats": {
+    "total": 59,
+    "qualifying": 35,
+    "formAdvantage": 17
+  },
+  "matches": [
+    {
+      "id": -3378395815424897951,
+      "homeTeam": "Sparta Praga",
+      "awayTeam": "Pardubice",
+      "time": "08.04.2026 15:45",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/pardubice-UDlHJ9wl/sparta-praha-zcG9U7N6/?mid=W6bmjRmI",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -7894385175503080048,
+      "homeTeam": "Karlowe Wary",
+      "awayTeam": "Trzyniec",
+      "time": "08.04.2026 16:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/karlovy-vary-pIEGPioE/trinec-UJFDTRxD/?mid=M9MFctEE",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -4848588622776916008,
+      "homeTeam": "Ilves",
+      "awayTeam": "KalPa",
+      "time": "08.04.2026 15:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/ilves-Oh5uGzDT/kalpa-tMuMK6vi/?mid=r1vFkGZr",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "D",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.7,
+        "draw": 4.3,
+        "away": 4.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 82,
+        "draw": null,
+        "away": 18,
+        "votes": 154
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 61.6,
+        "ev": 0.046,
+        "edge": 2.7,
+        "kelly": 6.6,
+        "confidence": 59.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 59.0,
+      "value_bet": true
+    },
+    {
+      "id": -5604290327462446452,
+      "homeTeam": "SaiPa",
+      "awayTeam": "Ässät",
+      "time": "08.04.2026 15:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/assat-I9wm5xTA/saipa-Q9sYH4O9/?mid=MRoqIMDl",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "D",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.75,
+        "draw": 4.2,
+        "away": 3.9,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 88,
+        "draw": null,
+        "away": 12,
+        "votes": 156
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 64.3,
+        "ev": 0.125,
+        "edge": 7.2,
+        "kelly": 16.7,
+        "confidence": 66.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 66.0,
+      "value_bet": true
+    },
+    {
+      "id": 7651243258059210326,
+      "homeTeam": "Eisbaren Berlin",
+      "awayTeam": "Koeln",
+      "time": "08.04.2026 17:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/eisbaren-vwLXr6U8/koln-va2irFDJ/?mid=GAQXFopB",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.25,
+        "draw": 4.2,
+        "away": 2.55,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "2",
+        "probability": 56.0,
+        "exactScore": "2-4",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 74,
+        "draw": null,
+        "away": 26,
+        "votes": 311
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 51.4,
+        "ev": 0.157,
+        "edge": 7.0,
+        "kelly": 12.6,
+        "confidence": 64.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 64.0,
+      "value_bet": true
+    },
+    {
+      "id": -5448415709943624342,
+      "homeTeam": "Mannheim",
+      "awayTeam": "Munchen",
+      "time": "08.04.2026 17:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/mannheim-0jhpSN72/munchen-dOHrLrqd/?mid=Cfo01nVH",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.05,
+        "draw": 4.2,
+        "away": 2.85,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 77,
+        "draw": null,
+        "away": 23,
+        "votes": 228
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 69.6,
+        "ev": 0.427,
+        "edge": 20.8,
+        "kelly": 40.6,
+        "confidence": 79.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 79.0,
+      "value_bet": true
+    },
+    {
+      "id": 8330301923140040070,
+      "homeTeam": "Vaxjo",
+      "awayTeam": "Rogle",
+      "time": "08.04.2026 17:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/rogle-j5ve8f1r/vaxjo-hzXCSnCE/?mid=lbqoE8It",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.45,
+        "draw": 3.8,
+        "away": 2.45,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 70,
+        "draw": null,
+        "away": 30,
+        "votes": 185
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 60.7,
+        "ev": 0.486,
+        "edge": 19.9,
+        "kelly": 33.6,
+        "confidence": 75.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 75.0,
+      "value_bet": true
+    },
+    {
+      "id": -4589644467563772849,
+      "homeTeam": "Dallas Stars",
+      "awayTeam": "Calgary Flames",
+      "time": "08.04.2026 00:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/calgary-flames-EZekktRt/dallas-stars-vVAvnIuC/?mid=S4Jcd6VQ",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayForm": [
+        "D",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.68,
+        "draw": 4.4,
+        "away": 4.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 60.0,
+        "exactScore": "4-2",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 1963
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 74.2,
+        "ev": 0.247,
+        "edge": 14.7,
+        "kelly": 36.4,
+        "confidence": 83.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 83.0,
+      "value_bet": true
+    },
+    {
+      "id": -7919300467952813039,
+      "homeTeam": "Minnesota Wild",
+      "awayTeam": "Seattle Kraken",
+      "time": "08.04.2026 00:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/minnesota-wild-j9Ck7BHi/seattle-kraken-MibYQ5nU/?mid=2grfCgA4",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.65,
+        "draw": 4.5,
+        "away": 4.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 61.0,
+        "exactScore": "4-3",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 91,
+        "draw": null,
+        "away": 9,
+        "votes": 1953
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 85.7,
+        "ev": 0.415,
+        "edge": 25.1,
+        "kelly": 63.8,
+        "confidence": 88.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 88.0,
+      "value_bet": true
+    },
+    {
+      "id": -6318169600158583063,
+      "homeTeam": "St. Louis Blues",
+      "awayTeam": "Colorado Avalanche",
+      "time": "08.04.2026 00:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/colorado-avalanche-hACAnvBa/st-louis-blues-KSAayVoi/?mid=ddunEFuh",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 3.05,
+        "draw": 4.1,
+        "away": 2.05,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "2",
+        "probability": 51.0,
+        "exactScore": "4-8",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 21,
+        "draw": null,
+        "away": 79,
+        "votes": 1936
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 36.7,
+        "ev": 0.118,
+        "edge": 3.9,
+        "kelly": 5.8,
+        "confidence": 54.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 54.0,
+      "value_bet": true
+    },
+    {
+      "id": -3051292290422884500,
+      "homeTeam": "Utah Mammoth",
+      "awayTeam": "Edmonton Oilers",
+      "time": "08.04.2026 01:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/edmonton-oilers-Mg0qoxeI/utah-mammoth-hnwxhtVp/?mid=Oz5Tjpgl",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 2777442852200102113,
+      "homeTeam": "Anaheim Ducks",
+      "awayTeam": "Nashville Predators",
+      "time": "08.04.2026 02:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/anaheim-ducks-4CM4ojpD/nashville-predators-QV0K6kn4/?mid=O8W2AXvH",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "D",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "D",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.15,
+        "draw": 4.0,
+        "away": 2.85,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 52.0,
+        "exactScore": "4-3",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 80,
+        "draw": null,
+        "away": 20,
+        "votes": 1739
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 62.8,
+        "ev": 0.35,
+        "edge": 16.3,
+        "kelly": 30.4,
+        "confidence": 79.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 79.0,
+      "value_bet": true
+    },
+    {
+      "id": -7923085955434353487,
+      "homeTeam": "Vancouver Canucks",
+      "awayTeam": "Vegas Golden Knights",
+      "time": "08.04.2026 02:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/vancouver-canucks-YiOrnTV9/vegas-golden-knights-fTT0TsUg/?mid=rwLUlON0",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -3408919494417988687,
+      "homeTeam": "New York Rangers",
+      "awayTeam": "Buffalo Sabres",
+      "time": "08.04.2026 23:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/buffalo-sabres-UobjtMIP/new-york-rangers-O4zxeyWN/?mid=WYZA8B9T",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -5926624250620424107,
+      "homeTeam": "Toronto Maple Leafs",
+      "awayTeam": "Washington Capitals",
+      "time": "08.04.2026 23:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/toronto-maple-leafs-ShE7Z8G3/washington-capitals-UND9nmoG/?mid=j3Oxm2hD",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -5153179035345286176,
+      "homeTeam": "Zhlobin",
+      "awayTeam": "Yunost Minsk",
+      "time": "08.04.2026 15:10",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/yunost-minsk-WYaSKhRh/zhlobin-hAqadBCC/?mid=lOjk4ZS8",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.55,
+        "draw": 3.65,
+        "away": 2.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 59,
+        "draw": null,
+        "away": 41,
+        "votes": 44
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 60.1,
+        "ev": 0.533,
+        "edge": 20.9,
+        "kelly": 34.4,
+        "confidence": 75.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 75.0,
+      "value_bet": true
+    },
+    {
+      "id": 7521901700481789584,
+      "homeTeam": "Trzyniec U20",
+      "awayTeam": "Pardubice U20",
+      "time": "08.04.2026 16:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/pardubice-zi9Vx0v0/trinec-Qu2rzbOI/?mid=Uua4X5xo",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.63,
+        "draw": 4.1,
+        "away": 3.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 12
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 71.7,
+        "ev": 0.169,
+        "edge": 10.3,
+        "kelly": 26.8,
+        "confidence": 73.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 73.0,
+      "value_bet": true
+    },
+    {
+      "id": 4460834575175318606,
+      "homeTeam": "Black Dogs Budweis",
+      "awayTeam": "VSE Falcons Prague",
+      "time": "08.04.2026 16:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/black-dogs-budweis-G2IjExQC/falcons-prague-vP6UKL3E/?mid=QeS0dWkD",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "D",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 18
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 76.1,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 48.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 48.0,
+      "value_bet": false
+    },
+    {
+      "id": 3206581716124595230,
+      "homeTeam": "UK Prague",
+      "awayTeam": "CZU Farmers Prague",
+      "time": "08.04.2026 17:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/farmers-prague-xKlHBHQ0/uk-prague-8xFrGbe0/?mid=IkFnKZsK",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 0,
+        "total": 4,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "D",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 18
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 78.1,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 49.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 49.0,
+      "value_bet": false
+    },
+    {
+      "id": -966875094840011114,
+      "homeTeam": "Engineers Prague",
+      "awayTeam": "Riders Pardubice",
+      "time": "08.04.2026 17:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/engineers-prague-x6zfzTtF/riders-pardubice-dlgaWtzI/?mid=lY5IED5s",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 55.0,
+        "exactScore": "2-4",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 12
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 67.4,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 48.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 48.0,
+      "value_bet": false
+    },
+    {
+      "id": 8394984232939680669,
+      "homeTeam": "Hämeenlinna K",
+      "awayTeam": "Kiekko-Espoo K",
+      "time": "08.04.2026 15:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/hameenlinna-Uy5O0rfc/kiekko-espoo-dKbDxBBI/?mid=lh8GDhno",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -4075772224949448140,
+      "homeTeam": "Grenoble",
+      "awayTeam": "Angers",
+      "time": "08.04.2026 18:15",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/angers-2udEPMGq/grenoble-fas8xYmC/?mid=KKCOmgsH",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -1531314303667074049,
+      "homeTeam": "Dunkerque Corsaires",
+      "awayTeam": "Caen",
+      "time": "08.04.2026 17:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/caen-OfpNN0od/dunkerque-WSaQcn09/?mid=Mcvsahkn",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -3074041636995954493,
+      "homeTeam": "Tours",
+      "awayTeam": "Cholet",
+      "time": "08.04.2026 17:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/cholet-AqHlS3u5/tours-zDMEi00k/?mid=A1q5glJN",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 7885820112404130878,
+      "homeTeam": "Brantford Bulldogs",
+      "awayTeam": "North Bay Battalion",
+      "time": "08.04.2026 23:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/brantford-bulldogs-lWYW6Lj7/north-bay-battalion-jTtNLK50/?mid=GtZqrnfd",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 54.0,
+        "exactScore": "5-3",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 14
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 63.3,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 46.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 46.0,
+      "value_bet": false
+    },
+    {
+      "id": 6900680524411693966,
+      "homeTeam": "Bietigheim/Bissingen",
+      "awayTeam": "Kassel",
+      "time": "08.04.2026 17:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/bietigheim-bissingen-0zXdT8ic/kassel-EoqRKsT1/?mid=SbXFCIAb",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 7125653174459516338,
+      "homeTeam": "Regensburg",
+      "awayTeam": "Krefeld",
+      "time": "08.04.2026 18:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/krefeld-h26esZSP/regensburg-Y5a0eDHD/?mid=Uoh4Tsml",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -7674029642783254836,
+      "homeTeam": "Deggendorf",
+      "awayTeam": "Trappers",
+      "time": "08.04.2026 18:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/deggendorf-tMD0kJuD/trappers-rmbyqMNH/?mid=zHC63liR",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 68,
+        "draw": null,
+        "away": 32,
+        "votes": 34
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 64.2,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 44.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 44.0,
+      "value_bet": false
+    },
+    {
+      "id": -6561127213913961918,
+      "homeTeam": "Hannover",
+      "awayTeam": "Memmingen",
+      "time": "08.04.2026 18:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/ecdc-memmingen-G4k7xdS4/hannover-rmicKBLC/?mid=tGKdokVr",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 2,
+        "total": 2,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -1943537518320725006,
+      "homeTeam": "Omsk",
+      "awayTeam": "CSKA Moskwa",
+      "time": "08.04.2026 13:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/cska-moscow-pGuexlkn/omsk-6PtiwUZu/?mid=2iCGmGcC",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.1,
+        "draw": 3.8,
+        "away": 3.15,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 71,
+        "draw": null,
+        "away": 29,
+        "votes": 570
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 69.7,
+        "ev": 0.463,
+        "edge": 22.0,
+        "kelly": 42.1,
+        "confidence": 79.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 79.0,
+      "value_bet": true
+    },
+    {
+      "id": -1392431996804283881,
+      "homeTeam": "Jarosław",
+      "awayTeam": "Ufa",
+      "time": "08.04.2026 16:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/ufa-n7KcqQqF/yaroslavl-MNZan6lB/?mid=8rGUcqWH",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.58,
+        "draw": 4.5,
+        "away": 4.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": null,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null,
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 79,
+        "draw": null,
+        "away": 21,
+        "votes": 482
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 82.9,
+        "ev": 0.31,
+        "edge": 19.6,
+        "kelly": 53.5,
+        "confidence": 84.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 84.0,
+      "value_bet": true
+    },
+    {
+      "id": 7562385695694807265,
+      "homeTeam": "Sibirskie Snaipery",
+      "awayTeam": "Omskie Yastreby",
+      "time": "08.04.2026 11:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/omskie-yastreby-mhl-p8N8FQdR/sibirskie-snaipery-mhl-OM6OUzJ0/?mid=S2TkNPcE",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 407473561081713191,
+      "homeTeam": "Avto",
+      "awayTeam": "Tolpar",
+      "time": "08.04.2026 13:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/avto-mhl-Q1adcRzq/tolpar-mhl-AcVa7247/?mid=dAqSq52t",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "L",
+        "D",
+        "D"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.45,
+        "draw": 4.1,
+        "away": 2.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 79,
+        "draw": null,
+        "away": 21,
+        "votes": 115
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 65.1,
+        "ev": 0.595,
+        "edge": 24.3,
+        "kelly": 41.1,
+        "confidence": 77.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 77.0,
+      "value_bet": true
+    },
+    {
+      "id": 8877407771086701509,
+      "homeTeam": "Belye Medvedi",
+      "awayTeam": "Stalnye Lisy",
+      "time": "08.04.2026 13:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/belye-medvedi-mhl-YR24e55e/stalnye-lisy-mhl-tOQe8rk1/?mid=z5tEwFNG",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -7423087528041510956,
+      "homeTeam": "Chaika",
+      "awayTeam": "Irbis",
+      "time": "08.04.2026 15:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/chaika-mhl-dvJhFEND/irbis-mhl-IV0enPrb/?mid=6iJM6HoQ",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -6851668588297980843,
+      "homeTeam": "Krasnoyarsk K",
+      "awayTeam": "Dynamo Neva K",
+      "time": "08.04.2026 12:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/biryusa-krasnoyarsk-dhphFb1H/dynamo-neva-xOKWRy57/?mid=OU0M2cRq",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "D",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.93,
+        "draw": 3.75,
+        "away": 3.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 80,
+        "draw": null,
+        "away": 20,
+        "votes": 30
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 64.7,
+        "ev": 0.249,
+        "edge": 12.9,
+        "kelly": 26.8,
+        "confidence": 74.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 74.0,
+      "value_bet": true
+    },
+    {
+      "id": -4794892708716264878,
+      "homeTeam": "Poprad",
+      "awayTeam": "Nitra",
+      "time": "08.04.2026 15:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/nitra-v7xWYbP2/poprad-IcyzYIv9/?mid=AyfP1hAO",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -7891661707983010511,
+      "homeTeam": "Senica",
+      "awayTeam": "Trnava",
+      "time": "08.04.2026 16:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/senica-tYQX8UQe/trnava-YeavWiY8/?mid=juagADeD",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 90,
+        "draw": null,
+        "away": 10,
+        "votes": 30
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 60.9,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 42.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 42.0,
+      "value_bet": false
+    },
+    {
+      "id": -9056956498952990962,
+      "homeTeam": "Davos",
+      "awayTeam": "Zurich",
+      "time": "08.04.2026 18:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/davos-6yAC1NAl/zurich-vmRgFvP6/?mid=O2tiM276",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.95,
+        "draw": 4.2,
+        "away": 3.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 81,
+        "draw": null,
+        "away": 19,
+        "votes": 125
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 62.3,
+        "ev": 0.216,
+        "edge": 11.1,
+        "kelly": 22.7,
+        "confidence": 71.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 71.0,
+      "value_bet": true
+    },
+    {
+      "id": 4635064642246190142,
+      "homeTeam": "Fribourg",
+      "awayTeam": "Servette",
+      "time": "08.04.2026 18:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/fribourg-r94HIWFD/servette-46e8yYpl/?mid=tMLOz2Ma",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.0,
+        "draw": 4.3,
+        "away": 3.05,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 60,
+        "draw": null,
+        "away": 40,
+        "votes": 114
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 57.3,
+        "ev": 0.146,
+        "edge": 7.3,
+        "kelly": 14.6,
+        "confidence": 64.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 64.0,
+      "value_bet": true
+    },
+    {
+      "id": -6732673036501960468,
+      "homeTeam": "IF Bjorkloven",
+      "awayTeam": "Sodertalje",
+      "time": "08.04.2026 17:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/bjorkloven-EyUu7RKr/sodertalje-EDbN0x98/?mid=fVYo7oxK",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "D",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.48,
+        "draw": 4.6,
+        "away": 4.6,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 81,
+        "draw": null,
+        "away": 19,
+        "votes": 86
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 77.8,
+        "ev": 0.151,
+        "edge": 10.2,
+        "kelly": 31.6,
+        "confidence": 76.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 76.0,
+      "value_bet": true
+    },
+    {
+      "id": 6283468462960269969,
+      "homeTeam": "Visby-Roma",
+      "awayTeam": "Karlskrona",
+      "time": "08.04.2026 17:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/karlskrona-2imIvxfh/visby-roma-bo1vAaeg/?mid=GYlTEhdB",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.95,
+        "draw": 3.9,
+        "away": 2.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 81,
+        "draw": null,
+        "away": 19,
+        "votes": 32
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 75.5,
+        "ev": 0.473,
+        "edge": 24.2,
+        "kelly": 49.8,
+        "confidence": 81.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 81.0,
+      "value_bet": true
+    },
+    {
+      "id": 8447377278376325054,
+      "homeTeam": "Djurgarden U20",
+      "awayTeam": "Leksand U20",
+      "time": "08.04.2026 17:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/djurgarden-tUe1VD4f/leksand-lSjdu3HG/?mid=6w4HX7Cr",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 90,
+        "draw": null,
+        "away": 10,
+        "votes": 21
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 66.3,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 45.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 45.0,
+      "value_bet": false
+    },
+    {
+      "id": -1886422894711940321,
+      "homeTeam": "Orebro U20",
+      "awayTeam": "Frolunda U20",
+      "time": "08.04.2026 17:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/frolunda-Mi1vEif8/orebro-KKf5UXJ0/?mid=ENcJiT3E",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 88,
+        "draw": null,
+        "away": 12,
+        "votes": 16
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 59.9,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 42.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 42.0,
+      "value_bet": false
+    },
+    {
+      "id": -2415296238672022118,
+      "homeTeam": "HV 71 U20",
+      "awayTeam": "Tingsryd U20",
+      "time": "08.04.2026 16:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/hv-71-jVBLEvXE/tingsryd-2i2hMBnO/?mid=xl5Pfe16",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 30,
+        "draw": null,
+        "away": 70,
+        "votes": 114
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 62.3,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 43.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 43.0,
+      "value_bet": false
+    },
+    {
+      "id": 3474160697140778343,
+      "homeTeam": "Oskarshamn U20",
+      "awayTeam": "Västerås U20",
+      "time": "08.04.2026 17:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/oskarshamn-4fQ0pS7D/vasteras-GnlESBlD/?mid=CpUogN84",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -2217215073828908879,
+      "homeTeam": "Australia U18",
+      "awayTeam": "Meksyk U18",
+      "time": "08.04.2026 10:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/australia-dC0UPnq8/meksyk-820ca1Es/?mid=2eTIuJGF",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "D",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": null,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null,
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 83,
+        "draw": null,
+        "away": 17,
+        "votes": 12
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 63.9,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 44.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 44.0,
+      "value_bet": false
+    },
+    {
+      "id": -7698560368231970024,
+      "homeTeam": "Chińskie Tajpej U18",
+      "awayTeam": "Belgia U18",
+      "time": "08.04.2026 14:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/belgium-21wFRN70/chinskie-tajpej-hvfwOQDK/?mid=bNMRwcoS",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 2,
+        "total": 4,
+        "winRate": 50
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 8495039698612636499,
+      "homeTeam": "Holandia U18",
+      "awayTeam": "Serbia U18",
+      "time": "08.04.2026 17:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/holandia-jRk2bLTm/serbia-furIm5UJ/?mid=SxDcYz9k",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 4,
+        "winRate": 75
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 21,
+        "draw": null,
+        "away": 79,
+        "votes": 194
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 48.9,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 38.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 38.0,
+      "value_bet": false
+    },
+    {
+      "id": 3708399856273200244,
+      "homeTeam": "Manitoba Moose",
+      "awayTeam": "Milwaukee Admirals",
+      "time": "08.04.2026 00:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/manitoba-moose-vmqXhgam/milwaukee-admirals-lAEGDY5P/?mid=KOkutU0k",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -3884769682142577954,
+      "homeTeam": "Texas Stars",
+      "awayTeam": "Iowa Wild",
+      "time": "08.04.2026 00:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/iowa-wild-rFNasfCU/texas-stars-nT23xfgH/?mid=GOKuvqKs",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 3923876481652777064,
+      "homeTeam": "Ontario Reign",
+      "awayTeam": "Colorado Eagles",
+      "time": "08.04.2026 02:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/colorado-eagles-tI34khC9/ontario-reign-A9dsNEp7/?mid=vVqhqUnn",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "D",
+        "D",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.5,
+        "draw": 3.95,
+        "away": 2.2,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 57.0,
+        "exactScore": "3-2",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 62,
+        "draw": null,
+        "away": 38,
+        "votes": 180
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 53.9,
+        "ev": 0.347,
+        "edge": 13.9,
+        "kelly": 23.1,
+        "confidence": 74.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 74.0,
+      "value_bet": true
+    },
+    {
+      "id": -3969919498893739340,
+      "homeTeam": "Toronto Marlies",
+      "awayTeam": "Utica Comets",
+      "time": "08.04.2026 14:45",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/toronto-marlies-CleEiiq6/utica-comets-4OOerzcO/?mid=b1cGJp3n",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.3,
+        "draw": 4.0,
+        "away": 2.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 77.0,
+        "exactScore": "3-1",
+        "overUnder": "Under 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 75,
+        "draw": null,
+        "away": 25,
+        "votes": 71
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 58.2,
+        "ev": 0.34,
+        "edge": 14.8,
+        "kelly": 26.1,
+        "confidence": 77.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 77.0,
+      "value_bet": true
+    },
+    {
+      "id": -24833281571377922,
+      "homeTeam": "Syracuse Crunch",
+      "awayTeam": "Rochester Americans",
+      "time": "08.04.2026 23:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/rochester-americans-MBYyhDEg/syracuse-crunch-4KeliXTa/?mid=x2Z85sFO",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "D",
+        "L",
+        "D",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.0,
+        "draw": 4.0,
+        "away": 2.85,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 52.0,
+        "exactScore": "4-3",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 72,
+        "draw": null,
+        "away": 28,
+        "votes": 32
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 60.9,
+        "ev": 0.218,
+        "edge": 10.9,
+        "kelly": 21.8,
+        "confidence": 73.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 73.0,
+      "value_bet": true
+    },
+    {
+      "id": -7762168439638607044,
+      "homeTeam": "Utah Grizzlies",
+      "awayTeam": "Idaho Steelheads",
+      "time": "08.04.2026 01:10",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/idaho-steelheads-6k8eYezf/utah-grizzlies-WSayU0FD/?mid=EgLTPUop",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -2868432299893902173,
+      "homeTeam": "Maine Mariners",
+      "awayTeam": "Adirondack Thunder",
+      "time": "08.04.2026 23:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/adirondack-thunder-0C7aXFk0/maine-mariners-4CYwevGQ/?mid=KAEIZF0B",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 52.0,
+        "exactScore": "4-3",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 14
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 63.3,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 46.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 46.0,
+      "value_bet": false
+    },
+    {
+      "id": -8222646095350551828,
+      "homeTeam": "Greenville Swamp Rabbits",
+      "awayTeam": "Savannah Ghost Pirates",
+      "time": "08.04.2026 23:05",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/greenville-swamp-rabbits-W24dUjzp/savannah-ghost-pirates-bmdn8F8S/?mid=CtHVvxQM",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 6198402879889685214,
+      "homeTeam": "Vancouver Goldeneyes K",
+      "awayTeam": "Boston Fleet K",
+      "time": "08.04.2026 01:30",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/boston-fleet-hQ15UVyi/vancouver-goldeneyes-jL3wkrb6/?mid=jHs8cev9",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 3,
+        "total": 4,
+        "winRate": 25
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -1297756803434764061,
+      "homeTeam": "Ottawa Charge K",
+      "awayTeam": "Seattle Torrent K",
+      "time": "08.04.2026 23:00",
+      "date": "2026-04-08",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/ottawa-charge-8zuYnvhI/seattle-torrent-WUBomMSI/?mid=M5HnjDWr",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 4,
+        "winRate": 75
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": 77.0,
+        "exactScore": "3-1",
+        "overUnder": "Under 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 70,
+        "draw": null,
+        "away": 30,
+        "votes": 30
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 69.9,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 49.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 49.0,
+      "value_bet": false
+    }
+  ]
+}
