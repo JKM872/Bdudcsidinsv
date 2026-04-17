@@ -1,0 +1,2254 @@
+{
+  "date": "2026-04-17",
+  "sport": "volleyball",
+  "generatedAt": "2026-04-17T03:50:31.054247",
+  "stats": {
+    "total": 41,
+    "qualifying": 22,
+    "formAdvantage": 9
+  },
+  "matches": [
+    {
+      "id": 1854489130667376817,
+      "homeTeam": "Skra Bełchatów",
+      "awayTeam": "Indykpol AZS Olsztyn",
+      "time": "17.04.2026 15:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/belchatow-SMCDQxuK/indykpol-azs-olsztyn-pAof6Hml/?mid=MmRcpqk4",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -6126223196273255731,
+      "homeTeam": "ATSE Graz K",
+      "awayTeam": "SG SVS hotVolleys K",
+      "time": "17.04.2026 17:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/atse-graz-nuWRK1uT/sg-svs-hotvolleys-AV7xsgFi/?mid=dQLVTugS",
+      "qualifies": true,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 66
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 98,
+        "draw": null,
+        "away": 2,
+        "votes": 50
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 64.3,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 44.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 44.0,
+      "value_bet": false
+    },
+    {
+      "id": 1475500646457090419,
+      "homeTeam": "Achel",
+      "awayTeam": "Haasrode Leuven",
+      "time": "17.04.2026 18:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/achel-6qoPxMTP/haasrode-leuven-hESei7a0/?mid=r7TeFXqn",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -7192930006437041202,
+      "homeTeam": "Lindemans Aalst",
+      "awayTeam": "Menen",
+      "time": "17.04.2026 18:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/lindemans-aalst-nLjMYaqj/menen-n1fQwmN6/?mid=KUkvcjUH",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 6846345763795518872,
+      "homeTeam": "Minas",
+      "awayTeam": "Suzano Volei",
+      "time": "17.04.2026 00:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/minas-tenis-clube-byQlmwTe/suzano-volei-p298ASFI/?mid=pr4LPWXA",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.3,
+        "draw": null,
+        "away": 3.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 85,
+        "draw": null,
+        "away": 15,
+        "votes": 633
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 72.0,
+        "ev": -0.064,
+        "edge": -4.9,
+        "kelly": 0.0,
+        "confidence": 43.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 43.0,
+      "value_bet": false
+    },
+    {
+      "id": 1877114200195556584,
+      "homeTeam": "Osasco K",
+      "awayTeam": "Minas K",
+      "time": "17.04.2026 21:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/minas-nFJw8Qkg/osasco-lvv3ESCP/?mid=OQdWvTID",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.73,
+        "draw": null,
+        "away": 1.95,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 61.0,
+        "exactScore": "3-1",
+        "overUnder": null,
+        "btts": null,
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 74,
+        "draw": null,
+        "away": 26,
+        "votes": 251
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 71.7,
+        "ev": 0.241,
+        "edge": 13.9,
+        "kelly": 33.0,
+        "confidence": 81.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 81.0,
+      "value_bet": true
+    },
+    {
+      "id": -3161696278662581258,
+      "homeTeam": "Czeskie Budziejowice",
+      "awayTeam": "Prague",
+      "time": "17.04.2026 16:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/ceske-budejovice-Crdl5TM1/vk-lvi-prague-lQ8hRNM8/?mid=jBHaWbH0",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 2014634158704042172,
+      "homeTeam": "Olymp Prague K",
+      "awayTeam": "Czeskie Budziejowice K",
+      "time": "17.04.2026 15:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/ceske-budejovice-tSfo9Y7h/olymp-prague-Mmv9zeu1/?mid=nqGQLKM0",
+      "qualifies": true,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 0,
+        "total": 1,
+        "winRate": 100
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.28,
+        "draw": null,
+        "away": 3.15,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 97,
+        "draw": null,
+        "away": 3,
+        "votes": 32
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 68.8,
+        "ev": -0.12,
+        "edge": -9.4,
+        "kelly": 0.0,
+        "confidence": 36.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 36.0,
+      "value_bet": false
+    },
+    {
+      "id": 6807685597787572779,
+      "homeTeam": "Akaa",
+      "awayTeam": "Oulu",
+      "time": "17.04.2026 15:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/ac-oulu-GShfFW35/akaa-vZAScEO5/?mid=rJimU0aE",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -4792272667406359402,
+      "homeTeam": "Viesti K",
+      "awayTeam": "Kangasala K",
+      "time": "17.04.2026 15:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/kangasala-Wn3rPL10/viesti-2wC5eeVt/?mid=61SmetKk",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -6440229630294619762,
+      "homeTeam": "Paris",
+      "awayTeam": "Poitiers",
+      "time": "17.04.2026 18:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/paris-hOxAoMjj/poitiers-WEyEpt6d/?mid=4fLRjrD5",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -941740614920394586,
+      "homeTeam": "Sète",
+      "awayTeam": "Montpellier",
+      "time": "17.04.2026 18:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/montpellier-fq1HkrTS/sete-OhtH6NSF/?mid=l4EBfQDt",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -8038753272026010883,
+      "homeTeam": "Melilla",
+      "awayTeam": "Conqueridor Valencia",
+      "time": "17.04.2026 17:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/conqueridor-valencia-Qy5Tb5of/melilla-GzE2xw3t/?mid=M9GnjJdD",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.33,
+        "draw": null,
+        "away": 2.95,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 28
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 84.0,
+        "ev": 0.117,
+        "edge": 8.8,
+        "kelly": 35.4,
+        "confidence": 76.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 76.0,
+      "value_bet": true
+    },
+    {
+      "id": -6436999006353813544,
+      "homeTeam": "Guaguas",
+      "awayTeam": "Almeria",
+      "time": "17.04.2026 18:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/almeria-6TFu6Ss7/guaguas-las-palmas-AcdnrwnO/?mid=pnE1aNZQ",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.11,
+        "draw": null,
+        "away": 5.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 94,
+        "draw": null,
+        "away": 6,
+        "votes": 50
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "2",
+        "prob": 17.6,
+        "ev": -0.118,
+        "edge": -2.4,
+        "kelly": 0.0,
+        "confidence": 25.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 25.0,
+      "value_bet": false
+    },
+    {
+      "id": -5104023811243920082,
+      "homeTeam": "Heidelberg K",
+      "awayTeam": "La Laguna K",
+      "time": "17.04.2026 17:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/heidelberg-GChn5IcL/la-laguna-OhTky2Im/?mid=UZ35Hgvm",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.25,
+        "draw": null,
+        "away": 3.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 82,
+        "draw": null,
+        "away": 18,
+        "votes": 22
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 72.1,
+        "ev": -0.098,
+        "edge": -7.9,
+        "kelly": 0.0,
+        "confidence": 39.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 39.0,
+      "value_bet": false
+    },
+    {
+      "id": 1044736691869666582,
+      "homeTeam": "Putra Jakarta Garuda",
+      "awayTeam": "Jakarta Bhayangkara",
+      "time": "17.04.2026 09:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/jakarta-bhayangkara-8KSv52Po/putra-jakarta-garuda-nqdirRx8/?mid=MiRyXa24",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 352853414139493155,
+      "homeTeam": "Jakarta Popsivo K",
+      "awayTeam": "Jakarta Pertamina K",
+      "time": "17.04.2026 12:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/jakarta-pertamina-I7nDbE8j/jakarta-popsivo-MiyTPZX0/?mid=YVpx9gFL",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 8298684498279067459,
+      "homeTeam": "Tokyo Great Bears",
+      "awayTeam": "Suntory Sunbirds",
+      "time": "17.04.2026 10:05",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/suntory-sunbirds-SO3PAQkT/tokyo-great-bears-IaHhI75c/?mid=pdE01tQ7",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 2888262049452847048,
+      "homeTeam": "NEC Red Rockets K",
+      "awayTeam": "Osaka Marvelous K",
+      "time": "17.04.2026 10:05",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/nec-red-rockets-nq5RG5kG/osaka-marvelous-fwrKeeJ7/?mid=8WB6524N",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.38,
+        "draw": null,
+        "away": 2.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 66,
+        "draw": null,
+        "away": 34,
+        "votes": 47
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 62.0,
+        "ev": -0.145,
+        "edge": -10.5,
+        "kelly": 0.0,
+        "confidence": 32.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 32.0,
+      "value_bet": false
+    },
+    {
+      "id": 5255587999465588660,
+      "homeTeam": "Zhetyssu Zhastar",
+      "awayTeam": "Atyrau",
+      "time": "17.04.2026 10:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/atyrau-U7sCU8Zi/zhetyssu-zhastar-jwJCiuUi/?mid=SCfmpNCm",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.18,
+        "draw": null,
+        "away": 3.95,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 81,
+        "draw": null,
+        "away": 19,
+        "votes": 21
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 77.3,
+        "ev": -0.087,
+        "edge": -7.4,
+        "kelly": 0.0,
+        "confidence": 42.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 42.0,
+      "value_bet": false
+    },
+    {
+      "id": 1060922918904594387,
+      "homeTeam": "Aktobe",
+      "awayTeam": "Zhayik Uralsk",
+      "time": "17.04.2026 13:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/aktobe-2uzZaRCC/zhayik-uralsk-vPkStePF/?mid=8jd3tuCC",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.63,
+        "draw": null,
+        "away": 2.05,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 18
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 67.4,
+        "ev": 0.099,
+        "edge": 6.1,
+        "kelly": 15.8,
+        "confidence": 66.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 66.0,
+      "value_bet": true
+    },
+    {
+      "id": 578253111109012733,
+      "homeTeam": "Burevestnik Almaty",
+      "awayTeam": "Esil Petropavlovsk",
+      "time": "17.04.2026 11:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/burevestnik-almaty-tv90iC4K/esil-petropavlovsk-j9jfMfyG/?mid=UL49FB7d",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": {
+        "prediction": "1",
+        "probability": null,
+        "exactScore": null,
+        "overUnder": null,
+        "btts": null,
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 13
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 77.2,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 49.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 49.0,
+      "value_bet": false
+    },
+    {
+      "id": 5511476610729097318,
+      "homeTeam": "Ushkyn Kokshetau",
+      "awayTeam": "Taraz Jambil",
+      "time": "17.04.2026 14:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/taraz-jambil-tzsnxjZp/ushkyn-kokshetau-INypiwT2/?mid=dSdewFa3",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -2185609623223436459,
+      "homeTeam": "Førde",
+      "awayTeam": "Viking",
+      "time": "17.04.2026 15:30",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/f-rde-x4vWsZJ8/viking-tif-bergen-pOPtlzje/?mid=Y5DT1XqR",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 89,
+        "draw": null,
+        "away": 11,
+        "votes": 18
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 73.3,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 47.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 47.0,
+      "value_bet": false
+    },
+    {
+      "id": -8341772113267414447,
+      "homeTeam": "Tromsø",
+      "awayTeam": "Koll",
+      "time": "17.04.2026 17:45",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/koll-MyE3tyjH/troms-IDnvtDlL/?mid=0hFL3gFE",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 1904704497624066290,
+      "homeTeam": "Viking TIF K",
+      "awayTeam": "Koll K",
+      "time": "17.04.2026 11:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/koll-l4eeHNrh/viking-tif-lz9R9cc8/?mid=4l4adB7l",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -2066513885245764481,
+      "homeTeam": "Førde K",
+      "awayTeam": "Oksil K",
+      "time": "17.04.2026 13:15",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/f-rde-vN7eFFat/oksil-fJsYOxtN/?mid=Ao77fkx1",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -6925551291975848171,
+      "homeTeam": "Leningradka K",
+      "awayTeam": "Tulitsa K",
+      "time": "17.04.2026 16:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/leningradka-xdWf5pBB/tulitsa-xtsciEg2/?mid=zovSMOIM",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 50,
+        "draw": null,
+        "away": 50,
+        "votes": 4
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 46.3,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 37.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 37.0,
+      "value_bet": false
+    },
+    {
+      "id": -7576330853369255234,
+      "homeTeam": "CSM Bucuresti",
+      "awayTeam": "Stiinta Baia Mare",
+      "time": "17.04.2026 15:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/csm-bucuresti-CnA0bi2r/stiinta-baia-mare-tQ0ZH5wH/?mid=vmznpqLG",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.7,
+        "draw": null,
+        "away": 2.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 83,
+        "draw": null,
+        "away": 17,
+        "votes": 18
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 59.2,
+        "ev": 0.006,
+        "edge": 0.4,
+        "kelly": 0.9,
+        "confidence": 55.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 55.0,
+      "value_bet": true
+    },
+    {
+      "id": 7377599722292893091,
+      "homeTeam": "Tent K",
+      "awayTeam": "Zeleznicar K",
+      "time": "17.04.2026 17:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/tent-8EJJqPE5/zeleznicar-xz2qrDNa/?mid=0nANh1CU",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.3,
+        "draw": null,
+        "away": 2.85,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 86,
+        "draw": null,
+        "away": 14,
+        "votes": 29
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 74.6,
+        "ev": -0.03,
+        "edge": -2.3,
+        "kelly": 0.0,
+        "confidence": 48.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 48.0,
+      "value_bet": false
+    },
+    {
+      "id": 5143783175746195736,
+      "homeTeam": "Calcit Kamnik K",
+      "awayTeam": "OTP Banka Branik K",
+      "time": "17.04.2026 16:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/calcit-kamnik-QLbRvUMh/nova-kbm-branik-8plWwlxa/?mid=OIGZyTHG",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 7747224543516874548,
+      "homeTeam": "NUC Volleyball K",
+      "awayTeam": "Schaffhausen K",
+      "time": "17.04.2026 17:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/nuc-volleyball-Im7U8hUh/schaffhausen-jkJB7jEB/?mid=Ug6jOQJH",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.15,
+        "draw": null,
+        "away": 4.5,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 61.0,
+        "exactScore": "3-1",
+        "overUnder": null,
+        "btts": null,
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 96,
+        "draw": null,
+        "away": 4,
+        "votes": 27
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 82.3,
+        "ev": -0.054,
+        "edge": -4.7,
+        "kelly": 0.0,
+        "confidence": 51.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 51.0,
+      "value_bet": false
+    },
+    {
+      "id": 5918976829300714674,
+      "homeTeam": "THY K",
+      "awayTeam": "Nilufer Bld. K",
+      "time": "17.04.2026 13:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/nilufer-bld-Kz88uobd/thy-C6ROGLdk/?mid=bJP5C8N9",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.4,
+        "draw": null,
+        "away": 2.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 93,
+        "draw": null,
+        "away": 7,
+        "votes": 161
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 70.2,
+        "ev": -0.017,
+        "edge": -1.2,
+        "kelly": 0.0,
+        "confidence": 47.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 47.0,
+      "value_bet": false
+    },
+    {
+      "id": 1079432017734146512,
+      "homeTeam": "Aras Kargo K",
+      "awayTeam": "Galatasaray K",
+      "time": "17.04.2026 16:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/aras-kargo-UeZMj6g6/galatasaray-UgJO4lj3/?mid=2FEq5QFq",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 419231420451510024,
+      "homeTeam": "Salt Lake K",
+      "awayTeam": "Austin K",
+      "time": "17.04.2026 00:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/austin-W48L3TuC/salt-lake-2PG47Btm/?mid=rZBIDlYG",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.55,
+        "draw": null,
+        "away": 2.25,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 61.0,
+        "exactScore": "3-1",
+        "overUnder": null,
+        "btts": null,
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": {
+        "home": 92,
+        "draw": null,
+        "away": 8,
+        "votes": 13
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 67.1,
+        "ev": 0.04,
+        "edge": 2.6,
+        "kelly": 7.3,
+        "confidence": 64.0,
+        "dataQuality": 0.8
+      },
+      "tennis": null,
+      "confidence": 64.0,
+      "value_bet": true
+    },
+    {
+      "id": -413454658405564393,
+      "homeTeam": "Atlanta Vibe K",
+      "awayTeam": "San Diego Mojo K",
+      "time": "17.04.2026 23:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/atlanta-vibe-v1M3FYyd/san-diego-mojo-YapFcigq/?mid=dUl9VrWA",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 82,
+        "draw": null,
+        "away": 18,
+        "votes": 11
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 60.9,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 42.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 42.0,
+      "value_bet": false
+    },
+    {
+      "id": -1214741624276238534,
+      "homeTeam": "Grand Rapids Rise K",
+      "awayTeam": "Indy Ignite K",
+      "time": "17.04.2026 23:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/grand-rapids-rise-02EfpXip/indy-ignite-UXZMCqwP/?mid=zF00X41b",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": {
+        "home": 33,
+        "draw": null,
+        "away": 67,
+        "votes": 12
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 47.1,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 37.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 37.0,
+      "value_bet": false
+    },
+    {
+      "id": -3861531782918974815,
+      "homeTeam": "Fino Kaposvar SE",
+      "awayTeam": "Vegyesz",
+      "time": "17.04.2026 16:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/fino-kaposvar-se-IF9ioWqP/vegyesz-vXLWOeqs/?mid=EHQJqYNr",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.05,
+        "draw": null,
+        "away": 7.0,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 94,
+        "draw": null,
+        "away": 6,
+        "votes": 33
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 89.0,
+        "ev": -0.065,
+        "edge": -6.2,
+        "kelly": 0.0,
+        "confidence": 48.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 48.0,
+      "value_bet": false
+    },
+    {
+      "id": 610446329290162949,
+      "homeTeam": "MAV Elore SC",
+      "awayTeam": "Penzugyor",
+      "time": "17.04.2026 17:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/mav-elore-sc-xdHW77yF/penzugyor-hzQzOFbm/?mid=nVORsChe",
+      "qualifies": true,
+      "h2h": {
+        "home": 5,
+        "draw": 0,
+        "away": 0,
+        "total": 5,
+        "winRate": 100
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.04,
+        "draw": null,
+        "away": 6.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 100,
+        "draw": null,
+        "away": 0,
+        "votes": 26
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 90.6,
+        "ev": -0.057,
+        "edge": -5.5,
+        "kelly": 0.0,
+        "confidence": 50.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 50.0,
+      "value_bet": false
+    },
+    {
+      "id": 2565501661912402723,
+      "homeTeam": "Miskolc",
+      "awayTeam": "MAFC",
+      "time": "17.04.2026 16:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/mafc-bme-mapei-W2buWcjp/miskolc-fgdAJtiH/?mid=UgrsimaK",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 5612748530447523475,
+      "homeTeam": "Dunaferr",
+      "awayTeam": "Szegedi",
+      "time": "17.04.2026 17:00",
+      "date": "2026-04-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/dunaferr-tYq8bCnL/szegedi-GIWo2aqh/?mid=WjWHWKs2",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    }
+  ]
+}
