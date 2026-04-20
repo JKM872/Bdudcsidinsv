@@ -1,0 +1,320 @@
+{
+  "date": "2026-04-20",
+  "sport": "handball",
+  "generatedAt": "2026-04-20T05:29:18.847562",
+  "stats": {
+    "total": 7,
+    "qualifying": 2,
+    "formAdvantage": 0
+  },
+  "matches": [
+    {
+      "id": 8254748196392508818,
+      "homeTeam": "GrIFK",
+      "awayTeam": "Riihimäen Cocks",
+      "time": "20.04.2026 16:30",
+      "date": "2026-04-20",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/pilka-reczna/grifk-WMrMXKeU/riihimaen-cocks-xlrETjXF/?mid=YoNfjqYQ",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -2271228256748852077,
+      "homeTeam": "AEK Athens",
+      "awayTeam": "PAOK",
+      "time": "20.04.2026 13:30",
+      "date": "2026-04-20",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/pilka-reczna/aek-athens-vBoxDX2G/paok-O2Dk55o7/?mid=MDMbRSy0",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "D",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "D",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.58,
+        "draw": 8.5,
+        "away": 2.8,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 74,
+        "draw": 4,
+        "away": 22,
+        "votes": 184
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 70.3,
+        "ev": 0.111,
+        "edge": 7.1,
+        "kelly": 19.2,
+        "confidence": 69.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 69.0,
+      "value_bet": true
+    },
+    {
+      "id": -3663940420421577203,
+      "homeTeam": "AZS AWF Warszawa K",
+      "awayTeam": "SPR Handball Rzeszów K",
+      "time": "20.04.2026 16:00",
+      "date": "2026-04-20",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/pilka-reczna/rzeszow-xxkuRnzk/warszawa-Cze9fRc5/?mid=xS0KgVI8",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 8898427681307177749,
+      "homeTeam": "Stavropol",
+      "awayTeam": "Perm",
+      "time": "20.04.2026 16:00",
+      "date": "2026-04-20",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/pilka-reczna/medvedi-perm-Kb3UgLn7/stavropol-UDISGrfK/?mid=EcKJvntn",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 2479853848354976204,
+      "homeTeam": "Jagodina K",
+      "awayTeam": "Partizan K",
+      "time": "20.04.2026 17:00",
+      "date": "2026-04-20",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/pilka-reczna/jagodina-OY7OGwQE/partizan-nHxCZgm3/?mid=WtnGFvgR",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 1,
+        "total": 3,
+        "winRate": 33
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 3793831946038152970,
+      "homeTeam": "Hammarby",
+      "awayTeam": "Savehof",
+      "time": "20.04.2026 17:00",
+      "date": "2026-04-20",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/pilka-reczna/hammarby-6utQOWwU/savehof-A161rl2s/?mid=2wT6hryJ",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "D",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.68,
+        "draw": 7.5,
+        "away": 2.65,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": {
+        "home": 81,
+        "draw": 7,
+        "away": 12,
+        "votes": 90
+      },
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 62.5,
+        "ev": 0.05,
+        "edge": 3.0,
+        "kelly": 7.4,
+        "confidence": 60.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 60.0,
+      "value_bet": true
+    },
+    {
+      "id": 8303055637687901083,
+      "homeTeam": "Trabzon",
+      "awayTeam": "Besiktas",
+      "time": "20.04.2026 13:00",
+      "date": "2026-04-20",
+      "league": null,
+      "country": "",
+      "sport": "handball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/pilka-reczna/besiktas-fyDESn8Q/trabzon-xIitU5Cl/?mid=AXyWiwl3",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 5,
+        "total": 5,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    }
+  ]
+}
