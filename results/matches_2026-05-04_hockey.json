@@ -1,0 +1,558 @@
+{
+  "date": "2026-05-04",
+  "sport": "hockey",
+  "generatedAt": "2026-05-04T04:06:57.024192",
+  "stats": {
+    "total": 9,
+    "qualifying": 6,
+    "formAdvantage": 3
+  },
+  "matches": [
+    {
+      "id": 6025628812761397096,
+      "homeTeam": "KooKoo",
+      "awayTeam": "Tappara",
+      "time": "04.05.2026 15:30",
+      "date": "2026-05-04",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/kookoo-ljjApDE3/tappara-llrWVOwG/?mid=Ue5nQ57M",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.45,
+        "draw": 3.95,
+        "away": 2.45,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 56.0,
+        "exactScore": "4-2",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 58.8,
+        "ev": 0.44,
+        "edge": 18.0,
+        "kelly": 30.3,
+        "confidence": 75.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 75.0,
+      "value_bet": true
+    },
+    {
+      "id": -2081571997879338249,
+      "homeTeam": "Colorado Avalanche",
+      "awayTeam": "Minnesota Wild",
+      "time": "04.05.2026 01:00",
+      "date": "2026-05-04",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/colorado-avalanche-hACAnvBa/minnesota-wild-j9Ck7BHi/?mid=OdDo8xRO",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.85,
+        "draw": 4.2,
+        "away": 3.65,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 61.6,
+        "ev": 0.14,
+        "edge": 7.6,
+        "kelly": 16.5,
+        "confidence": 63.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 63.0,
+      "value_bet": true
+    },
+    {
+      "id": -1670049551019262575,
+      "homeTeam": "Carolina Hurricanes",
+      "awayTeam": "Philadelphia Flyers",
+      "time": "04.05.2026 23:00",
+      "date": "2026-05-04",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/carolina-hurricanes-Sx0gl0tm/philadelphia-flyers-QySGG7oT/?mid=AXFhBZpI",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.73,
+        "draw": 4.1,
+        "away": 4.3,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 72.1,
+        "ev": 0.247,
+        "edge": 14.3,
+        "kelly": 33.8,
+        "confidence": 76.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 76.0,
+      "value_bet": true
+    },
+    {
+      "id": -5650401997940491398,
+      "homeTeam": "Brantford Bulldogs",
+      "awayTeam": "Barrie Colts",
+      "time": "04.05.2026 23:00",
+      "date": "2026-05-04",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/barrie-colts-fDwzT2DQ/brantford-bulldogs-lWYW6Lj7/?mid=M9WCgAJF",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -4979753701567905636,
+      "homeTeam": "Medicine Hat Tigers",
+      "awayTeam": "Prince Albert Raiders",
+      "time": "04.05.2026 00:00",
+      "date": "2026-05-04",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/medicine-hat-tigers-fXDwjulU/prince-albert-raiders-YZ0PXH4C/?mid=6DQTYTlm",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 512256110403348168,
+      "homeTeam": "Omsk",
+      "awayTeam": "Jarosław",
+      "time": "04.05.2026 13:30",
+      "date": "2026-05-04",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/omsk-6PtiwUZu/yaroslavl-MNZan6lB/?mid=zaanIUpd",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.15,
+        "draw": 3.95,
+        "away": 2.9,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 56.0,
+        "exactScore": "4-2",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 53.2,
+        "ev": 0.144,
+        "edge": 6.7,
+        "kelly": 12.5,
+        "confidence": 61.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 61.0,
+      "value_bet": true
+    },
+    {
+      "id": 216813342618321186,
+      "homeTeam": "Khimik",
+      "awayTeam": "Novokuznetsk",
+      "time": "04.05.2026 15:30",
+      "date": "2026-05-04",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/mhc-khimik-vhl-t2TtaE6T/nowokuznieck-4nP4oQ3H/?mid=rofjB6Cl",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.15,
+        "draw": 3.9,
+        "away": 2.7,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "2",
+        "probability": 51.0,
+        "exactScore": "2-3",
+        "overUnder": "Under 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "2",
+        "prob": 35.4,
+        "ev": -0.043,
+        "edge": -1.6,
+        "kelly": 0.0,
+        "confidence": 33.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 33.0,
+      "value_bet": false
+    },
+    {
+      "id": 3176634991463609004,
+      "homeTeam": "MHC Spartak",
+      "awayTeam": "Avto",
+      "time": "04.05.2026 16:00",
+      "date": "2026-05-04",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/avto-mhl-Q1adcRzq/mhc-spartak-mhl-SbPx0fiN/?mid=O0emh2Cb",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 1.55,
+        "draw": 4.4,
+        "away": 4.1,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 56.0,
+        "exactScore": "3-2",
+        "overUnder": "Under 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 67.1,
+        "ev": 0.041,
+        "edge": 2.6,
+        "kelly": 7.4,
+        "confidence": 61.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 61.0,
+      "value_bet": true
+    },
+    {
+      "id": -428590157511072994,
+      "homeTeam": "Atlanta Gladiators",
+      "awayTeam": "South Carolina Stingrays",
+      "time": "04.05.2026 23:10",
+      "date": "2026-05-04",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/atlanta-gladiators-ERg1TAkj/south-carolina-stingrays-dxOsnMQJ/?mid=tMinItWr",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    }
+  ]
+}
