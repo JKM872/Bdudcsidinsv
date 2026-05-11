@@ -1,0 +1,461 @@
+{
+  "date": "2026-05-11",
+  "sport": "hockey",
+  "generatedAt": "2026-05-11T04:21:13.431338",
+  "stats": {
+    "total": 7,
+    "qualifying": 5,
+    "formAdvantage": 2
+  },
+  "matches": [
+    {
+      "id": -352927044438622780,
+      "homeTeam": "KooKoo",
+      "awayTeam": "Tappara",
+      "time": "11.05.2026 15:30",
+      "date": "2026-05-11",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/kookoo-ljjApDE3/tappara-llrWVOwG/?mid=rg6opziA",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "D",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.55,
+        "draw": 3.75,
+        "away": 2.4,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 56.0,
+        "exactScore": "6-3",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 51.7,
+        "ev": 0.32,
+        "edge": 12.5,
+        "kelly": 20.6,
+        "confidence": 68.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 68.0,
+      "value_bet": true
+    },
+    {
+      "id": 3431194408656122478,
+      "homeTeam": "Anaheim Ducks",
+      "awayTeam": "Vegas Golden Knights",
+      "time": "11.05.2026 01:30",
+      "date": "2026-05-11",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/anaheim-ducks-4CM4ojpD/vegas-golden-knights-fTT0TsUg/?mid=rwGUGwHt",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "L",
+        "W",
+        "W",
+        "W",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.3,
+        "draw": 4.1,
+        "away": 2.6,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "2",
+        "probability": 55.0,
+        "exactScore": "3-5",
+        "overUnder": "Over 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "2",
+        "prob": 38.5,
+        "ev": 0.001,
+        "edge": 0.0,
+        "kelly": 0.1,
+        "confidence": 46.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 46.0,
+      "value_bet": true
+    },
+    {
+      "id": -1284747374040576535,
+      "homeTeam": "Jarosław",
+      "awayTeam": "Kazań",
+      "time": "11.05.2026 11:30",
+      "date": "2026-05-11",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/kazan-v320kOMr/yaroslavl-MNZan6lB/?mid=nDRZhIlL",
+      "qualifies": true,
+      "h2h": {
+        "home": 4,
+        "draw": 0,
+        "away": 1,
+        "total": 5,
+        "winRate": 80
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "formAdvantage": false,
+      "odds": {
+        "home": 2.2,
+        "draw": 3.8,
+        "away": 2.9,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 54.0,
+        "exactScore": "3-1",
+        "overUnder": "Under 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 58.7,
+        "ev": 0.292,
+        "edge": 13.3,
+        "kelly": 24.3,
+        "confidence": 72.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 72.0,
+      "value_bet": true
+    },
+    {
+      "id": -5050625523724633731,
+      "homeTeam": "Almetyevsk",
+      "awayTeam": "Jugra",
+      "time": "11.05.2026 14:00",
+      "date": "2026-05-11",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/almetyevsk-OjLH0pat/yugra-CpX7KoQr/?mid=zoEGoqYi",
+      "qualifies": false,
+      "h2h": {
+        "home": 2,
+        "draw": 0,
+        "away": 3,
+        "total": 5,
+        "winRate": 40
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -51775498540744140,
+      "homeTeam": "Maine Mariners",
+      "awayTeam": "Wheeling Nailers",
+      "time": "11.05.2026 23:00",
+      "date": "2026-05-11",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/maine-mariners-4CYwevGQ/wheeling-nailers-44r3GX5p/?mid=UNZDnvGk",
+      "qualifies": false,
+      "h2h": {
+        "home": 1,
+        "draw": 0,
+        "away": 4,
+        "total": 5,
+        "winRate": 20
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": -6423991737305816743,
+      "homeTeam": "Muskegon Lumberjacks",
+      "awayTeam": "Madison Capitols",
+      "time": "11.05.2026 23:10",
+      "date": "2026-05-11",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/madison-capitols-GzUTB3Lc/muskegon-lumberjacks-xpVPCq6i/?mid=reFs4RS6",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "homeFormHome": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "D"
+      ],
+      "awayFormAway": [
+        "W",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": {
+        "prediction": "2",
+        "probability": 51.0,
+        "exactScore": "2-3",
+        "overUnder": "Under 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 46.0,
+        "ev": -999.0,
+        "edge": 0.0,
+        "kelly": 0.0,
+        "confidence": 36.0,
+        "dataQuality": 0.6
+      },
+      "tennis": null,
+      "confidence": 36.0,
+      "value_bet": false
+    },
+    {
+      "id": 5674813250240490070,
+      "homeTeam": "Montreal Victoire K",
+      "awayTeam": "Minnesota Frost K",
+      "time": "11.05.2026 23:00",
+      "date": "2026-05-11",
+      "league": null,
+      "country": "",
+      "sport": "hockey",
+      "matchUrl": "https://www.livesport.com/pl/mecz/hokej/minnesota-frost-EZ21VBMp/montreal-victoire-UqtUmKxC/?mid=hQt9fxSq",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "L",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "awayForm": [
+        "W",
+        "L",
+        "D",
+        "W",
+        "D"
+      ],
+      "homeFormHome": [
+        "W",
+        "D",
+        "W",
+        "W",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 2.1,
+        "draw": 3.7,
+        "away": 2.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "1",
+        "probability": 66.0,
+        "exactScore": "3-2",
+        "overUnder": "Under 5.5",
+        "btts": "Yes",
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "1",
+        "prob": 56.8,
+        "ev": 0.193,
+        "edge": 9.2,
+        "kelly": 17.6,
+        "confidence": 66.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 66.0,
+      "value_bet": true
+    }
+  ]
+}
