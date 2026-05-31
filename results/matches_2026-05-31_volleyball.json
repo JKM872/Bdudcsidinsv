@@ -1,0 +1,154 @@
+{
+  "date": "2026-05-31",
+  "sport": "volleyball",
+  "generatedAt": "2026-05-31T04:48:59.818070",
+  "stats": {
+    "total": 3,
+    "qualifying": 1,
+    "formAdvantage": 1
+  },
+  "matches": [
+    {
+      "id": 7881967109997600008,
+      "homeTeam": "Albania K",
+      "awayTeam": "Litwa K",
+      "time": "31.05.2026 13:00",
+      "date": "2026-05-31",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/albania-COm9aIak/litwa-Y1c8c3yO/?mid=r1MAYhb2",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 464634690894271791,
+      "homeTeam": "Luksemburg K",
+      "awayTeam": "Dania K",
+      "time": "31.05.2026 16:00",
+      "date": "2026-05-31",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/dania-4WkLOmdg/luksemburg-M70GPTtm/?mid=WQ66YzE8",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 1,
+        "total": 1,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    },
+    {
+      "id": 451895563509019386,
+      "homeTeam": "Argentyna K",
+      "awayTeam": "Bułgaria K",
+      "time": "31.05.2026 00:00",
+      "date": "2026-05-31",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/argentyna-6LwerjYl/bulgaria-p8EJiqgc/?mid=dl4dVC35",
+      "qualifies": true,
+      "h2h": {
+        "home": 3,
+        "draw": 0,
+        "away": 2,
+        "total": 5,
+        "winRate": 60
+      },
+      "homeForm": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayForm": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "homeFormHome": [
+        "W",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
+      "awayFormAway": [
+        "L",
+        "L",
+        "L",
+        "W",
+        "L"
+      ],
+      "formAdvantage": true,
+      "odds": {
+        "home": 1.3,
+        "draw": null,
+        "away": 2.75,
+        "bookmaker": "Pinnacle"
+      },
+      "forebet": {
+        "prediction": "2",
+        "probability": 76.0,
+        "exactScore": "1-3",
+        "overUnder": null,
+        "btts": null,
+        "homeProb": null,
+        "drawProb": null,
+        "awayProb": null
+      },
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": {
+        "pick": "2",
+        "prob": 29.8,
+        "ev": -0.18,
+        "edge": -6.6,
+        "kelly": 0.0,
+        "confidence": 24.0,
+        "dataQuality": 0.7
+      },
+      "tennis": null,
+      "confidence": 24.0,
+      "value_bet": false
+    }
+  ]
+}
