@@ -1,0 +1,44 @@
+{
+  "date": "2026-08-17",
+  "sport": "volleyball",
+  "generatedAt": "2026-08-17T01:52:04.067324",
+  "stats": {
+    "total": 1,
+    "qualifying": 0,
+    "formAdvantage": 0
+  },
+  "matches": [
+    {
+      "id": -5498237595520852799,
+      "homeTeam": "Portoryko",
+      "awayTeam": "USA",
+      "time": "16.08.2026 23:30",
+      "date": "2026-08-17",
+      "league": null,
+      "country": "",
+      "sport": "volleyball",
+      "matchUrl": "https://www.livesport.com/pl/mecz/siatkowka/portoryko-6JpSJoln/usa-QXpoGyUl/?mid=vNUvis4m",
+      "qualifies": false,
+      "h2h": {
+        "home": 0,
+        "draw": 0,
+        "away": 0,
+        "total": 0,
+        "winRate": 0
+      },
+      "homeForm": [],
+      "awayForm": [],
+      "homeFormHome": [],
+      "awayFormAway": [],
+      "formAdvantage": false,
+      "odds": null,
+      "forebet": null,
+      "sofascore": null,
+      "focusTeam": "home",
+      "scoring": null,
+      "tennis": null,
+      "confidence": 0,
+      "value_bet": false
+    }
+  ]
+}
